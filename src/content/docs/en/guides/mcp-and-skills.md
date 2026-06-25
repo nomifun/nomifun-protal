@@ -48,7 +48,7 @@ Skills can be tagged, imported, exported / symlinked, scanned from external dire
 What you manage at `/assistants?tab=skills` are **cross-companion, general** skill knowledge packs. That is a different thing from a "companion's own skill library":
 
 - **General skills (this page)** — knowledge packs you curate by hand and every companion can share, sourced as Builtin / Custom / Extension.
-- **Per-companion skill library (on the companion page)** — each companion grows its own, **per-companion-isolated** set of skills. The evolution engine mines reusable skills from that companion's **tool-call sequences** (based on the sequence itself only, with **no parameter values**), produces a draft, and you review the resulting `SKILL.md` before enabling it; grown skills can also be **gifted** to other companions. See [Companions](/en/docs/guides/companions).
+- **Per-companion skill library (on the companion page)** — each companion grows its own, **per-companion-isolated** set of skills. The evolution engine mines reusable skills from that companion's **tool-call sequences** (based on the sequence itself only, with **no parameter values**), produces a draft, and you review the resulting `SKILL.md` before enabling it; grown skills can also be **gifted** to other companions. See [Companions](/docs/guides/companions).
 
 > Keep the memory-vs-skill boundary straight: **memory is a shared memory hub, shared family-wide** across one capture / learning pipeline; **skill libraries are isolated per companion**. Per-companion private memory is coming soon.
 
@@ -65,8 +65,8 @@ Manage outbound fronts under `/open-capabilities`. Authentication is by companio
 
 ## Related
 
-- [Companions](/en/docs/guides/companions) — per-companion skill libraries, evolution mining, and skill gifting.
-- [Knowledge base](/en/docs/guides/knowledge-base) — attach a knowledge base to a session / terminal / companion so the agent can "look it up first".
-- [Terminal](/en/docs/guides/terminal) — where the agent actually runs commands.
+- [Companions](/docs/guides/companions) — per-companion skill libraries, evolution mining, and skill gifting.
+- [Knowledge base](/docs/guides/knowledge-base) — attach a knowledge base to a session / terminal / companion so the agent can "look it up first".
+- [Terminal](/docs/guides/terminal) — where the agent actually runs commands.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

@@ -6,7 +6,7 @@ order: 3
 lang: en-US
 ---
 
-This page walks you through your first NomiFun session: set up a model provider, start a conversation from the home screen, then inspect the output in the conversation workspace. Finish [Installation](/en/docs/getting-started/installation) first.
+This page walks you through your first NomiFun session: set up a model provider, start a conversation from the home screen, then inspect the output in the conversation workspace. Finish [Installation](/docs/getting-started/installation) first.
 
 The desktop app (nomifun-desktop) and the self-hosted web server (nomifun-web) share the same UI. The difference is auth: the desktop WebView is trusted via a local token on every launch (no login), while `nomifun-web` listens on `127.0.0.1:8787` and requires login by default. For a first run, use the built-in **nomi** agent — a CLI binary bundled with the app, so no external CLI install is needed. It's the simplest way to verify everything works.
 
@@ -52,10 +52,10 @@ The desktop app (nomifun-desktop) and the self-hosted web server (nomifun-web) s
 
 ## Related
 
-- [MCP and skills](/en/docs/guides/mcp-and-skills)
-- [Assistants](/en/docs/guides/assistants)
-- [Terminal](/en/docs/guides/terminal)
-- [WebUI remote access](/en/docs/guides/webui-remote-access)
-- [Web server deployment](/en/docs/guides/web-server-deployment)
+- [MCP and skills](/docs/guides/mcp-and-skills)
+- [Assistants](/docs/guides/assistants)
+- [Terminal](/docs/guides/terminal)
+- [WebUI remote access](/docs/guides/webui-remote-access)
+- [Web server deployment](/docs/guides/web-server-deployment)
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

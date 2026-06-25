@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import UnoCSS from 'unocss/astro';
 
 // https://astro.build/config
-// zh-CN lives at the root ("/"), en-US lives under "/en".
+// en-US lives at the root ("/"), zh-CN lives under "/zh".
 export default defineConfig({
   site: 'https://www.nomifun.com',
   image: {
@@ -21,8 +21,8 @@ export default defineConfig({
     sitemap(),
   ],
   i18n: {
-    defaultLocale: 'zh-CN',
-    locales: ['zh-CN', { path: 'en', codes: ['en-US', 'en'] }],
+    defaultLocale: 'en-US',
+    locales: ['en-US', { path: 'zh', codes: ['zh-CN', 'zh'] }],
     routing: {
       prefixDefaultLocale: false,
       redirectToDefaultLocale: false,

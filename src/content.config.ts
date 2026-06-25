@@ -6,8 +6,8 @@ import { glob } from 'astro/loaders';
  *
  * Files live under `src/content/docs/<lang>/*.md` where `<lang>` is `zh` or
  * `en`. The glob id therefore carries the language prefix (e.g.
- * `zh/introduction`); routing strips that prefix so zh lives at `/docs/<topic>`
- * and en at `/en/docs/<topic>`.
+ * `zh/introduction`); routing strips that prefix so en lives at `/docs/<topic>`
+ * and zh lives at `/zh/docs/<topic>`.
  *
  * `category` groups guides in the sidebar; `order` sorts within a category.
  */

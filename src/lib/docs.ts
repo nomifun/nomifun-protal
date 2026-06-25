@@ -29,7 +29,7 @@ export interface DocGroup {
 /**
  * Group a locale's docs by category, preserving first-seen category order and
  * sorting items within each group by `order`. `href` is fully localized
- * (`/docs/<topic>` for zh, `/en/docs/<topic>` for en).
+ * (`/docs/<topic>` for en, `/zh/docs/<topic>` for zh).
  */
 export function groupDocs(docs: DocEntry[], locale: Locale): DocGroup[] {
   const groups: DocGroup[] = [];

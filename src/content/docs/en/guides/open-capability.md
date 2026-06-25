@@ -73,9 +73,9 @@ All three share one capability bus and the same companion-token auth. The headli
 
 ## Related
 
-- [MCP & skills](/en/docs/guides/mcp-and-skills)
-- [WebUI remote access](/en/docs/guides/webui-remote)
-- [Companions](/en/docs/guides/companions)
-- [Knowledge base](/en/docs/guides/knowledge-base)
+- [MCP & skills](/docs/guides/mcp-and-skills)
+- [WebUI remote access](/docs/guides/webui-remote)
+- [Companions](/docs/guides/companions)
+- [Knowledge base](/docs/guides/knowledge-base)
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

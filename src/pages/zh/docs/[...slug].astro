@@ -5,7 +5,7 @@ import { localizePath } from '@/i18n';
 import { getDocsForLocale, topicSlug } from '@/lib/docs';
 
 export async function getStaticPaths() {
-  const docs = await getDocsForLocale('en-US');
+  const docs = await getDocsForLocale('zh-CN');
   return docs.map((entry, i) => ({
     params: { slug: topicSlug(entry.id) },
     props: {
@@ -34,16 +34,16 @@ const nextSlug = next ? topicSlug(next.id) : null;
 
   <nav slot="after" class="mt-14 grid gap-4 border-t border-ink-700 pt-8 sm:grid-cols-2">
     {prev ? (
-      <a href={localizePath(`/docs/${prevSlug}`, 'en-US')} class="card card-hover p-4 flex flex-col gap-1 group">
-        <span class="text-xs text-low inline-flex items-center gap-1"><span class="i-mdi-arrow-left"></span>Previous</span>
+      <a href={localizePath(`/docs/${prevSlug}`, 'zh-CN')} class="card card-hover p-4 flex flex-col gap-1 group">
+        <span class="text-xs text-low inline-flex items-center gap-1"><span class="i-mdi-arrow-left"></span>上一篇</span>
         <span class="text-sm font-medium text-hi group-hover:text-pink-300 transition-colors">{prev.data.title}</span>
       </a>
     ) : (
       <span></span>
     )}
     {next ? (
-      <a href={localizePath(`/docs/${nextSlug}`, 'en-US')} class="card card-hover p-4 flex flex-col gap-1 items-end text-right group">
-        <span class="text-xs text-low inline-flex items-center gap-1">Next<span class="i-mdi-arrow-right"></span></span>
+      <a href={localizePath(`/docs/${nextSlug}`, 'zh-CN')} class="card card-hover p-4 flex flex-col gap-1 items-end text-right group">
+        <span class="text-xs text-low inline-flex items-center gap-1">下一篇<span class="i-mdi-arrow-right"></span></span>
         <span class="text-sm font-medium text-hi group-hover:text-pink-300 transition-colors">{next.data.title}</span>
       </a>
     ) : (

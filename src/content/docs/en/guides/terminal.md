@@ -55,8 +55,8 @@ Create one from the **Terminal** section in the sidebar, or navigate to `/termin
 
 ## Related
 
-- [The session workspace](/en/docs/guides/sessions) — how the in-session terminal works alongside the file tree and preview.
-- [Unattended automation · AutoWork](/en/docs/guides/autowork) — bind a terminal to a tag and let the orchestrator drive it unattended.
-- [Intelligent decisioning · IDMM](/en/docs/guides/intelligent-decision) — add a layer of decision-watch to a long-running terminal session.
+- [The session workspace](/docs/guides/sessions) — how the in-session terminal works alongside the file tree and preview.
+- [Unattended automation · AutoWork](/docs/guides/autowork) — bind a terminal to a tag and let the orchestrator drive it unattended.
+- [Intelligent decisioning · IDMM](/docs/guides/intelligent-decision) — add a layer of decision-watch to a long-running terminal session.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

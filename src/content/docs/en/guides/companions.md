@@ -46,7 +46,7 @@ The memory model is the key thing to understand:
 
    ![Per-companion skill library (isolated per companion)](/images/en/桌面伙伴/桌面伙伴技能配置.png)
 
-8. **Bind knowledge bases.** In the Model & Knowledge tab, mount one or more knowledge bases on this companion — binding is independent per companion, and the companion can retrieve from them while chatting (see [Knowledge base](/en/docs/guides/knowledge-base)). Bind different bases to different companions and you get a "finance companion," a "literature companion," a "coding companion."
+8. **Bind knowledge bases.** In the Model & Knowledge tab, mount one or more knowledge bases on this companion — binding is independent per companion, and the companion can retrieve from them while chatting (see [Knowledge base](/docs/guides/knowledge-base)). Bind different bases to different companions and you get a "finance companion," a "literature companion," a "coding companion."
 
    ![Bind knowledge bases to a companion](/images/en/桌面伙伴/桌面伙伴知识库配置.png)
 
@@ -71,7 +71,7 @@ The memory model is the key thing to understand:
 - **Memory is shared, skills are isolated.** All companions share one collection/learning pipeline and a single long-term memory; skill libraries are grown per companion. Don't read this as "each companion has its own private memory" — per-companion private memory is on the roadmap.
 - **The evolution engine sees sequences, not arguments.** Skill mining is based only on the **sequence** of tool calls and records no argument values, so the skills it distills are safe to review and share.
 - **Keep desktop pets to ≤ 5 on screen.** Each pet is its own WebView; too many hurts performance. The UI warns you but doesn't hard-cap.
-- **Remote channels bind per companion.** Each IM platform can bind one companion to handle remote messages, falling back to the default companion when unbound. Binding and rebinding are covered in [Channels](/en/docs/guides/channels).
+- **Remote channels bind per companion.** Each IM platform can bind one companion to handle remote messages, falling back to the default companion when unbound. Binding and rebinding are covered in [Channels](/docs/guides/channels).
 
 ## Privacy boundaries
 
@@ -86,7 +86,7 @@ The memory model is the key thing to understand:
 
 ## Related
 
-- [Channels](/en/docs/guides/channels) — channel master-agent mode and per-platform companion binding.
-- [Knowledge base](/en/docs/guides/knowledge-base) — knowledge-base creation, URL snapshots, and session mounting.
+- [Channels](/docs/guides/channels) — channel master-agent mode and per-platform companion binding.
+- [Knowledge base](/docs/guides/knowledge-base) — knowledge-base creation, URL snapshots, and session mounting.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

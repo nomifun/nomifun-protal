@@ -50,8 +50,8 @@ Find them in system settings: **Computer Use** (`/settings/computer-use`) and **
 
 ## Related
 
-- [The session workspace](/en/docs/guides/sessions) — how the file tree, preview, and a session invoke these capabilities.
-- [MCP & skills](/en/docs/guides/mcp-and-skills) — wire up external tools alongside the built-ins.
-- [Intelligent decisioning · IDMM](/en/docs/guides/intelligent-decision) — add decision-watch escort to a long-running task.
+- [The session workspace](/docs/guides/sessions) — how the file tree, preview, and a session invoke these capabilities.
+- [MCP & skills](/docs/guides/mcp-and-skills) — wire up external tools alongside the built-ins.
+- [Intelligent decisioning · IDMM](/docs/guides/intelligent-decision) — add decision-watch escort to a long-running task.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

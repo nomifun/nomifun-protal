@@ -42,7 +42,7 @@ Settings is NomiFun's app-level configuration surface: see where your local data
 - **Treat data as a database.** Treat the data directory like a database — back it up and lock down its permissions, and you can move the whole thing: copy it to a new machine to migrate, or quit the app and delete it to reset.
 - **Isolated sandbox.** To make one run use a separate directory, set `NOMIFUN_DATA_DIR=<absolute path>` before launch (the desktop app appends `/Nomi`). Two backends sharing one directory is blocked by design — startup fails fast and names the current holder.
 - **Shared memory, per-companion skills.** Inside the data directory, `companion/` is **one collection/learning pipeline shared by all companions**, while the skill library is isolated per companion. Per-companion private memory is coming soon.
-- **No runtime config here.** The toggles and permissions for computer-use / browser-use / the nomi agent are not in Settings — see [Computer & browser use](/en/docs/guides/computer-browser-use).
+- **No runtime config here.** The toggles and permissions for computer-use / browser-use / the nomi agent are not in Settings — see [Computer & browser use](/docs/guides/computer-browser-use).
 
 ## FAQ
 
@@ -54,8 +54,8 @@ Settings is NomiFun's app-level configuration surface: see where your local data
 
 ## Related
 
-- [Computer & browser use](/en/docs/guides/computer-browser-use) — toggles and permissions for computer-use / browser-use / the agent.
-- [WebUI remote access](/en/docs/guides/webui-remote) — expose the desktop instance over LAN behind a login.
-- [Companions](/en/docs/guides/companions) — the shared memory hub and per-companion skill libraries.
+- [Computer & browser use](/docs/guides/computer-browser-use) — toggles and permissions for computer-use / browser-use / the agent.
+- [WebUI remote access](/docs/guides/webui-remote) — expose the desktop instance over LAN behind a login.
+- [Companions](/docs/guides/companions) — the shared memory hub and per-companion skill libraries.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

@@ -61,7 +61,7 @@ Not yet doable from IM: creating a team (use the desktop / WebUI), file uploads 
 
 ## Related
 
-- [Companions](/en/docs/guides/companions) — multi-companion management, the shared memory hub, and per-companion skill libraries.
-- [AutoWork & Requirements](/en/docs/guides/autowork) — outbound completion-notification webhooks and requirement logging.
+- [Companions](/docs/guides/companions) — multi-companion management, the shared memory hub, and per-companion skill libraries.
+- [AutoWork & Requirements](/docs/guides/autowork) — outbound completion-notification webhooks and requirement logging.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

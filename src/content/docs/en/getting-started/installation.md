@@ -12,7 +12,7 @@ This page walks you through getting NomiFun onto your machine or server from scr
 
 > **Download entry**: the NomiFun app download page is [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases). Open it, choose a version, then pick the asset for your platform. If a release does not include your platform yet, you can still build from source (desktop Tauri / web axum) or self-host with Docker using the steps below.
 >
-> For platform support and system requirements, see the [download page](/en/download).
+> For platform support and system requirements, see the [download page](/download).
 
 ## Prerequisites
 
@@ -82,7 +82,7 @@ The repo ships a multi-stage `Dockerfile` and a `docker-compose.yml` that build 
 ## Notes and boundaries
 
 - **The desktop app is a single-user tool.** The OS account that launches it has everything the agent can do, including shell and file access. The login-free window relies on the local-trust token, not on "no auth" — other processes that merely know the port are not trusted automatically.
-- **Don't expose the desktop port directly for remote access.** To reach it from another device, use the in-app [WebUI LAN remote control](/en/docs/guides/webui-remote) (one-time QR scan, 5-minute token TTL) or deploy the [web service](#b-build-the-web-service-from-source) separately.
+- **Don't expose the desktop port directly for remote access.** To reach it from another device, use the in-app [WebUI LAN remote control](/docs/guides/webui-remote) (one-time QR scan, 5-minute token TTL) or deploy the [web service](#b-build-the-web-service-from-source) separately.
 - **First-run window.** Until you finish setup, anyone who can reach the web service's port can claim the admin account. On a non-loopback bind the server logs a prominent warning; preseeding with `NOMIFUN_ADMIN_PASSWORD` closes that race window.
 - **`--insecure-no-auth` is hostile by default.** It disables authentication entirely; use it only on loopback or a fully trusted private network. Running the backend remotely is, by design, equivalent to granting remote code execution on that host — auth + TLS is the floor.
 - **Only one backend instance per data directory.** The backend takes an exclusive `server.lock` at startup; running `nomifun-web` bare on a machine that also has the desktop app fails fast because both point at the same directory. To run multiple instances, give each its own `--data-dir`.
@@ -112,8 +112,8 @@ If you see `nomifun-web: embedded backend + SPA on one port` in the logs and `/a
 
 ## Related
 
-- [Introduction](/en/docs/getting-started/introduction) — what NomiFun is and how the two hosts compare.
-- [Quick Start](/en/docs/getting-started/quick-start) — your first session after installing.
-- [WebUI LAN remote control](/en/docs/guides/webui-remote) — turn an existing desktop install into a QR-scan remote instance.
+- [Introduction](/docs/getting-started/introduction) — what NomiFun is and how the two hosts compare.
+- [Quick Start](/docs/getting-started/quick-start) — your first session after installing.
+- [WebUI LAN remote control](/docs/guides/webui-remote) — turn an existing desktop install into a QR-scan remote instance.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

@@ -44,8 +44,8 @@ The entry point is **`/assistants`** (the old `/settings/assistants` redirects t
 
 ## Related
 
-- [MCP and skills](/en/docs/guides/mcp-and-skills) — manage skills and MCP servers to extend what an assistant can do.
-- [The session workspace](/en/docs/guides/sessions) — pick an assistant and get work done in a session.
-- [Model failover queue](/en/docs/guides/model-routing) — a safety net for an assistant's model preference.
+- [MCP and skills](/docs/guides/mcp-and-skills) — manage skills and MCP servers to extend what an assistant can do.
+- [The session workspace](/docs/guides/sessions) — pick an assistant and get work done in a session.
+- [Model failover queue](/docs/guides/model-routing) — a safety net for an assistant's model preference.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

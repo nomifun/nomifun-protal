@@ -46,8 +46,8 @@ Open **Scheduled tasks** from the sidebar (route `/scheduled`). With no jobs yet
 
 ## Related
 
-- [Unattended automation · AutoWork](/en/docs/guides/autowork) — use it when you want work done "as soon as possible" rather than on a clock.
-- [Session workspace](/en/docs/guides/sessions) — where the conversations a scheduled task creates continue.
-- [In-app terminal](/en/docs/guides/terminal) — when you need a live shell instead.
+- [Unattended automation · AutoWork](/docs/guides/autowork) — use it when you want work done "as soon as possible" rather than on a clock.
+- [Session workspace](/docs/guides/sessions) — where the conversations a scheduled task creates continue.
+- [In-app terminal](/docs/guides/terminal) — when you need a live shell instead.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

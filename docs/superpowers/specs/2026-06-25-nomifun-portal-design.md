@@ -20,7 +20,7 @@
 | 视觉 | **深炭黑画布 + 暖粉主强调 + 蓝紫辅色**（忠于 logo 粉碗+近黑底，蓝紫衔接 App） |
 | 文档范围 | **先做精选核心操作指南 + 可扩展架构**（侧边栏/搜索/i18n 一次搭好，内容分批补） |
 | 文案口径 | **以已实现能力为准；未上线/在途清晰标注"敬请期待 / Roadmap"** |
-| 语言 | **zh-CN 默认（根路径），en-US 次要（/en）**，浏览器语言自动判断；回退 en-US |
+| 语言 | **en-US 默认（根路径），zh-CN 次要（/zh）**，浏览器语言自动判断；回退 en-US |
 
 ---
 
@@ -106,7 +106,7 @@
 ```
 nomifun-portal/
 ├─ package.json            # astro, @astrojs/react, @astrojs/sitemap, react/react-dom, unocss, @unocss/astro
-├─ astro.config.mjs        # integrations: react(), UnoCSS(); i18n: defaultLocale 'zh-CN', locales ['zh-CN','en-US'], routing prefixDefaultLocale:false
+├─ astro.config.mjs        # integrations: react(), UnoCSS(); i18n: defaultLocale 'en-US', locales ['en-US','zh-CN'], routing prefixDefaultLocale:false
 ├─ uno.config.ts           # theme.colors 映射上面 token；presetWind3 + presetIcons(可选)
 ├─ tsconfig.json
 ├─ src/

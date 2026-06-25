@@ -1,7 +1,8 @@
 /**
  * i18n core for the NomiFun portal.
  *
- * Routing: zh-CN at the root ("/"), en-US under "/en".
+ * Routing: en-US at the root ("/"), zh-CN under "/zh".
+ * The old "/en" path is treated as an English compatibility alias.
  * Content lives in `src/i18n/dict/*.ts` — each section/page owns its own
  * dictionary file (one file holds both `zh-CN` and `en-US`) so that parallel
  * work never collides on a single mega-dictionary.
@@ -10,7 +11,7 @@
 export const LOCALES = ['zh-CN', 'en-US'] as const;
 export type Locale = (typeof LOCALES)[number];
 
-export const DEFAULT_LOCALE: Locale = 'zh-CN';
+export const DEFAULT_LOCALE: Locale = 'en-US';
 
 /** A dictionary entry: the same key resolved per locale. */
 export type Dict<T> = Record<Locale, T>;
@@ -18,20 +19,23 @@ export type Dict<T> = Record<Locale, T>;
 /** Derive the active locale from the request URL pathname. */
 export function getLocale(url: URL | string): Locale {
   const pathname = typeof url === 'string' ? url : url.pathname;
-  return pathname === '/en' || pathname.startsWith('/en/') ? 'en-US' : 'zh-CN';
+  return pathname === '/zh' || pathname.startsWith('/zh/') ? 'zh-CN' : 'en-US';
 }
 
 /** Prefix a root-relative path with the locale segment when needed. */
 export function localizePath(path: string, locale: Locale): string {
   const clean = path.startsWith('/') ? path : `/${path}`;
-  if (locale === 'en-US') {
-    return clean === '/' ? '/en' : `/en${clean}`;
+  if (locale === 'zh-CN') {
+    return clean === '/' ? '/zh' : `/zh${clean}`;
   }
   return clean;
 }
 
 /** Strip the locale prefix from a pathname (for building the language toggle). */
 export function delocalizePath(pathname: string): string {
+  if (pathname === '/zh') return '/';
+  if (pathname.startsWith('/zh/')) return pathname.slice(3) || '/';
+  // Legacy English URL compatibility.
   if (pathname === '/en') return '/';
   if (pathname.startsWith('/en/')) return pathname.slice(3) || '/';
   return pathname || '/';

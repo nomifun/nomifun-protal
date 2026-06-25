@@ -61,8 +61,8 @@ The desktop process serves one backend (routes built once) on **two** sockets:
 
 ## Related
 
-- [Run NomiFun as a desktop app](/en/docs/guides/companions)
-- [Terminal and local capabilities](/en/docs/guides/terminal)
-- [Open capabilities overview](/en/docs/guides/open-capability)
+- [Run NomiFun as a desktop app](/docs/guides/companions)
+- [Terminal and local capabilities](/docs/guides/terminal)
+- [Open capabilities overview](/docs/guides/open-capability)
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

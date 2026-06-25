@@ -47,8 +47,8 @@ Creating a session takes you to `/conversation/:id`. Start one from the sidebar'
 
 ## Related
 
-- [Mount a knowledge base](/en/docs/guides/knowledge-base) — prepare grounded sources for a session.
-- [Unattended automation · AutoWork](/en/docs/guides/autowork) — the full write-up on AutoWork and the **IDMM decision watch**.
-- [MCP and skills](/en/docs/guides/mcp-and-skills) — wire tools and skills into a session.
+- [Mount a knowledge base](/docs/guides/knowledge-base) — prepare grounded sources for a session.
+- [Unattended automation · AutoWork](/docs/guides/autowork) — the full write-up on AutoWork and the **IDMM decision watch**.
+- [MCP and skills](/docs/guides/mcp-and-skills) — wire tools and skills into a session.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

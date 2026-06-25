@@ -55,7 +55,7 @@ NomiFun is at **0.1.0 (pre-1.0)** and under active iteration. It began as a fork
 
 ## Related
 
-- [Installation](/en/docs/getting-started/installation) — get it running.
-- [Your first conversation](/en/docs/getting-started/quick-start) — set up a model and complete your first session.
+- [Installation](/docs/getting-started/installation) — get it running.
+- [Your first conversation](/docs/getting-started/quick-start) — set up a model and complete your first session.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

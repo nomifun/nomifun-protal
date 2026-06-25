@@ -48,7 +48,7 @@ A binding looks like `(target_kind, target_id, tag, optional cap)`. There are tw
 - **Session target** — open any session (running the built-in nomi or any ACP direct-connect agent) and, in the header **AutoWork** control, pick a tag, set an optional completion cap, and enable. Each round the orchestrator claims the next requirement, builds an injected instruction that's hidden from the visible transcript, and marks the row `Done` once the turn ends cleanly.
 - **Terminal target** — open a terminal preset to `claude` or `codex` (a plain shell, or Gemini, is not yet eligible); the same AutoWork control appears in its header. Bind a tag and enable. A terminal turn is considered finished when its output goes quiet.
 
-> **Full Auto is strongly recommended.** If a round hits an interactive approval prompt, it blocks until timeout. Every agent CLI has a non-interactive switch, and the terminal's Full Auto mode adds it for you (see [Terminals](/en/docs/guides/terminal)).
+> **Full Auto is strongly recommended.** If a round hits an interactive approval prompt, it blocks until timeout. Every agent CLI has a non-interactive switch, and the terminal's Full Auto mode adds it for you (see [Terminals](/docs/guides/terminal)).
 
 Once bound, the orchestrator cycles `Pending → InProgress → Done/Failed/NeedsReview`, executing one loop per tag in order.
 
@@ -80,9 +80,9 @@ Back in the Notify tab, pick a webhook for the target tag from the dropdown. Whe
 
 ## Related
 
-- [IDMM intelligent watch](/en/docs/guides/intelligent-decision) — keeps a stuck turn alive, stacks with AutoWork
-- [Terminals](/en/docs/guides/terminal) — use an agent CLI as a terminal target with Full Auto
-- [Sessions](/en/docs/guides/sessions) — session targets and the AutoWork control
-- [Channels](/en/docs/guides/channels) — current state of IM integrations
+- [IDMM intelligent watch](/docs/guides/intelligent-decision) — keeps a stuck turn alive, stacks with AutoWork
+- [Terminals](/docs/guides/terminal) — use an agent CLI as a terminal target with Full Auto
+- [Sessions](/docs/guides/sessions) — session targets and the AutoWork control
+- [Channels](/docs/guides/channels) — current state of IM integrations
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

@@ -8,7 +8,7 @@ lang: en-US
 
 IDMM (Intelligent Decision-Making Mode) is NomiFun's **per-session supervisor** for unattended work. It watches every turn and steps in the moment things stall, so long automation runs reach a terminal state instead of getting stuck on a single provider hiccup or a model that has stopped making progress. Whether that session runs the built-in nomi, an ACP direct-connect agent (Claude Code / Codex, etc.), or an agent CLI in a terminal, you enable it from the session header — IDMM is not nomi-only.
 
-IDMM has two layers: a **rule layer** that handles mechanical stalls with deterministic policy (no model calls), and a **side-model layer** that escalates genuine decision checkpoints to a lightweight model. It pairs naturally with [AutoWork](/en/docs/guides/autowork) — AutoWork pushes work forward, IDMM keeps each turn from getting stuck.
+IDMM has two layers: a **rule layer** that handles mechanical stalls with deterministic policy (no model calls), and a **side-model layer** that escalates genuine decision checkpoints to a lightweight model. It pairs naturally with [AutoWork](/docs/guides/autowork) — AutoWork pushes work forward, IDMM keeps each turn from getting stuck.
 
 > Entry point: Global config → **Models** (Models & Decisioning) to set defaults and review decision activity; the actual toggles are enabled per session in the **session header**, the same place as AutoWork.
 
@@ -46,6 +46,6 @@ When a provider keeps failing, IDMM can trigger a **model failover queue**: it s
 
 ## Related
 
-- [Unattended automation · AutoWork](/en/docs/guides/autowork) — the automation IDMM most often guards.
+- [Unattended automation · AutoWork](/docs/guides/autowork) — the automation IDMM most often guards.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

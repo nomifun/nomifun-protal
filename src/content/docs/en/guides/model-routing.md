@@ -43,7 +43,7 @@ Entry point: the **Models** page in the sidebar (`/models`) manages every provid
 
 - **Nomi engine sessions only.** This is an in-engine retry strategy. It does not spread load across multiple API keys, and it does not make all CLI / ACP agents share one model pool.
 - **Reliability, not quota.** If **every** provider in the queue is down, or the turn's prompt / tool state is itself invalid, failover can't rescue that turn.
-- **Works with IDMM.** When IDMM's failure-watch judges a provider failure recoverable and the session has failover enabled, it lets the session retry along this queue. Failure-watch and decision-watch are **off by default**. See [Unattended automation · AutoWork](/en/docs/guides/autowork).
+- **Works with IDMM.** When IDMM's failure-watch judges a provider failure recoverable and the session has failover enabled, it lets the session retry along this queue. Failure-watch and decision-watch are **off by default**. See [Unattended automation · AutoWork](/docs/guides/autowork).
 
 ## The 17 direct ACP agents
 
@@ -55,8 +55,8 @@ Beyond the native providers, NomiFun also connects directly to 17 external agent
 
 ## Related
 
-- [Unattended automation · AutoWork](/en/docs/guides/autowork)
-- [MCP & skills](/en/docs/guides/mcp-and-skills)
-- [Channels · super gateway](/en/docs/guides/channels)
+- [Unattended automation · AutoWork](/docs/guides/autowork)
+- [MCP & skills](/docs/guides/mcp-and-skills)
+- [Channels · super gateway](/docs/guides/channels)
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

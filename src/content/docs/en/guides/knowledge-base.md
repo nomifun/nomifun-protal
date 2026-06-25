@@ -82,8 +82,8 @@ A: Yes. Bind by workpath or companion to let multiple sessions share the same ba
 
 ## Related
 
-- [Companions](/en/docs/guides/companions) — bind a base to a companion to grow its own knowledge
-- [Sessions](/en/docs/guides/sessions) — enable and mount a base from the session header
-- [Channels · Super Gateway](/en/docs/guides/channels) — why IM writes always go through the staging inbox
+- [Companions](/docs/guides/companions) — bind a base to a companion to grow its own knowledge
+- [Sessions](/docs/guides/sessions) — enable and mount a base from the session header
+- [Channels · Super Gateway](/docs/guides/channels) — why IM writes always go through the staging inbox
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
