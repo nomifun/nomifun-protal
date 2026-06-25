@@ -23,7 +23,16 @@ export const links = {
   license: 'https://www.apache.org/licenses/LICENSE-2.0',
 } as const;
 
-/** PLACEHOLDER community entries — fill in what exists, drop the rest. */
+export const socialLinks = {
+  xiaohongshu: 'https://xhslink.com/m/4x6ti8n6cA1',
+  bilibili: 'https://b23.tv/0UhgKDh',
+  douyin: 'https://v.douyin.com/MDT5QVdYaJk/',
+  youtube: 'https://www.youtube.com/@NomiFun-o2y',
+  x: 'https://x.com/colir0',
+  tiktok: 'https://www.tiktok.com/@colir0luo',
+} as const;
+
+/** Primary community entries rendered before platform-specific social links. */
 export const community: { id: string; label: string; url: string; icon: string }[] = [
   { id: 'github', label: 'GitHub', url: links.github, icon: 'i-mdi-github' },
   // { id: 'discord', label: 'Discord', url: '#', icon: 'i-mdi-discord' },
