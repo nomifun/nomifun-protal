@@ -10,9 +10,9 @@ NomiFun is a fully open-source, local-first "super AI workstation": one Rust bac
 
 This page walks you through getting NomiFun onto your machine or server from scratch.
 
-> **This is 0.1.0 (pre-1.0); official prebuilt installers are coming soon.** For now the main paths are building from source (desktop Tauri / web axum) or self-hosting with Docker. Platform binaries (macOS `.dmg`, Windows installers, Linux `.deb`/`.AppImage`) can be built locally; a public download channel will follow. Nothing on this page depends on an installer that hasn't shipped yet.
+> **Download entry**: the NomiFun app download page is [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases). Open it, choose a version, then pick the asset for your platform. If a release does not include your platform yet, you can still build from source (desktop Tauri / web axum) or self-host with Docker using the steps below.
 >
-> For platform placeholders and system requirements, see the [download page](/en/download).
+> For platform support and system requirements, see the [download page](/en/download).
 
 ## Prerequisites
 

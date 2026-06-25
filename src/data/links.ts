@@ -1,10 +1,10 @@
 /**
  * Central place for all outbound links & contact info.
  *
- * The public GitHub repo (github.com/nomifun/nomifun-tauri) and the official
- * website (www.nomifun.com) are confirmed and live. The contact email is the
- * only field still being finalized — it stays marked PLACEHOLDER until the
- * author confirms it. See docs/RESOURCES-TODO.md.
+ * The public GitHub repo, GitHub Releases download page, and official website
+ * are confirmed and live. The contact email is the only field still being
+ * finalized — it stays marked PLACEHOLDER until the author confirms it. See
+ * docs/RESOURCES-TODO.md.
  */
 
 export const links = {
@@ -40,14 +40,11 @@ export const community: { id: string; label: string; url: string; icon: string }
   // { id: 'telegram', label: 'Telegram', url: '#', icon: 'i-mdi-telegram' },
 ];
 
-/**
- * Download artifacts. Empty `url` => button shows "即将提供 / Coming soon"
- * (the source repo has no official prebuilt installers yet).
- */
+/** Download entry points. Platform buttons all land on GitHub Releases. */
 export const downloads = {
-  macos: { label: 'macOS', ext: '.dmg', url: '', arch: 'Apple Silicon / Intel' },
-  windows: { label: 'Windows', ext: '.msi / .exe', url: '', arch: 'x64' },
-  linux: { label: 'Linux', ext: '.deb / .AppImage', url: '', arch: 'x64' },
+  macos: { label: 'macOS', ext: '.dmg', url: links.releases, arch: 'Apple Silicon / Intel' },
+  windows: { label: 'Windows', ext: '.msi / .exe', url: links.releases, arch: 'x64' },
+  linux: { label: 'Linux', ext: '.deb / .AppImage', url: links.releases, arch: 'x64' },
 } as const;
 
 export const meta = {

@@ -62,7 +62,7 @@
 
 ### B4. 下载二进制（产品侧，非门户）
 
-仓库当前**无官方预编译包**（只能源码构建 + Docker）。下载页我会先做"源码构建 + Docker 自托管"三条路径，平台二进制按钮标"即将提供"并预留位置。等你有了 Release 产物（`.dmg`/`.msi`/`.exe`/`.deb`/`.AppImage`），把链接填进 `src/data/links.ts` 的 `downloads` 即可点亮。
+应用下载入口已统一为 GitHub Releases：`https://github.com/nomifun/nomifun-tauri/releases`。下载页的平台按钮均指向该入口；如果某个版本暂未包含对应平台产物，页面仍保留"源码构建 + Docker 自托管"三条路径作为备用安装方式。
 
 ### B5. 真实产品截图（替换占位图，文档页用）
 

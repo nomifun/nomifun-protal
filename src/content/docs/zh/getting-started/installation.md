@@ -10,9 +10,9 @@ NomiFun 是完全开源、本地优先的「超级 AI 工作站」：一套 Rust
 
 本页带你从零把 NomiFun 装到本机或服务器上。
 
-> **当前为 0.1.0（pre-1.0），官方预编译安装包「即将提供」。** 现在主路径是从源码构建（桌面 Tauri / Web axum）或用 Docker 自托管；平台二进制（macOS `.dmg`、Windows 安装器、Linux `.deb`/`.AppImage`）可本地构建，公开下载渠道随后开放。本页不依赖任何尚未发布的安装包。
+> **下载入口**：NomiFun 应用下载地址为 [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases)。进入后选择对应版本和平台资产；如果当前版本暂未包含你的平台产物，也可以按下方步骤从源码构建（桌面 Tauri / Web axum）或用 Docker 自托管。
 >
-> 想了解平台占位与系统要求，可参考[下载页](/download)。
+> 想了解平台支持与系统要求，可参考[下载页](/download)。
 
 ## 前置条件
 
