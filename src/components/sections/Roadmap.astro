@@ -1,0 +1,163 @@
+---
+/**
+ * Roadmap — 敬请期待 / On the roadmap.
+ *
+ * Honest, warm tone. These items are upcoming OR deliberately withheld from
+ * the open-source build for data-security reasons (spec §2/§3 pillar 7):
+ *  - 伙伴细分私有记忆
+ *  - issue / IM 入站转需求
+ *  - Notion 知识库来源
+ *  - 企业微信 WeCom 渠道
+ *  - 更多因数据安全考量暂未在开源版开放的惊艳功能
+ * Author works part-time — set expectations graciously, invite co-building.
+ */
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import Badge from '@/components/ui/Badge.astro';
+
+const locale: Locale = getLocale(Astro.url);
+
+interface Item {
+  icon: string;
+  title: string;
+  body: string;
+  reason?: string;
+}
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  soonLabel: string;
+  withheldLabel: string;
+  items: Item[];
+  honestTitle: string;
+  honestBody: string;
+  cta: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '诚实路线图 · 敬请期待',
+    title: '还有一些能力，<span class="text-grad-pink">敬请期待</span>',
+    lead: '我们只宣传已经实现的能力。下面这些要么还在路上，要么出于数据安全考量暂未在开源版开放——把话说在前面，胜过让你踩空。',
+    soonLabel: '敬请期待',
+    withheldLabel: '安全考量 · 暂未开源',
+    items: [
+      {
+        icon: 'i-mdi-account-lock-outline',
+        title: '伙伴细分私有记忆',
+        body: '当前是共享记忆中枢 + 每个伙伴专属技能库。更细粒度的「按伙伴隔离的私有记忆」正在设计中。',
+      },
+      {
+        icon: 'i-mdi-import',
+        title: 'issue / IM 入站转需求',
+        body: '完成通知可出站推送 Lark / Slack / HTTP webhook；反向的「从 issue 或 IM 入站自动转成需求」尚未上线。',
+      },
+      {
+        icon: 'i-simple-icons-notion',
+        title: 'Notion 知识库来源',
+        body: '飞书 Feishu 连接器已实现；Notion 作为知识库来源仍在路线图上，暂未实现。',
+      },
+      {
+        icon: 'i-simple-icons-wechat',
+        title: '企业微信 WeCom 渠道',
+        body: '11 个 IM 渠道已落地，企业微信 WeCom 正在途中，落地后即补齐企业内部协同的最后一块。',
+      },
+      {
+        icon: 'i-mdi-shield-star-outline',
+        title: '更多惊艳能力',
+        body: '出于数据安全考量，若干更先进的功能暂未在开源版开放。把「放心」放在第一位，是刻意的取舍。',
+        reason: 'withheld',
+      },
+    ],
+    honestTitle: '一句实在话',
+    honestBody: '本项目由作者兼职开发、精力有限，迭代与修复速度可能不达预期。感谢你的理解，也真诚欢迎你一起共建——多一双手，路就走得更快。',
+    cta: '了解如何共建',
+  },
+  'en-US': {
+    eyebrow: 'Honest roadmap · On the way',
+    title: 'A few things are still <span class="text-grad-pink">on the roadmap</span>',
+    lead: 'We only advertise what already ships. The items below are either on the way, or deliberately held back from the open-source build for data-security reasons — better said upfront than discovered the hard way.',
+    soonLabel: 'On the roadmap',
+    withheldLabel: 'Security-conscious · not in OSS yet',
+    items: [
+      {
+        icon: 'i-mdi-account-lock-outline',
+        title: 'Per-companion private memory',
+        body: 'Today there is a shared memory hub plus a per-companion skill library. More granular, companion-isolated private memory is in design.',
+      },
+      {
+        icon: 'i-mdi-import',
+        title: 'Inbound issue / IM → tasks',
+        body: 'Completion notices push outbound to Lark / Slack / HTTP webhook; the reverse — turning inbound issues or IM messages into tasks — is not live yet.',
+      },
+      {
+        icon: 'i-simple-icons-notion',
+        title: 'Notion as a knowledge source',
+        body: 'The Feishu connector is implemented; Notion as a knowledge-base source is still on the roadmap, not yet implemented.',
+      },
+      {
+        icon: 'i-simple-icons-wechat',
+        title: 'WeCom (企业微信) channel',
+        body: '11 IM channels have landed. WeCom is on the way — once shipped it closes the last gap for in-company collaboration.',
+      },
+      {
+        icon: 'i-mdi-shield-star-outline',
+        title: 'More dazzling capabilities',
+        body: 'For data-security reasons, several more advanced features are held back from the open-source build. Putting peace of mind first is a deliberate trade-off.',
+        reason: 'withheld',
+      },
+    ],
+    honestTitle: 'A word, plainly',
+    honestBody: 'This project is built part-time by a solo author with limited bandwidth, so iteration and fixes may not move as fast as you would like. Thank you for your patience — and a genuine invitation to build it together. More hands, faster road.',
+    cta: 'See how to contribute',
+  },
+};
+
+const t = pick(copy, locale);
+---
+
+<section id="roadmap" class="relative section-y">
+  <div class="container-x">
+    <SectionHeader eyebrow={t.eyebrow} title={t.title} lead={t.lead} />
+
+    <!-- roadmap grid -->
+    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+      {t.items.map((item) => (
+        <li class="card card-hover flex flex-col p-6">
+          <div class="flex items-start justify-between gap-3">
+            <span class="grid h-11 w-11 place-items-center rounded-xl border border-warning/25 bg-warning/10">
+              <span class={`${item.icon} text-xl text-warning`} aria-hidden="true"></span>
+            </span>
+            <Badge tone="soon">
+              <span class="i-mdi-clock-outline text-xs" aria-hidden="true"></span>
+              {item.reason === 'withheld' ? t.withheldLabel : t.soonLabel}
+            </Badge>
+          </div>
+          <h3 class="mt-4 text-base font-semibold text-hi">{item.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-mid">{item.body}</p>
+        </li>
+      ))}
+    </ul>
+
+    <!-- honest, gracious note -->
+    <div class="mt-10" data-animate>
+      <div class="card relative overflow-hidden p-6 sm:p-8">
+        <div class="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full opacity-50 blur-3xl" style="background: radial-gradient(closest-side, rgba(255,111,145,0.18), transparent)"></div>
+        <div class="relative flex flex-col gap-4 sm:flex-row sm:items-start">
+          <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-pink-500/30 bg-pink-500/10">
+            <span class="i-mdi-hand-heart-outline text-xl text-pink-400" aria-hidden="true"></span>
+          </span>
+          <div class="min-w-0">
+            <h3 class="text-lg font-semibold text-hi">{t.honestTitle}</h3>
+            <p class="mt-2 text-base leading-relaxed text-mid">{t.honestBody}</p>
+            <a href={localizePath('/contact', locale)} class="btn-ghost mt-5 text-sm">
+              <span class="i-mdi-account-group-outline text-base" aria-hidden="true"></span>
+              {t.cta}
+              <span class="i-mdi-arrow-right text-base" aria-hidden="true"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

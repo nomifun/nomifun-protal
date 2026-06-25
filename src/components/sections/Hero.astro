@@ -1,0 +1,102 @@
+---
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+import { links } from '@/data/links';
+
+const locale: Locale = getLocale(Astro.url);
+
+const copy: Dict<{
+  eyebrow: string;
+  titleA: string;
+  titleHi: string;
+  titleB: string;
+  lead: string;
+  ctaPrimary: string;
+  ctaSecondary: string;
+  chips: string[];
+}> = {
+  'zh-CN': {
+    eyebrow: '完全开源 · 本地优先 · 免费商用',
+    titleA: '一项毫无保留的',
+    titleHi: '超级 AI 工作站',
+    titleB: '满足你对 AI 工作站的全部想象',
+    lead: '丰富的创新能力，极高的生产提效。数据全在本地，绝不主动外发——个人与企业都能放心使用、自由商用、接受审计。',
+    ctaPrimary: '立即下载',
+    ctaSecondary: '在 GitHub 查看源码',
+    chips: ['源码开放 · 数据全本地', '超级伙伴 · 智能进化', '智能值守 · 需求管理', '开放能力 · 超级生态', '无限搭配 · config one', '更 native 的实现', '专为提效 · 海量创新'],
+  },
+  'en-US': {
+    eyebrow: 'Fully open-source · Local-first · Free for commercial use',
+    titleA: 'A no-holds-barred',
+    titleHi: 'super AI workstation',
+    titleB: 'everything you imagine an AI workstation to be',
+    lead: 'Rich, inventive capabilities and serious productivity gains. All data stays local and is never sent out on its own — safe for individuals and enterprises alike, free to commercialize, open to audit.',
+    ctaPrimary: 'Download',
+    ctaSecondary: 'View source on GitHub',
+    chips: ['Open source · Local data', 'Evolving companions', 'Unattended automation', 'Open ecosystem', 'config one, use anywhere', 'Truly native', 'Built for productivity'],
+  },
+};
+
+const t = pick(copy, locale);
+---
+
+<section class="relative overflow-hidden">
+  <!-- ambient glows -->
+  <div class="pointer-events-none absolute inset-0 -z-10 bg-mesh"></div>
+  <div class="pointer-events-none absolute left-1/2 top-[-10%] -z-10 h-[520px] w-[820px] -translate-x-1/2 rounded-full opacity-60 blur-3xl" style="background: radial-gradient(closest-side, rgba(255,111,145,0.20), transparent)"></div>
+
+  <div class="container-x relative flex flex-col items-center pt-28 pb-20 text-center sm:pt-36 lg:pt-40">
+    <!-- animated logo bowl -->
+    <div class="hero-bowl mb-8" data-animate>
+      <div class="relative h-24 w-24 sm:h-28 sm:w-28">
+        <div class="absolute inset-0 rounded-[26px] blur-2xl opacity-70" style="background: radial-gradient(closest-side, rgba(255,111,145,0.55), transparent)"></div>
+        <svg viewBox="0 0 80 80" class="relative h-full w-full drop-shadow-[0_8px_32px_rgba(255,111,145,0.35)]" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="hb-bg" x1="0" y1="0" x2="0" y2="80" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1B1822"/><stop offset="1" stop-color="#0B0A10"/></linearGradient>
+            <linearGradient id="hb-bowl" x1="15" y1="49" x2="65" y2="69" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FF9FB4"/><stop offset="1" stop-color="#FF6F91"/></linearGradient>
+          </defs>
+          <rect width="80" height="80" rx="18" fill="url(#hb-bg)"/>
+          <g class="steam"><path d="M33 17 q-4.5 -4 0 -8.5" stroke="#FF8FA8" stroke-width="3" fill="none" stroke-linecap="round"/></g>
+          <g class="steam steam-2"><path d="M40 15 q-4.5 -4 0 -8.5" stroke="#FFB3C4" stroke-width="3" fill="none" stroke-linecap="round"/></g>
+          <g class="steam steam-3"><path d="M47 17 q-4.5 -4 0 -8.5" stroke="#FF8FA8" stroke-width="3" fill="none" stroke-linecap="round"/></g>
+          <path d="M22 46 Q22 27 40 27 Q58 27 58 46 Z" fill="#FFFFFF"/>
+          <path d="M14 49 H66 Q61.5 70 40 70 Q18.5 70 14 49 Z" fill="url(#hb-bowl)"/>
+        </svg>
+      </div>
+    </div>
+
+    <span class="eyebrow mb-5" data-animate>{t.eyebrow}</span>
+
+    <h1 class="max-w-4xl text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl" data-animate>
+      <span class="text-hi">{t.titleA}</span>
+      <span class="text-grad-pink"> {t.titleHi}</span>
+      <span class="mt-2 block text-2xl font-bold text-mid sm:text-3xl lg:text-4xl">{t.titleB}</span>
+    </h1>
+
+    <p class="mt-7 max-w-2xl text-base leading-relaxed text-mid sm:text-lg" data-animate>{t.lead}</p>
+
+    <div class="mt-9 flex flex-col items-center gap-3 sm:flex-row" data-animate>
+      <a href={localizePath('/download', locale)} class="btn-primary text-base px-7 py-3.5">
+        <span class="i-mdi-download text-lg"></span>{t.ctaPrimary}
+      </a>
+      <a href={links.github} target="_blank" rel="noopener" class="btn-ghost text-base px-7 py-3.5">
+        <span class="i-mdi-github text-lg"></span>{t.ctaSecondary}
+      </a>
+    </div>
+
+    <ul class="mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-2.5" data-stagger>
+      {t.chips.map((c) => (
+        <li class="rounded-full border border-ink-600/80 bg-ink-800/50 px-3.5 py-1.5 text-xs font-medium text-mid backdrop-blur-sm sm:text-sm">{c}</li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hero-bowl { animation: float 6s ease-in-out infinite; }
+  .steam { transform-origin: center bottom; animation: steam 2.6s ease-in-out infinite; }
+  .steam-2 { animation-delay: 0.5s; }
+  .steam-3 { animation-delay: 1s; }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bowl, .steam { animation: none; }
+  }
+</style>

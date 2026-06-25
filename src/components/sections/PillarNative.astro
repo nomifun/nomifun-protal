@@ -1,0 +1,139 @@
+---
+import { getLocale, pick, type Dict, type Locale } from '@/i18n';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+
+const locale: Locale = getLocale(Astro.url);
+
+// Native tool chip row — kept stable across locales (these are tool names).
+const nativeTools = ['Browser', 'Computer', 'Read', 'Write', 'Bash', 'Grep', 'Glob', 'Lsp', 'Terminal'];
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  hook: string;
+  claim: string;
+  toolsLabel: string;
+  // wrapper-vs-native comparison
+  compareWrapperLabel: string;
+  compareNativeLabel: string;
+  compareWrapper: string[];
+  compareNative: string[];
+  // capability points
+  cards: { icon: string; title: string; body: string; tags: string[] }[];
+}> = {
+  'zh-CN': {
+    eyebrow: '更 native 的实现',
+    title: '不是套壳，<span class="text-grad-pink">是更 native 的实现</span>',
+    lead: '浏览器与电脑操控，我们没有外挂别人的运行时，而是自研、内嵌、以原生工具的形式直接服务模型。',
+    hook: '套一层 Playwright / Node 子进程，慢、重、还难管控——能不能更干净？',
+    claim: '自研 in-process Rust 引擎与原生 computer-use，以 native tools 形式直接服务模型：更快、更省 token、可细粒度管控，源码可继续增强。',
+    toolsLabel: '内置原生工具',
+    compareWrapperLabel: '外挂运行时（传统做法）',
+    compareNativeLabel: 'NomiFun 原生实现',
+    compareWrapper: ['依赖 Playwright / Node 子进程', '启动慢、占内存、多一层中转', '黑盒，难以细粒度管控', '多一层转译，更费 token'],
+    compareNative: ['in-process Rust 引擎，直连 CDP', '更快、更轻，无额外运行时', '三轴能力网关，按策略放行', 'native tools 直供模型，更省 token', '源码开源，可继续增强'],
+    cards: [
+      { icon: 'i-mdi-application-brackets-outline', title: '自研浏览器引擎', body: '内嵌 in-process 的 Rust CDP 浏览器引擎，Chromium-only，无 Playwright、无 Node 子进程，约 32 个动作直接驱动页面。', tags: ['Rust · CDP', '~32 actions'] },
+      { icon: 'i-mdi-monitor-eye', title: '原生 computer-use', body: '截屏 + 输入合成，叠加平台无障碍引擎：macOS AX / Windows UIA / Linux AT-SPI，约 21 个动作真正地操作你的桌面。', tags: ['AX / UIA / AT-SPI', '~21 actions'] },
+      { icon: 'i-mdi-tune-variant', title: '细粒度能力管控', body: '三轴能力网关（危险级 × 调用面 × 决策）对每一次工具调用按策略放行 / 确认 / 拒绝；源码开源，开发者可继续增强。', tags: ['危险级 × 面 × 决策', '源码可增强'] },
+    ],
+  },
+  'en-US': {
+    eyebrow: 'Truly native',
+    title: 'Not a wrapper — <span class="text-grad-pink">a truly native build</span>',
+    lead: 'For browsing and computer control we don’t bolt on someone else’s runtime. It’s self-developed, in-process, and served to the model as native tools.',
+    hook: 'Spawning a Playwright / Node subprocess is slow, heavy and hard to govern — can it be cleaner?',
+    claim: 'A self-developed in-process Rust engine and native computer-use, served to the model as native tools: faster, fewer tokens, fine-grained control, and source you can extend.',
+    toolsLabel: 'Built-in native tools',
+    compareWrapperLabel: 'Bolted-on runtime (the usual way)',
+    compareNativeLabel: 'NomiFun native',
+    compareWrapper: ['Depends on a Playwright / Node subprocess', 'Slow to start, memory-heavy, extra hop', 'A black box, hard to govern finely', 'Extra translation layer burns tokens'],
+    compareNative: ['In-process Rust engine, direct CDP', 'Faster, lighter, no extra runtime', 'Three-axis capability gateway by policy', 'Native tools serve the model — fewer tokens', 'Open source, extensible'],
+    cards: [
+      { icon: 'i-mdi-application-brackets-outline', title: 'Self-built browser engine', body: 'An in-process Rust CDP browser engine, Chromium-only, with no Playwright and no Node subprocess — about 32 actions drive the page directly.', tags: ['Rust · CDP', '~32 actions'] },
+      { icon: 'i-mdi-monitor-eye', title: 'Native computer-use', body: 'Screen capture + input synthesis, backed by each platform’s accessibility engine: macOS AX / Windows UIA / Linux AT-SPI — about 21 actions that truly operate your desktop.', tags: ['AX / UIA / AT-SPI', '~21 actions'] },
+      { icon: 'i-mdi-tune-variant', title: 'Fine-grained control', body: 'A three-axis capability gateway (danger × surface × decision) gates every tool call — allow / confirm / deny by policy; open source, extensible by developers.', tags: ['danger × surface × decision', 'open & extensible'] },
+    ],
+  },
+};
+
+const t = pick(copy, locale);
+---
+
+<section class="relative section-y">
+  <div class="container-x">
+    <SectionHeader eyebrow={t.eyebrow} title={t.title} lead={t.lead} />
+
+    <div class="mt-14 grid gap-10 lg:grid-cols-2 lg:items-center">
+      <!-- hook + claim + native tool chips -->
+      <div data-animate>
+        <p class="text-lg font-semibold leading-snug text-hi sm:text-xl">{t.hook}</p>
+        <p class="mt-5 text-base leading-relaxed text-mid">{t.claim}</p>
+
+        <div class="mt-8 rounded-2xl border border-ink-600/70 bg-ink-900/50 p-5 sm:p-6">
+          <h3 class="flex items-center gap-2.5 text-sm font-semibold text-hi">
+            <span class="i-mdi-tools text-base text-pink-400"></span>{t.toolsLabel}
+          </h3>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {nativeTools.map((tool) => (
+              <li class="inline-flex items-center gap-1.5 rounded-full border border-ink-600 bg-ink-800/70 px-3 py-1.5 font-mono text-xs text-mid transition-colors hover:border-pink-500/40 hover:text-pink-200">
+                <span class="i-mdi-square-rounded text-[8px] text-pink-400/80" aria-hidden="true"></span>{tool}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- wrapper vs native comparison -->
+      <div class="card p-6 sm:p-7" data-animate>
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <!-- traditional / wrapper -->
+          <div class="rounded-2xl border border-ink-600/70 bg-ink-900/40 p-4">
+            <p class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-low">
+              <span class="i-mdi-package-variant-closed text-sm" aria-hidden="true"></span>{t.compareWrapperLabel}
+            </p>
+            <ul class="mt-3 flex flex-col gap-2.5">
+              {t.compareWrapper.map((item) => (
+                <li class="flex items-start gap-2 text-xs leading-snug text-mid">
+                  <span class="i-mdi-close-circle-outline mt-0.5 shrink-0 text-sm text-danger/70" aria-hidden="true"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <!-- native -->
+          <div class="rounded-2xl border border-pink-500/30 bg-pink-500/[0.06] p-4 shadow-[0_0_36px_-12px_rgba(255,111,145,0.35)]">
+            <p class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-pink-300">
+              <span class="i-mdi-shield-star-outline text-sm" aria-hidden="true"></span>{t.compareNativeLabel}
+            </p>
+            <ul class="mt-3 flex flex-col gap-2.5">
+              {t.compareNative.map((item) => (
+                <li class="flex items-start gap-2 text-xs leading-snug text-hi">
+                  <span class="i-mdi-check-circle mt-0.5 shrink-0 text-sm text-success" aria-hidden="true"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 capability cards -->
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+      {t.cards.map((c) => (
+        <div class="card card-hover p-6">
+          <span class={`${c.icon} text-2xl text-pink-400`}></span>
+          <h3 class="mt-4 text-lg font-semibold text-hi">{c.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-mid">{c.body}</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {c.tags.map((tag) => (
+              <span class="inline-flex items-center rounded-full border border-ink-600 bg-ink-700/60 px-2.5 py-1 font-mono text-[11px] text-mid">{tag}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

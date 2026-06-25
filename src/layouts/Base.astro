@@ -1,0 +1,95 @@
+---
+import '@unocss/reset/tailwind.css';
+import '@/styles/global.css';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import { getLocale, htmlLang, alternatePath, type Locale } from '@/i18n';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** disable the default header/footer chrome (rarely needed) */
+  bare?: boolean;
+}
+
+const locale: Locale = getLocale(Astro.url);
+const lang = htmlLang[locale];
+
+const defaults = {
+  'zh-CN': {
+    title: 'NomiFun · 完全开源的超级 AI 工作站',
+    description:
+      'NomiFun 是一项完全开源、本地优先的超级 AI 工作站。数据全在本地，免费商用，超级伙伴养成、智能值守、开放生态、统一搭配、原生 computer/browser use，满足你对 AI 工作站的想象。',
+  },
+  'en-US': {
+    title: 'NomiFun · Fully open-source super AI workstation',
+    description:
+      'NomiFun is a fully open-source, local-first super AI workstation. All data stays local, free for commercial use — evolving companions, unattended automation, an open capability ecosystem, unified config, and native computer/browser use.',
+  },
+};
+
+const { title = defaults[locale].title, description = defaults[locale].description, bare = false } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const altPath = alternatePath(Astro.url.pathname, locale === 'zh-CN' ? 'en-US' : 'zh-CN');
+const altHref = new URL(altPath, Astro.site).toString();
+const ogImage = new URL('/brand/og-cover.svg', Astro.site).toString();
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-pt-20">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0B0A10" />
+    <link rel="icon" type="image/svg+xml" href="/brand/logo.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={locale === 'zh-CN' ? 'en' : 'zh-CN'} href={altHref} />
+    <link rel="alternate" hreflang={lang} href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={locale === 'zh-CN' ? 'zh_CN' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+  </head>
+  <body>
+    {!bare && <Header />}
+    <main class={bare ? '' : 'pt-16'}>
+      <slot />
+    </main>
+    {!bare && <Footer />}
+
+    <script>
+      // Reveal-on-scroll: add `.in-view` to [data-animate]/[data-stagger] elements.
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const targets = document.querySelectorAll('[data-animate], [data-stagger]');
+      if (prefersReduced) {
+        targets.forEach((el) => el.classList.add('in-view'));
+      } else if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+        );
+        targets.forEach((el) => io.observe(el));
+      } else {
+        targets.forEach((el) => el.classList.add('in-view'));
+      }
+    </script>
+  </body>
+</html>

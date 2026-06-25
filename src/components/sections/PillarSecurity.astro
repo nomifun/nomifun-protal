@@ -1,0 +1,168 @@
+---
+import { getLocale, pick, type Dict, type Locale } from '@/i18n';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+
+const locale: Locale = getLocale(Astro.url);
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  hook: string;
+  claim: string;
+  // local-vault diagram
+  vaultTitle: string;
+  vaultSub: string;
+  vaultRows: string[];
+  blockedLabel: string;
+  allowedLabel: string;
+  allowedNote: string;
+  // narrative beat
+  beatTitle: string;
+  beatBody: string;
+  beatTag: string;
+  // capability cards
+  cards: { icon: string; title: string; body: string; tag: string }[];
+}> = {
+  'zh-CN': {
+    eyebrow: '支柱一 · 数据安全是底座',
+    title: '数据安全是底座，<span class="text-grad-pink">其余一切才值得</span>',
+    lead: '把 AI 工作站交给一个会偷偷外发数据的产品，再强的能力都不该让你心安。所以我们先把底座筑牢。',
+    hook: '你的对话、文件、记忆，凭什么要先经过别人的服务器？',
+    claim: '数据 all-in-local，绝不主动外发——唯一的对外网络调用是把你的请求发给你自己配置的 LLM 厂商，此外没有任何第三方网络对接。',
+    vaultTitle: '你的设备',
+    vaultSub: 'SQLite 唯一事实源 · 每个会话独立工作目录',
+    vaultRows: ['对话与历史', '知识库 / 技能', '伙伴记忆'],
+    blockedLabel: '第三方上报 · 遥测 · 云同步',
+    allowedLabel: 'LLM API',
+    allowedNote: '你自配的模型厂商',
+    beatTitle: '为了让你放心，我们主动做了减法',
+    beatBody: '我们砍掉了若干先进、有趣的功能，开源版暂不包含它们——因为要先保证每一个用户、每一个开发者的数据安全。被收起的能力会在更成熟、更可控时回来。',
+    beatTag: '更惊艳的能力见 Roadmap',
+    cards: [
+      { icon: 'i-mdi-database-lock-outline', title: '本地存储', body: '所有数据落在本机：SQLite 作为唯一事实源，每个会话拥有独立工作目录，互不串扰。', tag: 'all-in-local' },
+      { icon: 'i-mdi-source-branch-check', title: '开源可审计', body: 'Apache-2.0 完全开源，源码公开、欢迎审计——数据如何流动、外发与否，全都看得见。', tag: 'Apache-2.0' },
+      { icon: 'i-mdi-gift-open-outline', title: '永久免费商用', body: '免费商用，无广告、无会员、无付费墙。个人与企业都能放心地长期依赖。', tag: '无广告 · 无会员' },
+    ],
+  },
+  'en-US': {
+    eyebrow: 'Pillar 1 · Security is the foundation',
+    title: 'Security is the foundation — <span class="text-grad-pink">everything else builds on it</span>',
+    lead: "No capability is worth peace of mind if the product quietly ships your data elsewhere. So we lay the foundation first.",
+    hook: 'Why should your chats, files and memory pass through someone else’s servers first?',
+    claim: 'Data is all-in-local and never sent out on its own. The single outbound call is your request to the LLM vendor you configured — there is no other third-party network integration.',
+    vaultTitle: 'Your device',
+    vaultSub: 'SQLite as the single source of truth · isolated work dir per session',
+    vaultRows: ['Chats & history', 'Knowledge & skills', 'Companion memory'],
+    blockedLabel: 'Third-party reporting · telemetry · cloud sync',
+    allowedLabel: 'LLM API',
+    allowedNote: 'the vendor you configured',
+    beatTitle: 'To earn your trust, we deliberately did less',
+    beatBody: 'We cut several advanced, fun features — the open-source build ships without them for now — because the data safety of every user and every developer comes first. Those capabilities return once they are mature and controllable.',
+    beatTag: 'See the Roadmap for what’s next',
+    cards: [
+      { icon: 'i-mdi-database-lock-outline', title: 'Local storage', body: 'Everything lives on your machine: SQLite is the single source of truth, and every session gets its own isolated working directory.', tag: 'all-in-local' },
+      { icon: 'i-mdi-source-branch-check', title: 'Open & auditable', body: 'Fully open-source under Apache-2.0. The code is public and open to audit — how data flows, and whether it leaves, is all visible.', tag: 'Apache-2.0' },
+      { icon: 'i-mdi-gift-open-outline', title: 'Free forever, commercial OK', body: 'Free for commercial use. No ads, no membership, no paywall — safe for individuals and enterprises to rely on long-term.', tag: 'no ads · no membership' },
+    ],
+  },
+};
+
+const t = pick(copy, locale);
+---
+
+<section class="relative section-y">
+  <div class="container-x">
+    <SectionHeader eyebrow={t.eyebrow} title={t.title} lead={t.lead} />
+
+    <div class="mt-14 grid gap-10 lg:grid-cols-2 lg:items-center">
+      <!-- hook + claim -->
+      <div data-animate>
+        <p class="text-lg font-semibold leading-snug text-hi sm:text-xl">{t.hook}</p>
+        <p class="mt-5 text-base leading-relaxed text-mid">{t.claim}</p>
+
+        <!-- narrative beat: "we did less, on purpose" -->
+        <div class="mt-8 rounded-2xl border border-violet-400/25 bg-violet-500/5 p-5 sm:p-6">
+          <div class="flex items-center gap-2.5">
+            <span class="i-mdi-content-cut text-lg text-violet-300"></span>
+            <h3 class="text-base font-semibold text-hi">{t.beatTitle}</h3>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-mid">{t.beatBody}</p>
+          <span class="mt-4 inline-flex items-center gap-1.5 rounded-full border border-warning/30 bg-warning/10 px-3 py-1 text-xs font-medium text-warning">
+            <span class="i-mdi-rocket-launch-outline"></span>{t.beatTag}
+          </span>
+        </div>
+      </div>
+
+      <!-- local-vault diagram -->
+      <div data-animate>
+        <div class="vault relative card p-6 sm:p-8">
+          <!-- the device / box holding the user's data -->
+          <div class="rounded-2xl border border-pink-500/30 bg-ink-900/60 p-5">
+            <div class="flex items-center gap-2.5">
+              <span class="i-mdi-shield-lock-outline text-xl text-pink-400"></span>
+              <div>
+                <p class="text-sm font-semibold text-hi">{t.vaultTitle}</p>
+                <p class="text-xs text-low">{t.vaultSub}</p>
+              </div>
+            </div>
+            <ul class="mt-4 grid gap-2">
+              {t.vaultRows.map((r) => (
+                <li class="flex items-center gap-2 rounded-xl border border-ink-600/70 bg-ink-800/70 px-3 py-2 text-xs font-medium text-mid">
+                  <span class="i-mdi-database-outline text-sm text-pink-300"></span>{r}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- outbound channels: all blocked except one -->
+          <div class="mt-5 grid gap-3">
+            <!-- blocked -->
+            <div class="flex items-center gap-3 rounded-xl border border-ink-600/60 bg-ink-800/40 px-3.5 py-2.5 opacity-70">
+              <span class="i-mdi-arrow-up-thin shrink-0 text-lg text-low"></span>
+              <span class="flex-1 text-xs text-low line-through decoration-danger/70">{t.blockedLabel}</span>
+              <span class="i-mdi-cancel shrink-0 text-base text-danger" aria-hidden="true"></span>
+            </div>
+            <!-- the single allowed outbound arrow -->
+            <div class="flex items-center gap-3 rounded-xl border border-pink-500/40 bg-pink-500/10 px-3.5 py-2.5 shadow-[0_0_28px_-10px_rgba(255,111,145,0.45)]">
+              <span class="i-mdi-arrow-up-bold shrink-0 text-lg text-pink-400"></span>
+              <span class="flex-1 text-xs font-semibold text-pink-200">
+                {t.allowedLabel}
+                <span class="ml-1.5 font-normal text-mid">· {t.allowedNote}</span>
+              </span>
+              <span class="i-mdi-check-decagram shrink-0 text-base text-pink-400" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 capability cards -->
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+      {t.cards.map((c) => (
+        <div class="card card-hover p-6">
+          <span class={`${c.icon} text-2xl text-pink-400`}></span>
+          <h3 class="mt-4 text-lg font-semibold text-hi">{c.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-mid">{c.body}</p>
+          <span class="mt-4 inline-flex items-center rounded-full border border-ink-600 bg-ink-700/60 px-2.5 py-1 font-mono text-[11px] text-mid">{c.tag}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <style>
+    .vault::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(150deg, rgba(255, 111, 145, 0.35), transparent 55%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+  </style>
+</section>

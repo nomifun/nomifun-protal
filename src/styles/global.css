@@ -1,0 +1,136 @@
+/* ============================================================
+   NomiFun Portal — global styles & design tokens
+   深炭黑画布 · 暖粉主强调 · 蓝紫辅色
+   ============================================================ */
+
+:root {
+  /* Canvas / surfaces */
+  --ink-950: #07060b;
+  --ink-900: #0b0a10;
+  --ink-850: #131019;
+  --ink-800: #1b1822;
+  --ink-700: #25222e;
+  --ink-600: #322e3c;
+  /* Warm pink */
+  --pink-300: #ffb3c4;
+  --pink-400: #ff9fb4;
+  --pink-500: #ff6f91;
+  --pink-600: #f0577c;
+  /* Blue-violet */
+  --violet-300: #b5bcd6;
+  --violet-400: #a1aacb;
+  --violet-500: #7583b2;
+  /* Text */
+  --text-hi: #f5f3f7;
+  --text-mid: #b8b3c4;
+  --text-low: #7a7488;
+  /* Gradients */
+  --grad-pink: linear-gradient(135deg, #ff9fb4, #ff6f91);
+  --grad-hero: radial-gradient(120% 80% at 30% -10%, rgba(255, 111, 145, 0.16), transparent 60%);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  background-color: var(--ink-900);
+}
+
+body {
+  margin: 0;
+  background-color: var(--ink-900);
+  color: var(--text-hi);
+  font-family: 'Inter', 'HarmonyOS Sans SC', 'PingFang SC', 'Source Han Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(255, 111, 145, 0.3);
+  color: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Subtle grain / vignette helpers */
+.bg-mesh {
+  background-image:
+    radial-gradient(60% 50% at 80% 0%, rgba(117, 131, 178, 0.12), transparent 60%),
+    radial-gradient(50% 40% at 10% 10%, rgba(255, 111, 145, 0.1), transparent 55%);
+}
+
+.hairline {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ---------- Entrance animation (used with IntersectionObserver) ---------- */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+[data-animate].in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered children */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+[data-stagger].in-view > * {
+  opacity: 1;
+  transform: none;
+}
+[data-stagger].in-view > *:nth-child(2) { transition-delay: 0.07s; }
+[data-stagger].in-view > *:nth-child(3) { transition-delay: 0.14s; }
+[data-stagger].in-view > *:nth-child(4) { transition-delay: 0.21s; }
+[data-stagger].in-view > *:nth-child(5) { transition-delay: 0.28s; }
+[data-stagger].in-view > *:nth-child(6) { transition-delay: 0.35s; }
+[data-stagger].in-view > *:nth-child(7) { transition-delay: 0.42s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes steam {
+  0% { opacity: 0; transform: translateY(2px) scaleY(0.8); }
+  40% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-14px) scaleY(1.2); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ---------- Reduced motion: honor user preference globally ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  [data-animate], [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Thin custom scrollbar in dark theme */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--ink-950); }
+::-webkit-scrollbar-thumb { background: var(--ink-600); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--violet-500); }

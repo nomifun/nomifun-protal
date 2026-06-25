@@ -1,0 +1,253 @@
+---
+/**
+ * WebUiRemote.astro — "WebUI · 无需电脑，随时随地办公 / work anywhere, no computer needed".
+ * Sits right after the companion-gateway section.
+ *
+ * Accuracy (spec §3 pillar 4): WebUI binds the LAN on 0.0.0.0:25808; you connect by
+ * scanning a QR with a one-time token (5-minute TTL); Host/Origin allow-list blocks
+ * DNS-rebinding; it is DIRECT over the local network (LAN / office network / VPN),
+ * never via a social platform; plain HTTP intended for a trusted network. In-app PTY
+ * terminal sessions, presets Shell / Claude Code / Codex / Gemini — native, uninterrupted.
+ */
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+
+const locale: Locale = getLocale(Astro.url);
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  points: { icon: string; title: string; body: string }[];
+  // tablet showcase
+  tabletAlt: string;
+  tabletCaption: string;
+  scanLabel: string;
+  scanMeta: string;
+  bindLabel: string;
+  // terminal mock
+  terminalTitle: string;
+  terminalLine2: string;
+  terminalLine3: string;
+  terminalLine4: string;
+  terminalCaption: string;
+  ctaSecondary: string;
+}> = {
+  'zh-CN': {
+    eyebrow: 'WEBUI · 远程办公',
+    title: '无需电脑，<span class="text-grad-pink">随时随地办公</span>',
+    lead: '在局域网 / 办公网 / VPN 网络环境下开启 WebUI，手机、平板即可获得与桌面端完全一致的交互体验；掏出手机，随时随地继续办公。',
+    points: [
+      {
+        icon: 'i-mdi-monitor-cellphone',
+        title: '同桌面体验',
+        body: '手机 / 平板上的交互与 desktop 完全一致，不是阉割的精简版——同一套界面、同一套能力。',
+      },
+      {
+        icon: 'i-mdi-qrcode-scan',
+        title: '一键扫码 · 直连内网',
+        body: '局域网 / 办公网 / VPN 下一键扫码即连，一次性 token、限时 5 分钟有效，Host/Origin 白名单防 DNS 重绑定，不经任何社交平台。',
+      },
+      {
+        icon: 'i-mdi-console',
+        title: '终端不间断',
+        body: '想继续用 Codex / Claude？平台的终端会话（PTY，预设 Shell / Claude Code / Codex / Gemini）给你原生、不间断的远程使用体验。',
+      },
+    ],
+    tabletAlt: 'NomiFun 在电脑与平板上同时运行的真实场景',
+    tabletCaption: '同一套 NomiFun——电脑、平板无缝接力，随手拿起就能继续',
+    scanLabel: '扫码连接此设备',
+    scanMeta: '一次性 token · 5 分钟有效',
+    bindLabel: '0.0.0.0:25808 · 局域网直连',
+    terminalTitle: 'nomi — 远程终端会话',
+    terminalLine2: '在 NomiFun 终端内运行 — 会话保持不间断',
+    terminalLine3: '已恢复上下文 · 接管同一个工作目录',
+    terminalLine4: '正在编辑 src/lib/router.ts … 已写入 3 处改动',
+    terminalCaption: '原生 PTY 终端 · 预设 Shell / Claude Code / Codex / Gemini',
+    ctaSecondary: 'WebUI 远程使用指南',
+  },
+  'en-US': {
+    eyebrow: 'WEBUI · REMOTE OFFICE',
+    title: 'No computer needed — <span class="text-grad-pink">work anywhere</span>',
+    lead: 'Switch on the WebUI on your LAN / office network / VPN, and your phone or tablet gets the exact same interaction as the desktop. Pull out your phone and keep working, anywhere, anytime.',
+    points: [
+      {
+        icon: 'i-mdi-monitor-cellphone',
+        title: 'Same as desktop',
+        body: 'The experience on phone or tablet is identical to the desktop — not a cut-down lite version. Same interface, same full set of capabilities.',
+      },
+      {
+        icon: 'i-mdi-qrcode-scan',
+        title: 'Scan once · LAN direct',
+        body: 'On a LAN / office network / VPN, scan once to connect: a one-time token valid for 5 minutes, a Host/Origin allow-list that blocks DNS-rebinding, and never through any social platform.',
+      },
+      {
+        icon: 'i-mdi-console',
+        title: 'Uninterrupted terminal',
+        body: 'Want to keep using Codex / Claude? The platform’s terminal sessions (PTY, presets Shell / Claude Code / Codex / Gemini) give you a native, uninterrupted remote session.',
+      },
+    ],
+    tabletAlt: 'NomiFun running on both a laptop and a tablet',
+    tabletCaption: 'One NomiFun — seamless across laptop and tablet; just pick up and keep going',
+    scanLabel: 'Scan to connect this device',
+    scanMeta: 'One-time token · 5-min TTL',
+    bindLabel: '0.0.0.0:25808 · LAN direct',
+    terminalTitle: 'nomi — remote terminal session',
+    terminalLine2: 'running in NomiFun terminal — session kept alive',
+    terminalLine3: 'context restored · attached to the same working directory',
+    terminalLine4: 'editing src/lib/router.ts … wrote 3 edits',
+    terminalCaption: 'Native PTY terminal · presets Shell / Claude Code / Codex / Gemini',
+    ctaSecondary: 'WebUI remote guide',
+  },
+};
+
+const t = pick(copy, locale);
+---
+
+<section id="webui-remote" class="relative section-y">
+  <div class="container-x">
+    <!-- header -->
+    <div class="flex max-w-3xl flex-col gap-4" data-animate>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl lg:text-[2.75rem]">
+        <Fragment set:html={t.title} />
+      </h2>
+      <p class="text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
+    </div>
+
+    <div class="mt-12 grid gap-10 lg:mt-14 lg:grid-cols-2 lg:items-center lg:gap-12">
+      <!-- left: capability points -->
+      <ul class="flex flex-col gap-4" data-stagger>
+        {t.points.map((p) => (
+          <li class="card card-hover flex gap-4 p-5">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-pink-500/25 bg-pink-500/10" aria-hidden="true">
+              <span class={`${p.icon} text-xl text-pink-400`}></span>
+            </span>
+            <div>
+              <h3 class="text-base font-semibold text-hi">{p.title}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-mid">{p.body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <!-- right: real cross-device photo (laptop + tablet both running NomiFun) -->
+      <div class="flex justify-center" data-animate>
+        <figure class="device-frame relative m-0 w-full max-w-xl">
+          <!-- soft pink glow behind the photo -->
+          <div class="pointer-events-none absolute -inset-6 -z-10 rounded-[2.5rem] opacity-70 blur-3xl" style="background: radial-gradient(closest-side, rgba(255,111,145,0.22), transparent)" aria-hidden="true"></div>
+
+          <!-- framed photo -->
+          <div class="relative overflow-hidden rounded-3xl border border-ink-600 bg-ink-850 shadow-[0_0_70px_-18px_rgba(255,111,145,0.45)]">
+            <img
+              src="/screenshots/desktop-01-main-window.png"
+              alt={t.tabletAlt}
+              width="1440"
+              height="1080"
+              loading="lazy"
+              decoding="async"
+              class="block h-auto w-full"
+            />
+            <!-- subtle inner ring for polish -->
+            <div class="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5" aria-hidden="true"></div>
+          </div>
+
+          <!-- scan-to-connect chip -->
+          <div class="absolute -bottom-5 -right-3 flex items-center gap-2.5 rounded-2xl border border-ink-600 bg-ink-800/90 px-3 py-2.5 shadow-[0_0_40px_-12px_rgba(255,111,145,0.5)] backdrop-blur-sm sm:-right-5">
+            <!-- mini QR -->
+            <span class="flex h-9 w-9 items-center justify-center rounded-md bg-white p-1" aria-hidden="true">
+              <svg viewBox="0 0 29 29" width="28" height="28" shape-rendering="crispEdges">
+                <rect width="29" height="29" fill="#fff"></rect>
+                <g fill="#0B0A10">
+                  <path d="M2 2h7v7H2z M4 4h3v3H4z" fill-rule="evenodd"></path>
+                  <path d="M20 2h7v7h-7z M22 4h3v3h-3z" fill-rule="evenodd"></path>
+                  <path d="M2 20h7v7H2z M4 22h3v3H4z" fill-rule="evenodd"></path>
+                  <rect x="12" y="2" width="2" height="2"></rect><rect x="16" y="4" width="2" height="2"></rect>
+                  <rect x="12" y="8" width="2" height="2"></rect><rect x="2" y="12" width="2" height="2"></rect>
+                  <rect x="6" y="14" width="2" height="2"></rect><rect x="2" y="16" width="2" height="2"></rect>
+                  <rect x="12" y="12" width="2" height="2"></rect><rect x="16" y="14" width="2" height="2"></rect>
+                  <rect x="14" y="18" width="2" height="2"></rect><rect x="18" y="12" width="2" height="2"></rect>
+                  <rect x="22" y="14" width="2" height="2"></rect><rect x="24" y="18" width="2" height="2"></rect>
+                  <rect x="12" y="22" width="2" height="2"></rect><rect x="16" y="24" width="2" height="2"></rect>
+                  <rect x="20" y="22" width="2" height="2"></rect><rect x="24" y="24" width="2" height="2"></rect>
+                </g>
+              </svg>
+            </span>
+            <div class="leading-tight">
+              <p class="flex items-center gap-1 text-[11px] font-semibold text-hi">
+                <span class="i-mdi-cellphone-link text-xs text-pink-400" aria-hidden="true"></span>{t.scanLabel}
+              </p>
+              <p class="mt-0.5 flex items-center gap-1 text-[10px] text-low">
+                <span class="i-mdi-shield-check text-[10px] text-success" aria-hidden="true"></span>{t.scanMeta}
+              </p>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </div>
+
+    <!-- caption row under the showcase -->
+    <p class="mt-9 flex items-center gap-2 text-xs leading-relaxed text-low lg:mt-10">
+      <span class="i-mdi-devices text-sm text-pink-400" aria-hidden="true"></span>
+      <span>{t.tabletCaption}</span>
+      <span class="mx-1 hidden text-ink-600 sm:inline" aria-hidden="true">·</span>
+      <span class="hidden font-mono text-low/90 sm:inline">{t.bindLabel}</span>
+    </p>
+
+    <!-- terminal mockup (reinforces uninterrupted native terminal) -->
+    <div class="mt-7 overflow-hidden rounded-2xl border border-ink-700 bg-ink-950 shadow-[0_0_60px_-24px_rgba(255,111,145,0.4)]" data-animate>
+      <!-- window header -->
+      <div class="flex items-center gap-2 border-b border-ink-700/80 bg-ink-900/80 px-4 py-2.5">
+        <span class="h-3 w-3 rounded-full bg-danger/80" aria-hidden="true"></span>
+        <span class="h-3 w-3 rounded-full bg-warning/80" aria-hidden="true"></span>
+        <span class="h-3 w-3 rounded-full bg-success/80" aria-hidden="true"></span>
+        <span class="ml-3 flex items-center gap-1.5 font-mono text-xs text-low">
+          <span class="i-mdi-console-line text-sm" aria-hidden="true"></span>{t.terminalTitle}
+        </span>
+      </div>
+      <!-- session body -->
+      <div class="overflow-x-auto px-4 py-4 font-mono text-[13px] leading-relaxed sm:px-6 sm:py-5">
+        <p class="whitespace-pre text-hi"><span class="text-pink-400">$</span> claude</p>
+        <p class="mt-2 whitespace-pre text-success"><span aria-hidden="true">●</span> <span class="text-mid">{t.terminalLine2}</span></p>
+        <p class="mt-1.5 whitespace-pre text-low"><span class="text-violet-400" aria-hidden="true">⏺</span> {t.terminalLine3}</p>
+        <p class="mt-1.5 whitespace-pre text-low"><span class="text-violet-400" aria-hidden="true">⏺</span> {t.terminalLine4}</p>
+        <p class="mt-2 flex items-center whitespace-pre text-hi"><span class="text-pink-400">$</span>&nbsp;<span class="term-cursor inline-block h-[1.05em] w-[0.55em] translate-y-[0.12em] bg-pink-400" aria-hidden="true"></span></p>
+      </div>
+    </div>
+
+    <!-- secondary CTA -->
+    <div class="mt-8" data-animate>
+      <a href={localizePath('/docs', locale)} class="btn-ghost text-sm">
+        <span class="i-mdi-book-open-page-variant-outline text-base" aria-hidden="true"></span>
+        {t.ctaSecondary}
+        <span class="i-mdi-arrow-right text-base" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+
+  <style>
+    .device-frame {
+      transition: transform 0.4s ease;
+    }
+    .device-frame:hover {
+      transform: translateY(-4px);
+    }
+    .term-cursor {
+      animation: term-blink 1.1s step-end infinite;
+    }
+    @keyframes term-blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .device-frame,
+      .device-frame:hover {
+        transition: none;
+        transform: none;
+      }
+      .term-cursor {
+        animation: none;
+        opacity: 1;
+      }
+    }
+  </style>
+</section>

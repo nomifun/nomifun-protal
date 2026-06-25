@@ -1,0 +1,175 @@
+---
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+
+const locale: Locale = getLocale(Astro.url);
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  hook: string;
+  claim: string;
+  // hub diagram
+  hubLabel: string;
+  hubSub: string;
+  spokes: { icon: string; label: string; highlight?: boolean }[];
+  // write-back flow
+  flowTitle: string;
+  flowSteps: { icon: string; label: string; note: string }[];
+  flowFoot: string;
+  // capability points
+  cards: { icon: string; title: string; body: string; tags: string[] }[];
+  cta: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '统一知识库管理 · config one, use anywhere',
+    title: '统一知识库，<span class="text-grad-pink">管理 · 使用 · 跟踪</span>',
+    lead: '把系统中散落的知识集中管理、统一使用与跟踪——知识库、技能、Agent、MCP、模型配置一次，便能在任意会话、任意伙伴、任意终端里被复用。',
+    hook: '知识散落在文件、网页、对话里，每次都要从头找？把它们收进一个可管理、可追踪的知识中枢。',
+    claim: '统一管理、使用与跟踪你的知识库：策展式 markdown 目录、URL 实时快照、安全回写暂存，飞书可作来源——按需挂载进任意会话、伙伴或终端。同一套「配一次，处处可用」也适用于 skill / agent / mcp / 模型。',
+    hubLabel: '统一管理中枢',
+    hubSub: 'config once',
+    spokes: [
+      { icon: 'i-mdi-book-open-variant', label: '知识库', highlight: true },
+      { icon: 'i-mdi-lightning-bolt-outline', label: 'skill' },
+      { icon: 'i-mdi-robot-outline', label: 'agent' },
+      { icon: 'i-mdi-puzzle-outline', label: 'mcp' },
+      { icon: 'i-mdi-brain', label: '模型' },
+    ],
+    flowTitle: '安全回写：来自 IM 的写入，永远先进暂存区',
+    flowSteps: [
+      { icon: 'i-mdi-source-merge', label: '来源', note: '会话 / IM 渠道写入' },
+      { icon: 'i-mdi-inbox-arrow-down', label: '_inbox 暂存区', note: '待审阅，原文件不动' },
+      { icon: 'i-mdi-check-all', label: '审阅 / 合并', note: '你确认后才落库' },
+    ],
+    flowFoot: '回写策略 Disabled / Staged / Direct 可选；来自 IM 渠道的写入一律 Staged 进 _inbox，原文件绝不被直接改写。',
+    cards: [
+      { icon: 'i-mdi-folder-text-outline', title: '策展式知识库', body: '知识库 = 你策展的一份 markdown 目录，挂载进会话工作区即随手可查、可引。绑定到伙伴或会话，按需取用。', tags: ['markdown', '挂载工作区'] },
+      { icon: 'i-mdi-web', title: 'URL 实时快照', body: '把网页变成知识库条目：Live 实时抓取或 Snapshot 定格留存，内置 SSRF 防护，JS 重页面走无头浏览器渲染。', tags: ['Live / Snapshot', 'SSRF 防护'] },
+      { icon: 'i-mdi-shield-edit-outline', title: '安全回写', body: '回写分 Disabled / Staged / Direct 三档。来自 IM 渠道的写入永远进 _inbox 暂存区待审/合并，原文件绝不被改。', tags: ['_inbox 暂存', '飞书已接入'] },
+    ],
+    cta: '阅读知识库指南',
+  },
+  'en-US': {
+    eyebrow: 'Unified knowledge management · config one, use anywhere',
+    title: 'One knowledge hub — <span class="text-grad-pink">manage · use · track</span>',
+    lead: 'Centrally manage, use and track the knowledge scattered across your system — and configure knowledge bases, skills, agents, MCP and models once to reuse them across any session, companion or terminal.',
+    hook: 'Knowledge scattered across files, web pages and chats — hunting it down every time? Pull it into one manageable, trackable knowledge hub.',
+    claim: 'Manage, use and track your knowledge bases from one place: curated markdown directories, live URL snapshots, safe staged write-back, with Feishu as a source — mounted on demand into any session, companion or terminal. The same “config once, use anywhere” applies to skills / agents / mcp / models too.',
+    hubLabel: 'Unified hub',
+    hubSub: 'config once',
+    spokes: [
+      { icon: 'i-mdi-book-open-variant', label: 'knowledge', highlight: true },
+      { icon: 'i-mdi-lightning-bolt-outline', label: 'skill' },
+      { icon: 'i-mdi-robot-outline', label: 'agent' },
+      { icon: 'i-mdi-puzzle-outline', label: 'mcp' },
+      { icon: 'i-mdi-brain', label: 'model' },
+    ],
+    flowTitle: 'Safe write-back: writes from IM always stage first',
+    flowSteps: [
+      { icon: 'i-mdi-source-merge', label: 'Source', note: 'session / IM channel write' },
+      { icon: 'i-mdi-inbox-arrow-down', label: '_inbox staging', note: 'pending review, original untouched' },
+      { icon: 'i-mdi-check-all', label: 'Review / merge', note: 'committed only after you confirm' },
+    ],
+    flowFoot: 'Write-back is Disabled / Staged / Direct. Writes arriving from IM channels are always Staged into _inbox for review/merge — the original file is never rewritten in place.',
+    cards: [
+      { icon: 'i-mdi-folder-text-outline', title: 'Curated knowledge', body: 'A knowledge base is a markdown directory you curate, mounted into the session workspace so it’s instantly queryable. Bind it to a companion or a session.', tags: ['markdown', 'mounted workspace'] },
+      { icon: 'i-mdi-web', title: 'Live URL snapshots', body: 'Turn web pages into knowledge entries: Live fetch or pinned Snapshot, with built-in SSRF protection and a headless browser for JS-heavy pages.', tags: ['Live / Snapshot', 'SSRF-protected'] },
+      { icon: 'i-mdi-shield-edit-outline', title: 'Safe write-back', body: 'Write-back is Disabled / Staged / Direct. Writes from IM channels always land in the _inbox staging area for review/merge — originals are never touched.', tags: ['_inbox staging', 'Feishu connected'] },
+    ],
+    cta: 'Read the knowledge-base guide',
+  },
+};
+
+const t = pick(copy, locale);
+---
+
+<section class="relative section-y bg-ink-850/30">
+  <div class="container-x">
+    <SectionHeader eyebrow={t.eyebrow} title={t.title} lead={t.lead} />
+
+    <div class="mt-14 grid gap-10 lg:grid-cols-2 lg:items-center">
+      <!-- config-once hub diagram -->
+      <div data-animate>
+        <div class="hub card relative p-8 sm:p-10">
+          <div class="mx-auto flex max-w-md flex-col items-center">
+            <!-- center hub -->
+            <div class="relative z-10 flex h-28 w-28 flex-col items-center justify-center rounded-full border border-pink-500/40 bg-ink-900/80 text-center shadow-[0_0_44px_-8px_rgba(255,111,145,0.45)]">
+              <span class="i-mdi-cog-sync-outline text-2xl text-pink-400"></span>
+              <span class="mt-1 px-2 text-[11px] font-semibold leading-tight text-hi">{t.hubLabel}</span>
+              <span class="font-mono text-[10px] text-low">{t.hubSub}</span>
+            </div>
+            <!-- spokes -->
+            <ul class="mt-7 grid w-full grid-cols-5 gap-2">
+              {t.spokes.map((s) => (
+                <li class="flex flex-col items-center gap-1.5">
+                  <span class={`i-mdi-arrow-up-thin text-base ${s.highlight ? 'text-pink-400' : 'text-violet-400/70'}`} aria-hidden="true"></span>
+                  <span class={`flex h-11 w-full flex-col items-center justify-center rounded-xl border transition-colors ${s.highlight ? 'border-pink-500/50 bg-pink-500/10' : 'border-ink-600/70 bg-ink-800/70 hover:border-violet-400/50'}`}>
+                    <span class={`${s.icon} text-lg ${s.highlight ? 'text-pink-300' : 'text-violet-300'}`}></span>
+                  </span>
+                  <span class={`text-center text-[11px] font-medium ${s.highlight ? 'text-pink-200' : 'text-mid'}`}>{s.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- hook + claim + write-back flow -->
+      <div data-animate>
+        <p class="text-lg font-semibold leading-snug text-hi sm:text-xl">{t.hook}</p>
+        <p class="mt-5 text-base leading-relaxed text-mid">{t.claim}</p>
+
+        <div class="mt-8 rounded-2xl border border-ink-600/70 bg-ink-900/50 p-5 sm:p-6">
+          <h3 class="flex items-center gap-2.5 text-base font-semibold text-hi">
+            <span class="i-mdi-shield-lock-outline text-lg text-pink-400"></span>{t.flowTitle}
+          </h3>
+          <ol class="mt-5 flex flex-col gap-2.5 sm:flex-row sm:items-stretch">
+            {t.flowSteps.map((step, i) => (
+              <>
+                <li class="flex flex-1 flex-col gap-1.5 rounded-xl border border-ink-600/70 bg-ink-800/70 px-3.5 py-3">
+                  <span class="flex items-center gap-2 text-xs font-semibold text-hi">
+                    <span class={`${step.icon} text-base ${i === 1 ? 'text-pink-400' : 'text-violet-300'}`}></span>{step.label}
+                  </span>
+                  <span class="text-[11px] leading-snug text-low">{step.note}</span>
+                </li>
+                {i < t.flowSteps.length - 1 && (
+                  <li class="flex items-center justify-center text-mid" aria-hidden="true">
+                    <span class="i-mdi-arrow-right-thin hidden text-xl sm:inline"></span>
+                    <span class="i-mdi-arrow-down-thin text-xl sm:hidden"></span>
+                  </li>
+                )}
+              </>
+            ))}
+          </ol>
+          <p class="mt-4 text-xs leading-relaxed text-low">{t.flowFoot}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 capability cards -->
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+      {t.cards.map((c) => (
+        <div class="card card-hover p-6">
+          <span class={`${c.icon} text-2xl text-violet-300`}></span>
+          <h3 class="mt-4 text-lg font-semibold text-hi">{c.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-mid">{c.body}</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {c.tags.map((tag) => (
+              <span class="inline-flex items-center rounded-full border border-ink-600 bg-ink-700/60 px-2.5 py-1 font-mono text-[11px] text-mid">{tag}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- secondary CTA -->
+    <div class="mt-10" data-animate>
+      <a href={localizePath('/docs', locale)} class="btn-ghost text-base px-7 py-3.5">
+        <span class="i-mdi-book-open-page-variant-outline text-lg"></span>{t.cta}
+        <span class="i-mdi-arrow-right text-base"></span>
+      </a>
+    </div>
+  </div>
+</section>

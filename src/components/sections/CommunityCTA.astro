@@ -1,0 +1,218 @@
+---
+/**
+ * CommunityCTA — 与我们一起共建 NomiFun / Build NomiFun with us.
+ *
+ * Spec §7/§8 community closing section:
+ *  - 3 invitation cards: 贡献代码（贡献值）/ 社区运营 / 布道者 ——「目前很需要这些角色」。
+ *  - 商用告知 panel: 个人/企业可自由二次开发与免费商用；若商用希望留言告知——
+ *    不是为了授权，只为一份认可与肯定（正向情绪反馈）。法律风险使用者自担。
+ *  - 模型获取困难 panel: 寻找模型有困难可联系作者协助寻找 / 搭建统一模型服务网关
+ *    （作者目前尚未提供该服务，但愿意帮忙）。
+ *  - 大 CTA: 立即下载 / 在 GitHub 查看 / 联系我们。
+ */
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { links } from '@/data/links';
+
+const locale: Locale = getLocale(Astro.url);
+
+interface Role {
+  icon: string;
+  title: string;
+  body: string;
+  tag: string;
+}
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  needLine: string;
+  roles: Role[];
+  commercialTitle: string;
+  commercialBody: string;
+  commercialWish: string;
+  commercialRisk: string;
+  modelTitle: string;
+  modelBody: string;
+  modelNote: string;
+  ctaTitle: string;
+  ctaPrimary: string;
+  ctaGithub: string;
+  ctaContact: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '一起共建',
+    title: '与我们一起<span class="text-grad-pink">共建 NomiFun</span>',
+    lead: 'NomiFun 由作者兼职打造，正处在 pre-1.0 的成长期。无论你写代码、懂运营，还是乐于分享，这里都有你的位置。',
+    needLine: '目前我们很需要这些角色来壮大组织',
+    roles: [
+      {
+        icon: 'i-mdi-code-braces',
+        title: '贡献代码',
+        body: '提交 PR、修复缺陷、打磨能力。每一次合入都会记入贡献值，让你的名字留在项目里。',
+        tag: '贡献值',
+      },
+      {
+        icon: 'i-mdi-account-group-outline',
+        title: '社区运营',
+        body: '答疑解惑、组织讨论、沉淀文档与最佳实践，把零散的热情变成可持续的社区。',
+        tag: 'community ops',
+      },
+      {
+        icon: 'i-mdi-bullhorn-outline',
+        title: '布道者',
+        body: '写文章、做分享、录视频——把 NomiFun 介绍给更多需要它的人，让好东西被看见。',
+        tag: 'evangelist',
+      },
+    ],
+    commercialTitle: '商用告知',
+    commercialBody: '无论个人还是企业，都可以自由地二次开发并免费商用——这是 Apache-2.0 赋予你的权利，无需向我们申请授权。',
+    commercialWish: '如果你拿去商用了，欢迎留个言告诉我们一声。这不是为了授权，只是作为开发者，渴望得到一份来自真实使用的认可与肯定——一点正向的情绪反馈，足以支撑很久。',
+    commercialRisk: '二次开发与商用所涉及的法律风险，由使用者自行承担。',
+    modelTitle: '模型获取困难？',
+    modelBody: '如果你在寻找可用模型上遇到困难，可以联系作者——可以帮你一起找模型，或协助搭建一个统一的模型服务网关。',
+    modelNote: '说明：作者目前尚未对外提供这项服务，但很乐意伸把手帮你解决眼前的难题。',
+    ctaTitle: '准备好了吗？',
+    ctaPrimary: '立即下载',
+    ctaGithub: '在 GitHub 查看',
+    ctaContact: '联系我们',
+  },
+  'en-US': {
+    eyebrow: 'Build it together',
+    title: '<span class="text-grad-pink">Build NomiFun</span> with us',
+    lead: 'NomiFun is built part-time and is in its pre-1.0 growth phase. Whether you write code, run communities, or love to share — there is a place for you here.',
+    needLine: 'Right now we really need these roles to grow the project',
+    roles: [
+      {
+        icon: 'i-mdi-code-braces',
+        title: 'Contribute code',
+        body: 'Open PRs, fix bugs, sharpen capabilities. Every merge counts toward your contribution score and keeps your name in the project.',
+        tag: 'contributions',
+      },
+      {
+        icon: 'i-mdi-account-group-outline',
+        title: 'Community ops',
+        body: 'Answer questions, organize discussions, curate docs and best practices — turning scattered enthusiasm into a sustainable community.',
+        tag: 'community ops',
+      },
+      {
+        icon: 'i-mdi-bullhorn-outline',
+        title: 'Evangelist',
+        body: 'Write posts, give talks, record videos — introduce NomiFun to the people who need it and help good work get seen.',
+        tag: 'evangelist',
+      },
+    ],
+    commercialTitle: 'A note on commercial use',
+    commercialBody: 'Individuals and enterprises alike are free to modify and commercialize NomiFun, free of charge — that is your right under Apache-2.0, no permission needed from us.',
+    commercialWish: 'If you do ship it commercially, we would love a quick note. Not for licensing — just that, as a developer, a word of recognition from real-world use means the world. A little positive feedback goes a long way.',
+    commercialRisk: 'Any legal risk from modification or commercial use is borne by the user.',
+    modelTitle: 'Struggling to get models?',
+    modelBody: 'If you are having trouble finding usable models, reach out to the author — happy to help you find models, or to help you set up a unified model-service gateway.',
+    modelNote: 'Note: the author does not offer this as a service yet, but is glad to lend a hand with the problem in front of you.',
+    ctaTitle: 'Ready to dive in?',
+    ctaPrimary: 'Download now',
+    ctaGithub: 'View on GitHub',
+    ctaContact: 'Contact us',
+  },
+};
+
+const t = pick(copy, locale);
+---
+
+<section id="community" class="relative section-y bg-ink-850/30">
+  <div class="container-x">
+    <SectionHeader eyebrow={t.eyebrow} title={t.title} lead={t.lead} />
+
+    <!-- "we need these roles" line -->
+    <p class="mt-7 flex items-center gap-2 text-sm font-semibold text-pink-300" data-animate>
+      <span class="i-mdi-hand-wave-outline text-base" aria-hidden="true"></span>
+      {t.needLine}
+    </p>
+
+    <!-- 3 invitation cards -->
+    <ul class="mt-5 grid gap-5 sm:grid-cols-3" data-stagger>
+      {t.roles.map((role) => (
+        <li class="card card-hover flex flex-col p-6">
+          <span class="grid h-11 w-11 place-items-center rounded-xl border border-pink-500/25 bg-pink-500/10">
+            <span class={`${role.icon} text-xl text-pink-400`} aria-hidden="true"></span>
+          </span>
+          <h3 class="mt-4 text-base font-semibold text-hi">{role.title}</h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-mid">{role.body}</p>
+          <div class="mt-4">
+            <span class="inline-flex items-center rounded-full border border-ink-600 bg-ink-700/60 px-2.5 py-1 font-mono text-[11px] text-mid">{role.tag}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <!-- two side panels: commercial-use + model help -->
+    <div class="mt-6 grid gap-5 lg:grid-cols-2">
+      <!-- commercial use -->
+      <div class="card flex flex-col p-6 sm:p-7" data-animate>
+        <div class="flex items-center gap-2.5">
+          <span class="grid h-10 w-10 place-items-center rounded-xl border border-violet-400/30 bg-violet-500/10">
+            <span class="i-mdi-handshake-outline text-xl text-violet-300" aria-hidden="true"></span>
+          </span>
+          <h3 class="text-lg font-semibold text-hi">{t.commercialTitle}</h3>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed text-mid">{t.commercialBody}</p>
+        <div class="mt-4 rounded-2xl border border-pink-500/20 bg-pink-500/5 p-4">
+          <p class="flex items-start gap-2 text-sm leading-relaxed text-mid">
+            <span class="i-mdi-message-star-outline mt-0.5 shrink-0 text-pink-400" aria-hidden="true"></span>
+            <span>{t.commercialWish}</span>
+          </p>
+        </div>
+        <p class="mt-4 flex items-start gap-1.5 text-xs leading-relaxed text-low">
+          <span class="i-mdi-scale-balance mt-0.5 shrink-0" aria-hidden="true"></span>
+          <span>{t.commercialRisk}</span>
+        </p>
+      </div>
+
+      <!-- model gateway help -->
+      <div class="card flex flex-col p-6 sm:p-7" data-animate>
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <span class="grid h-10 w-10 place-items-center rounded-xl border border-violet-400/30 bg-violet-500/10">
+              <span class="i-mdi-server-network-outline text-xl text-violet-300" aria-hidden="true"></span>
+            </span>
+            <h3 class="text-lg font-semibold text-hi">{t.modelTitle}</h3>
+          </div>
+          <Badge tone="neutral">
+            <span class="i-mdi-lifebuoy text-xs" aria-hidden="true"></span>
+            {locale === 'zh-CN' ? '愿意帮忙' : 'Glad to help'}
+          </Badge>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed text-mid">{t.modelBody}</p>
+        <p class="mt-4 flex items-start gap-1.5 text-xs leading-relaxed text-low">
+          <span class="i-mdi-information-outline mt-0.5 shrink-0" aria-hidden="true"></span>
+          <span>{t.modelNote}</span>
+        </p>
+        <a href={localizePath('/contact', locale)} class="btn-ghost mt-5 self-start text-sm">
+          <span class="i-mdi-email-outline text-base" aria-hidden="true"></span>
+          {t.ctaContact}
+        </a>
+      </div>
+    </div>
+
+    <!-- big closing CTA row -->
+    <div class="mt-10" data-animate>
+      <div class="card relative overflow-hidden p-8 text-center sm:p-12">
+        <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-full opacity-70" style="background: radial-gradient(at 50% 0%, rgba(255,111,145,0.16), transparent 65%)"></div>
+        <h3 class="text-2xl font-bold tracking-tight text-hi sm:text-3xl">{t.ctaTitle}</h3>
+        <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href={localizePath('/download', locale)} class="btn-primary text-base px-7 py-3.5">
+            <span class="i-mdi-download text-lg" aria-hidden="true"></span>{t.ctaPrimary}
+          </a>
+          <a href={links.github} target="_blank" rel="noopener" class="btn-ghost text-base px-7 py-3.5">
+            <span class="i-mdi-github text-lg" aria-hidden="true"></span>{t.ctaGithub}
+          </a>
+          <a href={localizePath('/contact', locale)} class="btn-ghost text-base px-7 py-3.5">
+            <span class="i-mdi-email-outline text-lg" aria-hidden="true"></span>{t.ctaContact}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
