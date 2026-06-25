@@ -1,5 +1,10 @@
 # NomiFun 门户 — 待补静态资源清单（给作者）
 
+> **2026-06-25 更新**：作者已产出**真实产品截图**（中文界面，深色主题），放在 `public/images/zh/<分类>/`，
+> 已接入全部 18 篇文档 + 首页「真实界面一览」展示区 + WebUiRemote 区 + 联系页二维码。旧的 `public/screenshots/*`
+> 占位卡**已全部弃用、不再被引用**。截图对照与待补清单见 **`public/images/IMAGE-MANIFEST.md`**。
+> 仍待补：**英文界面截图**（`public/images/en/` 下同相对路径，详见 manifest 第 3 节）；以及下方 B 节的真实文本/联系方式。
+
 > 说明：门户绝大多数视觉用**前端代码直接渲染**（活体演示 + CSS 动效），并**直接复用 nomifun-tauri 现有资源**，所以真正需要你手动补的资源**很少**。下面分两部分：
 > - **A. 我会自动复用**（你无需操作，列出来让你知情）
 > - **B. 需要你补充**（缺失项我已用占位图/占位常量顶上，不阻塞开发；你补上后替换即可）
@@ -48,11 +53,11 @@
 
 | 字段 | 当前状态 | 需要你提供 |
 |---|---|---|
-| `githubUrl` | 占位（仓库 remote 是私有 IP `124.221.192.128`） | **公开的 GitHub 仓库地址**（门户大量 CTA 指向它） |
-| `releasesUrl` | 占位 | GitHub Releases 页地址（下载页二进制按钮指向） |
-| `contactEmail` | 占位 | 对外联系/安全报告邮箱 |
+| `githubUrl` | ✅ 已确认 `https://github.com/nomifun/nomifun-tauri` | —（已接入全部 CTA 与文档页脚） |
+| `releasesUrl` | ✅ 已确认 `…/nomifun-tauri/releases` | —（下载页二进制按钮指向） |
+| `contactEmail` | 占位 `hello@nomifun.com` | 对外联系/安全报告邮箱（确认后替换） |
 | `communityLinks` | 空 | Discord / 微信群 / Telegram / QQ 群等社群入口（有几个填几个） |
-| `websiteUrl` | `nomifun.com`（NOTICE 提及，未核实） | 确认官网域名是否就是 nomifun.com |
+| `websiteUrl` | ✅ 已确认 `https://www.nomifun.com` | —（已写入 links.ts） |
 | `commercialNoticeChannel` | 占位 | "商用告知"希望走哪个通道（邮箱 / issue / 表单） |
 
 ### B4. 下载二进制（产品侧，非门户）

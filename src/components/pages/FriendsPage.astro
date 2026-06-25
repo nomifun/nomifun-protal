@@ -4,6 +4,7 @@
  * A curated page recommending other products we genuinely like.
  * Rendered inside <Base> by src/pages/friends.astro and src/pages/en/friends.astro.
  */
+import { links } from '@/data/links';
 import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
 
 const locale: Locale = getLocale(Astro.url);
@@ -12,6 +13,7 @@ const locale: Locale = getLocale(Astro.url);
 const PRODUCTS = [
   { id: 'saytive', name: 'Saytive', url: 'https://saytive.ai', domain: 'saytive.ai', icon: 'i-mdi-microphone-message', accent: 'pink' as const },
   { id: 'fast', name: 'Fast', url: 'https://fast.saien.pro', domain: 'fast.saien.pro', icon: 'i-mdi-magnify-expand', accent: 'violet' as const },
+  { id: 'aionui', name: 'AionUi', url: links.aionui, domain: 'github.com/iOfficeAI/AionUi', icon: 'i-mdi-robot-happy-outline', accent: 'cyan' as const },
 ];
 
 interface ProductCopy {
@@ -49,6 +51,12 @@ const copy: Dict<{
         desc: '只需输入文字并点击，即可直达小红书、抖音、美团等数十个主流应用的搜索结果页。拒绝信息流，专注搜索本身——搜索本该如此简单。',
         tags: ['一触直达', '数十个应用', '无信息流'],
       },
+      aionui: {
+        tagline: '内置 Agent 引擎，安装即用。',
+        category: 'AI agent 工作台',
+        desc: 'NomiFun 最早期是基于 AionUI 进行功能开发的。即便到今日已经大不相同，仍然有沿用的设计；在此感谢 AionUi 带来的早期基础。AionUi 内置完整 AI agent 引擎，无需单独安装 CLI agent，也无需复杂配置，粘贴任意 API Key 即可开始，并支持文件读写、Web 搜索、图片生成、MCP 工具与 21 个内置专业助手。',
+        tags: ['内置 agent 引擎', '无需 CLI', '21 个专业助手'],
+      },
     },
     bottomTitle: '有想被推荐的好产品？',
     bottomBody: '如果你也做了一款用心的好产品，欢迎联系我们——好东西值得被更多人看见。',
@@ -72,6 +80,12 @@ const copy: Dict<{
         desc: 'Just type and tap to jump straight to the search results of dozens of mainstream apps — Xiaohongshu, Douyin, Meituan and more. No feeds, just search — the way search should be.',
         tags: ['One-tap', 'Dozens of apps', 'No feed'],
       },
+      aionui: {
+        tagline: 'Built-in agent engine. Ready on install.',
+        category: 'AI agent workspace',
+        desc: 'NomiFun first began as feature work on AionUI. It is very different today, but part of that design lineage remains; thank you to AionUi for the early foundation. AionUi ships with a complete AI agent engine: no separate CLI agents, no complex setup, paste any API key to start, with file read/write, web search, image generation, MCP tools, and 21 built-in professional assistants.',
+        tags: ['Built-in agents', 'No CLI setup', '21 assistants'],
+      },
     },
     bottomTitle: 'Have a product we should feature?',
     bottomBody: 'If you’ve built something thoughtful too, get in touch — good things deserve to be seen.',
@@ -92,6 +106,11 @@ const accentMap = {
     btn: 'btn-ghost',
     tag: 'border-violet-400/25 text-violet-200',
   },
+  cyan: {
+    tile: 'border-cyan-400/30 bg-cyan-500/10 text-cyan-200',
+    btn: 'btn-ghost',
+    tag: 'border-cyan-400/25 text-cyan-100',
+  },
 };
 ---
 
@@ -107,7 +126,7 @@ const accentMap = {
     </div>
 
     <!-- product cards -->
-    <div class="mt-12 grid gap-6 md:grid-cols-2" data-stagger>
+    <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3" data-stagger>
       {PRODUCTS.map((p) => {
         const c = t.products[p.id];
         const a = accentMap[p.accent];

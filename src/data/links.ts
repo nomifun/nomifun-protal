@@ -1,22 +1,22 @@
 /**
  * Central place for all outbound links & contact info.
  *
- * NOTE (placeholders): the source repo's git remote is a private IP-hosted Git
- * server, and there is no public GitHub URL, contact email, or community link
- * yet. Everything marked PLACEHOLDER must be replaced by the author — see
- * docs/RESOURCES-TODO.md. The UI renders fine with placeholders.
+ * The public GitHub repo (github.com/nomifun/nomifun-tauri) and the official
+ * website (www.nomifun.com) are confirmed and live. The contact email is the
+ * only field still being finalized — it stays marked PLACEHOLDER until the
+ * author confirms it. See docs/RESOURCES-TODO.md.
  */
 
 export const links = {
-  // PLACEHOLDER — public GitHub repo URL (most CTAs point here)
-  github: 'https://github.com/nomifun/nomifun',
-  // PLACEHOLDER — GitHub Releases page (download buttons)
-  releases: 'https://github.com/nomifun/nomifun/releases',
-  // PLACEHOLDER — issues
-  issues: 'https://github.com/nomifun/nomifun/issues',
-  // Website (referenced in NOTICE; unverified)
-  website: 'https://nomifun.com',
-  // PLACEHOLDER — contact / security email
+  // Public GitHub repo (most CTAs point here)
+  github: 'https://github.com/nomifun/nomifun-tauri',
+  // GitHub Releases page (download buttons)
+  releases: 'https://github.com/nomifun/nomifun-tauri/releases',
+  // Issues
+  issues: 'https://github.com/nomifun/nomifun-tauri/issues',
+  // Official website
+  website: 'https://www.nomifun.com',
+  // PLACEHOLDER — contact / security email (not yet confirmed)
   email: 'hello@nomifun.com',
   // Upstream attribution (Apache-2.0)
   aionui: 'https://github.com/iOfficeAI/AionUi',

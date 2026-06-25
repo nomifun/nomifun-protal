@@ -7,7 +7,14 @@ import UnoCSS from 'unocss/astro';
 // https://astro.build/config
 // zh-CN lives at the root ("/"), en-US lives under "/en".
 export default defineConfig({
-  site: 'https://nomifun.com',
+  site: 'https://www.nomifun.com',
+  image: {
+    endpoint: { route: '/_image' },
+    service: { entrypoint: 'astro/assets/services/sharp', config: {} },
+    domains: [],
+    remotePatterns: [],
+    responsiveStyles: false,
+  },
   integrations: [
     UnoCSS({ injectReset: true }),
     react(),

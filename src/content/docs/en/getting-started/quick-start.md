@@ -1,37 +1,61 @@
 ---
 title: Your first conversation
-description: Configure a model, create your first session, and use the conversation workspace.
+description: Configure a model, start your first session from the home screen, and use the workspace's messages, file tree, preview, and terminal.
 category: Getting Started
 order: 3
 lang: en-US
 ---
 
-This page walks you through your first NomiFun session. The desktop app and web server share the same UI; the difference is auth: the desktop WebView is trusted via a local token (no login), while `nomifun-web` requires login. Finish [Installation](/en/docs/getting-started/installation) first.
+This page walks you through your first NomiFun session: set up a model provider, start a conversation from the home screen, then inspect the output in the conversation workspace. Finish [Installation](/en/docs/getting-started/installation) first.
 
-![First-run admin setup (web only)](/screenshots/gs-04-quickstart-login.png)
+The desktop app (nomifun-desktop) and the self-hosted web server (nomifun-web) share the same UI. The difference is auth: the desktop WebView is trusted via a local token on every launch (no login), while `nomifun-web` listens on `127.0.0.1:8787` and requires login by default. For a first run, use the built-in **nomi** agent — a CLI binary bundled with the app, so no external CLI install is needed. It's the simplest way to verify everything works.
+
+> Where to look: model setup lives in the sidebar at `/models`, sessions start from the home screen at `/guid`, and an active session is at `/conversation/:id`.
 
 ## Steps
 
-1. **Launch and land on the home screen.** After login you land on `/guid`, which gathers everything you need to start a session: agent picker, model picker, assistant, tools & workspace, and the input box.
+1. **Configure a model provider.** Before sending your first message, you need at least one working model. Open `/models` and add a native provider — Anthropic, OpenAI-compatible, Amazon Bedrock, or Google Vertex — with its API key, base URL, and default model id.
 
-   ![guid home screen](/screenshots/gs-05-quickstart-guid.png)
+   ![Add a model provider](/images/en/01模型/新增模型.png)
 
-2. **Configure a model.** Open `/models` and add at least one provider — Anthropic, OpenAI-compatible, Amazon Bedrock, or Google Vertex — with its API key, base URL, and default model. For unattended long tasks, set up a **model failover queue** so the engine cycles through backups on failure / rate limits.
+2. **(Optional) Set up a model failover queue.** For unattended long tasks, you can compose a failover queue in model settings: when a model fails, gets rate-limited, or becomes unavailable, the engine cycles through backups in order, switching up to 4 times before giving up. You can skip this for a first run — one working model is enough.
 
-   ![Model settings](/screenshots/gs-06-quickstart-model-settings.png)
+3. **Start your first session from the home screen.** Go back to `/guid`. The home screen gathers everything you need to begin: the agent picker, the model picker, an assistant (a preset persona / system prompt / skill bundle), tools & workspace, and the input box. Pick the built-in **nomi** engine, choose the model you just configured, and type your first prompt in the input box, for example:
 
-3. **Create your first session.** Back on `/guid`, pick the built-in **nomi** engine (no external CLI required — ideal for a first run), choose a configured model, type a prompt like "Write a Python function returning the nth Fibonacci number, with a small test," and send.
+   > Write a Python function that returns the nth Fibonacci number, with a small test.
 
-   ![First reply](/screenshots/gs-07-quickstart-first-reply.png)
+   Press send. NomiFun creates a new session, navigates to `/conversation/:id`, and starts streaming the reply. While typing you can use `@` to reference a file, skill, or assistant.
 
-4. **Use the conversation workspace.** Every session has its own working directory. The session page includes the message stream, a file tree, a preview panel (code / Markdown / PDF / Office / HTML / diff), and a PTY terminal mounted at the working directory.
+   ![Start your first session from home](/images/en/02会话/会话启动.png)
 
-## Common surfaces
+4. **Use the conversation workspace.** Every session has its own working directory. The session page typically has four areas:
 
-- `/assistants` — manage assistants; `?tab=skills` for skills.
-- `/mcp` — manage MCP servers.
-- `/open-capabilities` — WebUI remote access and outbound capability exposure.
-- `/requirements` — the AutoWork board.
-- `/nomi` — companions, remote channel bindings, and companion settings.
+   - **Message stream** — model replies, tool calls, file changes, and execution status.
+   - **File tree** — the files in this session's working directory.
+   - **Preview panel** — preview code, Markdown, PDF, Office, HTML, and diffs.
+   - **Terminal** — a PTY terminal mounted at the working directory, launched from within the session.
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun)
+   Ask nomi to write that function to a file, then check the result in the file tree and preview panel.
+
+   ![Session workspace: messages + file tree + preview + terminal](/images/en/02会话/会话.png)
+
+## Notes and limits
+
+- **Built-in nomi vs. external agents** — the built-in nomi needs no external CLI and works out of the box. If you switch to an external agent such as Claude Code, Codex, or Gemini, you still have to install the matching CLI on the host yourself; `/models` only handles model credentials and selection — it won't install third-party CLIs for you.
+- **Memory and skills boundary** — all companions share one memory capture / learning pipeline (a shared memory hub), while the **skill library is isolated per companion** — each companion has its own skill set. Per-companion private memory is coming soon.
+- **Login difference** — the desktop app requires no login; on the web, the first visit guides you through creating an admin account, after which login is required.
+
+## FAQ
+
+- **First message won't send?** Usually the model isn't configured yet, or the chosen agent and model don't match. Re-check that the provider is healthy in `/models`, then select it again in `/guid`.
+- **Want a different look?** NomiFun ships 3 pure-code SVG companion characters (Mochi the mochi rabbit / Ink the black cat / Bolt the robot, with Mochi as the default) and supports any custom IP. Adjust it in `/nomi`.
+
+## Related
+
+- [MCP and skills](/en/docs/guides/mcp-and-skills)
+- [Assistants](/en/docs/guides/assistants)
+- [Terminal](/en/docs/guides/terminal)
+- [WebUI remote access](/en/docs/guides/webui-remote-access)
+- [Web server deployment](/en/docs/guides/web-server-deployment)
+
+Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
