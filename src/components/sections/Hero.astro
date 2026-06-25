@@ -24,7 +24,7 @@ const copy: Dict<{
     ctaPrimary: '立即下载',
     ctaSecondary: '在 GitHub 查看源码',
     chips: ['源码开放 · 数据全本地', '超级伙伴 · 智能进化', '智能值守 · 需求管理', '开放能力 · 超级生态', '无限搭配 · config one', '更 native 的实现', '专为提效 · 海量创新'],
-    showcaseAlt: 'NomiFun 同时运行在笔记本与平板上的真实场景',
+    showcaseAlt: 'NomiFun 主界面会话工作区与桌面伙伴演示截图',
   },
   'en-US': {
     eyebrow: 'Fully open-source · Local-first · Free for commercial use',
@@ -35,7 +35,7 @@ const copy: Dict<{
     ctaPrimary: 'Download',
     ctaSecondary: 'View source on GitHub',
     chips: ['Open source · Local data', 'Evolving companions', 'Unattended automation', 'Open ecosystem', 'config one, use anywhere', 'Truly native', 'Built for productivity'],
-    showcaseAlt: 'NomiFun running on a laptop and a tablet at the same time',
+    showcaseAlt: 'NomiFun session workspace and desktop companion demo screenshot',
   },
 };
 
@@ -92,7 +92,7 @@ const t = pick(copy, locale);
       ))}
     </ul>
 
-    <!-- real cross-device showcase photo (laptop + tablet both running NomiFun) -->
+    <!-- real product showcase screenshot -->
     <figure class="hero-shot relative mt-16 w-full max-w-4xl" data-animate>
       <div
         class="pointer-events-none absolute -inset-6 -z-10 rounded-[2.75rem] opacity-60 blur-3xl"
@@ -102,10 +102,10 @@ const t = pick(copy, locale);
       </div>
       <div class="relative overflow-hidden rounded-3xl border border-ink-600 bg-ink-850 shadow-[0_0_90px_-22px_rgba(255,111,145,0.5)]">
         <img
-          src="/images/showcase/webui-cross-device.png"
+          src="/images/showcase/home-hero-demo.png"
           alt={t.showcaseAlt}
-          width="1440"
-          height="1080"
+          width="3420"
+          height="2224"
           loading="lazy"
           decoding="async"
           class="block h-auto w-full"
