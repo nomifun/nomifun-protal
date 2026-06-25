@@ -1,0 +1,145 @@
+---
+/**
+ * ScreenshotGallery — "真实界面一览 / Real screenshots".
+ *
+ * A restrained, dark-themed grid of REAL product captures (from the actual
+ * running app, dark theme) — placed near the end of the homepage to back the
+ * code-rendered live demos with "see it for yourself" credibility. The live
+ * islands above remain the primary storytelling; this section is the proof.
+ *
+ * Accuracy: these are genuine in-app screenshots. Captions stay neutral and
+ * descriptive — no capability claims beyond what the shot shows. Each card
+ * links to the matching operation guide.
+ *
+ * i18n note: captures show the Chinese UI; we surface the same images on both
+ * locales here (product screenshots, illustrative). The /docs pages use
+ * locale-aware image paths (zh real / en `/images/en/` to be filled in).
+ */
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+
+const locale: Locale = getLocale(Astro.url);
+
+// Six curated captures spanning the product surface; href → matching guide.
+const shots: { img: string; href: string; w: number; h: number }[] = [
+  { img: '02会话/会话.png', href: '/docs/getting-started/quick-start', w: 1280, h: 832 },
+  { img: '桌面伙伴/桌面伙伴聊天页.png', href: '/docs/guides/companions', w: 1280, h: 832 },
+  { img: '05需求平台/需求平台列表.png', href: '/docs/guides/autowork', w: 1280, h: 832 },
+  { img: '01模型/模型列表.png', href: '/docs/guides/model-routing', w: 1280, h: 832 },
+  { img: '03知识库/知识库首页.png', href: '/docs/guides/knowledge-base', w: 1280, h: 832 },
+  { img: '开放能力/webui.png', href: '/docs/guides/webui-remote', w: 1452, h: 832 },
+];
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  realBadge: string;
+  viewLabel: string;
+  footnote: string;
+  captions: string[];
+}> = {
+  'zh-CN': {
+    eyebrow: '真实界面 · 眼见为实',
+    title: '不是渲染图，是<span class="text-grad-pink">真实运行界面</span>',
+    lead: '上面的演示是用前端代码实时绘制的；这里则是产品真机截图。每一张都来自实际运行的 NomiFun（深色主题），点开可直达对应操作文档。',
+    realBadge: '真机截图',
+    viewLabel: '查看文档',
+    footnote: '截图均取自实际运行的应用；界面持续迭代，最终以你本机版本为准。',
+    captions: [
+      '会话工作区：消息流、文件树、预览与内置终端',
+      '与桌面伙伴对话',
+      '需求平台 · AutoWork 列表',
+      '模型管理与故障转移',
+      '知识库首页',
+      '开放能力 · WebUI 远程访问',
+    ],
+  },
+  'en-US': {
+    eyebrow: 'Real UI · see for yourself',
+    title: 'Not renders — <span class="text-grad-pink">the real running app</span>',
+    lead: 'The demos above are drawn live in front-end code; these are real product captures. Every shot is from an actual running NomiFun (dark theme) — tap through to the matching guide.',
+    realBadge: 'Real capture',
+    viewLabel: 'View guide',
+    footnote: 'All captures are from the actual running app; the UI keeps evolving — your local build is the source of truth.',
+    captions: [
+      'Session workspace: messages, file tree, preview & built-in terminal',
+      'Chatting with a desktop companion',
+      'Requirements · AutoWork list',
+      'Model management & failover',
+      'Knowledge base home',
+      'Open capabilities · WebUI remote access',
+    ],
+  },
+};
+
+const t = pick(copy, locale);
+const items = shots.map((s, i) => ({ ...s, caption: t.captions[i] }));
+---
+
+<section id="screenshots" class="relative section-y bg-ink-850/30">
+  <div class="container-x">
+    <!-- header -->
+    <div class="flex max-w-3xl flex-col gap-4" data-animate>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl lg:text-[2.75rem]">
+        <Fragment set:html={t.title} />
+      </h2>
+      <p class="text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
+    </div>
+
+    <!-- gallery grid -->
+    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+      {
+        items.map((s) => (
+          <li>
+            <a
+              href={localizePath(s.href, locale)}
+              class="shot group block overflow-hidden rounded-2xl border border-ink-600/70 bg-ink-800/60 transition-colors hover:border-pink-500/40"
+            >
+              <span class="relative block overflow-hidden">
+                <img
+                  src={`/images/zh/${s.img}`}
+                  alt={s.caption}
+                  width={s.w}
+                  height={s.h}
+                  loading="lazy"
+                  decoding="async"
+                  class="shot-img block aspect-[16/10] h-auto w-full object-cover object-top transition-transform duration-500"
+                />
+                <span class="pointer-events-none absolute right-2.5 top-2.5 inline-flex items-center gap-1 rounded-full border border-ink-600/80 bg-ink-900/80 px-2 py-1 text-[10px] font-medium text-mid backdrop-blur-sm">
+                  <span class="i-mdi-camera-outline text-[11px] text-pink-400" aria-hidden="true" />
+                  {t.realBadge}
+                </span>
+              </span>
+              <span class="flex items-center justify-between gap-3 px-4 py-3.5">
+                <span class="truncate text-sm text-mid transition-colors group-hover:text-hi">{s.caption}</span>
+                <span class="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-low transition-colors group-hover:text-pink-300">
+                  {t.viewLabel}
+                  <span class="i-mdi-arrow-right text-sm transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                </span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-7 flex items-center gap-2 text-xs leading-relaxed text-low" data-animate>
+      <span class="i-mdi-information-outline text-sm" aria-hidden="true"></span>
+      <span>{t.footnote}</span>
+    </p>
+  </div>
+
+  <style>
+    .shot:hover .shot-img {
+      transform: scale(1.035);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .shot-img,
+      .shot:hover .shot-img {
+        transition: none;
+        transform: none;
+      }
+    }
+  </style>
+</section>
