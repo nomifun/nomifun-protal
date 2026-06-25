@@ -12,6 +12,8 @@ export const links = {
   github: 'https://github.com/nomifun/nomifun-tauri',
   // GitHub Releases page (download buttons)
   releases: 'https://github.com/nomifun/nomifun-tauri/releases',
+  // Baidu Netdisk mirror for users in mainland China
+  baiduPan: 'https://pan.baidu.com/s/1PpqNMDe-CoLZm1bz99V7hA?pwd=nomi',
   // Issues
   issues: 'https://github.com/nomifun/nomifun-tauri/issues',
   // Official website

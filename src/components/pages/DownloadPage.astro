@@ -4,7 +4,8 @@
  * Reads the active locale from Astro.url so zh + en share one file.
  *
  * Platform cards map over `downloads` data. Official download entry points
- * land on GitHub Releases; source-build and Docker paths remain documented
+ * land on GitHub Releases; China users also get a Baidu Netdisk mirror.
+ * Source-build and Docker paths remain documented
  * for users who need to build or self-host.
  */
 import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
@@ -31,6 +32,11 @@ const copy: Dict<{
   bannerTitle: string;
   bannerBody: string;
   releasesCta: string;
+  baiduTitle: string;
+  baiduBody: string;
+  baiduCta: string;
+  baiduFile: string;
+  baiduCode: string;
   pathsTitle: string;
   pathsLead: string;
   paths: InstallPath[];
@@ -51,6 +57,12 @@ const copy: Dict<{
     bannerBody:
       'NomiFun 的应用下载地址为 GitHub Releases。进入后选择对应版本和平台资产；如果当前版本暂未包含你的平台产物，可继续使用源码构建或 Docker 自托管路径。',
     releasesCta: '打开 GitHub Releases',
+    baiduTitle: '中国区备用：百度网盘',
+    baiduBody:
+      '为中国区用户提供 latest 网盘分享，下载不稳定或访问 GitHub 较慢时可使用。GitHub Releases 仍是官方发布源。',
+    baiduCta: '百度网盘下载',
+    baiduFile: '分享文件：latest',
+    baiduCode: '提取码：nomi',
     pathsTitle: '三条上手路径',
     pathsLead: '桌面端走 Tauri 构建，Web 端走自托管 axum 服务，或直接用 Docker / Compose 一键起服务。',
     paths: [
@@ -109,6 +121,12 @@ const copy: Dict<{
     bannerBody:
       'The NomiFun app download page is GitHub Releases. Open it, choose a version, then pick the asset for your platform. If a release does not include your platform yet, use the source-build or Docker self-host path below.',
     releasesCta: 'Open GitHub Releases',
+    baiduTitle: 'China mirror: Baidu Netdisk',
+    baiduBody:
+      'For users in mainland China, the latest shared package is also available through Baidu Netdisk when GitHub access is slow. GitHub Releases remains the canonical release source.',
+    baiduCta: 'Download via Baidu Netdisk',
+    baiduFile: 'Shared file: latest',
+    baiduCode: 'Extraction code: nomi',
     pathsTitle: 'Three ways to get started',
     pathsLead: 'Build the Tauri desktop app, run the self-hosted axum web server, or spin everything up with Docker / Compose.',
     paths: [
@@ -214,6 +232,22 @@ const platformList = (['macos', 'windows', 'linux'] as const).map((key) => ({
       <a href={links.releases} target="_blank" rel="noopener" class="btn-primary mt-1 w-fit text-sm">
         <span class="i-mdi-github text-base"></span>{t.releasesCta}
       </a>
+      <div class="mt-2 flex flex-col gap-3 border-t border-ink-700/70 pt-4 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2 text-sm font-semibold text-hi">
+            <span class="i-mdi-cloud-download-outline text-lg text-violet-300"></span>
+            <span>{t.baiduTitle}</span>
+          </div>
+          <p class="max-w-3xl text-sm leading-relaxed text-mid">{t.baiduBody}</p>
+          <div class="flex flex-wrap gap-2">
+            <Badge tone="neutral">{t.baiduFile}</Badge>
+            <Badge tone="success">{t.baiduCode}</Badge>
+          </div>
+        </div>
+        <a href={links.baiduPan} target="_blank" rel="noopener" class="btn-ghost w-fit shrink-0 text-sm">
+          <span class="i-mdi-link-variant text-base"></span>{t.baiduCta}
+        </a>
+      </div>
     </div>
   </div>
 </section>
