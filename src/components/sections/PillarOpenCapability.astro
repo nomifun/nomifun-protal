@@ -1,0 +1,150 @@
+---
+/**
+ * PillarOpenCapability — pillar 4: 开放能力 · 超级生态 / Open capability,
+ * super ecosystem.
+ *
+ * Accuracy red lines (spec §2/§3 pillar 4):
+ *  - 151 项能力经三个公开门面：/mcp（全量 Remote）、/mcp-agent（精选 do-work 子集）、
+ *    /v1（REST + /v1/openapi.json OpenAPI 3.1 + SSE 流）。
+ *  - companion-token（Bearer，SHA-256 存储，常量时间比对）鉴权，
+ *    调用者「以该伙伴身份」在 Remote 面操作。
+ *  - 让 Claude / Codex / 任意 Agent 通过 MCP/Skill 直接驱动 NomiFun。
+ *  - 头部能力 nomi_agent_run（流式）+ nomi_agent_result（轮询）。
+ *  - 细粒度三轴能力网关守护安全；IM 写入永远进暂存区待审。
+ */
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+import OpenApiTabs from '@/components/islands/OpenApiTabs.tsx';
+import CapabilityGateway from '@/components/islands/CapabilityGateway.tsx';
+
+const locale: Locale = getLocale(Astro.url);
+
+interface Point {
+  icon: string;
+  title: string;
+  body: string;
+}
+
+const copy: Dict<{
+  eyebrow: string;
+  hook: string;
+  title: string;
+  lead: string;
+  points: Point[];
+  tabsLabel: string;
+  matrixLabel: string;
+  ctaSecondary: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '开放能力 · 超级生态',
+    hook: '什么都有、什么都能用、什么都能与它配合。',
+    title: '<span class="text-grad-pink">开放能力</span> · 超级生态',
+    lead: '151 项能力经 /mcp（全量 Remote）、/mcp-agent（精选 do-work 子集）、/v1（REST + OpenAPI 3.1 + SSE 流）三个公开门面对外开放。让 Claude / Codex / 任意 Agent 通过 MCP/Skill 直接驱动 NomiFun。',
+    points: [
+      {
+        icon: 'i-mdi-api',
+        title: '151 项能力 · 三个门面',
+        body: '/mcp 暴露全量 Remote 能力面，/mcp-agent 精选 do-work 子集，/v1 提供 REST + /v1/openapi.json（OpenAPI 3.1）与 SSE 流式响应。',
+      },
+      {
+        icon: 'i-mdi-key-chain-variant',
+        title: 'companion-token 鉴权',
+        body: 'Bearer token（SHA-256 存储、常量时间比对）鉴权，调用者以该伙伴身份在 Remote 面操作。头部能力 nomi_agent_run（流式）+ nomi_agent_result（轮询）。',
+      },
+      {
+        icon: 'i-mdi-shield-check-outline',
+        title: '三轴能力网关守护',
+        body: '危险级 × 调用面 × 决策三轴细粒度管控每一次调用；来自 IM 的写入永远进入暂存区待审，安全边界从不松动。',
+      },
+    ],
+    tabsLabel: '接入方式',
+    matrixLabel: '能力网关 · 三轴决策',
+    ctaSecondary: '查看接入与 API 文档',
+  },
+  'en-US': {
+    eyebrow: 'Open capability · super ecosystem',
+    hook: 'Has everything, works with everything, plays well with everything.',
+    title: '<span class="text-grad-pink">Open capability</span>, super ecosystem',
+    lead: '151 capabilities are exposed through three public facades: /mcp (full Remote surface), /mcp-agent (a curated do-work subset), and /v1 (REST + OpenAPI 3.1 + SSE streams). Let Claude, Codex, or any agent drive NomiFun directly over MCP/Skill.',
+    points: [
+      {
+        icon: 'i-mdi-api',
+        title: '151 capabilities · three facades',
+        body: '/mcp exposes the full Remote surface, /mcp-agent a curated do-work subset, and /v1 offers REST + /v1/openapi.json (OpenAPI 3.1) with SSE streaming responses.',
+      },
+      {
+        icon: 'i-mdi-key-chain-variant',
+        title: 'companion-token auth',
+        body: 'Bearer tokens (stored as SHA-256, compared in constant time) authenticate calls; the caller acts as that companion on the Remote surface. Headline tools: nomi_agent_run (streaming) + nomi_agent_result (polling).',
+      },
+      {
+        icon: 'i-mdi-shield-check-outline',
+        title: 'Three-axis gateway guard',
+        body: 'DangerTier × Surface × Decision finely govern every call; writes from IM channels always land in a review staging area — the safety boundary never gives.',
+      },
+    ],
+    tabsLabel: 'How to connect',
+    matrixLabel: 'Capability gateway · three-axis decisions',
+    ctaSecondary: 'Read the integration & API docs',
+  },
+};
+
+const t = pick(copy, locale);
+---
+
+<section id="open-capability" class="relative section-y">
+  <div class="container-x">
+    <!-- header -->
+    <div class="flex max-w-3xl flex-col gap-4" data-animate>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl lg:text-[2.75rem]">
+        <Fragment set:html={t.title} />
+      </h2>
+      <p class="flex items-start gap-2 text-base leading-relaxed text-mid sm:text-lg">
+        <span class="i-mdi-flash mt-1 shrink-0 text-pink-400" aria-hidden="true"></span>
+        <span>{t.hook}</span>
+      </p>
+      <p class="text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
+    </div>
+
+    <!-- 3 capability points -->
+    <ul class="mt-10 grid gap-4 sm:grid-cols-3" data-stagger>
+      {t.points.map((p) => (
+        <li class="card card-hover p-5">
+          <span class="grid h-10 w-10 place-items-center rounded-xl border border-pink-500/25 bg-pink-500/10">
+            <span class={`${p.icon} text-xl text-pink-400`} aria-hidden="true"></span>
+          </span>
+          <h3 class="mt-3 text-base font-semibold text-hi">{p.title}</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-mid">{p.body}</p>
+        </li>
+      ))}
+    </ul>
+
+    <!-- interactive islands: tabs (left) + gateway matrix (right); stacked on mobile -->
+    <div class="mt-12 grid gap-6 lg:grid-cols-2 lg:items-start lg:gap-8">
+      <div class="flex flex-col gap-3" data-animate>
+        <div class="flex items-center gap-2">
+          <span class="i-mdi-console-line text-base text-violet-300" aria-hidden="true"></span>
+          <span class="text-sm font-semibold text-hi">{t.tabsLabel}</span>
+        </div>
+        <OpenApiTabs locale={locale} client:visible />
+      </div>
+
+      <div class="flex flex-col gap-3" data-animate>
+        <div class="flex items-center gap-2">
+          <span class="i-mdi-grid text-base text-violet-300" aria-hidden="true"></span>
+          <span class="text-sm font-semibold text-hi">{t.matrixLabel}</span>
+        </div>
+        <CapabilityGateway locale={locale} client:visible />
+      </div>
+    </div>
+
+    <!-- secondary CTA -->
+    <div class="mt-8" data-animate>
+      <a href={localizePath('/docs', locale)} class="btn-ghost text-sm">
+        <span class="i-mdi-book-open-page-variant-outline text-base" aria-hidden="true"></span>
+        {t.ctaSecondary}
+        <span class="i-mdi-arrow-right text-base" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</section>

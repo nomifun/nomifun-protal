@@ -1,0 +1,160 @@
+---
+/**
+ * FriendsPage — 友情推荐 / Friendly picks.
+ * A curated page recommending other products we genuinely like.
+ * Rendered inside <Base> by src/pages/friends.astro and src/pages/en/friends.astro.
+ */
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+
+const locale: Locale = getLocale(Astro.url);
+
+// Locale-invariant product facts.
+const PRODUCTS = [
+  { id: 'saytive', name: 'Saytive', url: 'https://saytive.ai', domain: 'saytive.ai', icon: 'i-mdi-microphone-message', accent: 'pink' as const },
+  { id: 'fast', name: 'Fast', url: 'https://fast.saien.pro', domain: 'fast.saien.pro', icon: 'i-mdi-magnify-expand', accent: 'violet' as const },
+];
+
+interface ProductCopy {
+  tagline: string;
+  category: string;
+  desc: string;
+  tags: string[];
+}
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  visit: string;
+  products: Record<string, ProductCopy>;
+  bottomTitle: string;
+  bottomBody: string;
+  bottomCta: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '友情推荐',
+    title: '我们也<span class="text-grad-pink">由衷喜欢</span>的好产品',
+    lead: '除了 NomiFun，这些也是我们由衷喜欢、想分享给你的好产品。',
+    visit: '前往了解',
+    products: {
+      saytive: {
+        tagline: 'Be Creative, Be Saytive.',
+        category: '创意语音输入法',
+        desc: '专为创意工作者打造的语音输入法。通过顶级模型与精心的产品设计，自动感知你的工作上下文，提供快速、准确而贴合场景的转写体验。',
+        tags: ['语音转写', '上下文感知', '顶级模型'],
+      },
+      fast: {
+        tagline: '搜索，一触即达。',
+        category: '极速搜索直达',
+        desc: '只需输入文字并点击，即可直达小红书、抖音、美团等数十个主流应用的搜索结果页。拒绝信息流，专注搜索本身——搜索本该如此简单。',
+        tags: ['一触直达', '数十个应用', '无信息流'],
+      },
+    },
+    bottomTitle: '有想被推荐的好产品？',
+    bottomBody: '如果你也做了一款用心的好产品，欢迎联系我们——好东西值得被更多人看见。',
+    bottomCta: '联系我们',
+  },
+  'en-US': {
+    eyebrow: 'FRIENDLY PICKS',
+    title: 'Products we <span class="text-grad-pink">genuinely love</span> too',
+    lead: 'Beyond NomiFun, these are other products we genuinely love and want to share with you.',
+    visit: 'Visit',
+    products: {
+      saytive: {
+        tagline: 'Be Creative, Be Saytive.',
+        category: 'Voice input for creators',
+        desc: 'A voice input method built for creative workers. Powered by top-tier models and thoughtful design, it senses your working context to deliver fast, accurate, context-aware transcription.',
+        tags: ['Transcription', 'Context-aware', 'Top models'],
+      },
+      fast: {
+        tagline: 'Search, one tap away.',
+        category: 'Instant search launcher',
+        desc: 'Just type and tap to jump straight to the search results of dozens of mainstream apps — Xiaohongshu, Douyin, Meituan and more. No feeds, just search — the way search should be.',
+        tags: ['One-tap', 'Dozens of apps', 'No feed'],
+      },
+    },
+    bottomTitle: 'Have a product we should feature?',
+    bottomBody: 'If you’ve built something thoughtful too, get in touch — good things deserve to be seen.',
+    bottomCta: 'Contact us',
+  },
+};
+
+const t = pick(copy, locale);
+
+const accentMap = {
+  pink: {
+    tile: 'border-pink-500/30 bg-pink-500/10 text-pink-400',
+    btn: 'btn-primary',
+    tag: 'border-pink-500/25 text-pink-200',
+  },
+  violet: {
+    tile: 'border-violet-400/30 bg-violet-500/10 text-violet-300',
+    btn: 'btn-ghost',
+    tag: 'border-violet-400/25 text-violet-200',
+  },
+};
+---
+
+<section class="relative section-y bg-mesh">
+  <div class="container-x">
+    <!-- header -->
+    <div class="flex max-w-3xl flex-col gap-4" data-animate>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h1 class="text-4xl font-bold leading-tight tracking-tight text-hi sm:text-5xl">
+        <Fragment set:html={t.title} />
+      </h1>
+      <p class="text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
+    </div>
+
+    <!-- product cards -->
+    <div class="mt-12 grid gap-6 md:grid-cols-2" data-stagger>
+      {PRODUCTS.map((p) => {
+        const c = t.products[p.id];
+        const a = accentMap[p.accent];
+        return (
+          <article class="card card-hover flex flex-col p-7 sm:p-8">
+            <div class="flex items-center gap-4">
+              <span class={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border text-2xl ${a.tile}`} aria-hidden="true">
+                <span class={p.icon}></span>
+              </span>
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold text-hi">{p.name}</h2>
+                <a href={p.url} target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs text-low transition-colors hover:text-pink-300">
+                  <span class="i-mdi-link-variant text-xs" aria-hidden="true"></span>{p.domain}
+                </a>
+              </div>
+            </div>
+
+            <p class="mt-5 text-lg font-semibold text-grad-pink">{c.tagline}</p>
+            <span class={`mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium ${a.tag}`}>
+              {c.category}
+            </span>
+            <p class="mt-4 flex-1 text-sm leading-relaxed text-mid">{c.desc}</p>
+
+            <div class="mt-5 flex flex-wrap gap-2">
+              {c.tags.map((tag) => (
+                <span class="inline-flex items-center rounded-full border border-ink-600 bg-ink-700/50 px-2.5 py-1 text-[11px] text-mid">{tag}</span>
+              ))}
+            </div>
+
+            <a href={p.url} target="_blank" rel="noopener" class={`mt-7 ${a.btn} text-sm`}>
+              <span class="i-mdi-arrow-top-right text-base" aria-hidden="true"></span>
+              {t.visit} {p.name}
+            </a>
+          </article>
+        );
+      })}
+    </div>
+
+    <!-- bottom CTA -->
+    <div class="mt-12 rounded-3xl border border-ink-600/70 bg-ink-850/50 p-8 text-center sm:p-10" data-animate>
+      <h3 class="text-xl font-semibold text-hi sm:text-2xl">{t.bottomTitle}</h3>
+      <p class="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-mid">{t.bottomBody}</p>
+      <a href={localizePath('/contact', locale)} class="btn-ghost mt-6 text-sm">
+        <span class="i-mdi-email-heart-outline text-base" aria-hidden="true"></span>
+        {t.bottomCta}
+        <span class="i-mdi-arrow-right text-base" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</section>

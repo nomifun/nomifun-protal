@@ -1,0 +1,80 @@
+---
+import { getLocale, localizePath, type Locale } from '@/i18n';
+import { links } from '@/data/links';
+import { getDocsForLocale, groupDocs } from '@/lib/docs';
+
+interface Props {
+  /** current page slug (topic, e.g. "guides/companions"); empty on the index */
+  activeSlug?: string;
+  /** id used by the mobile drawer toggle to target this nav */
+  id?: string;
+}
+
+const { activeSlug = '', id } = Astro.props;
+const locale: Locale = getLocale(Astro.url);
+const docs = await getDocsForLocale(locale);
+const groups = groupDocs(docs, locale);
+
+const t = {
+  home: locale === 'zh-CN' ? '← 返回首页' : '← Home',
+  overview: locale === 'zh-CN' ? '文档总览' : 'Docs overview',
+  fullDocs: locale === 'zh-CN' ? '完整技术文档 → GitHub' : 'Full technical docs → GitHub',
+};
+const docsRoot = localizePath('/docs', locale);
+---
+
+<nav id={id} class="flex flex-col gap-6 text-sm" aria-label="Docs">
+  <a
+    href={localizePath('/', locale)}
+    class="inline-flex items-center gap-1.5 text-mid hover:text-pink-300 transition-colors"
+  >
+    {t.home}
+  </a>
+
+  <a
+    href={docsRoot}
+    class={`rounded-lg px-3 py-2 font-medium transition-colors ${
+      activeSlug === ''
+        ? 'bg-pink-500/10 text-pink-300 border border-pink-500/25'
+        : 'text-mid hover:text-hi hover:bg-ink-800/60 border border-transparent'
+    }`}
+  >
+    {t.overview}
+  </a>
+
+  {groups.map((group) => (
+    <div class="flex flex-col gap-1.5">
+      <h3 class="eyebrow px-3 mb-1">{group.category}</h3>
+      <ul class="flex flex-col gap-0.5">
+        {group.items.map((item) => {
+          const active = item.slug === activeSlug;
+          return (
+            <li>
+              <a
+                href={item.href}
+                aria-current={active ? 'page' : undefined}
+                class={`block rounded-lg px-3 py-2 leading-snug transition-colors border-l-2 ${
+                  active
+                    ? 'border-pink-500 bg-pink-500/10 text-pink-300 font-medium'
+                    : 'border-transparent text-mid hover:text-hi hover:bg-ink-800/60'
+                }`}
+              >
+                {item.title}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  ))}
+
+  <a
+    href={links.github}
+    target="_blank"
+    rel="noopener"
+    class="mt-2 inline-flex items-center gap-1.5 rounded-lg border border-ink-600 px-3 py-2 text-xs font-medium text-mid transition-colors hover:border-violet-400/60 hover:text-hi"
+  >
+    <span class="i-mdi-github text-sm"></span>
+    {t.fullDocs}
+  </a>
+</nav>

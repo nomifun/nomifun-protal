@@ -1,0 +1,144 @@
+---
+/**
+ * PillarCompanion — 超级伙伴 · 智能养成体系 / Companions that grow with you.
+ *
+ * Structure (per spec §7): 痛点钩子 → 一句话主张 → 3 能力要点 → 演示 island → 次级 CTA.
+ * Accuracy red lines (spec §2/§3 pillar 2):
+ *   - 共享记忆中枢（全体伙伴共享）+ 每个伙伴专属技能库（skill 按伙伴隔离）。
+ *     绝不写 "专属记忆"。
+ *   - 行为采集 opt-in（多数默认关），由模型蒸馏为长期记忆。
+ *   - 进化引擎只从工具调用序列挖掘 skill（不含参数值）→ 可评审 SKILL.md → 与你商议确认。
+ */
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+import CompanionDemo from '@/components/islands/CompanionDemo.tsx';
+
+const locale: Locale = getLocale(Astro.url);
+
+interface Point {
+  icon: string;
+  title: string;
+  body: string;
+}
+
+const copy: Dict<{
+  eyebrow: string;
+  hook: string;
+  title: string;
+  lead: string;
+  points: Point[];
+  share: string;
+  ctaSecondary: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '超级伙伴 · 智能养成体系',
+    hook: '越用越懂你。',
+    title: '会陪你一起<span class="text-grad-pink">成长</span>的超级伙伴',
+    lead: '三个内置形象——Mochi 麻薯兔、Ink 墨墨黑猫、Bolt 波特机器人，皆为纯代码绘制；更能自定义任何你想要的伙伴 IP，甚至是你自己的家人、宠物。配人格预设（活泼 / 沉静 / 俏皮，或自由文本），行为采集默认多为关闭、可选开启，由模型蒸馏为长期记忆——伙伴越用越懂你。',
+    points: [
+      {
+        icon: 'i-mdi-image-edit-outline',
+        title: '自定义任意形象',
+        body: '内置 Mochi 麻薯兔、Ink 墨墨黑猫、Bolt 波特机器人三款形象；更可自定义任何你想要的伙伴 IP，甚至上传你自己的家人、宠物，做成独一无二的专属伙伴。',
+      },
+      {
+        icon: 'i-mdi-brain',
+        title: '共享记忆中枢 + 专属技能库',
+        body: '记忆是全体伙伴共享的记忆中枢；而技能库按伙伴隔离，每个伙伴拥有自己的专属技能。每个伙伴还可绑定各自领域的专家知识库。',
+      },
+      {
+        icon: 'i-mdi-auto-fix',
+        title: '进化引擎挖掘技能',
+        body: '自动从工具调用序列中挖掘可复用的 skill（不含参数值）→ 生成可评审的 SKILL.md，与你商议确认后才启用。',
+      },
+      {
+        icon: 'i-mdi-gift-outline',
+        title: '技能赠予 · 共享学习',
+        body: '可在伙伴之间「赠予 (gift)」技能、开启技能共享学习。你可以只教一个伙伴，让它去教其他伙伴。',
+      },
+    ],
+    share: '细分私有记忆敬请期待',
+    ctaSecondary: '查看养成指南',
+  },
+  'en-US': {
+    eyebrow: 'Super companions · evolving by design',
+    hook: 'The more you use it, the better it knows you.',
+    title: 'Companions that <span class="text-grad-pink">grow</span> with you',
+    lead: 'Three built-in characters — Mochi the mochi bunny, Ink the amber-eyed cat, and Bolt the hovering robot, all hand-drawn in code; or design any companion IP you like — even your own family or pets. Plus persona presets (Lively / Calm / Sassy, or free text); behavior capture is mostly off by default and opt-in, distilled by an LLM into long-term memory — so companions learn you over time.',
+    points: [
+      {
+        icon: 'i-mdi-image-edit-outline',
+        title: 'Design any avatar you like',
+        body: 'Three built-ins — Mochi the mochi bunny, Ink the amber-eyed cat, Bolt the hovering robot; or customize any companion IP you want — even upload your own family or pets to make a one-of-a-kind companion.',
+      },
+      {
+        icon: 'i-mdi-brain',
+        title: 'Shared memory hub + per-companion skills',
+        body: 'Memory is a hub shared across every companion; skill libraries, by contrast, are isolated per companion. Each companion can also bind its own domain expert knowledge base.',
+      },
+      {
+        icon: 'i-mdi-auto-fix',
+        title: 'Evolution engine mines skills',
+        body: 'It auto-mines reusable skills from tool-call sequences (parameter values excluded) → generates a reviewable SKILL.md, enabled only after it reviews it with you.',
+      },
+      {
+        icon: 'i-mdi-gift-outline',
+        title: 'Gift skills · shared learning',
+        body: 'Gift a skill from one companion to another and turn on shared learning. Teach just one companion, and let it teach the rest.',
+      },
+    ],
+    share: 'Finer-grained private memory — coming soon',
+    ctaSecondary: 'Read the companion guide',
+  },
+};
+
+const t = pick(copy, locale);
+---
+
+<section id="companions" class="relative section-y">
+  <div class="container-x">
+    <!-- header -->
+    <div data-animate class="flex max-w-3xl flex-col gap-4">
+      <span class="eyebrow">{t.eyebrow}</span>
+      <p class="text-sm font-medium text-pink-300">{t.hook}</p>
+      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl lg:text-[2.75rem]">
+        <Fragment set:html={t.title} />
+      </h2>
+      <p class="text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
+    </div>
+
+    <div class="mt-12 grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-12">
+      <!-- 3 capability points -->
+      <ul class="flex flex-col gap-4" data-stagger>
+        {t.points.map((p) => (
+          <li class="card card-hover flex gap-4 p-5 sm:p-6">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-pink-500/25 bg-pink-500/10 text-xl text-pink-400">
+              <span class={p.icon} aria-hidden="true"></span>
+            </span>
+            <div class="min-w-0">
+              <h3 class="text-base font-semibold text-hi sm:text-lg">{p.title}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-mid">{p.body}</p>
+            </div>
+          </li>
+        ))}
+
+        <li class="flex items-center gap-2 px-1 pt-1 text-xs text-low" data-animate>
+          <span class="i-mdi-clock-outline" aria-hidden="true"></span>
+          <span>{t.share}</span>
+        </li>
+
+        <li class="pt-2" data-animate>
+          <a href={localizePath('/docs', locale)} class="btn-ghost text-sm">
+            <span class="i-mdi-book-open-page-variant-outline text-base" aria-hidden="true"></span>
+            {t.ctaSecondary}
+            <span class="i-mdi-arrow-right text-base" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- interactive demo island -->
+      <div data-animate>
+        <CompanionDemo locale={locale} client:visible />
+      </div>
+    </div>
+  </div>
+</section>

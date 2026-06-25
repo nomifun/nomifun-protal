@@ -1,0 +1,18 @@
+---
+/**
+ * Section wrapper — consistent vertical rhythm + max width + scroll anchor.
+ */
+interface Props {
+  id?: string;
+  class?: string;
+  /** when true, paints the subtle mesh background */
+  mesh?: boolean;
+}
+const { id, class: className = '', mesh = false } = Astro.props;
+---
+
+<section id={id} class={`relative section-y ${mesh ? 'bg-mesh' : ''} ${className}`}>
+  <div class="container-x">
+    <slot />
+  </div>
+</section>

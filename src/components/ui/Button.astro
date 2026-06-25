@@ -1,0 +1,22 @@
+---
+/**
+ * Button — primary (pink gradient) or ghost. Renders as <a> when href given.
+ */
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'ghost';
+  size?: 'md' | 'lg';
+  class?: string;
+  target?: string;
+  rel?: string;
+}
+const { href, variant = 'primary', size = 'md', class: className = '', target, rel } = Astro.props;
+const base = variant === 'primary' ? 'btn-primary' : 'btn-ghost';
+const sizeCls = size === 'lg' ? 'text-base px-7 py-3.5' : 'text-sm';
+const cls = `${base} ${sizeCls} ${className}`;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag href={href} target={target} rel={rel} class={cls}>
+  <slot />
+</Tag>

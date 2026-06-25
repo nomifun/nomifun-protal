@@ -1,0 +1,80 @@
+---
+import DocsLayout from '@/layouts/DocsLayout.astro';
+import { getLocale, type Locale } from '@/i18n';
+import { links } from '@/data/links';
+import { getDocsForLocale, groupDocs } from '@/lib/docs';
+
+const locale: Locale = getLocale(Astro.url);
+const docs = await getDocsForLocale(locale);
+const groups = groupDocs(docs, locale);
+
+const t = {
+  eyebrow: locale === 'zh-CN' ? '操作文档' : 'Documentation',
+  title: locale === 'zh-CN' ? '上手 NomiFun' : 'Get going with NomiFun',
+  lead:
+    locale === 'zh-CN'
+      ? '精选的操作与使用指南，帮你把这套本地优先的超级 AI 工作站跑起来、用起来。深层技术内幕与架构细节请参阅 GitHub 上的完整文档。'
+      : 'A curated set of operational, how-to guides for getting this local-first super AI workstation up and running. For deep technical internals and architecture, see the full docs on GitHub.',
+  fullDocs: locale === 'zh-CN' ? '阅读完整技术文档 → GitHub' : 'Read the full technical docs → GitHub',
+  start: locale === 'zh-CN' ? '开始阅读' : 'Start reading',
+};
+
+const groupIcons: Record<string, string> = {
+  '快速上手': 'i-mdi-rocket-launch-outline',
+  'Getting Started': 'i-mdi-rocket-launch-outline',
+  '核心操作': 'i-mdi-toy-brick-outline',
+  'Core Guides': 'i-mdi-toy-brick-outline',
+};
+---
+
+<DocsLayout
+  title={t.title}
+  description={t.lead}
+  activeSlug=""
+  eyebrow={t.eyebrow}
+  heading={t.title}
+>
+  <p class="text-lg text-mid leading-relaxed">{t.lead}</p>
+
+  <div slot="after" class="mt-10 grid gap-6 sm:grid-cols-2">
+    {groups.map((group) => (
+      <div class="card card-hover p-6 flex flex-col">
+        <div class="flex items-center gap-3">
+          <span class={`${groupIcons[group.category] ?? 'i-mdi-book-open-variant'} text-2xl text-pink-400`}></span>
+          <h2 class="text-lg font-bold text-hi">{group.category}</h2>
+        </div>
+        <ul class="mt-4 flex flex-col gap-1.5 flex-1">
+          {group.items.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="group flex items-start gap-2 rounded-lg px-2 py-1.5 -mx-2 text-mid transition-colors hover:bg-ink-800/60 hover:text-hi"
+              >
+                <span class="i-mdi-chevron-right mt-1 text-base text-low transition-colors group-hover:text-pink-400"></span>
+                <span>
+                  <span class="block text-sm font-medium text-hi">{item.title}</span>
+                  {item.description && (
+                    <span class="block text-xs text-low leading-snug">{item.description}</span>
+                  )}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        {group.items[0] && (
+          <a href={group.items[0].href} class="btn-ghost mt-5 text-sm px-4 py-2 self-start">
+            {t.start}
+            <span class="i-mdi-arrow-right text-base"></span>
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
+
+  <p slot="after" class="mt-10 text-sm">
+    <a href={links.github} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-pink-300 hover:text-pink-500 transition-colors">
+      <span class="i-mdi-github text-base"></span>
+      {t.fullDocs}
+    </a>
+  </p>
+</DocsLayout>

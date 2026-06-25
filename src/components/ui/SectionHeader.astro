@@ -1,0 +1,22 @@
+---
+/**
+ * SectionHeader — eyebrow + title + optional lead, with entrance animation.
+ */
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  align?: 'left' | 'center';
+  class?: string;
+}
+const { eyebrow, title, lead, align = 'left', class: className = '' } = Astro.props;
+const alignCls = align === 'center' ? 'text-center mx-auto items-center' : 'items-start';
+---
+
+<div data-animate class={`flex flex-col gap-4 ${alignCls} ${align === 'center' ? 'max-w-2xl' : 'max-w-3xl'} ${className}`}>
+  {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+  <h2 class="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold leading-tight tracking-tight text-hi">
+    <Fragment set:html={title} />
+  </h2>
+  {lead && <p class="text-base sm:text-lg text-mid leading-relaxed">{lead}</p>}
+</div>

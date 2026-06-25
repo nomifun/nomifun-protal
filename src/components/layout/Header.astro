@@ -1,0 +1,97 @@
+---
+import { getLocale, localizePath, pick, type Locale } from '@/i18n';
+import { nav, brand } from '@/i18n/dict/common';
+import { links } from '@/data/links';
+import LangSwitch from './LangSwitch.astro';
+
+const locale: Locale = getLocale(Astro.url);
+const t = pick(nav, locale);
+const b = pick(brand, locale);
+const pathname = Astro.url.pathname;
+
+const items = [
+  { label: t.home, href: localizePath('/', locale) },
+  { label: t.docs, href: localizePath('/docs', locale) },
+  { label: t.download, href: localizePath('/download', locale) },
+  { label: t.friends, href: localizePath('/friends', locale) },
+  { label: t.contact, href: localizePath('/contact', locale) },
+];
+
+function isActive(href: string) {
+  if (href === localizePath('/', locale)) return pathname === href;
+  return pathname.startsWith(href);
+}
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 transition-all duration-300 border-b border-transparent"
+>
+  <div class="container-x flex h-16 items-center justify-between gap-4">
+    <a href={localizePath('/', locale)} class="flex items-center gap-2.5 shrink-0" aria-label={b.name}>
+      <img src="/brand/logo.svg" alt="NomiFun" width="34" height="34" class="rounded-[9px]" />
+      <span class="text-lg font-bold tracking-tight text-hi">{b.name}</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-1">
+      {items.map((it) => (
+        <a
+          href={it.href}
+          class={`rounded-lg px-3.5 py-2 text-sm font-medium transition-colors ${
+            isActive(it.href) ? 'text-hi' : 'text-mid hover:text-hi'
+          }`}
+        >
+          {it.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-2.5">
+      <LangSwitch />
+      <a
+        href={links.github}
+        target="_blank"
+        rel="noopener"
+        class="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-ink-600 px-3 py-1.5 text-sm font-medium text-mid transition-colors hover:border-violet-400/60 hover:text-hi"
+      >
+        <span class="i-mdi-github text-base"></span>
+        {t.github}
+      </a>
+      <a href={localizePath('/download', locale)} class="btn-primary text-sm px-4 py-2">{t.cta}</a>
+      <button id="mobile-toggle" class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-lg border border-ink-600 text-hi" aria-label="Menu">
+        <span class="i-mdi-menu text-xl"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- mobile menu -->
+  <div id="mobile-menu" class="md:hidden hidden border-t border-ink-700 bg-ink-900/95 backdrop-blur-lg">
+    <nav class="container-x flex flex-col py-3">
+      {items.map((it) => (
+        <a href={it.href} class="rounded-lg px-3 py-2.5 text-base font-medium text-mid hover:text-hi hover:bg-ink-800">{it.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Header background on scroll
+  const header = document.getElementById('site-header');
+  const onScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 12) {
+      header.classList.add('bg-ink-900/80', 'backdrop-blur-lg', 'border-ink-700');
+      header.classList.remove('border-transparent');
+    } else {
+      header.classList.remove('bg-ink-900/80', 'backdrop-blur-lg', 'border-ink-700');
+      header.classList.add('border-transparent');
+    }
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile menu toggle
+  const toggle = document.getElementById('mobile-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+</script>

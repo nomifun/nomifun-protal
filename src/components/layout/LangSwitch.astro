@@ -1,0 +1,19 @@
+---
+import { getLocale, alternatePath, type Locale } from '@/i18n';
+
+const pathname = Astro.url.pathname;
+const locale: Locale = getLocale(Astro.url);
+const targetLocale: Locale = locale === 'zh-CN' ? 'en-US' : 'zh-CN';
+const targetHref = alternatePath(pathname, targetLocale);
+const label = locale === 'zh-CN' ? 'EN' : '中文';
+const aria = locale === 'zh-CN' ? 'Switch to English' : '切换到中文';
+---
+
+<a
+  href={targetHref}
+  aria-label={aria}
+  class="inline-flex items-center gap-1.5 rounded-lg border border-ink-600 px-3 py-1.5 text-sm font-medium text-mid transition-colors hover:border-violet-400/60 hover:text-hi"
+>
+  <span class="i-mdi-translate text-base"></span>
+  {label}
+</a>

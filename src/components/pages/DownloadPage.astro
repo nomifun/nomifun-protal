@@ -1,0 +1,336 @@
+---
+/**
+ * DownloadPage — shared implementation for /download and /en/download.
+ * Reads the active locale from Astro.url so zh + en share one file.
+ *
+ * Accuracy red line (§2, §8): there are NO official prebuilt installers yet.
+ * Today's only install paths are source-build (Desktop / Web) and Docker
+ * self-host. Platform cards map over `downloads` data; an empty `url` renders
+ * a disabled "即将提供 / Coming soon" button (never invent download URLs).
+ */
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+import { links, downloads, meta } from '@/data/links';
+import Badge from '@/components/ui/Badge.astro';
+
+const locale: Locale = getLocale(Astro.url);
+
+type InstallPath = {
+  icon: string;
+  title: string;
+  desc: string;
+  /** code block lines, rendered in a <pre> */
+  cmds: string[];
+  note?: string;
+};
+
+type PlatformCopy = { reqTitle: string; comingSoon: string; download: string };
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  bannerTitle: string;
+  bannerBody: string;
+  pathsTitle: string;
+  pathsLead: string;
+  paths: InstallPath[];
+  platformTitle: string;
+  platformLead: string;
+  platform: PlatformCopy;
+  reqTitle: string;
+  reqLead: string;
+  reqs: { icon: string; title: string; body: string }[];
+  docsCta: string;
+  githubCta: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '下载 · 自托管',
+    title: '获取 NomiFun',
+    lead: '本地优先的超级 AI 工作站，完全开源、免费商用。当前为 pre-1.0 阶段，请按以下任一方式从源码构建或自托管运行。',
+    bannerTitle: '暂无官方预编译安装包',
+    bannerBody:
+      '当前阶段尚未提供官方预编译安装包，请用源码构建或 Docker 自托管。预编译包就绪后会在此处与 GitHub Releases 同步上线。',
+    pathsTitle: '三条上手路径',
+    pathsLead: '桌面端走 Tauri 构建，Web 端走自托管 axum 服务，或直接用 Docker / Compose 一键起服务。',
+    paths: [
+      {
+        icon: 'i-mdi-desktop-classic',
+        title: '桌面源码构建（Tauri）',
+        desc: '构建 nomifun-desktop 桌面应用：环回端口 + 每次启动本地信任 token。',
+        cmds: ['bun install', 'bun run build:ui', 'bun run build'],
+        note: '产物为各平台桌面安装包（见下方平台支持）。',
+      },
+      {
+        icon: 'i-mdi-server-network',
+        title: 'Web 服务源码',
+        desc: '构建并启动自托管 Web 服务（axum）。默认绑定 127.0.0.1:8787，需登录。',
+        cmds: ['bun run build:ui', 'bun run serve:web'],
+        note: '绑定 127.0.0.1:8787，默认需登录。',
+      },
+      {
+        icon: 'i-simple-icons-docker',
+        title: 'Docker 自托管',
+        desc: '用 Docker Compose 一键构建并后台运行，适合放在服务器上长期值守。',
+        cmds: ['docker compose up -d --build', '# 打开 http://<server-ip>:8787'],
+        note: '建议搭配 Caddy 反向代理做 TLS（见下方）。',
+      },
+    ],
+    platformTitle: '平台支持',
+    platformLead: '桌面构建产物覆盖以下平台。预编译安装包就绪前，下载按钮暂为「即将提供」。',
+    platform: { reqTitle: '系统要求', comingSoon: '即将提供', download: '下载' },
+    reqTitle: '系统要求 & 自托管',
+    reqLead: '从源码构建或自托管运行前，请留意以下环境要求与生产部署建议。',
+    reqs: [
+      {
+        icon: 'i-simple-icons-windows',
+        title: 'Windows：需要 WebView2',
+        body: '桌面端依赖 Microsoft WebView2 运行时（Win11 已内置；Win10 如缺失会在安装时引导获取）。安装包为 .msi / .exe。',
+      },
+      {
+        icon: 'i-mdi-lock-check-outline',
+        title: 'Caddy TLS 反向代理',
+        body: '生产环境建议在 Web 服务（127.0.0.1:8787）前挂一层 Caddy 反向代理，自动签发并续期 HTTPS 证书。',
+      },
+      {
+        icon: 'i-mdi-cog-sync-outline',
+        title: 'systemd 常驻服务',
+        body: '在 Linux 上用 systemd unit 托管 Web 服务，实现开机自启、崩溃重启与日志收敛，长期无人值守更稳。',
+      },
+    ],
+    docsCta: '查看操作文档',
+    githubCta: '在 GitHub 查看源码',
+  },
+  'en-US': {
+    eyebrow: 'Download · Self-host',
+    title: 'Get NomiFun',
+    lead: 'A local-first super AI workstation — fully open source, free for commercial use. NomiFun is pre-1.0 today, so build from source or self-host using any of the paths below.',
+    bannerTitle: 'No official prebuilt installers yet',
+    bannerBody:
+      'There are no official prebuilt installers at this stage — build from source or self-host with Docker. Prebuilt packages will appear here and on GitHub Releases once they ship.',
+    pathsTitle: 'Three ways to get started',
+    pathsLead: 'Build the Tauri desktop app, run the self-hosted axum web server, or spin everything up with Docker / Compose.',
+    paths: [
+      {
+        icon: 'i-mdi-desktop-classic',
+        title: 'Desktop from source (Tauri)',
+        desc: 'Build the nomifun-desktop app: loopback port + a local trust token minted on each launch.',
+        cmds: ['bun install', 'bun run build:ui', 'bun run build'],
+        note: 'Produces a desktop installer per platform (see platform support below).',
+      },
+      {
+        icon: 'i-mdi-server-network',
+        title: 'Web server from source',
+        desc: 'Build and start the self-hosted web server (axum). Binds 127.0.0.1:8787, login required.',
+        cmds: ['bun run build:ui', 'bun run serve:web'],
+        note: 'Binds 127.0.0.1:8787, login required by default.',
+      },
+      {
+        icon: 'i-simple-icons-docker',
+        title: 'Self-host with Docker',
+        desc: 'Build and run in the background with Docker Compose — ideal for an always-on server.',
+        cmds: ['docker compose up -d --build', '# open http://<server-ip>:8787'],
+        note: 'Pair with a Caddy reverse proxy for TLS (see below).',
+      },
+    ],
+    platformTitle: 'Platform support',
+    platformLead: 'Desktop builds target the platforms below. Until prebuilt installers ship, the download buttons read “Coming soon”.',
+    platform: { reqTitle: 'Requirements', comingSoon: 'Coming soon', download: 'Download' },
+    reqTitle: 'Requirements & self-host',
+    reqLead: 'Before building from source or self-hosting, note these environment requirements and production deployment tips.',
+    reqs: [
+      {
+        icon: 'i-simple-icons-windows',
+        title: 'Windows: needs WebView2',
+        body: 'The desktop app requires the Microsoft WebView2 runtime (bundled on Win11; the installer guides you to fetch it on Win10 if missing). Installers ship as .msi / .exe.',
+      },
+      {
+        icon: 'i-mdi-lock-check-outline',
+        title: 'Caddy TLS reverse proxy',
+        body: 'In production, put a Caddy reverse proxy in front of the web server (127.0.0.1:8787) to issue and auto-renew HTTPS certificates.',
+      },
+      {
+        icon: 'i-mdi-cog-sync-outline',
+        title: 'systemd service',
+        body: 'On Linux, manage the web server with a systemd unit for start-on-boot, crash restarts, and centralized logs — steadier for long unattended runs.',
+      },
+    ],
+    docsCta: 'Read the docs',
+    githubCta: 'View source on GitHub',
+  },
+};
+
+const t = pick(copy, locale);
+
+// Platform cards from data. Order is intentional: macOS / Windows / Linux.
+const platformIcons: Record<string, string> = {
+  macos: 'i-simple-icons-apple',
+  windows: 'i-simple-icons-windows',
+  linux: 'i-simple-icons-linux',
+};
+const platformList = (['macos', 'windows', 'linux'] as const).map((key) => ({
+  key,
+  icon: platformIcons[key],
+  ...downloads[key],
+}));
+---
+
+<!-- Page hero -->
+<section class="relative overflow-hidden border-b border-ink-700/60">
+  <div class="pointer-events-none absolute inset-0 -z-10 bg-mesh"></div>
+  <div
+    class="pointer-events-none absolute left-1/2 top-[-30%] -z-10 h-[420px] w-[720px] -translate-x-1/2 rounded-full opacity-50 blur-3xl"
+    style="background: radial-gradient(closest-side, rgba(255,111,145,0.18), transparent)"
+  >
+  </div>
+  <div class="container-x flex flex-col items-center pt-20 pb-14 text-center sm:pt-24">
+    <span class="eyebrow mb-5" data-animate>{t.eyebrow}</span>
+    <h1 class="max-w-3xl text-4xl font-extrabold leading-[1.12] tracking-tight text-hi sm:text-5xl" data-animate>
+      {t.title}
+    </h1>
+    <p class="mt-6 max-w-2xl text-base leading-relaxed text-mid sm:text-lg" data-animate>{t.lead}</p>
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs text-low" data-animate>
+      <Badge tone="neutral">v{meta.version}</Badge>
+      <Badge tone="soon">{meta.status}</Badge>
+      <Badge tone="violet">{meta.license}</Badge>
+    </div>
+  </div>
+</section>
+
+<!-- Honest banner: no prebuilt installers yet -->
+<section class="container-x mt-10">
+  <div
+    class="card flex flex-col gap-3 border-warning/25 bg-warning/5 p-5 sm:flex-row sm:items-start sm:gap-4 sm:p-6"
+    data-animate
+  >
+    <span class="i-mdi-information-outline mt-0.5 shrink-0 text-2xl text-warning"></span>
+    <div class="flex flex-col gap-2">
+      <div class="flex flex-wrap items-center gap-3">
+        <Badge tone="soon"><span class="i-mdi-progress-wrench"></span>{t.platform.comingSoon}</Badge>
+        <h2 class="text-base font-semibold text-hi sm:text-lg">{t.bannerTitle}</h2>
+      </div>
+      <p class="max-w-3xl text-sm leading-relaxed text-mid">{t.bannerBody}</p>
+    </div>
+  </div>
+</section>
+
+<!-- Three install paths -->
+<section class="section-y">
+  <div class="container-x">
+    <div class="mb-12 flex max-w-3xl flex-col gap-4" data-animate>
+      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl">{t.pathsTitle}</h2>
+      <p class="text-base leading-relaxed text-mid sm:text-lg">{t.pathsLead}</p>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-3" data-stagger>
+      {
+        t.paths.map((p) => (
+          <article class="card card-hover flex flex-col gap-4 p-6">
+            <div class="flex items-center gap-3">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-ink-600 bg-ink-800/80">
+                <span class={`${p.icon} text-2xl text-pink-400`} />
+              </span>
+              <h3 class="text-lg font-semibold text-hi">{p.title}</h3>
+            </div>
+            <p class="text-sm leading-relaxed text-mid">{p.desc}</p>
+            <pre class="group relative overflow-x-auto rounded-xl border border-ink-700 bg-ink-950/70 p-4 font-mono text-[13px] leading-relaxed text-hi"><span class="pointer-events-none absolute right-3 top-3 text-[11px] text-low"><span class="i-mdi-content-copy align-middle" /></span>{p.cmds.map((line) => (
+              <span class={`block ${line.startsWith('#') ? 'text-low' : ''}`}><span class="select-none text-pink-400/70">{line.startsWith('#') ? '  ' : '$ '}</span>{line.replace(/^#\s?/, '# ')}</span>
+            ))}</pre>
+            {p.note && (
+              <p class="flex items-start gap-1.5 text-xs leading-relaxed text-low">
+                <span class="i-mdi-information-outline mt-0.5 shrink-0 text-sm" />
+                <span>{p.note}</span>
+              </p>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Platform grid -->
+<section class="section-y pt-0">
+  <div class="container-x">
+    <div class="mb-12 flex max-w-3xl flex-col gap-4" data-animate>
+      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl">{t.platformTitle}</h2>
+      <p class="text-base leading-relaxed text-mid sm:text-lg">{t.platformLead}</p>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
+      {
+        platformList.map((p) => (
+          <article class="card flex flex-col gap-5 p-6">
+            <div class="flex items-center gap-3">
+              <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-ink-600 bg-ink-800/80">
+                <span class={`${p.icon} text-2xl text-hi`} />
+              </span>
+              <div class="flex flex-col">
+                <span class="text-lg font-semibold text-hi">{p.label}</span>
+                <span class="font-mono text-xs text-low">{p.ext}</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-mid">
+              <span class="i-mdi-chip text-sm text-violet-300" />
+              <span>{p.arch}</span>
+            </div>
+            {p.url ? (
+              <a
+                href={p.url}
+                target="_blank"
+                rel="noopener"
+                class="btn-primary mt-auto w-full justify-center text-sm"
+              >
+                <span class="i-mdi-download text-base" />
+                {t.platform.download} {p.label}
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled
+                aria-disabled="true"
+                class="mt-auto inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-ink-600 bg-ink-800/50 px-5 py-2.5 text-sm font-medium text-low opacity-80"
+              >
+                <span class="i-mdi-clock-outline text-base" />
+                {t.platform.comingSoon}
+              </button>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Requirements & self-host -->
+<section class="section-y border-t border-ink-700/60 bg-ink-850/40 pt-20">
+  <div class="container-x">
+    <div class="mb-12 flex max-w-3xl flex-col gap-4" data-animate>
+      <span class="eyebrow">{t.reqTitle}</span>
+      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl">{t.reqTitle}</h2>
+      <p class="text-base leading-relaxed text-mid sm:text-lg">{t.reqLead}</p>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-3" data-stagger>
+      {
+        t.reqs.map((r) => (
+          <article class="card card-hover flex flex-col gap-3 p-6">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-ink-600 bg-ink-800/80">
+              <span class={`${r.icon} text-xl text-violet-300`} />
+            </span>
+            <h3 class="text-base font-semibold text-hi">{r.title}</h3>
+            <p class="text-sm leading-relaxed text-mid">{r.body}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 flex flex-col items-start gap-3 sm:flex-row" data-animate>
+      <a href={localizePath('/docs', locale)} class="btn-primary text-sm">
+        <span class="i-mdi-book-open-variant text-base"></span>{t.docsCta}
+      </a>
+      <a href={links.github} target="_blank" rel="noopener" class="btn-ghost text-sm">
+        <span class="i-mdi-github text-base"></span>{t.githubCta}
+      </a>
+    </div>
+  </div>
+</section>

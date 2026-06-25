@@ -1,0 +1,108 @@
+---
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+import ChannelGateway from '@/components/islands/ChannelGateway.tsx';
+
+const locale: Locale = getLocale(Astro.url);
+
+const copy: Dict<{
+  eyebrow: string;
+  hook: string;
+  title: string;
+  lead: string;
+  points: { icon: string; title: string; body: string }[];
+  ctaSecondary: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '伙伴即超级网关',
+    hook: '随时随地，只要有网络与社交平台，就能指挥远在天边的伙伴帮你操作电脑。',
+    title: '伙伴即<span class="text-grad-pink">超级网关</span>',
+    lead: '每个伙伴都是完整独立的个体，可独立连接 11+ 个 IM 渠道。从任意社交 App 下令，伙伴就在你的电脑上把活儿干完——一个 bot 绑定一个伙伴。',
+    points: [
+      {
+        icon: 'i-mdi-access-point-network',
+        title: '独立连接 11+ 渠道',
+        body: 'Telegram、飞书、钉钉、微信、Slack、Discord、Matrix、Mattermost、Twitch、Nostr、QQ Bot 已落地，企业微信在途。',
+      },
+      {
+        icon: 'i-mdi-cellphone-message',
+        title: '社交 App 即遥控器',
+        body: '通过任意社交 App 下令，伙伴在你的电脑上完成工作；远在天边也能即时指挥。',
+      },
+      {
+        icon: 'i-mdi-robot-happy-outline',
+        title: '一个 bot，一个伙伴',
+        body: '每个伙伴都是完整独立个体，能完整驱动系统全部能力；一个 bot 精确绑定一个伙伴。',
+      },
+    ],
+    ctaSecondary: '渠道接入指南',
+  },
+  'en-US': {
+    eyebrow: 'Companion as super gateway',
+    hook: 'Anywhere, anytime — with just a network and a chat app, command your far-away companion to operate your computer.',
+    title: 'Your companion is a <span class="text-grad-pink">super gateway</span>',
+    lead: 'Every companion is a full, independent individual that can connect to 11+ IM channels on its own. Send orders from any chat app and it gets the work done on your computer — one bot bound to one companion.',
+    points: [
+      {
+        icon: 'i-mdi-access-point-network',
+        title: 'Connects to 11+ channels',
+        body: 'Telegram, Lark, DingTalk, WeChat, Slack, Discord, Matrix, Mattermost, Twitch, Nostr, QQ Bot are live; WeCom is in progress.',
+      },
+      {
+        icon: 'i-mdi-cellphone-message',
+        title: 'Any chat app is the remote',
+        body: 'Issue commands from any chat app; the companion does the work on your computer — instant control from anywhere.',
+      },
+      {
+        icon: 'i-mdi-robot-happy-outline',
+        title: 'One bot, one companion',
+        body: 'Each companion is a complete, independent individual that fully drives the whole system; one bot binds to exactly one companion.',
+      },
+    ],
+    ctaSecondary: 'Channel setup guide',
+  },
+};
+
+const t = pick(copy, locale);
+---
+
+<section id="gateway" class="relative section-y">
+  <div class="container-x">
+    <!-- header -->
+    <div class="flex max-w-3xl flex-col gap-4" data-animate>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl lg:text-[2.75rem]">
+        <Fragment set:html={t.title} />
+      </h2>
+      <p class="flex items-start gap-2 text-base leading-relaxed text-mid sm:text-lg">
+        <span class="i-mdi-flash mt-1 shrink-0 text-pink-400" aria-hidden="true"></span>
+        <span>{t.hook}</span>
+      </p>
+      <p class="text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
+    </div>
+
+    <!-- interactive island -->
+    <div class="mt-10" data-animate>
+      <ChannelGateway locale={locale} client:visible />
+    </div>
+
+    <!-- 3 capability points -->
+    <ul class="mt-10 grid gap-4 sm:grid-cols-3" data-stagger>
+      {t.points.map((p) => (
+        <li class="card card-hover p-5">
+          <span class={`${p.icon} text-2xl text-pink-400`} aria-hidden="true"></span>
+          <h3 class="mt-3 text-base font-semibold text-hi">{p.title}</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-mid">{p.body}</p>
+        </li>
+      ))}
+    </ul>
+
+    <!-- secondary CTA -->
+    <div class="mt-8" data-animate>
+      <a href={localizePath('/docs', locale)} class="btn-ghost text-sm">
+        <span class="i-mdi-book-open-page-variant-outline text-base" aria-hidden="true"></span>
+        {t.ctaSecondary}
+        <span class="i-mdi-arrow-right text-base" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</section>

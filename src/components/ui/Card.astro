@@ -1,0 +1,15 @@
+---
+/**
+ * Card — surface with optional hover glow.
+ */
+interface Props {
+  hover?: boolean;
+  class?: string;
+  animate?: boolean;
+}
+const { hover = true, class: className = '', animate = false } = Astro.props;
+---
+
+<div data-animate={animate ? '' : undefined} class={`card ${hover ? 'card-hover' : ''} p-6 ${className}`}>
+  <slot />
+</div>

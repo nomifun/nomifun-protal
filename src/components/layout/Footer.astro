@@ -1,0 +1,64 @@
+---
+import { getLocale, localizePath, pick, type Locale } from '@/i18n';
+import { footer, brand } from '@/i18n/dict/common';
+import { links, meta } from '@/data/links';
+
+const locale: Locale = getLocale(Astro.url);
+const f = pick(footer, locale);
+const b = pick(brand, locale);
+
+// Map placeholder hrefs (#github/#license) to real links; localize internal paths.
+function resolve(href: string): string {
+  if (href === '#github') return links.github;
+  if (href === '#license') return links.license;
+  if (href.startsWith('/')) return localizePath(href, locale);
+  return href;
+}
+---
+
+<footer class="border-t border-ink-700 bg-ink-950">
+  <div class="container-x py-14">
+    <div class="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div class="flex flex-col gap-4">
+        <a href={localizePath('/', locale)} class="flex items-center gap-2.5">
+          <img src="/brand/logo.svg" alt="NomiFun" width="32" height="32" class="rounded-[9px]" />
+          <span class="text-lg font-bold text-hi">{b.name}</span>
+        </a>
+        <p class="text-sm text-low max-w-xs">{b.tagline}</p>
+        <p class="text-xs text-low/80 max-w-xs leading-relaxed">{f.blurb}</p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h3 class="text-sm font-semibold text-hi">{f.productTitle}</h3>
+        {f.links.map((l) => (
+          <a href={resolve(l.href)} class="text-sm text-mid hover:text-pink-300 transition-colors">{l.label}</a>
+        ))}
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h3 class="text-sm font-semibold text-hi">{f.resourceTitle}</h3>
+        {f.resources.map((l) => (
+          <a href={resolve(l.href)} target={l.href.startsWith('#') ? '_blank' : undefined} rel="noopener" class="text-sm text-mid hover:text-pink-300 transition-colors">{l.label}</a>
+        ))}
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h3 class="text-sm font-semibold text-hi">{f.communityTitle}</h3>
+        <a href={links.github} target="_blank" rel="noopener" class="text-sm text-mid hover:text-pink-300 transition-colors inline-flex items-center gap-1.5"><span class="i-mdi-github"></span>GitHub</a>
+        <a href={localizePath('/contact', locale)} class="text-sm text-mid hover:text-pink-300 transition-colors">{locale === 'zh-CN' ? '加入共建' : 'Join us'}</a>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col gap-3 border-t border-ink-700 pt-6 text-xs text-low sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+        <span>{f.copyright}</span>
+        <span class="text-low/60">·</span>
+        <span>{f.license}</span>
+        <span class="text-low/60">·</span>
+        <span>v{meta.version} ({meta.status})</span>
+      </div>
+      <span class="text-low/70">{f.attribution}</span>
+    </div>
+    <p class="mt-3 text-[11px] leading-relaxed text-low/60">{f.noWarranty}</p>
+  </div>
+</footer>

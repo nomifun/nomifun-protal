@@ -1,0 +1,272 @@
+---
+/**
+ * ContactPage — shared implementation for /contact and /en/contact.
+ * Reads the active locale from Astro.url so zh + en share one file.
+ *
+ * Accuracy (§3, §8): NomiFun is Apache-2.0, free for commercial use with no
+ * authorization required — the "commercial heads-up" panel is an invitation
+ * for recognition/feedback, NOT a license condition. Contact + community
+ * links are placeholders today (see RESOURCES-TODO.md / data/links.ts).
+ */
+import { getLocale, pick, type Dict, type Locale } from '@/i18n';
+import { links, community } from '@/data/links';
+import Badge from '@/components/ui/Badge.astro';
+
+const locale: Locale = getLocale(Astro.url);
+
+type Role = { icon: string; title: string; body: string };
+type Panel = { icon: string; title: string; body: string };
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  titleHi: string;
+  lead: string;
+  rolesTitle: string;
+  rolesLead: string;
+  rolesNeed: string;
+  roles: Role[];
+  commercial: Panel & { badge: string };
+  models: Panel & { badge: string };
+  contactTitle: string;
+  contactLead: string;
+  emailLabel: string;
+  placeholderTag: string;
+  placeholderNote: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '联系我们 · 共建',
+    title: '与我们',
+    titleHi: '一起共建',
+    lead: '开发者兼职、精力有限，很多惊喜功能还在路上。如果你认同这件事，欢迎以任何方式加入——一行代码、一条建议、一次转发，都是莫大的鼓励。',
+    rolesTitle: '共建召集',
+    rolesLead: '目前很需要这些角色，欢迎对号入座，也欢迎自带想法来。',
+    rolesNeed: '目前很需要',
+    roles: [
+      {
+        icon: 'i-mdi-code-braces',
+        title: '贡献代码',
+        body: '修 bug、补功能、写测试、改文档都欢迎。从一个小 issue 起步，逐步深入后端 crate 或前端 island。',
+      },
+      {
+        icon: 'i-mdi-account-group-outline',
+        title: '社区运营',
+        body: '帮忙搭建并照看社区：答疑、整理常见问题、组织讨论，让更多人顺利上手 NomiFun。',
+      },
+      {
+        icon: 'i-mdi-bullhorn-outline',
+        title: '布道者',
+        body: '写教程、录演示、做分享——把本地优先、数据安全的 AI 工作站理念传播给更多人。',
+      },
+    ],
+    commercial: {
+      badge: '免费商用',
+      icon: 'i-mdi-handshake-outline',
+      title: '商用告知',
+      body: 'Apache-2.0 授权下，你可以自由二次开发、免费商用，无需任何额外授权。如果你把它用在商业场景里，欢迎留言告知一声——这不是授权要求，只为换一份认可与正向反馈，让我们知道这件事被需要着。法律风险请自行评估并承担。',
+    },
+    models: {
+      badge: '愿意帮忙',
+      icon: 'i-mdi-server-network-outline',
+      title: '模型获取困难？',
+      body: '如果你在获取或接入模型上遇到困难，可以联系作者协助寻找，或一起搭建统一的模型网关。统一网关目前尚未提供，但我们很乐意搭把手，帮你把链路跑通。',
+    },
+    contactTitle: '联系方式',
+    contactLead: '以下渠道随时欢迎你来交流。部分链接尚为占位，待真实地址补齐后即时更新。',
+    emailLabel: '邮箱',
+    placeholderTag: '占位待补',
+    placeholderNote: '说明：真实的 GitHub 仓库、联系邮箱与社群入口尚在准备中（详见 RESOURCES-TODO），上方标注「占位待补」的链接会在地址确定后第一时间替换。',
+  },
+  'en-US': {
+    eyebrow: 'Contact · Build with us',
+    title: 'Build',
+    titleHi: 'with us',
+    lead: 'This is a part-time effort with limited bandwidth, and many delightful features are still on the way. If this resonates with you, join in any way you like — a line of code, a suggestion, a reshare all mean a lot.',
+    rolesTitle: 'A call for contributors',
+    rolesLead: 'We really need these roles right now — pick one that fits, or bring your own idea.',
+    rolesNeed: 'Needed right now',
+    roles: [
+      {
+        icon: 'i-mdi-code-braces',
+        title: 'Contribute code',
+        body: 'Fix bugs, add features, write tests, improve docs — all welcome. Start from a small issue, then go deeper into a backend crate or a frontend island.',
+      },
+      {
+        icon: 'i-mdi-account-group-outline',
+        title: 'Community building',
+        body: 'Help start and tend the community: answer questions, curate FAQs, host discussions, and help more people get NomiFun running.',
+      },
+      {
+        icon: 'i-mdi-bullhorn-outline',
+        title: 'Evangelist',
+        body: 'Write tutorials, record demos, share talks — spread the idea of a local-first, privacy-safe AI workstation.',
+      },
+    ],
+    commercial: {
+      badge: 'Free commercial use',
+      icon: 'i-mdi-handshake-outline',
+      title: 'Commercial heads-up',
+      body: 'Under Apache-2.0 you are free to fork, modify, and use NomiFun commercially — no extra authorization needed. If you do ship it commercially, we would love a quick note. This is not a license requirement — just a wish for some recognition and positive feedback so we know it is needed. Please assess and assume any legal risk yourself.',
+    },
+    models: {
+      badge: 'Happy to help',
+      icon: 'i-mdi-server-network-outline',
+      title: 'Trouble getting models?',
+      body: 'If sourcing or wiring up models is hard for you, reach out — we can help you find one or build a unified model gateway together. A unified gateway is not available yet, but we are glad to lend a hand and get your pipeline working.',
+    },
+    contactTitle: 'Get in touch',
+    contactLead: 'Reach out through any of the channels below. Some links are still placeholders and will update the moment the real addresses are ready.',
+    emailLabel: 'Email',
+    placeholderTag: 'Placeholder',
+    placeholderNote: 'Note: the real GitHub repo, contact email, and community entry points are still being set up (see RESOURCES-TODO). Links tagged “Placeholder” above will be replaced as soon as the addresses are confirmed.',
+  },
+};
+
+const t = pick(copy, locale);
+
+// Community buttons: always include GitHub + email; flag the placeholders.
+// A url is a placeholder when it is empty, '#', or still points at the
+// not-yet-public github.com/nomifun host (per data/links.ts notes).
+const isPlaceholderUrl = (url: string) =>
+  !url || url === '#' || url.includes('github.com/nomifun') || url.includes('nomifun.com');
+
+const contactButtons = [
+  ...community.map((c) => ({
+    id: c.id,
+    label: c.label,
+    href: c.url,
+    icon: c.icon,
+    placeholder: isPlaceholderUrl(c.url),
+  })),
+  {
+    id: 'email',
+    label: t.emailLabel,
+    href: `mailto:${links.email}`,
+    icon: 'i-mdi-email-outline',
+    placeholder: isPlaceholderUrl(links.email),
+  },
+];
+// De-dupe in case `community` already contains a github entry: keep first.
+const seen = new Set<string>();
+const buttons = contactButtons.filter((b) => (seen.has(b.id) ? false : (seen.add(b.id), true)));
+const anyPlaceholder = buttons.some((b) => b.placeholder);
+---
+
+<!-- Page hero -->
+<section class="relative overflow-hidden border-b border-ink-700/60">
+  <div class="pointer-events-none absolute inset-0 -z-10 bg-mesh"></div>
+  <div
+    class="pointer-events-none absolute left-1/2 top-[-30%] -z-10 h-[420px] w-[720px] -translate-x-1/2 rounded-full opacity-50 blur-3xl"
+    style="background: radial-gradient(closest-side, rgba(255,111,145,0.18), transparent)"
+  >
+  </div>
+  <div class="container-x flex flex-col items-center pt-20 pb-14 text-center sm:pt-24">
+    <span class="eyebrow mb-5" data-animate>{t.eyebrow}</span>
+    <h1 class="max-w-3xl text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-5xl" data-animate>
+      <span class="text-hi">{t.title}</span><span class="text-grad-pink"> {t.titleHi}</span>
+    </h1>
+    <p class="mt-6 max-w-2xl text-base leading-relaxed text-mid sm:text-lg" data-animate>{t.lead}</p>
+  </div>
+</section>
+
+<!-- Call for contributors -->
+<section class="section-y">
+  <div class="container-x">
+    <div class="mb-12 flex max-w-3xl flex-col gap-4" data-animate>
+      <span class="eyebrow">{t.rolesTitle}</span>
+      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl">{t.rolesTitle}</h2>
+      <p class="text-base leading-relaxed text-mid sm:text-lg">{t.rolesLead}</p>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-3" data-stagger>
+      {
+        t.roles.map((r) => (
+          <article class="card card-hover flex flex-col gap-4 p-6">
+            <div class="flex items-center justify-between gap-3">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-ink-600 bg-ink-800/80">
+                <span class={`${r.icon} text-2xl text-pink-400`} />
+              </span>
+              <Badge tone="pink"><span class="i-mdi-star-four-points-outline" />{t.rolesNeed}</Badge>
+            </div>
+            <h3 class="text-lg font-semibold text-hi">{r.title}</h3>
+            <p class="text-sm leading-relaxed text-mid">{r.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Two info panels: commercial heads-up + model help -->
+<section class="section-y pt-0">
+  <div class="container-x">
+    <div class="grid gap-6 lg:grid-cols-2" data-stagger>
+      <article class="card flex flex-col gap-4 border-pink-500/20 bg-pink-500/[0.04] p-7">
+        <div class="flex items-center gap-3">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-pink-500/25 bg-pink-500/10">
+            <span class={`${t.commercial.icon} text-2xl text-pink-300`}></span>
+          </span>
+          <div class="flex flex-col gap-1.5">
+            <Badge tone="success"><span class="i-mdi-cash-check"></span>{t.commercial.badge}</Badge>
+            <h3 class="text-lg font-semibold text-hi">{t.commercial.title}</h3>
+          </div>
+        </div>
+        <p class="text-sm leading-relaxed text-mid">{t.commercial.body}</p>
+      </article>
+
+      <article class="card flex flex-col gap-4 border-violet-400/20 bg-violet-500/[0.04] p-7">
+        <div class="flex items-center gap-3">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-violet-400/25 bg-violet-500/10">
+            <span class={`${t.models.icon} text-2xl text-violet-300`}></span>
+          </span>
+          <div class="flex flex-col gap-1.5">
+            <Badge tone="violet"><span class="i-mdi-hand-heart-outline"></span>{t.models.badge}</Badge>
+            <h3 class="text-lg font-semibold text-hi">{t.models.title}</h3>
+          </div>
+        </div>
+        <p class="text-sm leading-relaxed text-mid">{t.models.body}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Contact channels -->
+<section class="section-y border-t border-ink-700/60 bg-ink-850/40 pt-20">
+  <div class="container-x">
+    <div class="mb-10 flex max-w-3xl flex-col gap-4" data-animate>
+      <span class="eyebrow">{t.contactTitle}</span>
+      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl">{t.contactTitle}</h2>
+      <p class="text-base leading-relaxed text-mid sm:text-lg">{t.contactLead}</p>
+    </div>
+
+    <div class="flex flex-wrap gap-4" data-stagger>
+      {
+        buttons.map((b) => (
+          <a
+            href={b.href}
+            target={b.href.startsWith('mailto:') ? undefined : '_blank'}
+            rel="noopener"
+            class="card card-hover group flex min-w-[200px] flex-1 items-center gap-3 p-5 sm:flex-none"
+          >
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-ink-600 bg-ink-800/80 transition-colors group-hover:border-pink-500/40">
+              <span class={`${b.icon} text-2xl text-hi`} />
+            </span>
+            <span class="flex flex-col gap-1">
+              <span class="text-sm font-semibold text-hi">{b.label}</span>
+              {b.placeholder && <Badge tone="soon" class="self-start">{t.placeholderTag}</Badge>}
+            </span>
+          </a>
+        ))
+      }
+    </div>
+
+    {
+      anyPlaceholder && (
+        <p class="mt-8 flex max-w-3xl items-start gap-2 text-xs leading-relaxed text-low" data-animate>
+          <span class="i-mdi-information-outline mt-0.5 shrink-0 text-sm" />
+          <span>{t.placeholderNote}</span>
+        </p>
+      )
+    }
+  </div>
+</section>

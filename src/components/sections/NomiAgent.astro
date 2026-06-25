@@ -1,0 +1,247 @@
+---
+/**
+ * NomiAgent — 开箱即用 nomi agent / Batteries-included nomi agent.
+ *
+ * Accuracy red lines (spec §3 "开箱即用 nomi agent"):
+ *  - nomi agent 内置无需额外安装（CLI 二进制 `nomi`）。
+ *  - 4 个原生 provider 后端：Anthropic / OpenAI 兼容 / Amazon Bedrock / Google
+ *    Vertex。OpenAI 兼容 + 自定义 base_url 可达 DeepSeek / Gemini / Qwen / Kimi /
+ *    Ollama / vLLM / Azure 等 —— 这些不是独立后端。
+ *  - 17 个 ACP 直连 Agent，并由 NomiFun 为它们提供模型。
+ *  - 交互式会话与 PTY 终端均可用（终端预设 Shell / Claude Code / Codex / Gemini）。
+ */
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+import Badge from '@/components/ui/Badge.astro';
+import { nativeBackends, compatibleProviders, providerLabels } from '@/data/providers';
+import { acpAgents, acpLabels } from '@/data/acpAgents';
+
+const locale: Locale = getLocale(Astro.url);
+
+const copy: Dict<{
+  eyebrow: string;
+  hook: string;
+  title: string;
+  lead: string;
+  builtinTitle: string;
+  builtinBody: string;
+  builtinTags: string[];
+  providersTitle: string;
+  acpFootnote: string;
+  termTitle: string;
+  termBody: string;
+  termPresetsLabel: string;
+  termPresets: string[];
+  sessionLabel: string;
+  ptyLabel: string;
+  cta: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '开箱即用 · nomi agent',
+    hook: '装好就能跑，不用再为「先装哪个 agent」纠结。',
+    title: '<span class="text-grad-pink">开箱即用</span> 的 nomi agent',
+    lead: '内置的 nomi agent 无需额外安装（CLI 二进制 `nomi`），落地即用。4 个原生后端覆盖主流云，OpenAI 兼容再接入海量供应商；17 个 ACP 直连 Agent 也能并肩工作，且由 NomiFun 为它们统一供给模型。',
+    builtinTitle: '内置 nomi agent · 无需额外安装',
+    builtinBody: '随 NomiFun 一同分发的 CLI 二进制 `nomi`，开箱即用——不依赖额外下载、不需要单独配环境，安装完成即可发起对话与委派任务。',
+    builtinTags: ['CLI 二进制 nomi', '零额外安装', '流式委派'],
+    providersTitle: '模型供应商',
+    acpFootnote: '不仅自研 nomi agent，上述 Agent 均由 NomiFun 统一供给模型——同一套 provider 配置，处处可用。',
+    termTitle: '交互式会话 + PTY 终端',
+    termBody: '既能开启交互式会话与 agent 来回对话，也能直接拉起一个真实 PTY 终端。终端内置常用预设，开箱即进入熟悉的工作流。',
+    termPresetsLabel: '终端预设',
+    termPresets: ['Shell', 'Claude Code', 'Codex', 'Gemini'],
+    sessionLabel: '交互式会话',
+    ptyLabel: 'PTY 终端',
+    cta: '阅读 nomi agent 文档',
+  },
+  'en-US': {
+    eyebrow: 'Batteries-included · nomi agent',
+    hook: 'Installed means ready — no agonizing over "which agent do I install first".',
+    title: 'The <span class="text-grad-pink">batteries-included</span> nomi agent',
+    lead: 'The built-in nomi agent needs no extra install (the `nomi` CLI binary) — usable the moment NomiFun lands. Four native backends cover the major clouds, OpenAI-compatible reaches countless more providers, and 17 ACP direct-connect agents work alongside it — all fed models by NomiFun.',
+    builtinTitle: 'Built-in nomi agent · no extra install',
+    builtinBody: 'The `nomi` CLI binary ships with NomiFun and works out of the box — no separate download, no extra environment to wire up. Once installed you can start conversations and delegate tasks right away.',
+    builtinTags: ['nomi CLI binary', 'Zero extra install', 'Streaming delegation'],
+    providersTitle: 'Model providers',
+    acpFootnote: 'Beyond the in-house nomi agent, every agent above is supplied models by NomiFun — one provider config, used everywhere.',
+    termTitle: 'Interactive sessions + PTY terminal',
+    termBody: 'Open an interactive session and chat back and forth with the agent, or spin up a real PTY terminal directly. The terminal ships with handy presets so you land in a familiar workflow.',
+    termPresetsLabel: 'Terminal presets',
+    termPresets: ['Shell', 'Claude Code', 'Codex', 'Gemini'],
+    sessionLabel: 'Interactive session',
+    ptyLabel: 'PTY terminal',
+    cta: 'Read the nomi agent docs',
+  },
+};
+
+const t = pick(copy, locale);
+const pl = pick(providerLabels, locale);
+const al = pick(acpLabels, locale);
+---
+
+<section id="nomi-agent" class="relative section-y bg-ink-850/30">
+  <div class="container-x">
+    <!-- header -->
+    <div class="flex max-w-3xl flex-col gap-4" data-animate>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl lg:text-[2.75rem]">
+        <Fragment set:html={t.title} />
+      </h2>
+      <p class="flex items-start gap-2 text-base font-semibold leading-relaxed text-hi sm:text-lg">
+        <span class="i-mdi-power-plug-outline mt-1 shrink-0 text-pink-400" aria-hidden="true"></span>
+        <span>{t.hook}</span>
+      </p>
+      <p class="text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
+    </div>
+
+    <!-- built-in agent callout -->
+    <div class="mt-10 card p-6 sm:p-8" data-animate>
+      <div class="flex flex-col gap-5 sm:flex-row sm:items-center">
+        <div class="flex shrink-0 items-center gap-4">
+          <span class="grid h-14 w-14 place-items-center rounded-2xl border border-pink-500/30 bg-pink-500/10 shadow-[0_0_40px_-12px_rgba(255,111,145,0.55)]">
+            <img src="/providers/nomi.svg" alt="nomi agent" class="h-8 w-8" width="32" height="32" loading="lazy" />
+          </span>
+          <code class="rounded-xl border border-ink-600/70 bg-ink-900/70 px-3.5 py-2 font-mono text-sm text-pink-300">$ nomi</code>
+        </div>
+        <div class="min-w-0">
+          <h3 class="text-lg font-semibold text-hi">{t.builtinTitle}</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-mid">{t.builtinBody}</p>
+          <div class="mt-3.5 flex flex-wrap gap-2">
+            {t.builtinTags.map((tag) => (
+              <span class="inline-flex items-center rounded-full border border-ink-600 bg-ink-700/60 px-2.5 py-1 font-mono text-[11px] text-mid">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- model providers block -->
+    <div class="mt-6 card p-6 sm:p-8" data-animate>
+      <div class="flex items-center gap-2.5">
+        <span class="i-mdi-brain text-lg text-violet-300" aria-hidden="true"></span>
+        <h3 class="text-lg font-semibold text-hi">{t.providersTitle}</h3>
+      </div>
+
+      <!-- 4 native backends — prominent -->
+      <div class="mt-5 flex items-center gap-2.5">
+        <Badge tone="pink">{pl.native}</Badge>
+      </div>
+      <ul class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4" data-stagger>
+        {nativeBackends.map((p) => (
+          <li class="flex flex-col items-center justify-center gap-3 rounded-2xl border border-ink-600/70 bg-ink-800/70 px-4 py-5 text-center transition-colors hover:border-pink-500/40">
+            {p.hasLogo ? (
+              <img src={`/providers/${p.icon}.svg`} alt={p.name} class="h-9 w-9 object-contain" width="36" height="36" loading="lazy" />
+            ) : (
+              <span class="grid h-9 w-9 place-items-center rounded-xl border border-violet-400/30 bg-violet-500/10 font-mono text-sm font-semibold text-violet-300">{p.name.charAt(0)}</span>
+            )}
+            <span class="text-sm font-medium text-hi">{p.name}</span>
+          </li>
+        ))}
+      </ul>
+
+      <!-- OpenAI-compatible reachable — secondary strip -->
+      <div class="mt-7 border-t border-ink-700/70 pt-6">
+        <div class="flex flex-wrap items-center gap-2.5">
+          <Badge tone="violet">{pl.compatible}</Badge>
+        </div>
+        <ul class="mt-4 flex flex-wrap gap-2.5" data-stagger>
+          {compatibleProviders.map((p) => (
+            <li class="inline-flex items-center gap-2 rounded-full border border-ink-600/70 bg-ink-900/50 px-3 py-1.5 text-xs font-medium text-mid transition-colors hover:border-violet-400/50">
+              {p.hasLogo ? (
+                <img src={`/providers/${p.icon}.svg`} alt={p.name} class="h-4 w-4 object-contain" width="16" height="16" loading="lazy" />
+              ) : (
+                <span class="i-mdi-api text-sm text-violet-300/80" aria-hidden="true"></span>
+              )}
+              {p.name}
+            </li>
+          ))}
+          <li class="inline-flex items-center rounded-full px-2 py-1.5 text-xs font-medium text-low">…</li>
+        </ul>
+        <p class="mt-4 text-xs leading-relaxed text-low">{pl.note}</p>
+      </div>
+    </div>
+
+    <!-- ACP direct-connect agents grid -->
+    <div class="mt-6 card p-6 sm:p-8" data-animate>
+      <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex items-center gap-2.5">
+          <span class="i-mdi-transit-connection-variant text-lg text-violet-300" aria-hidden="true"></span>
+          <h3 class="text-lg font-semibold text-hi">{al.title}</h3>
+        </div>
+        <Badge tone="pink" class="self-start sm:self-auto">{al.count}</Badge>
+      </div>
+      <p class="mt-2.5 text-sm leading-relaxed text-mid">{al.subtitle}</p>
+
+      <ul class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4" data-stagger>
+        {acpAgents.map((a) => (
+          <li class="flex items-center gap-3 rounded-xl border border-ink-600/70 bg-ink-800/70 px-3.5 py-3 transition-colors hover:border-violet-400/50">
+            {a.hasLogo ? (
+              <img src={`/providers/${a.icon}.svg`} alt={a.name} class="h-6 w-6 shrink-0 object-contain" width="24" height="24" loading="lazy" />
+            ) : (
+              <span class="grid h-6 w-6 shrink-0 place-items-center rounded-lg border border-ink-600 bg-ink-700/70 font-mono text-[11px] font-semibold text-violet-300">{a.name.charAt(0)}</span>
+            )}
+            <span class="truncate text-sm font-medium text-hi">{a.name}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-5 text-xs leading-relaxed text-low">{t.acpFootnote}</p>
+    </div>
+
+    <!-- interactive sessions + PTY terminal note -->
+    <div class="mt-6 card p-6 sm:p-8" data-animate>
+      <div class="grid gap-6 lg:grid-cols-2 lg:items-center">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="i-mdi-console text-lg text-pink-400" aria-hidden="true"></span>
+            <h3 class="text-lg font-semibold text-hi">{t.termTitle}</h3>
+          </div>
+          <p class="mt-2.5 text-sm leading-relaxed text-mid">{t.termBody}</p>
+          <div class="mt-4 flex flex-wrap items-center gap-2.5">
+            <span class="text-xs font-semibold text-low">{t.termPresetsLabel}</span>
+            {t.termPresets.map((preset) => (
+              <span class="inline-flex items-center rounded-full border border-ink-600 bg-ink-700/60 px-2.5 py-1 font-mono text-[11px] text-mid">{preset}</span>
+            ))}
+          </div>
+        </div>
+
+        <!-- mock terminal frame -->
+        <div class="overflow-hidden rounded-2xl border border-ink-600/70 bg-ink-950/80 shadow-[0_0_44px_-16px_rgba(255,111,145,0.35)]">
+          <div class="flex items-center gap-2 border-b border-ink-700/70 bg-ink-900/70 px-4 py-2.5">
+            <span class="h-2.5 w-2.5 rounded-full bg-danger/70"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-warning/70"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-success/70"></span>
+            <div class="ml-2 flex gap-2 text-[11px] text-low">
+              <span class="rounded-md border border-ink-700 bg-ink-800/70 px-2 py-0.5 text-violet-300">{t.sessionLabel}</span>
+              <span class="rounded-md px-2 py-0.5">{t.ptyLabel}</span>
+            </div>
+          </div>
+          <div class="space-y-2 px-4 py-4 font-mono text-[13px] leading-relaxed">
+            <p class="text-low"><span class="text-pink-400">$</span> nomi</p>
+            <p class="text-mid"><span class="text-violet-300">›</span> ready · <span class="text-low">interactive session + pty</span></p>
+            <p class="text-low"><span class="text-pink-400">$</span> nomi run <span class="text-mid">--stream</span><span class="ml-0.5 inline-block h-3.5 w-1.5 translate-y-0.5 bg-pink-400 term-caret"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- secondary CTA -->
+    <div class="mt-8" data-animate>
+      <a href={localizePath('/docs', locale)} class="btn-ghost text-sm">
+        <span class="i-mdi-book-open-page-variant-outline text-base" aria-hidden="true"></span>
+        {t.cta}
+        <span class="i-mdi-arrow-right text-base" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .term-caret { animation: term-blink 1.1s step-end infinite; }
+  @keyframes term-blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .term-caret { animation: none; }
+  }
+</style>
