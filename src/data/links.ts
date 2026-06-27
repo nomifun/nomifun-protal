@@ -1,10 +1,9 @@
 /**
  * Central place for all outbound links & contact info.
  *
- * The public GitHub repo, GitHub Releases download page, and official website
- * are confirmed and live. The contact email is the only field still being
- * finalized — it stays marked PLACEHOLDER until the author confirms it. See
- * docs/RESOURCES-TODO.md.
+ * The public GitHub repo, GitHub Releases download page, official website,
+ * and public contact email are confirmed and live. See docs/RESOURCES-TODO.md
+ * for optional future channels and assets.
  */
 
 export const links = {
@@ -18,8 +17,8 @@ export const links = {
   issues: 'https://github.com/nomifun/nomifun-tauri/issues',
   // Official website
   website: 'https://www.nomifun.com',
-  // PLACEHOLDER — contact / security email (not yet confirmed)
-  email: 'hello@nomifun.com',
+  // Public contact / security email
+  email: '535526063@qq.com',
   // Upstream attribution (Apache-2.0)
   aionui: 'https://github.com/iOfficeAI/AionUi',
   license: 'https://www.apache.org/licenses/LICENSE-2.0',

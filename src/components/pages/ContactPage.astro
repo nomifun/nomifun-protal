@@ -6,8 +6,7 @@
  * Accuracy (§3, §8): NomiFun is Apache-2.0, free for commercial use with no
  * authorization required — the "commercial heads-up" panel is an invitation
  * for recognition/feedback, NOT a license condition. The GitHub repo and
- * official website are live; only the contact email is still being finalized
- * (see RESOURCES-TODO.md / data/links.ts).
+ * official website and public contact email are live.
  */
 import { getLocale, pick, type Dict, type Locale } from '@/i18n';
 import { links, community, socialLinks } from '@/data/links';
@@ -93,9 +92,9 @@ const copy: Dict<{
       body: '如果你在获取或接入模型上遇到困难，可以联系作者协助寻找，或一起搭建统一的模型网关。统一网关目前尚未提供，但我们很乐意搭把手，帮你把链路跑通。',
     },
     contactTitle: '联系方式',
-    contactLead: '以下渠道随时欢迎你来交流。GitHub 仓库、官网与国内 / 境外社交平台入口已整理在这里；联系邮箱待确认后即时更新。',
+    contactLead: '以下渠道随时欢迎你来交流。GitHub 仓库、邮箱、境外社交媒体与国内平台入口已整理在这里。',
     primaryTitle: '直接联系',
-    primaryLead: '适合提交问题、参与开发或等待邮箱确认后的正式联络。',
+    primaryLead: '适合提交问题、参与开发与正式联络；后续新增邮箱、表单或社群入口时也会继续放在这里。',
     chinaTitle: '国内平台快速访问',
     chinaLead: '小红书、B站与抖音的短链入口，适合在国内网络环境下快速打开。',
     globalTitle: '境外社交媒体',
@@ -109,9 +108,9 @@ const copy: Dict<{
       tiktok: { label: 'TikTok', caption: '@colir0luo' },
     },
     emailLabel: '邮箱',
-    emailCaption: '正式联系邮箱待确认',
+    emailCaption: links.email,
     placeholderTag: '占位待补',
-    placeholderNote: '说明：联系邮箱仍在确认中（详见 RESOURCES-TODO），上方标注「占位待补」的邮箱会在地址确定后第一时间替换。GitHub 仓库（github.com/nomifun/nomifun-tauri）与官网（www.nomifun.com）已经可用。',
+    placeholderNote: '说明：上方标注「占位待补」的入口会在地址确定后第一时间替换。GitHub 仓库（github.com/nomifun/nomifun-tauri）、官网（www.nomifun.com）与联系邮箱已经可用。',
     qrTitle: '扫码加入社群',
     qrLead: '用微信 / QQ 扫码加群，也可以通过小红书 / B站 / 抖音找到我们。',
     qrs: [
@@ -160,9 +159,9 @@ const copy: Dict<{
       body: 'If sourcing or wiring up models is hard for you, reach out — we can help you find one or build a unified model gateway together. A unified gateway is not available yet, but we are glad to lend a hand and get your pipeline working.',
     },
     contactTitle: 'Get in touch',
-    contactLead: 'Reach out through any of the channels below. GitHub, the website, China-platform quick links, and global social profiles are collected here; the contact email will update the moment it is confirmed.',
+    contactLead: 'Reach out through any of the channels below. GitHub, email, global social profiles, and China-platform quick links are collected here.',
     primaryTitle: 'Direct contact',
-    primaryLead: 'Best for issues, development collaboration, and formal email once the address is confirmed.',
+    primaryLead: 'Best for issues, development collaboration, and formal email. Future email, form, or community entries can sit here as the channel list grows.',
     chinaTitle: 'China-platform quick links',
     chinaLead: 'Short links for RED (Xiaohongshu), Bilibili, and Douyin.',
     globalTitle: 'Global social media',
@@ -176,9 +175,9 @@ const copy: Dict<{
       tiktok: { label: 'TikTok', caption: '@colir0luo' },
     },
     emailLabel: 'Email',
-    emailCaption: 'Formal contact email to be confirmed',
+    emailCaption: links.email,
     placeholderTag: 'Placeholder',
-    placeholderNote: 'Note: the contact email is still being finalized (see RESOURCES-TODO) and the link tagged “Placeholder” above will be replaced as soon as the address is confirmed. The GitHub repo (github.com/nomifun/nomifun-tauri) and website (www.nomifun.com) are already available.',
+    placeholderNote: 'Note: links tagged “Placeholder” above will be replaced as soon as their destinations are confirmed. The GitHub repo (github.com/nomifun/nomifun-tauri), website (www.nomifun.com), and contact email are already available.',
     qrTitle: 'Scan to join the community',
     qrLead: 'Scan to join the WeChat or QQ group, or find us through RED, Bilibili, and Douyin.',
     qrs: [
@@ -204,11 +203,10 @@ const qrImages = [
 ];
 const qrs = qrImages.map((q, i) => ({ ...q, ...t.qrs[i] }));
 
-// Community buttons: always include GitHub + email; flag the placeholders.
-// The GitHub repo and official website are confirmed live (see data/links.ts);
-// only the contact email is still being finalized, so flag just that.
+// Community buttons: always include GitHub + email; keep placeholder handling
+// for future channels that may be added before their destinations are final.
 const isPlaceholderUrl = (url: string) =>
-  !url || url === '#' || url.includes('@nomifun.com');
+  !url || url === '#';
 
 type ContactButton = {
   id: string;
@@ -287,11 +285,19 @@ const dedupeButtons = (items: ContactButton[]) => {
   return items.filter((item) => (seen.has(item.id) ? false : (seen.add(item.id), true)));
 };
 
-const contactGroups = [
-  { id: 'primary', title: t.primaryTitle, lead: t.primaryLead, buttons: dedupeButtons(primaryButtons) },
-  { id: 'china', title: t.chinaTitle, lead: t.chinaLead, buttons: chinaPlatformButtons },
+const primaryContactGroup = {
+  id: 'primary',
+  title: t.primaryTitle,
+  lead: t.primaryLead,
+  buttons: dedupeButtons(primaryButtons),
+};
+
+const platformContactGroups = [
   { id: 'global', title: t.globalTitle, lead: t.globalLead, buttons: globalPlatformButtons },
+  { id: 'china', title: t.chinaTitle, lead: t.chinaLead, buttons: chinaPlatformButtons },
 ];
+
+const contactGroups = [primaryContactGroup, ...platformContactGroups];
 
 const anyPlaceholder = contactGroups.some((group) => group.buttons.some((button) => button.placeholder));
 ---
@@ -383,40 +389,74 @@ const anyPlaceholder = contactGroups.some((group) => group.buttons.some((button)
       <p class="text-base leading-relaxed text-mid sm:text-lg">{t.contactLead}</p>
     </div>
 
-    <div class="grid gap-8" data-stagger>
-      {
-        contactGroups.map((group) => (
-          <div class="flex flex-col gap-4">
-            <div class="flex max-w-2xl flex-col gap-1.5">
-              <h3 class="text-base font-semibold text-hi">{group.title}</h3>
-              <p class="text-sm leading-relaxed text-mid">{group.lead}</p>
-            </div>
+    <div class="grid gap-9" data-stagger>
+      <div class="flex flex-col gap-4">
+        <div class="flex max-w-2xl flex-col gap-1.5">
+          <h3 class="text-base font-semibold text-hi">{primaryContactGroup.title}</h3>
+          <p class="text-sm leading-relaxed text-mid">{primaryContactGroup.lead}</p>
+        </div>
 
-            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {group.buttons.map((b) => (
-                <a
-                  href={b.href}
-                  target={b.href.startsWith('mailto:') ? undefined : '_blank'}
-                  rel={b.href.startsWith('mailto:') ? undefined : 'noopener'}
-                  class="card card-hover group flex min-h-[104px] items-center gap-3 p-5"
-                >
-                  <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-ink-600 bg-ink-800/80 transition-colors group-hover:border-pink-500/40">
-                    <span class={`${b.icon} text-2xl text-hi`} />
-                  </span>
-                  <span class="flex min-w-0 flex-1 flex-col gap-1">
-                    <span class="text-sm font-semibold text-hi">{b.label}</span>
-                    <span class="text-xs leading-relaxed text-low">{b.caption}</span>
-                    {b.placeholder && <Badge tone="soon" class="self-start">{t.placeholderTag}</Badge>}
-                  </span>
-                  {!b.href.startsWith('mailto:') && (
-                    <span class="i-mdi-arrow-top-right text-base text-low transition-colors group-hover:text-pink-300" aria-hidden="true" />
-                  )}
-                </a>
-              ))}
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {
+            primaryContactGroup.buttons.map((b) => (
+              <a
+                href={b.href}
+                target={b.href.startsWith('mailto:') ? undefined : '_blank'}
+                rel={b.href.startsWith('mailto:') ? undefined : 'noopener'}
+                class="card card-hover group flex min-h-[108px] items-center gap-3 p-5"
+              >
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-ink-600 bg-ink-800/80 transition-colors group-hover:border-pink-500/40">
+                  <span class={`${b.icon} text-2xl text-hi`} />
+                </span>
+                <span class="flex min-w-0 flex-1 flex-col gap-1">
+                  <span class="text-sm font-semibold text-hi">{b.label}</span>
+                  <span class="break-words text-xs leading-relaxed text-low">{b.caption}</span>
+                  {b.placeholder && <Badge tone="soon" class="self-start">{t.placeholderTag}</Badge>}
+                </span>
+                {!b.href.startsWith('mailto:') && (
+                  <span class="i-mdi-arrow-top-right text-base text-low transition-colors group-hover:text-pink-300" aria-hidden="true" />
+                )}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="grid gap-8 lg:grid-cols-[1.08fr_0.92fr]">
+        {
+          platformContactGroups.map((group) => (
+            <div class="flex flex-col gap-4">
+              <div class="flex max-w-2xl flex-col gap-1.5">
+                <h3 class="text-base font-semibold text-hi">{group.title}</h3>
+                <p class="text-sm leading-relaxed text-mid">{group.lead}</p>
+              </div>
+
+              <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-3">
+                {group.buttons.map((b) => (
+                  <a
+                    href={b.href}
+                    target={b.href.startsWith('mailto:') ? undefined : '_blank'}
+                    rel={b.href.startsWith('mailto:') ? undefined : 'noopener'}
+                    class="card card-hover group flex min-h-[108px] items-center gap-3 p-5"
+                  >
+                    <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-ink-600 bg-ink-800/80 transition-colors group-hover:border-pink-500/40">
+                      <span class={`${b.icon} text-2xl text-hi`} />
+                    </span>
+                    <span class="flex min-w-0 flex-1 flex-col gap-1">
+                      <span class="text-sm font-semibold text-hi">{b.label}</span>
+                      <span class="break-words text-xs leading-relaxed text-low">{b.caption}</span>
+                      {b.placeholder && <Badge tone="soon" class="self-start">{t.placeholderTag}</Badge>}
+                    </span>
+                    {!b.href.startsWith('mailto:') && (
+                      <span class="i-mdi-arrow-top-right text-base text-low transition-colors group-hover:text-pink-300" aria-hidden="true" />
+                    )}
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
-        ))
-      }
+          ))
+        }
+      </div>
     </div>
 
     <!-- community QR codes -->

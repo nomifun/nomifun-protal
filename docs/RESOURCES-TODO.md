@@ -55,7 +55,7 @@
 |---|---|---|
 | `githubUrl` | ✅ 已确认 `https://github.com/nomifun/nomifun-tauri` | —（已接入全部 CTA 与文档页脚） |
 | `releasesUrl` | ✅ 已确认 `…/nomifun-tauri/releases` | —（下载页二进制按钮指向） |
-| `contactEmail` | 占位 `hello@nomifun.com` | 对外联系/安全报告邮箱（确认后替换） |
+| `contactEmail` | ✅ 已确认 `535526063@qq.com` | 对外联系/安全报告邮箱（已接入联系页） |
 | `communityLinks` | 空 | Discord / 微信群 / Telegram / QQ 群等社群入口（有几个填几个） |
 | `websiteUrl` | ✅ 已确认 `https://www.nomifun.com` | —（已写入 links.ts） |
 | `commercialNoticeChannel` | 占位 | "商用告知"希望走哪个通道（邮箱 / issue / 表单） |
