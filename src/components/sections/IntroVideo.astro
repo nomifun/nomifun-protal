@@ -1,0 +1,100 @@
+---
+import { getLocale, pick, type Dict, type Locale } from '@/i18n';
+import { links } from '@/data/links';
+
+const locale: Locale = getLocale(Astro.url);
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  watchLabel: string;
+  note: string;
+  videoTitle: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '产品介绍视频',
+    title: '先看一段完整介绍，再决定从哪里开始',
+    lead: '如果你想快速判断 NomiFun 是否适合自己的工作流，这段介绍视频比继续扫功能列表更直接。',
+    watchLabel: '在 YouTube 打开',
+    note: '视频由 YouTube 加载；如果当前网络无法播放，可点开外部链接观看。',
+    videoTitle: 'NomiFun 产品介绍视频',
+  },
+  'en-US': {
+    eyebrow: 'Product walkthrough',
+    title: 'Watch NomiFun in context before diving deeper',
+    lead: 'If you want to quickly judge whether NomiFun fits your workflow, this walkthrough is more direct than scanning another feature list.',
+    watchLabel: 'Open on YouTube',
+    note: 'The video is loaded from YouTube; open the external link if playback is blocked on this network.',
+    videoTitle: 'NomiFun product walkthrough video',
+  },
+};
+
+const t = pick(copy, locale);
+const embedUrl = `${links.introVideoEmbed}?rel=0`;
+---
+
+<section id="intro-video" class="relative overflow-hidden py-16 sm:py-20 lg:py-24">
+  <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-pink-400/40 to-transparent" aria-hidden="true"></div>
+  <div class="container-x">
+    <div class="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
+      <div class="max-w-xl" data-animate>
+        <span class="eyebrow">{t.eyebrow}</span>
+        <h2 class="mt-4 text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl lg:text-[2.65rem]">
+          {t.title}
+        </h2>
+        <p class="mt-5 text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
+        <a href={links.introVideo} target="_blank" rel="noopener noreferrer" class="btn-ghost mt-8 text-sm sm:text-base">
+          <span class="i-mdi-youtube text-lg text-pink-400" aria-hidden="true"></span>
+          {t.watchLabel}
+        </a>
+      </div>
+
+      <div class="relative" data-animate>
+        <div class="video-shell">
+          <iframe
+            class="video-frame"
+            src={embedUrl}
+            title={t.videoTitle}
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+        <p class="mt-3 flex items-start gap-2 text-xs leading-relaxed text-low">
+          <span class="i-mdi-information-outline mt-0.5 shrink-0 text-sm" aria-hidden="true"></span>
+          <span>{t.note}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .video-shell {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      background: var(--ink-950);
+      box-shadow: 0 28px 90px -36px rgba(255, 111, 145, 0.55);
+    }
+    .video-shell::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      z-index: 1;
+    }
+    .video-frame {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      background: var(--ink-950);
+    }
+  </style>
+</section>

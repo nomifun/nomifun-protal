@@ -17,6 +17,9 @@ export const links = {
   issues: 'https://github.com/nomifun/nomifun-tauri/issues',
   // Official website
   website: 'https://www.nomifun.com',
+  // Product introduction video
+  introVideo: 'https://youtu.be/gEDo5H0H0Pg',
+  introVideoEmbed: 'https://www.youtube-nocookie.com/embed/gEDo5H0H0Pg',
   // Public contact / security email
   email: '535526063@qq.com',
   // Upstream attribution (Apache-2.0)
