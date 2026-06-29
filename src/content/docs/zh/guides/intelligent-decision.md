@@ -8,7 +8,7 @@ lang: zh-CN
 
 IDMM（Intelligent Decision-Making Mode，智能决策模式）是 NomiFun 面向无人值守任务的**每会话监督层**。它盯守每一轮对话，一旦停滞就介入，让长时间自动化任务跑到终态，而不是卡在一次 provider 抖动、或一个不再向前的模型上。无论这段会话跑的是内置 nomi、ACP 直连 Agent（如 Claude Code / Codex），还是终端里的 agent CLI，都能在会话头部为它开启 IDMM——它不是 nomi 专属。
 
-IDMM 由两层组成：**规则层**用确定性策略处理机械性停滞（无需调用模型），**旁路模型层**才在真正的决策卡点把这一轮升级给一个轻量模型。它与 [AutoWork](/docs/guides/autowork) 天生互补——AutoWork 推动工作向前，IDMM 让每一轮不至于卡死。
+IDMM 由两层组成：**规则层**用确定性策略处理机械性停滞（无需调用模型），**旁路模型层**才在真正的决策卡点把这一轮升级给一个轻量模型。它与 [AutoWork](/zh/docs/guides/autowork) 天生互补——AutoWork 推动工作向前，IDMM 让每一轮不至于卡死。
 
 > 入口：全局配置 → **模型**（模型与决策）页配置默认值与查看决策活动；具体的开关在**会话头部**逐会话开启，与 AutoWork 同一处。
 
@@ -46,6 +46,6 @@ IDMM 由两层组成：**规则层**用确定性策略处理机械性停滞（�
 
 ## 相关
 
-- [智能值守 · AutoWork](/docs/guides/autowork)——IDMM 最常守护的自动化场景。
+- [智能值守 · AutoWork](/zh/docs/guides/autowork)——IDMM 最常守护的自动化场景。
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

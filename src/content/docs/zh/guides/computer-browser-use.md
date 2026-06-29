@@ -50,8 +50,8 @@ NomiFun 给 agent 内置了两项可选的系统级能力：**电脑操控（Com
 
 ## 相关
 
-- [会话工作台](/docs/guides/sessions) —— 文件树、预览与会话里如何调用这些能力。
-- [MCP 与技能](/docs/guides/mcp-and-skills) —— 在内置能力之外再接外部工具。
-- [智能决策 · IDMM](/docs/guides/intelligent-decision) —— 为长任务叠加值守与决策护航。
+- [会话工作台](/zh/docs/guides/sessions) —— 文件树、预览与会话里如何调用这些能力。
+- [MCP 与技能](/zh/docs/guides/mcp-and-skills) —— 在内置能力之外再接外部工具。
+- [智能决策 · IDMM](/zh/docs/guides/intelligent-decision) —— 为长任务叠加值守与决策护航。
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

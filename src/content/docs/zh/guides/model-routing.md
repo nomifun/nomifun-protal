@@ -43,7 +43,7 @@ lang: zh-CN
 
 - **只作用于 Nomi 引擎会话**。这是引擎内部的重试策略，不会把负载分摊到多个 API key，也不会让所有 CLI / ACP Agent 共享同一个模型池。
 - **解决可靠性，不解决额度**。如果队列里**所有** provider 都不可用，或本轮的 prompt / 工具状态本身就是无效的，故障转移也救不回这一轮。
-- **与 IDMM 协作**。IDMM 的故障值守在判定某次 provider 故障可恢复、且该会话启用了故障转移时，会让会话按这条队列重试。故障值守与决策值守**默认关闭**。详见 [智能值守 · AutoWork](/docs/guides/autowork)。
+- **与 IDMM 协作**。IDMM 的故障值守在判定某次 provider 故障可恢复、且该会话启用了故障转移时，会让会话按这条队列重试。故障值守与决策值守**默认关闭**。详见 [智能值守 · AutoWork](/zh/docs/guides/autowork)。
 
 ## 17 个 ACP 直连 Agent
 
@@ -55,8 +55,8 @@ lang: zh-CN
 
 ## 相关
 
-- [智能值守 · AutoWork](/docs/guides/autowork)
-- [MCP 与技能](/docs/guides/mcp-and-skills)
-- [渠道 · 超级网关](/docs/guides/channels)
+- [智能值守 · AutoWork](/zh/docs/guides/autowork)
+- [MCP 与技能](/zh/docs/guides/mcp-and-skills)
+- [渠道 · 超级网关](/zh/docs/guides/channels)
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

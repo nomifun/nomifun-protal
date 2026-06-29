@@ -55,7 +55,7 @@ The desktop app (nomifun-desktop) and the self-hosted web server (nomifun-web) s
 - [MCP and skills](/docs/guides/mcp-and-skills)
 - [Assistants](/docs/guides/assistants)
 - [Terminal](/docs/guides/terminal)
-- [WebUI remote access](/docs/guides/webui-remote-access)
-- [Web server deployment](/docs/guides/web-server-deployment)
+- [WebUI remote access](/docs/guides/webui-remote)
+- [Web server deployment](/docs/getting-started/installation)
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

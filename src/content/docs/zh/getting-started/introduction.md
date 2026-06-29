@@ -55,7 +55,7 @@ NomiFun 当前为 **0.1.0（pre-1.0）**，仍在活跃迭代。脱胎自 [AionU
 
 ## 相关
 
-- [安装](/docs/getting-started/installation) —— 把它跑起来。
-- [第一次对话](/docs/getting-started/quick-start) —— 配置模型并完成第一段会话。
+- [安装](/zh/docs/getting-started/installation) —— 把它跑起来。
+- [第一次对话](/zh/docs/getting-started/quick-start) —— 配置模型并完成第一段会话。
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

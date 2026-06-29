@@ -47,8 +47,8 @@ lang: zh-CN
 
 ## 相关
 
-- [挂载知识库](/docs/guides/knowledge-base)——为会话准备可引用的资料来源。
-- [智能值守 · AutoWork](/docs/guides/autowork)——自动工作与 **IDMM 决策值守**的完整说明。
-- [MCP 与技能](/docs/guides/mcp-and-skills)——为会话接入工具与技能。
+- [挂载知识库](/zh/docs/guides/knowledge-base)——为会话准备可引用的资料来源。
+- [智能值守 · AutoWork](/zh/docs/guides/autowork)——自动工作与 **IDMM 决策值守**的完整说明。
+- [MCP 与技能](/zh/docs/guides/mcp-and-skills)——为会话接入工具与技能。
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

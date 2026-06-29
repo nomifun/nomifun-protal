@@ -48,7 +48,7 @@ lang: zh-CN
 - **会话目标**：打开任意会话（内置 nomi 或任意 ACP 直连 Agent 均可），在头部 **AutoWork** 控件选 tag、设可选完成上限、启用。每一轮编排器认领下一条需求，构造一段对用户隐藏的注入指令，等待回合干净结束后记为 `Done`。
 - **终端目标**：打开预设为 `claude` 或 `codex` 的终端（普通 shell、Gemini 暂不符合条件），头部会出现同一个 AutoWork 控件。绑定 tag 并启用即可。终端以「输出静默即完成」判定回合收尾。
 
-> **强烈推荐 Full Auto。** 一旦回合撞到交互式批准提示，会一直阻塞到超时。每个 agent CLI 都有非交互式开关，终端的 Full Auto 模式会替你加上（参见 [终端](/docs/guides/terminal)）。
+> **强烈推荐 Full Auto。** 一旦回合撞到交互式批准提示，会一直阻塞到超时。每个 agent CLI 都有非交互式开关，终端的 Full Auto 模式会替你加上（参见 [终端](/zh/docs/guides/terminal)）。
 
 绑定后编排器即按 `Pending → InProgress → Done/Failed/NeedsReview` 轮转，按 tag 单循环顺序执行。
 
@@ -80,9 +80,9 @@ lang: zh-CN
 
 ## 相关
 
-- [智能值守 IDMM](/docs/guides/intelligent-decision)——让卡顿中的本轮存活，与 AutoWork 叠加
-- [终端](/docs/guides/terminal)——把 agent CLI 作为终端目标，开启 Full Auto
-- [会话](/docs/guides/sessions)——会话目标与 AutoWork 控件
-- [消息渠道](/docs/guides/channels)——IM 接入现状
+- [智能值守 IDMM](/zh/docs/guides/intelligent-decision)——让卡顿中的本轮存活，与 AutoWork 叠加
+- [终端](/zh/docs/guides/terminal)——把 agent CLI 作为终端目标，开启 Full Auto
+- [会话](/zh/docs/guides/sessions)——会话目标与 AutoWork 控件
+- [消息渠道](/zh/docs/guides/channels)——IM 接入现状
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

@@ -46,8 +46,8 @@ lang: zh-CN
 
 ## 相关
 
-- [智能值守 · AutoWork](/docs/guides/autowork)——需要"尽快异步处理"而非"按时钟"时用它。
-- [会话工作区](/docs/guides/sessions)——定时任务生成的会话就在这里继续。
-- [应用内终端](/docs/guides/terminal)——需要实时 shell 时的去处。
+- [智能值守 · AutoWork](/zh/docs/guides/autowork)——需要"尽快异步处理"而非"按时钟"时用它。
+- [会话工作区](/zh/docs/guides/sessions)——定时任务生成的会话就在这里继续。
+- [应用内终端](/zh/docs/guides/terminal)——需要实时 shell 时的去处。
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

@@ -82,8 +82,8 @@ A：可以。按 workpath 或 companion 绑定即可让多段会话共享同一�
 
 ## 相关
 
-- [超级伙伴](/docs/guides/companions) —— 把库绑定到伙伴，养成专属知识
-- [会话工作区](/docs/guides/sessions) —— 在会话头部开启并挂载知识库
-- [渠道 · 超级网关](/docs/guides/channels) —— IM 写入为何永远走暂存区
+- [超级伙伴](/zh/docs/guides/companions) —— 把库绑定到伙伴，养成专属知识
+- [会话工作区](/zh/docs/guides/sessions) —— 在会话头部开启并挂载知识库
+- [渠道 · 超级网关](/zh/docs/guides/channels) —— IM 写入为何永远走暂存区
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

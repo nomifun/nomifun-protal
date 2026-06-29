@@ -42,7 +42,7 @@ lang: zh-CN
 - **数据即数据库**：把数据目录当成数据库对待——做好备份、限制权限即可整体迁移；复制到新机器即可搬家，退出应用后删除该目录即可重置。
 - **隔离沙箱**：想让某次运行用独立目录，在启动前设置环境变量 `NOMIFUN_DATA_DIR=<绝对路径>`（桌面应用会在其后附加 `/Nomi`）。同一目录被两个后端同时占用会被机制性阻止——启动会带着持有者信息快速失败。
 - **共享记忆，按伙伴技能**：数据目录里的 `companion/` 是**全体伙伴共享的一条记忆采集 / 学习链路**，而技能库（skill）按伙伴隔离。按伙伴细分的私有记忆敬请期待。
-- **本页不含运行配置**：computer-use / browser-use / nomi agent 的开关与权限不在系统设置里，详见 [电脑操作与浏览器操作](/docs/guides/computer-browser-use)。
+- **本页不含运行配置**：computer-use / browser-use / nomi agent 的开关与权限不在系统设置里，详见 [电脑操作与浏览器操作](/zh/docs/guides/computer-browser-use)。
 
 ## 常见问题
 
@@ -54,8 +54,8 @@ lang: zh-CN
 
 ## 相关
 
-- [电脑操作与浏览器操作](/docs/guides/computer-browser-use) —— computer-use / browser-use / agent 运行的开关与权限。
-- [WebUI 远程访问](/docs/guides/webui-remote) —— 把桌面实例经登录暴露给手机 / 局域网。
-- [伙伴管理](/docs/guides/companions) —— 共享记忆中枢与按伙伴技能库。
+- [电脑操作与浏览器操作](/zh/docs/guides/computer-browser-use) —— computer-use / browser-use / agent 运行的开关与权限。
+- [WebUI 远程访问](/zh/docs/guides/webui-remote) —— 把桌面实例经登录暴露给手机 / 局域网。
+- [伙伴管理](/zh/docs/guides/companions) —— 共享记忆中枢与按伙伴技能库。
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

@@ -55,8 +55,8 @@ NomiFun 在应用内附带了一个**真正的终端**。每个终端都是后�
 
 ## 相关
 
-- [会话工作区](/docs/guides/sessions)——会话内置终端与文件树、预览的协同。
-- [智能值守 · AutoWork](/docs/guides/autowork)——把终端绑定 tag、交给编排器无人值守驱动。
-- [智能决策 · IDMM](/docs/guides/intelligent-decision)——为长跑终端会话加一层决策值守。
+- [会话工作区](/zh/docs/guides/sessions)——会话内置终端与文件树、预览的协同。
+- [智能值守 · AutoWork](/zh/docs/guides/autowork)——把终端绑定 tag、交给编排器无人值守驱动。
+- [智能决策 · IDMM](/zh/docs/guides/intelligent-decision)——为长跑终端会话加一层决策值守。
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

@@ -48,7 +48,7 @@ NomiFun 有两条容易混淆的扩展路径，这页帮你分清并配好它们
 `/assistants?tab=skills` 这里管理的是**跨伙伴通用**的技能知识包。它和"伙伴专属技能库"是两回事：
 
 - **通用技能（本页）**——你手工策展、所有伙伴可共用的知识包，来源是 Builtin / Custom / Extension。
-- **伙伴专属技能库（在伙伴页）**——每只伙伴各养成一套、**按伙伴隔离**的技能。进化引擎从该伙伴的**工具调用序列**中自动挖掘可复用 skill（仅基于调用序列本身，**不含任何参数值**），生成草稿后由你评审对应的 `SKILL.md` 再决定是否启用；养成的技能还能**赠予（gift）**给其它伙伴。详见[超级伙伴](/docs/guides/companions)。
+- **伙伴专属技能库（在伙伴页）**——每只伙伴各养成一套、**按伙伴隔离**的技能。进化引擎从该伙伴的**工具调用序列**中自动挖掘可复用 skill（仅基于调用序列本身，**不含任何参数值**），生成草稿后由你评审对应的 `SKILL.md` 再决定是否启用；养成的技能还能**赠予（gift）**给其它伙伴。详见[超级伙伴](/zh/docs/guides/companions)。
 
 > 记忆与技能的边界要分清：**记忆是共享记忆中枢、全家共享**一条采集 / 学习链路；**技能库按伙伴隔离**。按伙伴细分的私有记忆敬请期待。
 
@@ -65,8 +65,8 @@ NomiFun 有两条容易混淆的扩展路径，这页帮你分清并配好它们
 
 ## 相关
 
-- [超级伙伴](/docs/guides/companions) —— 伙伴专属技能库、进化挖掘与技能 gift。
-- [知识库](/docs/guides/knowledge-base) —— 给会话 / 终端 / 伙伴挂载知识库，让 agent"先查再答"。
-- [终端](/docs/guides/terminal) —— agent 实际执行命令的地方。
+- [超级伙伴](/zh/docs/guides/companions) —— 伙伴专属技能库、进化挖掘与技能 gift。
+- [知识库](/zh/docs/guides/knowledge-base) —— 给会话 / 终端 / 伙伴挂载知识库，让 agent"先查再答"。
+- [终端](/zh/docs/guides/terminal) —— agent 实际执行命令的地方。
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

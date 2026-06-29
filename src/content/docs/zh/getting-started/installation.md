@@ -12,7 +12,7 @@ NomiFun 是完全开源、本地优先的「超级 AI 工作站」：一套 Rust
 
 > **下载入口**：NomiFun 应用下载地址为 [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases)。进入后选择对应版本和平台资产；如果当前版本暂未包含你的平台产物，也可以按下方步骤从源码构建（桌面 Tauri / Web axum）或用 Docker 自托管。
 >
-> 想了解平台支持与系统要求，可参考[下载页](/download)。
+> 想了解平台支持与系统要求，可参考[下载页](/zh/download)。
 
 ## 前置条件
 
@@ -82,7 +82,7 @@ nomifun-web \
 ## 要点与注意
 
 - **桌面端是单用户工具。** 启动它的操作系统账户拥有 agent 的全部能力（含 shell 与文件访问）。桌面窗口免登录靠的是本地信任 token，而非「无鉴权」——只知道端口的其他进程不会被自动信任。
-- **不要直接暴露桌面端口做远程访问。** 想从另一台设备访问，请用应用内的 [WebUI 局域网远控](/docs/guides/webui-remote)（一次性扫码、token 5 分钟 TTL），或独立部署 [Web 服务](#b-从源码构建-web-服务)。
+- **不要直接暴露桌面端口做远程访问。** 想从另一台设备访问，请用应用内的 [WebUI 局域网远控](/zh/docs/guides/webui-remote)（一次性扫码、token 5 分钟 TTL），或独立部署 [Web 服务](#b-从源码构建-web-服务)。
 - **首次运行窗口期。** Web 服务在你完成设置前，任何能到达端口的人都可能认领管理员。非环回绑定时服务会打印醒目警告；用 `NOMIFUN_ADMIN_PASSWORD` 预置即可关闭这个竞态窗口。
 - **`--insecure-no-auth` 默认是敌对选项。** 它完全禁用鉴权，仅限 loopback 或完全可信的私有网络。远程裸跑后端，本质上等同于给该主机开通远程代码执行——鉴权 + TLS 是底线。
 - **同一数据目录只允许一个后端实例。** 后端启动时会取排他的 `server.lock`；在同时装有桌面应用的机器上裸跑 `nomifun-web`，会因为指向同一目录而快速失败。要并行多实例，请为每个实例指定独立的 `--data-dir`。
@@ -112,8 +112,8 @@ curl -sS http://127.0.0.1:8787/api/auth/status
 
 ## 相关
 
-- [简介](/docs/getting-started/introduction) —— NomiFun 是什么、两种宿主的取舍。
-- [快速上手](/docs/getting-started/quick-start) —— 装好后的第一段会话。
-- [WebUI 局域网远控](/docs/guides/webui-remote) —— 把现有桌面安装变成可扫码远程访问的实例。
+- [简介](/zh/docs/getting-started/introduction) —— NomiFun 是什么、两种宿主的取舍。
+- [快速上手](/zh/docs/getting-started/quick-start) —— 装好后的第一段会话。
+- [WebUI 局域网远控](/zh/docs/guides/webui-remote) —— 把现有桌面安装变成可扫码远程访问的实例。
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

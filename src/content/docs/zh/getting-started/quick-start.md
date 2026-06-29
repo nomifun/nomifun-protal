@@ -6,7 +6,7 @@ order: 3
 lang: zh-CN
 ---
 
-这页带你跑通第一段 NomiFun 会话：配好一个模型 provider，从首页发起对话，再在会话工作区里检查产物。开始前请先完成[安装](/docs/getting-started/installation)。
+这页带你跑通第一段 NomiFun 会话：配好一个模型 provider，从首页发起对话，再在会话工作区里检查产物。开始前请先完成[安装](/zh/docs/getting-started/installation)。
 
 桌面应用（nomifun-desktop）与自托管 Web 服务（nomifun-web）使用同一份 UI，差异主要在鉴权：桌面 WebView 每次启动都通过本地信任 token 免登录；`nomifun-web` 默认监听 `127.0.0.1:8787` 且需要登录。首跑建议直接用内置 **nomi** agent——它是随应用内置的 CLI 二进制，无需另外安装任何外部 CLI，最适合第一次验证。
 
@@ -52,10 +52,10 @@ lang: zh-CN
 
 ## 相关
 
-- [MCP 与技能](/docs/guides/mcp-and-skills)
-- [助手](/docs/guides/assistants)
-- [终端](/docs/guides/terminal)
-- [WebUI 远程访问](/docs/guides/webui-remote-access)
-- [Web 服务部署](/docs/guides/web-server-deployment)
+- [MCP 与技能](/zh/docs/guides/mcp-and-skills)
+- [助手](/zh/docs/guides/assistants)
+- [终端](/zh/docs/guides/terminal)
+- [WebUI 远程访问](/zh/docs/guides/webui-remote)
+- [Web 服务部署](/zh/docs/getting-started/installation)
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

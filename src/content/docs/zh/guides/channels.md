@@ -61,7 +61,7 @@ Telegram、飞书 Lark、钉钉、微信、Slack、Discord、Matrix、Mattermost
 
 ## 相关
 
-- [伙伴](/docs/guides/companions)——多伙伴管理、共享记忆中枢与每伙伴技能库。
-- [需求平台与 AutoWork](/docs/guides/autowork)——出站完成通知 webhook 与需求登记。
+- [伙伴](/zh/docs/guides/companions)——多伙伴管理、共享记忆中枢与每伙伴技能库。
+- [需求平台与 AutoWork](/zh/docs/guides/autowork)——出站完成通知 webhook 与需求登记。
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

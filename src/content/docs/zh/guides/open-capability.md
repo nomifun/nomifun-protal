@@ -73,9 +73,9 @@ NomiFun 把整个平台的 151 项能力（agent / 浏览器 / computer / 知识
 
 ## 相关
 
-- [MCP 与技能](/docs/guides/mcp-and-skills)
-- [WebUI 远程访问](/docs/guides/webui-remote)
-- [伙伴](/docs/guides/companions)
-- [知识库](/docs/guides/knowledge-base)
+- [MCP 与技能](/zh/docs/guides/mcp-and-skills)
+- [WebUI 远程访问](/zh/docs/guides/webui-remote)
+- [伙伴](/zh/docs/guides/companions)
+- [知识库](/zh/docs/guides/knowledge-base)
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)

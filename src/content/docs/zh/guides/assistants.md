@@ -44,8 +44,8 @@ lang: zh-CN
 
 ## 相关
 
-- [MCP 与技能](/docs/guides/mcp-and-skills)——管理技能与 MCP server，扩展助手能力。
-- [会话工作区](/docs/guides/sessions)——在会话里选用助手并干活。
-- [模型故障转移队列](/docs/guides/model-routing)——为助手的模型偏好兜底。
+- [MCP 与技能](/zh/docs/guides/mcp-and-skills)——管理技能与 MCP server，扩展助手能力。
+- [会话工作区](/zh/docs/guides/sessions)——在会话里选用助手并干活。
+- [模型故障转移队列](/zh/docs/guides/model-routing)——为助手的模型偏好兜底。
 
 完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
