@@ -3,13 +3,17 @@ import '@unocss/reset/tailwind.css';
 import '@/styles/global.css';
 import Header from '@/components/layout/Header.astro';
 import Footer from '@/components/layout/Footer.astro';
-import { getLocale, htmlLang, alternatePath, type Locale } from '@/i18n';
+import JsonLd from '@/components/seo/JsonLd.astro';
+import { getLocale, htmlLang, delocalizePath, localizePath, type Locale } from '@/i18n';
+import { links, socialLinks, meta } from '@/data/links';
 
 interface Props {
   title?: string;
   description?: string;
   /** disable the default header/footer chrome (rarely needed) */
   bare?: boolean;
+  /** emit SoftwareApplication JSON-LD (home & download pages only) */
+  softwareApp?: boolean;
 }
 
 const locale: Locale = getLocale(Astro.url);
@@ -28,12 +32,63 @@ const defaults = {
   },
 };
 
-const { title = defaults[locale].title, description = defaults[locale].description, bare = false } = Astro.props;
+const { title = defaults[locale].title, description = defaults[locale].description, bare = false, softwareApp = false } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site).toString();
-const altPath = alternatePath(Astro.url.pathname, locale === 'zh-CN' ? 'en-US' : 'zh-CN');
-const altHref = new URL(altPath, Astro.site).toString();
-const ogImage = new URL('/brand/og-cover.svg', Astro.site).toString();
+// Normalize to trailing-slash form so canonical, hreflang, and the sitemap all
+// reference the exact same URL string (the sitemap emits trailing slashes).
+const norm = (p: string) => (p.endsWith('/') ? p : p + '/');
+const canonical = new URL(norm(Astro.url.pathname), Astro.site).toString();
+
+// Reciprocal language alternates, always pointing at the canonical root for each
+// locale (en at "/", zh at "/zh/…") regardless of which page renders this layout.
+const basePath = delocalizePath(Astro.url.pathname);
+const enHref = new URL(norm(localizePath(basePath, 'en-US')), Astro.site).toString();
+const zhHref = new URL(norm(localizePath(basePath, 'zh-CN')), Astro.site).toString();
+
+const ogImage = new URL('/brand/og-cover.png', Astro.site).toString();
+const ogImageAlt =
+  locale === 'zh-CN'
+    ? 'NomiFun — 完全开源的超级 AI 工作站'
+    : 'NomiFun — fully open-source super AI workstation';
+const twitterHandle = '@' + socialLinks.x.split('/').pop();
+
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'NomiFun',
+  url: 'https://www.nomifun.com/',
+  logo: 'https://www.nomifun.com/brand/logo.svg',
+  sameAs: [
+    links.github,
+    socialLinks.x,
+    socialLinks.youtube,
+    socialLinks.tiktok,
+    socialLinks.bilibili,
+    socialLinks.douyin,
+    socialLinks.xiaohongshu,
+  ],
+};
+const siteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'NomiFun',
+  url: 'https://www.nomifun.com/',
+  inLanguage: ['en', 'zh-CN'],
+};
+const appLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'NomiFun',
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'macOS, Windows, Linux',
+  url: 'https://www.nomifun.com/',
+  downloadUrl: links.releases,
+  softwareVersion: meta.version,
+  license: links.license,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: defaults['en-US'].description,
+};
+const jsonLd = softwareApp ? [orgLd, siteLd, appLd] : [orgLd, siteLd];
 ---
 
 <!doctype html>
@@ -45,21 +100,37 @@ const ogImage = new URL('/brand/og-cover.svg', Astro.site).toString();
     <link rel="icon" type="image/svg+xml" href="/brand/logo.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Google Search Console: paste the verification token and uncomment to verify.
+    <meta name="google-site-verification" content="YOUR_GSC_TOKEN" /> -->
+
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang={locale === 'zh-CN' ? 'en' : 'zh-CN'} href={altHref} />
-    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="zh-CN" href={zhHref} />
+    <link rel="alternate" hreflang="x-default" href={enHref} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NomiFun" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:locale" content={locale === 'zh-CN' ? 'zh_CN' : 'en_US'} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={twitterHandle} />
+    <meta name="twitter:creator" content={twitterHandle} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    <JsonLd schema={jsonLd} />
   </head>
   <body>
     {!bare && <Header />}

@@ -18,7 +18,14 @@ export default defineConfig({
   integrations: [
     UnoCSS({ injectReset: true }),
     react(),
-    sitemap(),
+    sitemap({
+      // en-US at the root ("/"), zh-CN under "/zh" — emit reciprocal
+      // <xhtml:link hreflang> alternates so search engines pair the languages.
+      i18n: {
+        defaultLocale: 'en',
+        locales: { en: 'en', zh: 'zh-CN' },
+      },
+    }),
   ],
   i18n: {
     defaultLocale: 'en-US',
