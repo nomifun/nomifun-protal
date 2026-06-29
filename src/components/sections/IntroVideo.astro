@@ -16,8 +16,8 @@ const copy: Dict<{
     eyebrow: '产品介绍视频',
     title: '先看一段完整介绍，再决定从哪里开始',
     lead: '如果你想快速判断 NomiFun 是否适合自己的工作流，这段介绍视频比继续扫功能列表更直接。',
-    watchLabel: '在 YouTube 打开',
-    note: '视频由 YouTube 加载；如果当前网络无法播放，可点开外部链接观看。',
+    watchLabel: '在 B站 打开',
+    note: '视频由哔哩哔哩加载；如果当前网络无法播放，可点开外部链接观看。',
     videoTitle: 'NomiFun 产品介绍视频',
   },
   'en-US': {
@@ -31,7 +31,9 @@ const copy: Dict<{
 };
 
 const t = pick(copy, locale);
-const embedUrl = `${links.introVideoEmbed}?rel=0`;
+const video = pick(links.introVideos, locale);
+const embedUrl = video.embed;
+const isBilibili = video.embed.includes('bilibili');
 ---
 
 <section id="intro-video" class="relative overflow-hidden py-16 sm:py-20 lg:py-24">
@@ -44,8 +46,8 @@ const embedUrl = `${links.introVideoEmbed}?rel=0`;
           {t.title}
         </h2>
         <p class="mt-5 text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
-        <a href={links.introVideo} target="_blank" rel="noopener noreferrer" class="btn-ghost mt-8 text-sm sm:text-base">
-          <span class="i-mdi-youtube text-lg text-pink-400" aria-hidden="true"></span>
+        <a href={video.watch} target="_blank" rel="noopener noreferrer" class="btn-ghost mt-8 text-sm sm:text-base">
+          <span class={`${isBilibili ? 'i-simple-icons-bilibili' : 'i-mdi-youtube'} text-lg text-pink-400`} aria-hidden="true"></span>
           {t.watchLabel}
         </a>
       </div>

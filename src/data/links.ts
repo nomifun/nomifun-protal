@@ -17,9 +17,17 @@ export const links = {
   issues: 'https://github.com/nomifun/nomifun-tauri/issues',
   // Official website
   website: 'https://www.nomifun.com',
-  // Product introduction video
-  introVideo: 'https://youtu.be/gEDo5H0H0Pg',
-  introVideoEmbed: 'https://www.youtube-nocookie.com/embed/gEDo5H0H0Pg',
+  // Product introduction video (region-aware: Bilibili for mainland China, YouTube for overseas)
+  introVideos: {
+    'zh-CN': {
+      watch: 'https://www.bilibili.com/video/BV1RCKS6mEuS/',
+      embed: 'https://player.bilibili.com/player.html?bvid=BV1RCKS6mEuS&autoplay=0',
+    },
+    'en-US': {
+      watch: 'https://www.youtube.com/watch?v=Z28XyhvNh_E',
+      embed: 'https://www.youtube-nocookie.com/embed/Z28XyhvNh_E?rel=0',
+    },
+  },
   // Public contact / security email
   email: '535526063@qq.com',
   // Upstream attribution (Apache-2.0)
