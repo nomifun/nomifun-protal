@@ -6,6 +6,7 @@ import Footer from '@/components/layout/Footer.astro';
 import JsonLd from '@/components/seo/JsonLd.astro';
 import { getLocale, htmlLang, delocalizePath, localizePath, type Locale } from '@/i18n';
 import { links, socialLinks, meta } from '@/data/links';
+import { activeVerifications } from '@/data/siteVerification';
 
 interface Props {
   title?: string;
@@ -102,8 +103,8 @@ const jsonLd = softwareApp ? [orgLd, siteLd, appLd] : [orgLd, siteLd];
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
-    <!-- Google Search Console verification -->
-    <meta name="google-site-verification" content="0d2-w2TWdJppCVQdx8IBs4MY-t3yG6QJPq4_B-LAyCk" />
+    <!-- Search-engine ownership verification (Google / Bing / Baidu / Yandex) -->
+    {activeVerifications.map((v) => <meta name={v.name} content={v.content} />)}
 
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="en" href={enHref} />
