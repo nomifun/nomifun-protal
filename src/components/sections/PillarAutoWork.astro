@@ -99,28 +99,28 @@ const webhookLabel = locale === 'zh-CN' ? '完成通知推送' : 'Completion not
       <p class="text-base sm:text-lg text-mid leading-relaxed">{t.lead}</p>
     </div>
 
-    <div class="mt-12 grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-12">
+    <div class="mt-12 grid min-w-0 gap-8 lg:grid-cols-2 lg:items-start lg:gap-12">
       <!-- Capability points + outbound webhooks + roadmap note + CTA -->
-      <div class="flex flex-col gap-5">
-        <ul class="flex flex-col gap-4" data-stagger>
+      <div class="flex min-w-0 flex-col gap-5">
+        <ul class="flex min-w-0 flex-col gap-4" data-stagger>
           {t.points.map((p) => (
-            <li class="card card-hover flex gap-4 p-5">
+            <li class="card card-hover flex min-w-0 gap-4 p-5">
               <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-pink-500/25 bg-pink-500/10">
                 <span class={`${p.icon} text-xl text-pink-400`} aria-hidden="true"></span>
               </span>
               <div class="min-w-0">
-                <h3 class="text-base font-semibold text-hi">{p.title}</h3>
-                <p class="mt-1 text-sm leading-relaxed text-mid">{p.body}</p>
+                <h3 class="break-words text-base font-semibold text-hi">{p.title}</h3>
+                <p class="mt-1 break-words text-sm leading-relaxed text-mid">{p.body}</p>
               </div>
             </li>
           ))}
         </ul>
 
         <!-- Outbound completion webhooks (NOT inbound) -->
-        <div class="rounded-2xl border border-ink-600/70 bg-ink-850/50 p-4" data-animate>
-          <div class="flex items-center gap-2">
+        <div class="min-w-0 rounded-2xl border border-ink-600/70 bg-ink-850/50 p-4" data-animate>
+          <div class="flex min-w-0 items-center gap-2">
             <span class="i-mdi-webhook text-lg text-violet-300" aria-hidden="true"></span>
-            <span class="text-sm font-semibold text-hi">{webhookLabel}</span>
+            <span class="min-w-0 break-words text-sm font-semibold text-hi">{webhookLabel}</span>
           </div>
           <div class="mt-3 flex flex-wrap items-center gap-2">
             {webhooks.map((w) => (
@@ -131,7 +131,7 @@ const webhookLabel = locale === 'zh-CN' ? '完成通知推送' : 'Completion not
           </div>
         </div>
 
-        <div class="flex flex-wrap items-center gap-4 pt-1" data-animate>
+        <div class="flex min-w-0 flex-wrap items-center gap-4 pt-1" data-animate>
           <Badge tone="soon">
             <span class="i-mdi-clock-outline text-sm" aria-hidden="true"></span>{t.soon}
           </Badge>
@@ -143,9 +143,9 @@ const webhookLabel = locale === 'zh-CN' ? '完成通知推送' : 'Completion not
       </div>
 
       <!-- Interactive board -->
-      <div class="lg:sticky lg:top-24" data-animate>
+      <div class="min-w-0 lg:sticky lg:top-24" data-animate>
         <AutoWorkBoard locale={locale} client:visible />
-        <p class="mt-4 text-center text-sm font-medium text-mid">
+        <p class="mt-4 max-w-full break-words text-center text-sm font-medium text-mid">
           <span class="text-grad-pink">{t.punch}</span>
         </p>
       </div>

@@ -48,7 +48,7 @@ Not yet doable from IM: creating a team (use the desktop / WebUI), file uploads 
 
 - **One companion per platform.** Bots bind to a companion per channel row, and the structure guarantees **one bot is never bound to a second companion**; the same platform can host multiple bots (e.g. a separate Lark custom app per companion).
 - **No binding → default companion.** A channel row with no explicit binding falls back through the platform preference to the **default companion**; if a bound companion is later deleted, it auto-falls back to the default and resets the session.
-- **Memory is shared family-wide.** No matter how many bots or channels, session data flows into one **shared memory hub** — switching companions loses nothing. Skills, by contrast, are **per-companion isolated**, each with its own skill library. (Per-companion private memory is coming soon.)
+- **Memory has shared / private scopes.** Shared memories are family-wide; private memories are visible only to their owning companion. Skills, by contrast, are **per-companion isolated**, each with its own skill library.
 - **Pairing-code safety.** 6-digit random code, 10-minute TTL, with a periodic sweep that expires stale codes.
 
 ## FAQ
@@ -61,7 +61,7 @@ Not yet doable from IM: creating a team (use the desktop / WebUI), file uploads 
 
 ## Related
 
-- [Companions](/docs/guides/companions) — multi-companion management, the shared memory hub, and per-companion skill libraries.
+- [Companions](/docs/guides/companions) — multi-companion management, shared/private memory scopes, and per-companion skill libraries.
 - [AutoWork & Requirements](/docs/guides/autowork) — outbound completion-notification webhooks and requirement logging.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

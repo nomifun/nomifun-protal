@@ -36,7 +36,7 @@ Open **Scheduled tasks** from the sidebar (route `/scheduled`). With no jobs yet
 - **Missed triggers are logged, not silently lost.** If a trigger is missed because the system slept or the app wasn't running, the next startup / resume records a `missed` run, posts a system message into the affected conversation, and re-arms the timer for the next normal trigger.
 - **Run history carries a status.** Each trigger is recorded as `ok` / `error` / `skipped` / `missed`, with a link to the resulting conversation where applicable.
 - **A busy guard prevents overlap.** In `existing` mode, if the previous run is still going when the next trigger arrives, the new run is skipped (recorded as `skipped`). Switch to `new_conversation` for long-running work so each trigger gets its own thread.
-- **You can attach a per-task skill.** Author a `SKILL.md` on the detail page and it is injected into the agent's session on every trigger — to lock in a persona, tool preferences, or workspace conventions. Skills are **isolated per companion** (each companion has its own skill library), while memory runs through a **shared memory hub across all companions** — the two are independent. (Per-companion private memory is coming soon.) Deleting the task removes its skill directory too.
+- **You can attach a per-task skill.** Author a `SKILL.md` on the detail page and it is injected into the agent's session on every trigger — to lock in a persona, tool preferences, or workspace conventions. Companion skills are **isolated per companion**, while memory supports shared and per-companion private scopes — the two are independent. Deleting the task removes its skill directory too.
 
 ## FAQ
 

@@ -45,9 +45,9 @@ Entry point: the **Models** page in the sidebar (`/models`) manages every provid
 - **Reliability, not quota.** If **every** provider in the queue is down, or the turn's prompt / tool state is itself invalid, failover can't rescue that turn.
 - **Works with IDMM.** When IDMM's failure-watch judges a provider failure recoverable and the session has failover enabled, it lets the session retry along this queue. Failure-watch and decision-watch are **off by default**. See [Unattended automation · AutoWork](/docs/guides/autowork).
 
-## The 17 direct ACP agents
+## The ~19 external ecosystem agents
 
-Beyond the native providers, NomiFun also connects directly to 17 external agent CLIs (e.g. Claude Code, Codex) over **ACP (Agent Client Protocol)**. They run as separate runtimes in a terminal and you install and configure each one; the built-in **nomi agent** is a bundled CLI binary that needs no extra install.
+Beyond the native providers, NomiFun also connects to about 19 external ecosystem agents (e.g. Claude Code, Codex, OpenCode, Nanobot, OpenClaw) over **ACP (Agent Client Protocol)** or adjacent local agent runtimes. They run as separate runtimes in a terminal and you install and configure each one; the built-in **nomi agent** is a bundled CLI binary that needs no extra install.
 
 ![ACP agent install & configuration](/images/en/01模型/agent安装配置.png)
 

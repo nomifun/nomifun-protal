@@ -145,9 +145,9 @@ export default function AutoWorkBoard({ locale }: { locale: Locale }) {
   stages.forEach((stage, idx) => columns[stage].push({ idx, stage }));
 
   return (
-    <div className="rounded-2xl border border-ink-600/70 bg-ink-850/60 p-4 backdrop-blur-sm sm:p-5">
+    <div className="min-w-0 max-w-full overflow-hidden rounded-2xl border border-ink-600/70 bg-ink-850/60 p-4 backdrop-blur-sm sm:p-5">
       {/* IDMM watch status strip */}
-      <div className="mb-4 flex items-center justify-between gap-3 rounded-xl border border-ink-600/70 bg-ink-900/50 px-3.5 py-2.5">
+      <div className="mb-4 flex min-w-0 items-center justify-between gap-3 rounded-xl border border-ink-600/70 bg-ink-900/50 px-3.5 py-2.5">
         <div className="flex items-center gap-2.5 min-w-0">
           <span className="relative flex h-2.5 w-2.5 shrink-0">
             {!reduced && (
@@ -162,11 +162,11 @@ export default function AutoWorkBoard({ locale }: { locale: Locale }) {
             · {s.watchOn}
           </span>
         </div>
-        <div className="flex items-center gap-1.5 shrink-0">
+        <div className="flex min-w-0 shrink items-center justify-end gap-1.5">
           <span className="i-mdi-shield-sync-outline text-sm text-pink-400" aria-hidden="true" />
           <span
             key={tier}
-            className={`text-[11px] font-medium tabular-nums sm:text-xs ${reduced ? 'text-mid' : 'awb-fade text-mid'}`}
+            className={`min-w-0 truncate text-[11px] font-medium tabular-nums sm:text-xs ${reduced ? 'text-mid' : 'awb-fade text-mid'}`}
           >
             {s.tiers[tier]}
           </span>
@@ -174,34 +174,34 @@ export default function AutoWorkBoard({ locale }: { locale: Locale }) {
       </div>
 
       {/* Kanban */}
-      <div className="grid grid-cols-3 gap-2 sm:gap-3">
+      <div className="grid min-w-0 grid-cols-3 gap-2 sm:gap-3">
         {columns.map((cards, col) => (
           <div
             key={col}
-            className="flex flex-col rounded-xl border border-ink-700/70 bg-ink-900/40 p-2 sm:p-2.5"
+            className="flex min-w-0 flex-col rounded-xl border border-ink-700/70 bg-ink-900/40 p-2 sm:p-2.5"
           >
-            <div className="mb-2 flex items-center gap-1.5 px-1">
+            <div className="mb-2 flex min-w-0 items-center gap-1.5 px-1">
               <span
                 className={`h-1.5 w-1.5 rounded-full ${
                   col === 0 ? 'bg-low' : col === 1 ? 'bg-warning' : 'bg-success'
                 }`}
                 aria-hidden="true"
               />
-              <span className="text-[11px] font-semibold tracking-wide text-mid sm:text-xs">
+              <span className="min-w-0 truncate text-[11px] font-semibold tracking-wide text-mid sm:text-xs">
                 {s.cols[col]}
               </span>
               <span className="ml-auto text-[10px] font-medium tabular-nums text-low">
                 {cards.length}
               </span>
             </div>
-            <div className="flex min-h-[7rem] flex-col gap-2 sm:min-h-[8.5rem]">
+            <div className="flex min-h-[7rem] min-w-0 flex-col gap-2 sm:min-h-[8.5rem]">
               {cards.map(({ idx }) => {
                 const card = s.cards[idx];
                 const isMoving = idx === movingIdx;
                 return (
                   <div
                     key={idx}
-                    className={`group rounded-lg border bg-ink-800/70 p-2 sm:p-2.5 transition-all duration-500 ${
+                    className={`group min-w-0 rounded-lg border bg-ink-800/70 p-2 sm:p-2.5 transition-all duration-500 ${
                       isMoving
                         ? 'border-pink-500/50 shadow-[0_0_24px_-6px_rgba(255,111,145,0.45)]'
                         : 'border-ink-600/60'
@@ -214,7 +214,7 @@ export default function AutoWorkBoard({ locale }: { locale: Locale }) {
                     >
                       {card.tag}
                     </span>
-                    <p className="mt-1.5 text-[11px] font-medium leading-snug text-hi sm:text-xs">
+                    <p className="mt-1.5 break-words text-[11px] font-medium leading-snug text-hi sm:text-xs">
                       {card.title}
                     </p>
                     {col === 2 && (

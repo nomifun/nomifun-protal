@@ -42,7 +42,7 @@ A tour of the common entry points (sidebar / routes) once you're in:
 
 ## Notes & boundaries
 
-- **Shared memory + per-companion skills** — all companions share one memory capture / learning pipeline (a shared memory hub), while the skill library is isolated per companion. Per-companion private memory is coming soon.
+- **Shared / private memory + per-companion skills** — memories can be family-wide or owned by one companion, while the skill library is isolated per companion.
 - **IM channels (11+)** — shipped: Telegram, Lark (Feishu), DingTalk, WeChat, Slack, Discord, Matrix, Mattermost, Twitch, Nostr, QQ Bot; WeCom (Enterprise WeChat) is in progress.
 - **Completion notifications are outbound** — tasks can push completion via outbound webhooks (Lark signed card / Slack / HTTP). Turning an issue or IM message **into an inbound requirement** is on the roadmap (coming soon).
 - **Knowledge base sources** — the Feishu connector is shipped (its in-UI creation entry is currently disabled); Notion as a source is on the roadmap, not yet implemented.

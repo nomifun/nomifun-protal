@@ -1,6 +1,6 @@
 ---
 title: Companions
-description: Raise a family of companions — shared memory hub, per-companion skill libraries, knowledge-base binding, skill evolution, and cross-machine migration.
+description: Raise a family of companions — shared/private memory scopes, per-companion skill libraries, knowledge-base binding, skill evolution, and cross-machine migration.
 category: Companions & Channels
 order: 8
 lang: en-US
@@ -10,9 +10,8 @@ NomiFun's digital companion grows from a single nomi into a **family of companio
 
 The memory model is the key thing to understand:
 
-- **Shared memory hub (family-wide)** — collection and learning run as one global pipeline. Whatever any companion learns or remembers, the whole family remembers. Switch companions mid-conversation and the new one already knows everything that happened.
+- **Shared / private memory scopes** — memories can be family-wide or owned by one companion. Chat memories default to the active companion, while learner output is shared.
 - **Per-companion skill libraries (isolated per companion)** — each companion grows its own set of skills, kept separate from the others.
-- (Per-companion **private memory** is coming soon.)
 
 > The entry point is the **Companions** page in the sidebar (`/nomi`). Right-clicking any desktop pet and choosing "Open chat" also deep-links here.
 
@@ -50,9 +49,9 @@ The memory model is the key thing to understand:
 
    ![Bind knowledge bases to a companion](/images/en/桌面伙伴/桌面伙伴知识库配置.png)
 
-9. **Shared memory in action.** You can add a shared memory by hand in the shared area. Tell one companion to remember something, then ask another — it knows too, because the memory hub is shared across the whole family.
+9. **Manage shared / private memories.** You can add shared memories by hand or assign a memory to one companion. Chat-saved memories default to the active companion, while learner output lands in the shared scope.
 
-   ![Add a shared memory](/images/en/桌面伙伴/桌面伙伴新增共享记忆.png)
+   ![Add a memory and choose its scope](/images/en/桌面伙伴/桌面伙伴新增共享记忆.png)
 
 10. **Configure data collection.** Shared data collection decides which of your work data the memory hub learns from. Most collectors are **off by default and opt-in**, and you can control them per category.
 
@@ -68,7 +67,7 @@ The memory model is the key thing to understand:
 
 ## Notes and boundaries
 
-- **Memory is shared, skills are isolated.** All companions share one collection/learning pipeline and a single long-term memory; skill libraries are grown per companion. Don't read this as "each companion has its own private memory" — per-companion private memory is on the roadmap.
+- **Memory has scopes; skills stay isolated.** Memories can be shared or private to one companion. Shared memories are family-wide; private memories are visible only to the owning companion. Skill libraries are still grown per companion.
 - **The evolution engine sees sequences, not arguments.** Skill mining is based only on the **sequence** of tool calls and records no argument values, so the skills it distills are safe to review and share.
 - **Keep desktop pets to ≤ 5 on screen.** Each pet is its own WebView; too many hurts performance. The UI warns you but doesn't hard-cap.
 - **Remote channels bind per companion.** Each IM platform can bind one companion to handle remote messages, falling back to the default companion when unbound. Binding and rebinding are covered in [Channels](/docs/guides/channels).

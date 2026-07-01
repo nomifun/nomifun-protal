@@ -1,0 +1,247 @@
+---
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+
+const locale: Locale = getLocale(Astro.url);
+
+type Highlight = {
+  icon: string;
+  title: string;
+  body: string;
+  tags: string[];
+};
+
+type Shot = {
+  src: string;
+  alt: string;
+  label: string;
+};
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  release: string;
+  proof: string;
+  highlights: Highlight[];
+  shots: Shot[];
+  cta: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '近期迭代 · 2026-07-01 真机版本',
+    title: '官网介绍已同步到 <span class="text-grad-pink">v0.1.13 的核心能力</span>',
+    lead:
+      '这次补充直接取自 nomifun-tauri 的最新 changelog、README 与设计记录：编排、浏览器、模型容错、伙伴记忆、开放能力与发版链路都有明显增量。',
+    release: 'v0.1.13',
+    proof: '截图来自 2026-07-01 的真实 NomiFun 桌面应用，不是渲染稿。',
+    highlights: [
+      {
+        icon: 'i-mdi-graph-outline',
+        title: '会话原生编排更可控',
+        body:
+          'DAG 节点可在启动前单独选模型、补预置要求；interactive run 会先停在待批准态，确认后再执行，并可点击节点查看真实 worker 会话。',
+        tags: ['DAG 预配置', '执行前批准', 'worker 投射'],
+      },
+      {
+        icon: 'i-mdi-web-sync',
+        title: 'Browser Use 默认静默',
+        body:
+          '桌面版默认用静默托管 Chromium，也可切到系统 Chrome / Edge 本体；登录态可加密复用，高风险静默审批可附当前页面截图。',
+        tags: ['静默默认', '系统浏览器来源', '截图审批'],
+      },
+      {
+        icon: 'i-mdi-image-refresh-outline',
+        title: '模型与多模态容错升级',
+        body:
+          '当模型不支持图片输入时自动剥离图片并在同一会话重试，同时保留可见提示；模型上下文窗口也可逐模型校准，避免长任务预算失真。',
+        tags: ['图片降级', '上下文窗口', '不中断会话'],
+      },
+      {
+        icon: 'i-mdi-account-heart-outline',
+        title: '伙伴记忆进入共享 / 私有作用域',
+        body:
+          '伙伴记忆支持共享与按伙伴私有两种作用域，聊天记忆默认归属当前伙伴，学习中枢产出进入共享；记忆内容与归属都可编辑。',
+        tags: ['共享记忆', '私有记忆', '可编辑'],
+      },
+    ],
+    shots: [
+      {
+        src: '/images/showcase/readme/readme-00-orchestration-hero.png',
+        alt: 'NomiFun 会话原生编排与 DAG 画布',
+        label: '会话编排',
+      },
+      {
+        src: '/images/showcase/readme/readme-05-companions.png',
+        alt: 'NomiFun 桌面伙伴概览',
+        label: '桌面伙伴',
+      },
+      {
+        src: '/images/showcase/readme/readme-04-model-agents.png',
+        alt: 'NomiFun 模型与 Agent 管理',
+        label: '模型与 Agent',
+      },
+      {
+        src: '/images/showcase/readme/readme-07-requirements.png',
+        alt: 'NomiFun 需求平台与 AutoWork 入口',
+        label: '需求平台',
+      },
+    ],
+    cta: '查看完整文档',
+  },
+  'en-US': {
+    eyebrow: 'Recent iteration · 2026-07-01 desktop build',
+    title: 'The site now reflects the <span class="text-grad-pink">v0.1.13 core capabilities</span>',
+    lead:
+      'This refresh is pulled directly from the latest nomifun-tauri changelog, README, and design records: orchestration, browser use, model resilience, companion memory, open capability, and release flow all moved forward.',
+    release: 'v0.1.13',
+    proof: 'Screenshots are real captures from the NomiFun desktop app on 2026-07-01, not renders.',
+    highlights: [
+      {
+        icon: 'i-mdi-graph-outline',
+        title: 'Conversation-native orchestration is more controllable',
+        body:
+          'DAG nodes can be pre-configured with their own model and brief; interactive runs pause for approval before execution, and each node opens the real worker transcript.',
+        tags: ['DAG preflight', 'Approval before run', 'Worker projection'],
+      },
+      {
+        icon: 'i-mdi-web-sync',
+        title: 'Browser Use defaults to silent',
+        body:
+          'Desktop builds default to silent managed Chromium, can switch to system Chrome / Edge, reuse encrypted login state, and attach screenshots to high-risk silent approvals.',
+        tags: ['Silent default', 'System browser source', 'Screenshot approval'],
+      },
+      {
+        icon: 'i-mdi-image-refresh-outline',
+        title: 'Model and multimodal resilience improved',
+        body:
+          'If a model rejects images, NomiFun removes them, retries in the same conversation, and leaves a visible notice. Context windows can now be tuned per model.',
+        tags: ['Image fallback', 'Context window', 'No interrupted turn'],
+      },
+      {
+        icon: 'i-mdi-account-heart-outline',
+        title: 'Companion memory has shared and private scopes',
+        body:
+          'Companion memories now support shared and per-companion private scopes. Chat memories belong to the active companion, learner output is shared, and scope/content are editable.',
+        tags: ['Shared memory', 'Private scope', 'Editable'],
+      },
+    ],
+    shots: [
+      {
+        src: '/images/showcase/readme/readme-00-orchestration-hero.png',
+        alt: 'NomiFun conversation-native orchestration and DAG canvas',
+        label: 'Orchestration',
+      },
+      {
+        src: '/images/showcase/readme/readme-05-companions.png',
+        alt: 'NomiFun desktop companion overview',
+        label: 'Companions',
+      },
+      {
+        src: '/images/showcase/readme/readme-04-model-agents.png',
+        alt: 'NomiFun models and agents management',
+        label: 'Models & Agents',
+      },
+      {
+        src: '/images/showcase/readme/readme-07-requirements.png',
+        alt: 'NomiFun requirements platform and AutoWork entry',
+        label: 'Requirements',
+      },
+    ],
+    cta: 'Read the full docs',
+  },
+};
+
+const t = pick(copy, locale);
+const heroShot = t.shots[0];
+const supportingShots = t.shots.slice(1);
+---
+
+<section id="latest" class="relative section-y bg-ink-850/30">
+  <div class="container-x">
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center">
+      <div data-animate>
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="eyebrow">{t.eyebrow}</span>
+          <span class="rounded-full border border-pink-500/35 bg-pink-500/10 px-3 py-1 font-mono text-xs font-semibold text-pink-200">
+            {t.release}
+          </span>
+        </div>
+
+        <h2 class="mt-5 text-3xl font-bold leading-tight text-hi sm:text-4xl lg:text-[2.7rem]">
+          <Fragment set:html={t.title} />
+        </h2>
+        <p class="mt-5 text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
+
+        <ul class="mt-8 grid gap-4" data-stagger>
+          {
+            t.highlights.map((item) => (
+              <li class="highlight-row rounded-2xl border border-ink-600/70 bg-ink-900/45 p-4 transition-colors hover:border-pink-500/35 sm:p-5">
+                <div class="flex gap-4">
+                  <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-pink-500/25 bg-pink-500/10">
+                    <span class={`${item.icon} text-xl text-pink-400`} aria-hidden="true" />
+                  </span>
+                  <div class="min-w-0">
+                    <h3 class="text-base font-semibold text-hi">{item.title}</h3>
+                    <p class="mt-1.5 text-sm leading-relaxed text-mid">{item.body}</p>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                      {item.tags.map((tag) => (
+                        <span class="rounded-full border border-ink-600 bg-ink-800/70 px-2.5 py-1 font-mono text-[11px] text-low">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <a href={localizePath('/docs', locale)} class="btn-ghost mt-8 text-sm">
+          <span class="i-mdi-book-open-page-variant-outline text-base" aria-hidden="true"></span>
+          {t.cta}
+          <span class="i-mdi-arrow-right text-base" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div data-animate>
+        <figure class="overflow-hidden rounded-3xl border border-ink-600 bg-ink-900/70 shadow-[0_0_70px_-26px_rgba(255,111,145,0.58)]">
+          <img
+            src={heroShot.src}
+            alt={heroShot.alt}
+            width="2560"
+            height="1500"
+            loading="lazy"
+            decoding="async"
+            class="block aspect-[16/9] w-full object-cover object-left-top"
+          />
+          <figcaption class="flex items-center justify-between gap-3 border-t border-ink-700/70 px-4 py-3 text-xs text-low sm:px-5">
+            <span class="inline-flex items-center gap-2">
+              <span class="i-mdi-camera-outline text-sm text-pink-400" aria-hidden="true"></span>
+              {t.proof}
+            </span>
+            <span class="shrink-0 font-mono text-pink-200">{heroShot.label}</span>
+          </figcaption>
+        </figure>
+
+        <ul class="mt-4 grid gap-4 sm:grid-cols-3">
+          {
+            supportingShots.map((shot) => (
+              <li class="overflow-hidden rounded-2xl border border-ink-600/70 bg-ink-900/60">
+                <img
+                  src={shot.src}
+                  alt={shot.alt}
+                  width="1280"
+                  height="832"
+                  loading="lazy"
+                  decoding="async"
+                  class="block aspect-[4/3] w-full object-cover object-left-top"
+                />
+                <p class="border-t border-ink-700/70 px-3 py-2 text-xs font-medium text-mid">{shot.label}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

@@ -42,7 +42,7 @@ The desktop app (nomifun-desktop) and the self-hosted web server (nomifun-web) s
 ## Notes and limits
 
 - **Built-in nomi vs. external agents** — the built-in nomi needs no external CLI and works out of the box. If you switch to an external agent such as Claude Code, Codex, or Gemini, you still have to install the matching CLI on the host yourself; `/models` only handles model credentials and selection — it won't install third-party CLIs for you.
-- **Memory and skills boundary** — all companions share one memory capture / learning pipeline (a shared memory hub), while the **skill library is isolated per companion** — each companion has its own skill set. Per-companion private memory is coming soon.
+- **Memory and skills boundary** — memory supports shared and per-companion private scopes, while the **skill library is isolated per companion** — each companion has its own skill set.
 - **Login difference** — the desktop app requires no login; on the web, the first visit guides you through creating an admin account, after which login is required.
 
 ## FAQ

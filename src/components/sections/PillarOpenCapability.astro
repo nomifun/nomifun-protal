@@ -120,8 +120,8 @@ const t = pick(copy, locale);
     </ul>
 
     <!-- interactive islands: tabs (left) + gateway matrix (right); stacked on mobile -->
-    <div class="mt-12 grid gap-6 lg:grid-cols-2 lg:items-start lg:gap-8">
-      <div class="flex flex-col gap-3" data-animate>
+    <div class="mt-12 grid min-w-0 gap-6 lg:grid-cols-2 lg:items-start lg:gap-8">
+      <div class="flex min-w-0 flex-col gap-3" data-animate>
         <div class="flex items-center gap-2">
           <span class="i-mdi-console-line text-base text-violet-300" aria-hidden="true"></span>
           <span class="text-sm font-semibold text-hi">{t.tabsLabel}</span>
@@ -129,7 +129,7 @@ const t = pick(copy, locale);
         <OpenApiTabs locale={locale} client:visible />
       </div>
 
-      <div class="flex flex-col gap-3" data-animate>
+      <div class="flex min-w-0 flex-col gap-3" data-animate>
         <div class="flex items-center gap-2">
           <span class="i-mdi-grid text-base text-violet-300" aria-hidden="true"></span>
           <span class="text-sm font-semibold text-hi">{t.matrixLabel}</span>

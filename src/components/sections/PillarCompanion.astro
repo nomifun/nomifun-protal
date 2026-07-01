@@ -4,8 +4,7 @@
  *
  * Structure (per spec §7): 痛点钩子 → 一句话主张 → 3 能力要点 → 演示 island → 次级 CTA.
  * Accuracy red lines (spec §2/§3 pillar 2):
- *   - 共享记忆中枢（全体伙伴共享）+ 每个伙伴专属技能库（skill 按伙伴隔离）。
- *     绝不写 "专属记忆"。
+ *   - 记忆支持共享 / 按伙伴私有作用域；技能库仍按伙伴隔离。
  *   - 行为采集 opt-in（多数默认关），由模型蒸馏为长期记忆。
  *   - 进化引擎只从工具调用序列挖掘 skill（不含参数值）→ 可评审 SKILL.md → 与你商议确认。
  */
@@ -26,7 +25,7 @@ const copy: Dict<{
   title: string;
   lead: string;
   points: Point[];
-  share: string;
+  note: string;
   ctaSecondary: string;
 }> = {
   'zh-CN': {
@@ -42,8 +41,8 @@ const copy: Dict<{
       },
       {
         icon: 'i-mdi-brain',
-        title: '共享记忆中枢 + 专属技能库',
-        body: '记忆是全体伙伴共享的记忆中枢；而技能库按伙伴隔离，每个伙伴拥有自己的专属技能。每个伙伴还可绑定各自领域的专家知识库。',
+        title: '共享 / 私有记忆 + 专属技能库',
+        body: '记忆支持共享与按伙伴私有两种作用域：聊天记忆默认归属当前伙伴，学习中枢产出进入共享；技能库仍按伙伴隔离，每个伙伴拥有自己的专属技能。',
       },
       {
         icon: 'i-mdi-auto-fix',
@@ -56,7 +55,7 @@ const copy: Dict<{
         body: '可在伙伴之间「赠予 (gift)」技能、开启技能共享学习。你可以只教一个伙伴，让它去教其他伙伴。',
       },
     ],
-    share: '细分私有记忆敬请期待',
+    note: '记忆内容与归属可编辑；新对话与实时 recall 会按最新作用域读取。',
     ctaSecondary: '查看养成指南',
   },
   'en-US': {
@@ -72,8 +71,8 @@ const copy: Dict<{
       },
       {
         icon: 'i-mdi-brain',
-        title: 'Shared memory hub + per-companion skills',
-        body: 'Memory is a hub shared across every companion; skill libraries, by contrast, are isolated per companion. Each companion can also bind its own domain expert knowledge base.',
+        title: 'Shared / private memory + per-companion skills',
+        body: 'Memory supports shared and per-companion private scopes: chat memories default to the active companion, learner output is shared. Skill libraries remain isolated per companion.',
       },
       {
         icon: 'i-mdi-auto-fix',
@@ -86,7 +85,7 @@ const copy: Dict<{
         body: 'Gift a skill from one companion to another and turn on shared learning. Teach just one companion, and let it teach the rest.',
       },
     ],
-    share: 'Finer-grained private memory — coming soon',
+    note: 'Memory content and ownership are editable; new conversations and realtime recall read the latest scope.',
     ctaSecondary: 'Read the companion guide',
   },
 };
@@ -100,7 +99,7 @@ const t = pick(copy, locale);
     <div data-animate class="flex max-w-3xl flex-col gap-4">
       <span class="eyebrow">{t.eyebrow}</span>
       <p class="text-sm font-medium text-pink-300">{t.hook}</p>
-      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl lg:text-[2.75rem]">
+      <h2 class="text-3xl font-bold leading-tight text-hi sm:text-4xl lg:text-[2.75rem]">
         <Fragment set:html={t.title} />
       </h2>
       <p class="text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
@@ -123,7 +122,7 @@ const t = pick(copy, locale);
 
         <li class="flex items-center gap-2 px-1 pt-1 text-xs text-low" data-animate>
           <span class="i-mdi-clock-outline" aria-hidden="true"></span>
-          <span>{t.share}</span>
+          <span>{t.note}</span>
         </li>
 
         <li class="pt-2" data-animate>

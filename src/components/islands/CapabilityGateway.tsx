@@ -116,7 +116,7 @@ export default function CapabilityGateway({ locale }: Props) {
   const transition = reduced ? '' : 'transition-all duration-200';
 
   return (
-    <div className="rounded-2xl border border-ink-600/70 bg-ink-850/60 p-4 backdrop-blur-sm sm:p-5">
+    <div className="min-w-0 rounded-2xl border border-ink-600/70 bg-ink-850/60 p-4 backdrop-blur-sm sm:p-5">
       {/* Header: axes + illustrative badge */}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] font-medium text-low">

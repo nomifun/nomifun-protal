@@ -162,12 +162,12 @@ export default function OpenApiTabs({ locale }: Props) {
   const lines = CODE[active];
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-ink-600/70 bg-ink-850/60 backdrop-blur-sm">
+    <div className="min-w-0 overflow-hidden rounded-2xl border border-ink-600/70 bg-ink-850/60 backdrop-blur-sm">
       {/* Tab bar */}
       <div
         role="tablist"
         aria-label={s.ariaCopy}
-        className="flex items-stretch gap-1 border-b border-ink-700/70 bg-ink-900/50 p-1.5"
+        className="flex min-w-0 items-stretch gap-1 overflow-x-auto border-b border-ink-700/70 bg-ink-900/50 p-1.5"
       >
         {s.tabs.map((tab) => {
           const isActive = tab.id === active;
@@ -178,7 +178,7 @@ export default function OpenApiTabs({ locale }: Props) {
               type="button"
               aria-selected={isActive}
               onClick={() => setActive(tab.id)}
-              className={`group flex flex-1 flex-col items-start gap-0.5 rounded-xl px-3 py-2 text-left transition-colors duration-200 sm:px-3.5 ${
+              className={`group flex min-w-[7rem] flex-1 flex-col items-start gap-0.5 rounded-xl px-3 py-2 text-left transition-colors duration-200 sm:min-w-0 sm:px-3.5 ${
                 isActive
                   ? 'bg-ink-800/90 shadow-[0_0_24px_-10px_rgba(255,111,145,0.45)]'
                   : 'hover:bg-ink-800/50'
@@ -211,7 +211,7 @@ export default function OpenApiTabs({ locale }: Props) {
 
         <pre
           aria-label={s.ariaCopy}
-          className="overflow-x-auto bg-ink-950 px-4 py-4 font-mono text-[12.5px] leading-relaxed sm:text-[13px]"
+          className="max-w-full overflow-x-auto bg-ink-950 px-4 py-4 font-mono text-[12.5px] leading-relaxed sm:text-[13px]"
         >
           <code className="block">
             {lines.map((line, i) => {

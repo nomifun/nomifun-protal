@@ -45,9 +45,9 @@ lang: zh-CN
 - **解决可靠性，不解决额度**。如果队列里**所有** provider 都不可用，或本轮的 prompt / 工具状态本身就是无效的，故障转移也救不回这一轮。
 - **与 IDMM 协作**。IDMM 的故障值守在判定某次 provider 故障可恢复、且该会话启用了故障转移时，会让会话按这条队列重试。故障值守与决策值守**默认关闭**。详见 [智能值守 · AutoWork](/zh/docs/guides/autowork)。
 
-## 17 个 ACP 直连 Agent
+## 约 19 个外部生态 Agent
 
-除原生 provider 外，NomiFun 还能通过 **ACP（Agent Client Protocol）** 直连 17 个外部 Agent CLI（如 Claude Code、Codex 等）。它们以独立运行时跑在终端里，由你各自安装与配置；内置的 **nomi agent** 是随附的 CLI 二进制，无需额外安装。
+除原生 provider 外，NomiFun 还能通过 **ACP（Agent Client Protocol）** 直连约 19 个外部生态 Agent（如 Claude Code、Codex 等）。它们以独立运行时跑在终端里，由你各自安装与配置；内置的 **nomi agent** 是随附的 CLI 二进制，无需额外安装。
 
 ![ACP Agent 安装与配置](/images/zh/01模型/agent安装配置.png)
 

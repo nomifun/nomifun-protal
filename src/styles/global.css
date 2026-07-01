@@ -35,6 +35,10 @@ html {
   background-color: var(--ink-900);
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   background-color: var(--ink-900);

@@ -7,7 +7,7 @@
  *  - 4 个原生 provider 后端：Anthropic / OpenAI 兼容 / Amazon Bedrock / Google
  *    Vertex。OpenAI 兼容 + 自定义 base_url 可达 DeepSeek / Gemini / Qwen / Kimi /
  *    Ollama / vLLM / Azure 等 —— 这些不是独立后端。
- *  - 17 个 ACP 直连 Agent，并由 NomiFun 为它们提供模型。
+ *  - 约 19 个外部生态 Agent，并由 NomiFun 为它们提供模型和本地能力。
  *  - 交互式会话与 PTY 终端均可用（终端预设 Shell / Claude Code / Codex / Gemini）。
  */
 import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
@@ -40,7 +40,7 @@ const copy: Dict<{
     eyebrow: '开箱即用 · nomi agent',
     hook: '装好就能跑，不用再为「先装哪个 agent」纠结。',
     title: '<span class="text-grad-pink">开箱即用</span> 的 nomi agent',
-    lead: '内置的 nomi agent 无需额外安装（CLI 二进制 `nomi`），落地即用。4 个原生后端覆盖主流云，OpenAI 兼容再接入海量供应商；17 个 ACP 直连 Agent 也能并肩工作，且由 NomiFun 为它们统一供给模型。',
+    lead: '内置的 nomi agent 无需额外安装（CLI 二进制 `nomi`），落地即用。4 个原生后端覆盖主流云，OpenAI 兼容再接入 26+ 供应商 / 预设；约 19 个外部生态 Agent 也能并肩工作，且由 NomiFun 为它们统一供给模型和本地能力。',
     builtinTitle: '内置 nomi agent · 无需额外安装',
     builtinBody: '随 NomiFun 一同分发的 CLI 二进制 `nomi`，开箱即用——不依赖额外下载、不需要单独配环境，安装完成即可发起对话与委派任务。',
     builtinTags: ['CLI 二进制 nomi', '零额外安装', '流式委派'],
@@ -58,7 +58,7 @@ const copy: Dict<{
     eyebrow: 'Batteries-included · nomi agent',
     hook: 'Installed means ready — no agonizing over "which agent do I install first".',
     title: 'The <span class="text-grad-pink">batteries-included</span> nomi agent',
-    lead: 'The built-in nomi agent needs no extra install (the `nomi` CLI binary) — usable the moment NomiFun lands. Four native backends cover the major clouds, OpenAI-compatible reaches countless more providers, and 17 ACP direct-connect agents work alongside it — all fed models by NomiFun.',
+    lead: 'The built-in nomi agent needs no extra install (the `nomi` CLI binary) — usable the moment NomiFun lands. Four native backends cover the major clouds, OpenAI-compatible reaches 26+ providers / presets, and ~19 external ecosystem agents work alongside it — all fed models and local capabilities by NomiFun.',
     builtinTitle: 'Built-in nomi agent · no extra install',
     builtinBody: 'The `nomi` CLI binary ships with NomiFun and works out of the box — no separate download, no extra environment to wire up. Once installed you can start conversations and delegate tasks right away.',
     builtinTags: ['nomi CLI binary', 'Zero extra install', 'Streaming delegation'],
@@ -84,7 +84,7 @@ const al = pick(acpLabels, locale);
     <!-- header -->
     <div class="flex max-w-3xl flex-col gap-4" data-animate>
       <span class="eyebrow">{t.eyebrow}</span>
-      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl lg:text-[2.75rem]">
+      <h2 class="text-3xl font-bold leading-tight text-hi sm:text-4xl lg:text-[2.75rem]">
         <Fragment set:html={t.title} />
       </h2>
       <p class="flex items-start gap-2 text-base font-semibold leading-relaxed text-hi sm:text-lg">

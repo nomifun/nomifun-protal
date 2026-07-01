@@ -9,7 +9,7 @@ export interface AcpAgent {
 }
 
 /**
- * 17 built-in ACP direct-connect agents (SQL-seeded in nomifun-db migrations).
+ * 19 supported external ecosystem agents (ACP builtins plus Nanobot/OpenClaw).
  * NomiFun connects to them over the Agent Client Protocol AND supplies models.
  * `hasLogo` reflects which brand SVGs ship in public/providers.
  */
@@ -24,24 +24,26 @@ export const acpAgents: AcpAgent[] = [
   { id: 'hermes', name: 'Hermes', icon: 'hermes', hasLogo: true },
   { id: 'kimi', name: 'Kimi', icon: 'kimi', hasLogo: true },
   { id: 'codebuddy', name: 'CodeBuddy', hasLogo: false },
-  { id: 'opencode', name: 'OpenCode', hasLogo: false },
+  { id: 'opencode', name: 'OpenCode', icon: 'opencode', hasLogo: true },
   { id: 'copilot', name: 'Copilot', hasLogo: false },
   { id: 'qoder', name: 'Qoder', hasLogo: false },
   { id: 'vibe', name: 'Vibe', hasLogo: false },
   { id: 'cursor', name: 'Cursor', hasLogo: false },
   { id: 'kiro', name: 'Kiro', hasLogo: false },
   { id: 'snow', name: 'Snow', hasLogo: false },
+  { id: 'nanobot', name: 'Nanobot', icon: 'nanobot', hasLogo: true },
+  { id: 'openclaw', name: 'OpenClaw', icon: 'openclaw', hasLogo: true },
 ];
 
 export const acpLabels: Dict<{ title: string; subtitle: string; count: string }> = {
   'zh-CN': {
-    title: 'ACP 协议直连 17+ 主流 Agent',
-    subtitle: '不仅自研 nomi agent 可用海量系统能力，Claude Code、Codex 等数十个 Agent 也能直连，并由 NomiFun 为它们提供模型。',
-    count: '17 个内置 ACP Agent',
+    title: '直连约 19 个外部生态 Agent',
+    subtitle: '不仅自研 nomi agent 可用系统能力，Claude Code、Codex、OpenCode、Nanobot、OpenClaw 等生态 Agent 也能接入，并由 NomiFun 为它们提供模型和本地能力。',
+    count: '19 个支持的生态 Agent',
   },
   'en-US': {
-    title: 'ACP direct-connect to 17+ leading agents',
-    subtitle: 'Not just the built-in nomi agent — Claude Code, Codex and dozens more connect directly, with NomiFun supplying their models.',
-    count: '17 built-in ACP agents',
+    title: '~19 external ecosystem agents',
+    subtitle: 'Not just the built-in nomi agent — Claude Code, Codex, OpenCode, Nanobot, OpenClaw, and more can connect, with NomiFun supplying their models and local capabilities.',
+    count: '19 supported ecosystem agents',
   },
 };

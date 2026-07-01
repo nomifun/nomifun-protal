@@ -33,7 +33,7 @@ The entry point is **`/assistants`** (the old `/settings/assistants` redirects t
 - **Three sources, different editability.** Custom assistants are editable and deletable; Builtin assistants are read-only in content (only enabled/order/default-backend override are mutable); Extension assistants are read-only.
 - **Default backend and providers.** If you don't set a default backend when creating an assistant, you need at least one configured provider; the built-in `nomi` is used by default when it can be inferred.
 - **CLI agents need their own install.** Choosing `claude` / `codex` / `gemini` does not install those tools — they still require the matching CLI on the host beforehand.
-- **Skills are per-companion; memory is shared.** Each companion has its own skill library, while memory runs through one capture/learning pipeline shared by all companions. Per-companion private memory is coming soon.
+- **Skills are per-companion; memory has scopes.** Each companion has its own skill library; memories can be shared family-wide or private to one companion.
 - **Skills and MCP are managed separately.** The Skills tab is at `/assistants?tab=skills`, while MCP servers moved out to `/mcp`; both extend capability but are managed apart today.
 
 ## FAQ

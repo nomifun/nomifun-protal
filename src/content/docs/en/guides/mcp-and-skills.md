@@ -50,7 +50,7 @@ What you manage at `/assistants?tab=skills` are **cross-companion, general** ski
 - **General skills (this page)** — knowledge packs you curate by hand and every companion can share, sourced as Builtin / Custom / Extension.
 - **Per-companion skill library (on the companion page)** — each companion grows its own, **per-companion-isolated** set of skills. The evolution engine mines reusable skills from that companion's **tool-call sequences** (based on the sequence itself only, with **no parameter values**), produces a draft, and you review the resulting `SKILL.md` before enabling it; grown skills can also be **gifted** to other companions. See [Companions](/docs/guides/companions).
 
-> Keep the memory-vs-skill boundary straight: **memory is a shared memory hub, shared family-wide** across one capture / learning pipeline; **skill libraries are isolated per companion**. Per-companion private memory is coming soon.
+> Keep the memory-vs-skill boundary straight: **memory supports shared and per-companion private scopes**; shared memories are family-wide, private memories are visible only to their owning companion, and **skill libraries are isolated per companion**.
 
 ## Exposing NomiFun to external agents
 

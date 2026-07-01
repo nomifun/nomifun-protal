@@ -35,7 +35,7 @@ Creating a session takes you to `/conversation/:id`. Start one from the sidebar'
 - **Each session has its own working directory** — the file tree, preview, and terminal all revolve around that one directory, with no cross-talk between sessions.
 - **Preview covers the common formats** — code / Markdown / PDF / Office / HTML / diff render right in the panel, no external app needed.
 - **The terminal is mounted to the working directory by default** — it acts on the same files as the message stream, handy for manual checks or running commands yourself.
-- **Memory is shared; skills are per-companion** — all companions share one memory capture/learning pipeline, but each companion's **skill library** is isolated. Per-companion private memory is coming soon.
+- **Memory has shared / private scopes; skills are per-companion** — shared memories are family-wide, private memories are visible only to their owning companion, and each companion's **skill library** stays isolated.
 - **Failure-watch and decision-watch are off by default** — turn them on in the session header when you need them; a model failover queue (up to 4 switches) can be triggered.
 - **Knowledge base sources** — the Feishu connector is shipped; Notion is on the roadmap and not yet supported.
 
