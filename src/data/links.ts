@@ -12,7 +12,7 @@ export const links = {
   // GitHub Releases page (download buttons)
   releases: 'https://github.com/nomifun/nomifun-tauri/releases',
   // Baidu Netdisk mirror for users in mainland China
-  baiduPan: 'https://pan.baidu.com/s/1PpqNMDe-CoLZm1bz99V7hA?pwd=nomi',
+  baiduPan: 'https://pan.baidu.com/s/5GPonoJNrwJ7GciBSDgXLaA',
   // Issues
   issues: 'https://github.com/nomifun/nomifun-tauri/issues',
   // Official website
@@ -20,12 +20,12 @@ export const links = {
   // Product introduction video (region-aware: Bilibili for mainland China, YouTube for overseas)
   introVideos: {
     'zh-CN': {
-      watch: 'https://www.bilibili.com/video/BV1RCKS6mEuS/',
-      embed: 'https://player.bilibili.com/player.html?bvid=BV1RCKS6mEuS&autoplay=0',
+      watch: 'https://www.bilibili.com/video/BV1kwKZ6UE5X/',
+      embed: 'https://player.bilibili.com/player.html?bvid=BV1kwKZ6UE5X&autoplay=0',
     },
     'en-US': {
-      watch: 'https://www.youtube.com/watch?v=Z28XyhvNh_E',
-      embed: 'https://www.youtube-nocookie.com/embed/Z28XyhvNh_E?rel=0',
+      watch: 'https://youtu.be/AsEToBDFR9s',
+      embed: 'https://www.youtube-nocookie.com/embed/AsEToBDFR9s?rel=0',
     },
   },
   // Public contact / security email

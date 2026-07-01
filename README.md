@@ -4,6 +4,15 @@ NomiFun 是一项完全开源、无任何保留的超级 AI 工作站。它把 A
 
 本仓库是 NomiFun 官方网站与文档门户源码，主产品源码见 [nomifun/nomifun-tauri](https://github.com/nomifun/nomifun-tauri)。
 
+![NomiFun 自动工作与编排画布](public/images/showcase/autowork-flow-readme.png)
+
+## 下载与演示
+
+- 官方下载入口：[GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases)
+- 中国区备用下载：[百度网盘分享 nomifun](https://pan.baidu.com/s/5GPonoJNrwJ7GciBSDgXLaA)
+- 中国区视频播放：[抖音演示](https://www.douyin.com/user/self?from_tab_name=main&modal_id=7657100052061523209) / [B站演示](https://www.bilibili.com/video/BV1kwKZ6UE5X/)
+- 海外视频播放：[YouTube](https://youtu.be/AsEToBDFR9s) / [X](https://x.com/colir0/status/2072001821640437776?s=20)
+
 ## 核心承诺
 
 ### 数据安全：all in local
