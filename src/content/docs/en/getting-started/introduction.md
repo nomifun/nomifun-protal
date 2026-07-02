@@ -49,7 +49,7 @@ A tour of the common entry points (sidebar / routes) once you're in:
 
 ## Current version
 
-NomiFun is at **0.1.0 (pre-1.0)** and under active iteration. Part of its UI design is inspired by [AionUi](https://github.com/iOfficeAI/AionUi), and it is released under **Apache-2.0**. The built-in nomi agent ships as a standalone CLI binary bundled with the app — no extra install needed.
+NomiFun is at **0.1.0 (pre-1.0)**, under active iteration, and released under **Apache-2.0**. The built-in nomi agent ships as a standalone CLI binary bundled with the app — no extra install needed.
 
 > This portal covers operational / usage content only — it does not duplicate the full technical docs or architecture internals on GitHub.
 

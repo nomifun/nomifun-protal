@@ -49,7 +49,7 @@ NomiFun 面向已经在用 agent 做真实工作的用户。它要求你理解 A
 
 ## 当前版本
 
-NomiFun 当前为 **0.1.0（pre-1.0）**，仍在活跃迭代。项目部分 UI 设计借鉴自 [AionUi](https://github.com/iOfficeAI/AionUi)，并以 **Apache-2.0** 许可开源。内置 nomi agent 为独立 CLI 二进制，随应用分发，无需额外安装。
+NomiFun 当前为 **0.1.0（pre-1.0）**，仍在活跃迭代，并以 **Apache-2.0** 许可开源。内置 nomi agent 为独立 CLI 二进制，随应用分发，无需额外安装。
 
 > 本门户只收敛"操作 / 使用"类内容，不重复 GitHub 上的全量技术文档与架构内幕。
 

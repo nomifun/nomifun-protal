@@ -27,7 +27,6 @@ export const footer: Dict<{
   links: { label: string; href: string }[];
   resources: { label: string; href: string }[];
   license: string;
-  attribution: string;
   noWarranty: string;
   copyright: string;
 }> = {
@@ -49,7 +48,6 @@ export const footer: Dict<{
       { label: 'Apache-2.0 许可', href: '#license' },
     ],
     license: '基于 Apache License 2.0 开源',
-    attribution: '部分 UI 设计借鉴自 AionUi',
     noWarranty: '二次开发 / 商用风险由使用者自行承担，作者与贡献者不承担相关法律责任。',
     copyright: '© 2025-2026 NomiFun',
   },
@@ -71,7 +69,6 @@ export const footer: Dict<{
       { label: 'Apache-2.0 license', href: '#license' },
     ],
     license: 'Open-source under the Apache License 2.0',
-    attribution: 'Part of the UI design is inspired by AionUi',
     noWarranty: 'Forks / commercial use are at your own risk; the author and contributors assume no liability.',
     copyright: '© 2025-2026 NomiFun',
   },

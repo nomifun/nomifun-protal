@@ -1,12 +1,12 @@
 ---
 title: Settings
-description: Review and adjust your local data directory, the dark/light theme, and the version and open-source attribution on the About page.
+description: Review and adjust your local data directory, the dark/light theme, and the version and open-source license on the About page.
 category: Remote & Settings
 order: 18
 lang: en-US
 ---
 
-Settings is NomiFun's app-level configuration surface: see where your local data lives, switch between dark and light themes, and confirm the current version and open-source attribution on the About page. It is separate from your companion, model, and channel configuration — those have their own pages; this one is about the app itself.
+Settings is NomiFun's app-level configuration surface: see where your local data lives, switch between dark and light themes, and confirm the current version and open-source license on the About page. It is separate from your companion, model, and channel configuration — those have their own pages; this one is about the app itself.
 
 > Entry point: **Settings** at the bottom of the sidebar, route `/settings`.
 
@@ -27,15 +27,14 @@ Settings is NomiFun's app-level configuration surface: see where your local data
 
    That directory holds the SQLite database (sessions, settings), `companion/` (companions + the shared memory hub), `knowledge/` (knowledge base), `logs/`, and more. The desktop app, the self-hosted web host, and the dev scripts all default to the same directory — so a provider or companion you set up in one host is visible in the others.
 
-4. **Read the About page.** Open the **About** group to confirm the current version and open-source attribution.
+4. **Read the About page.** Open the **About** group to confirm the current version and open-source license.
 
-   ![About (version / attribution)](/images/en/设置/关于.png)
+   ![About (version / license)](/images/en/设置/关于.png)
 
 ## What's on this page
 
 - **Version**: currently `0.1.0` (pre-1.0). NomiFun is iterating quickly, so settings and the UI may shift between releases.
 - **License**: **Apache-2.0**. Fully open-source and open to audit; the source lives on GitHub.
-- **Attribution**: Part of NomiFun's UI design is inspired by [AionUi](https://github.com/iOfficeAI/AionUi), with thanks for that design reference.
 
 ## Notes & boundaries
 
