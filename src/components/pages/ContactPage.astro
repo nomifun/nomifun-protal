@@ -36,7 +36,7 @@ const copy: Dict<{
   rolesNeed: string;
   roles: Role[];
   commercial: Panel & { badge: string };
-  models: Panel & { badge: string };
+  support: Panel & { badge: string };
   contactTitle: string;
   contactLead: string;
   primaryTitle: string;
@@ -85,11 +85,11 @@ const copy: Dict<{
       title: '商用告知',
       body: 'Apache-2.0 授权下，你可以自由二次开发、免费商用，无需任何额外授权。如果你把它用在商业场景里，欢迎留言告知一声——这不是授权要求，只为换一份认可与正向反馈，让我们知道这件事被需要着。法律风险请自行评估并承担。',
     },
-    models: {
-      badge: '愿意帮忙',
-      icon: 'i-mdi-server-network-outline',
-      title: '模型获取困难？',
-      body: '如果你在获取或接入模型上遇到困难，可以联系作者协助寻找，或一起搭建统一的模型网关。统一网关目前尚未提供，但我们很乐意搭把手，帮你把链路跑通。',
+    support: {
+      badge: '欢迎反馈',
+      icon: 'i-mdi-help-circle-outline',
+      title: '使用遇到问题？',
+      body: '如果你在安装、模型供应商配置或开放能力使用上遇到问题，欢迎通过下面渠道反馈。我们会尽力在开源项目范围内提供建议，也欢迎把可复用经验沉淀成 issue、文档和社区答疑。',
     },
     contactTitle: '联系方式',
     contactLead: '以下渠道随时欢迎你来交流。GitHub 仓库、邮箱、境外社交媒体与国内平台入口已整理在这里。',
@@ -152,11 +152,11 @@ const copy: Dict<{
       title: 'Commercial heads-up',
       body: 'Under Apache-2.0 you are free to fork, modify, and use NomiFun commercially — no extra authorization needed. If you do ship it commercially, we would love a quick note. This is not a license requirement — just a wish for some recognition and positive feedback so we know it is needed. Please assess and assume any legal risk yourself.',
     },
-    models: {
-      badge: 'Happy to help',
-      icon: 'i-mdi-server-network-outline',
-      title: 'Trouble getting models?',
-      body: 'If sourcing or wiring up models is hard for you, reach out — we can help you find one or build a unified model gateway together. A unified gateway is not available yet, but we are glad to lend a hand and get your pipeline working.',
+    support: {
+      badge: 'Feedback welcome',
+      icon: 'i-mdi-help-circle-outline',
+      title: 'Need help using NomiFun?',
+      body: 'If installation, model-provider configuration, or open-capability setup is getting in your way, reach out through the channels below. We will help within the scope of the open source project and turn reusable answers into issues, docs, and community guidance.',
     },
     contactTitle: 'Get in touch',
     contactLead: 'Reach out through any of the channels below. GitHub, email, global social profiles, and China-platform quick links are collected here.',
@@ -347,7 +347,7 @@ const anyPlaceholder = contactGroups.some((group) => group.buttons.some((button)
   </div>
 </section>
 
-<!-- Two info panels: commercial heads-up + model help -->
+<!-- Two info panels: commercial heads-up + support feedback -->
 <section class="section-y pt-0">
   <div class="container-x">
     <div class="grid gap-6 lg:grid-cols-2" data-stagger>
@@ -367,14 +367,14 @@ const anyPlaceholder = contactGroups.some((group) => group.buttons.some((button)
       <article class="card flex flex-col gap-4 border-violet-400/20 bg-violet-500/[0.04] p-7">
         <div class="flex items-center gap-3">
           <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-violet-400/25 bg-violet-500/10">
-            <span class={`${t.models.icon} text-2xl text-violet-300`}></span>
+            <span class={`${t.support.icon} text-2xl text-violet-300`}></span>
           </span>
           <div class="flex flex-col gap-1.5">
-            <Badge tone="violet"><span class="i-mdi-hand-heart-outline"></span>{t.models.badge}</Badge>
-            <h3 class="text-lg font-semibold text-hi">{t.models.title}</h3>
+            <Badge tone="violet"><span class="i-mdi-hand-heart-outline"></span>{t.support.badge}</Badge>
+            <h3 class="text-lg font-semibold text-hi">{t.support.title}</h3>
           </div>
         </div>
-        <p class="text-sm leading-relaxed text-mid">{t.models.body}</p>
+        <p class="text-sm leading-relaxed text-mid">{t.support.body}</p>
       </article>
     </div>
   </div>

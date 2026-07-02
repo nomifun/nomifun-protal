@@ -6,8 +6,7 @@
  *  - 3 invitation cards: 贡献代码（贡献值）/ 社区运营 / 布道者 ——「目前很需要这些角色」。
  *  - 商用告知 panel: 个人/企业可自由二次开发与免费商用；若商用希望留言告知——
  *    不是为了授权，只为一份认可与肯定（正向情绪反馈）。法律风险使用者自担。
- *  - 模型获取困难 panel: 寻找模型有困难可联系作者协助寻找 / 搭建统一模型服务网关
- *    （作者目前尚未提供该服务，但愿意帮忙）。
+ *  - 使用反馈 panel: 安装、模型配置、开放能力使用中的问题反馈与文档沉淀。
  *  - 大 CTA: 立即下载 / 在 GitHub 查看 / 联系我们。
  */
 import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
@@ -34,9 +33,9 @@ const copy: Dict<{
   commercialBody: string;
   commercialWish: string;
   commercialRisk: string;
-  modelTitle: string;
-  modelBody: string;
-  modelNote: string;
+  supportTitle: string;
+  supportBody: string;
+  supportNote: string;
   ctaTitle: string;
   ctaPrimary: string;
   ctaGithub: string;
@@ -71,9 +70,9 @@ const copy: Dict<{
     commercialBody: '无论个人还是企业，都可以自由地二次开发并免费商用——这是 Apache-2.0 赋予你的权利，无需向我们申请授权。',
     commercialWish: '如果你拿去商用了，欢迎留个言告诉我们一声。这不是为了授权，只是作为开发者，渴望得到一份来自真实使用的认可与肯定——一点正向的情绪反馈，足以支撑很久。',
     commercialRisk: '二次开发与商用所涉及的法律风险，由使用者自行承担。',
-    modelTitle: '模型获取困难？',
-    modelBody: '如果你在寻找可用模型上遇到困难，可以联系作者——可以帮你一起找模型，或协助搭建一个统一的模型服务网关。',
-    modelNote: '说明：作者目前尚未对外提供这项服务，但很乐意伸把手帮你解决眼前的难题。',
+    supportTitle: '使用遇到问题？',
+    supportBody: '如果你在安装、模型供应商配置、WebUI 或 MCP 使用中遇到问题，欢迎通过 GitHub 或邮箱反馈。我们更倾向把可复用经验沉淀成 issue、文档和社区答疑。',
+    supportNote: '说明：NomiFun 仍在成长，复杂部署、第三方服务接入和合规风险需要使用者自行评估。',
     ctaTitle: '准备好了吗？',
     ctaPrimary: '立即下载',
     ctaGithub: '在 GitHub 查看',
@@ -108,9 +107,9 @@ const copy: Dict<{
     commercialBody: 'Individuals and enterprises alike are free to modify and commercialize NomiFun, free of charge — that is your right under Apache-2.0, no permission needed from us.',
     commercialWish: 'If you do ship it commercially, we would love a quick note. Not for licensing — just that, as a developer, a word of recognition from real-world use means the world. A little positive feedback goes a long way.',
     commercialRisk: 'Any legal risk from modification or commercial use is borne by the user.',
-    modelTitle: 'Struggling to get models?',
-    modelBody: 'If you are having trouble finding usable models, reach out to the author — happy to help you find models, or to help you set up a unified model-service gateway.',
-    modelNote: 'Note: the author does not offer this as a service yet, but is glad to lend a hand with the problem in front of you.',
+    supportTitle: 'Need help using NomiFun?',
+    supportBody: 'If installation, model-provider configuration, WebUI, or MCP usage is getting in your way, reach out through GitHub or email. We prefer turning reusable answers into issues, docs, and community guidance.',
+    supportNote: 'Note: NomiFun is still growing. Complex deployments, third-party service integration, and compliance risk need to be assessed by the user.',
     ctaTitle: 'Ready to dive in?',
     ctaPrimary: 'Download now',
     ctaGithub: 'View on GitHub',
@@ -147,7 +146,7 @@ const t = pick(copy, locale);
       ))}
     </ul>
 
-    <!-- two side panels: commercial-use + model help -->
+    <!-- two side panels: commercial-use + support feedback -->
     <div class="mt-6 grid gap-5 lg:grid-cols-2">
       <!-- commercial use -->
       <div class="card flex flex-col p-6 sm:p-7" data-animate>
@@ -170,24 +169,24 @@ const t = pick(copy, locale);
         </p>
       </div>
 
-      <!-- model gateway help -->
+      <!-- support feedback -->
       <div class="card flex flex-col p-6 sm:p-7" data-animate>
         <div class="flex items-center justify-between gap-3">
           <div class="flex items-center gap-2.5">
             <span class="grid h-10 w-10 place-items-center rounded-xl border border-violet-400/30 bg-violet-500/10">
-              <span class="i-mdi-server-network-outline text-xl text-violet-300" aria-hidden="true"></span>
+              <span class="i-mdi-help-circle-outline text-xl text-violet-300" aria-hidden="true"></span>
             </span>
-            <h3 class="text-lg font-semibold text-hi">{t.modelTitle}</h3>
+            <h3 class="text-lg font-semibold text-hi">{t.supportTitle}</h3>
           </div>
           <Badge tone="neutral">
             <span class="i-mdi-lifebuoy text-xs" aria-hidden="true"></span>
-            {locale === 'zh-CN' ? '愿意帮忙' : 'Glad to help'}
+            {locale === 'zh-CN' ? '欢迎反馈' : 'Feedback welcome'}
           </Badge>
         </div>
-        <p class="mt-4 text-sm leading-relaxed text-mid">{t.modelBody}</p>
+        <p class="mt-4 text-sm leading-relaxed text-mid">{t.supportBody}</p>
         <p class="mt-4 flex items-start gap-1.5 text-xs leading-relaxed text-low">
           <span class="i-mdi-information-outline mt-0.5 shrink-0" aria-hidden="true"></span>
-          <span>{t.modelNote}</span>
+          <span>{t.supportNote}</span>
         </p>
         <a href={localizePath('/contact', locale)} class="btn-ghost mt-5 self-start text-sm">
           <span class="i-mdi-email-outline text-base" aria-hidden="true"></span>

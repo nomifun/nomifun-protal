@@ -183,7 +183,7 @@ nomifun-portal/
 9. `PillarNative.astro` — 更 native（自研浏览器/电脑操控 + WebUI 扫码）
 10. `NomiAgent.astro` — 开箱即用 nomi agent（4 provider + 17 ACP 矩阵，复用 provider logos）
 11. `Roadmap.astro` — 敬请期待（诚实呈现未上线/在途能力）
-12. `CommunityCTA.astro` — 共建召集 + 商用告知 + 模型网关求助 + 底部大 CTA
+12. `CommunityCTA.astro` — 共建召集 + 商用告知 + 使用反馈 + 底部大 CTA
 
 每个 section 结构：`痛点钩子 → 一句话主张 → 3 能力要点 → 演示/截图 → 次级 CTA`。
 
@@ -192,7 +192,7 @@ nomifun-portal/
 ## 8. 其余页面
 
 - **`/download`**：官方下载入口横幅（GitHub Releases：`https://github.com/nomifun/nomifun-tauri/releases`）→ 三条路径卡（桌面源码构建 / Web 源码 / Docker 自托管）→ 平台卡（macOS/Windows/Linux，统一跳转 Releases 选择对应资产）→ 系统要求 + 自托管指引（Caddy/systemd）。
-- **`/contact`**：共建召集（贡献值/社区运营/布道者）+ 商用告知通道（"渴望一场认可，非授权"）+ 模型网关求助 + 渠道占位（GitHub/邮箱/社群 — 待补真实地址，先用占位常量集中放 `data/links.ts`）。
+- **`/contact`**：共建召集（贡献值/社区运营/布道者）+ 商用告知通道（"渴望一场认可，非授权"）+ 使用反馈 + 渠道占位（GitHub/邮箱/社群 — 待补真实地址，先用占位常量集中放 `data/links.ts`）。
 - **`/docs`**：侧边栏 + 内容区 + 站内搜索（轻量，pagefind 或前端过滤）+ i18n。v1 精选：快速上手(介绍/安装/第一次对话)、核心操作(伙伴/渠道/知识库/AutoWork/IDMM/终端/MCP&Skill/WebUI 远程/模型路由)。底部"完整技术文档 →"外链 Git。内容迁移自 tauri `docs/getting-started` + `docs/guides`（仅操作类，bucket B），改写为门户语气，**不照搬技术内幕**。
 
 ---
