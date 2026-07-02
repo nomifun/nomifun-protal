@@ -35,7 +35,7 @@ Settings is NomiFun's app-level configuration surface: see where your local data
 
 - **Version**: currently `0.1.0` (pre-1.0). NomiFun is iterating quickly, so settings and the UI may shift between releases.
 - **License**: **Apache-2.0**. Fully open-source and open to audit; the source lives on GitHub.
-- **Attribution**: NomiFun **grew out of [AionUi](https://github.com/iOfficeAI/AionUi)**, rebuilt from there into a local-first "super AI workstation."
+- **Attribution**: Part of NomiFun's UI design is inspired by [AionUi](https://github.com/iOfficeAI/AionUi), with thanks for that design reference.
 
 ## Notes & boundaries
 

@@ -35,7 +35,7 @@ lang: zh-CN
 
 - **版本**：当前为 `0.1.0`（pre-1.0）。仍在快速迭代阶段，配置项与界面可能随版本调整。
 - **许可证**：**Apache-2.0**。完全开源、接受审计，源码托管于 GitHub。
-- **归属**：NomiFun **脱胎自 [AionUi](https://github.com/iOfficeAI/AionUi)**，在其基础上重构为本地优先的"超级 AI 工作站"。
+- **归属**：NomiFun 部分 UI 设计借鉴自 [AionUi](https://github.com/iOfficeAI/AionUi)，并在此致谢。
 
 ## 要点与边界
 

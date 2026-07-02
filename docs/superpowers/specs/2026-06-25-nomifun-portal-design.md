@@ -41,7 +41,7 @@
 
 ## 3. 产品事实库（写文案的素材，全部已核对）
 
-**定位**：本地优先的超级 AI 工作站 / 编码工作空间。一套 Rust 后端 + 一套 React 19 前端 + 两种宿主形态：`nomifun-desktop`（Tauri 2 桌面，环回端口 + 每次启动本地信任 token）/ `nomifun-web`（自托管 axum 服务，`127.0.0.1:8787`，默认需登录）。15 个 `nomi-*` agent crate、29 个 `nomifun-*` 后端 crate。Apache-2.0，脱胎自 AionUi 并大幅重构。当前版本 **0.1.0（pre-1.0）**。
+**定位**：本地优先的超级 AI 工作站 / 编码工作空间。一套 Rust 后端 + 一套 React 19 前端 + 两种宿主形态：`nomifun-desktop`（Tauri 2 桌面，环回端口 + 每次启动本地信任 token）/ `nomifun-web`（自托管 axum 服务，`127.0.0.1:8787`，默认需登录）。15 个 `nomi-*` agent crate、29 个 `nomifun-*` 后端 crate。Apache-2.0，部分 UI 设计借鉴自 AionUi。当前版本 **0.1.0（pre-1.0）**。
 
 **7 大支柱（首页叙事骨架）**：
 
@@ -55,7 +55,7 @@
 
 **开箱即用 nomi agent**：内置无需额外安装（CLI 二进制 `nomi`）。4 个原生 provider 后端：**Anthropic / OpenAI 兼容 / Amazon Bedrock / Google Vertex**（OpenAI 兼容可达 DeepSeek/Gemini/Qwen/Kimi/Ollama/vLLM/Azure 等）。**17 个 ACP 直连 Agent**：Claude Code、Codex CLI、Gemini CLI、Qwen、CodeBuddy、Droid、Goose、Auggie、Kimi、OpenCode、Copilot、Qoder、Vibe、Cursor、Kiro、Hermes、Snow（+ Nanobot / OpenClaw 两个非 ACP 托管）。交互式会话与 PTY 终端均可用（终端预设：Shell / Claude Code / Codex / Gemini）。
 
-**许可与归属**：Apache-2.0 © 2025-2026 NomiFun（nomifun.com，未核实）。脱胎自 AionUi（https://github.com/iOfficeAI/AionUi ，Apache-2.0），页脚需署名致谢。
+**许可与归属**：Apache-2.0 © 2025-2026 NomiFun（nomifun.com，未核实）。部分 UI 设计借鉴自 AionUi（https://github.com/iOfficeAI/AionUi ，Apache-2.0），页脚需署名致谢。
 
 ---
 
