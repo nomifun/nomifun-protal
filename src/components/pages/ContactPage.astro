@@ -112,10 +112,11 @@ const copy: Dict<{
     placeholderTag: '占位待补',
     placeholderNote: '说明：上方标注「占位待补」的入口会在地址确定后第一时间替换。GitHub 仓库（github.com/nomifun/nomifun-tauri）、官网（www.nomifun.com）与联系邮箱已经可用。',
     qrTitle: '扫码加入社群',
-    qrLead: '用微信 / QQ 扫码加群，也可以通过小红书 / B站 / 抖音找到我们。',
+    qrLead: '用微信 / QQ / 飞书扫码加群，也可以通过小红书 / B站 / 抖音找到我们。',
     qrs: [
       { label: '微信群', caption: '扫码加入微信群' },
       { label: 'QQ群', caption: '扫码加入 QQ 群' },
+      { label: '飞书群', caption: '扫码加入飞书群' },
       { label: '小红书', caption: '扫码关注小红书' },
       { label: 'B站', caption: '扫码查看 B站主页' },
       { label: '抖音', caption: '扫码查看抖音主页' },
@@ -179,10 +180,11 @@ const copy: Dict<{
     placeholderTag: 'Placeholder',
     placeholderNote: 'Note: links tagged “Placeholder” above will be replaced as soon as their destinations are confirmed. The GitHub repo (github.com/nomifun/nomifun-tauri), website (www.nomifun.com), and contact email are already available.',
     qrTitle: 'Scan to join the community',
-    qrLead: 'Scan to join the WeChat or QQ group, or find us through RED, Bilibili, and Douyin.',
+    qrLead: 'Scan to join the WeChat, QQ, or Feishu group, or find us through RED, Bilibili, and Douyin.',
     qrs: [
       { label: 'WeChat group', caption: 'Scan to join the WeChat group' },
       { label: 'QQ group', caption: 'Scan to join the QQ group' },
+      { label: 'Feishu group', caption: 'Scan to join the Feishu group' },
       { label: 'RED (Xiaohongshu)', caption: 'Follow us on RED' },
       { label: 'Bilibili', caption: 'Open the Bilibili profile' },
       { label: 'Douyin', caption: 'Open the Douyin profile' },
@@ -197,6 +199,7 @@ const t = pick(copy, locale);
 const qrImages = [
   { img: '/images/zh/联系方式/wechat-group/qr.png', icon: 'i-mdi-wechat', w: 1031, h: 1456 },
   { img: '/images/zh/联系方式/qq-group/qr.png', icon: 'i-mdi-qqchat', w: 1156, h: 2055 },
+  { img: '/images/zh/联系方式/feishu-group/qr.jpg', icon: 'i-mdi-message-text-outline', w: 965, h: 1126 },
   { img: '/images/zh/联系方式/xhs/1280X1280.JPEG', icon: 'i-simple-icons-xiaohongshu', w: 937, h: 1280 },
   { img: '/images/zh/联系方式/bilibili/qr.png', icon: 'i-simple-icons-bilibili', w: 960, h: 960 },
   { img: '/images/zh/联系方式/douyin/qr.png', icon: 'i-mdi-music-note-eighth', w: 869, h: 1280 },
@@ -465,7 +468,7 @@ const anyPlaceholder = contactGroups.some((group) => group.buttons.some((button)
         <h3 class="text-lg font-semibold text-hi">{t.qrTitle}</h3>
         <p class="text-sm leading-relaxed text-mid">{t.qrLead}</p>
       </div>
-      <div class="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5" data-stagger>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
         {
           qrs.map((q) => (
             <figure class="card flex flex-col items-center gap-3 p-5 text-center">
