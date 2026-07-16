@@ -1,22 +1,44 @@
 ---
 title: 安装
-description: 在本地装好 NomiFun 的三条路径：桌面源码构建、Web 源码构建、Docker 自托管，附前置条件、关键命令与验证步骤。
+description: 在 Windows、macOS 或 Linux 安装 NomiFun，也可从源码构建或通过 Docker 自托管。
 category: 快速上手
 order: 2
 lang: zh-CN
 ---
 
-NomiFun 是完全开源、本地优先的「超级 AI 工作站」：一套 Rust 后端 + React 19 前端，配两种宿主形态——桌面应用 `nomifun-desktop`（Tauri 2，环回端口启动、每次启动注入本地信任 token，桌面窗口免登录）与自托管 Web 服务 `nomifun-web`（axum，默认 `127.0.0.1:8787`，默认需登录）。两者共享同一个后端，因此在任一宿主里配置的 provider、伙伴、知识库在另一宿主里同样可见。
+NomiFun 已提供 Windows、macOS 与 Linux 桌面安装包。多数用户直接安装桌面版即可；需要服务器长期运行或从其它设备访问时，再选择 Web 服务或 Docker 自托管。
 
 本页带你从零把 NomiFun 装到本机或服务器上。
 
-> **下载入口**：NomiFun 应用下载地址为 [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases)。进入后选择对应版本和平台资产；如果当前版本暂未包含你的平台产物，也可以按下方步骤从源码构建（桌面 Tauri / Web axum）或用 Docker 自托管。
+> **下载入口**：[GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases)。Windows 选择 `x64-setup.exe`，macOS 选择 `universal.dmg`；Linux x86_64 可选 `AppImage`、`.deb` 或 `.rpm`。不同平台的安装包会由各自构建机依次追加，如果最新标签暂时没有你的平台，请使用最近一个包含对应文件的版本。
 >
 > 想了解平台支持与系统要求，可参考[下载页](/zh/download)。
 
-## 前置条件
+## 直接安装桌面版
 
-无论走哪条路径，都需要一套可用的构建工具链：
+### Windows
+
+下载 `NomiFun_<版本>_x64-setup.exe` 并按提示安装。Windows 11 已内置 WebView2；Windows 10 如缺失，安装程序会引导你获取。当前安装包使用 Tauri 更新签名，但没有 Authenticode 证书，手动下载时 Windows 可能显示“未知发布者”，请确认文件来自官方 GitHub Releases。
+
+### macOS
+
+下载 `NomiFun_<版本>_universal.dmg`，打开后把 NomiFun 拖入“应用程序”。Universal 安装包同时支持 Apple Silicon 与 Intel；正式发布包已经过签名与公证。
+
+### Linux
+
+Linux x86_64 提供三种格式：
+
+- **AppImage**：下载后执行 `chmod +x NomiFun_*.AppImage`，再双击或从终端运行。
+- **Debian / Ubuntu**：`sudo apt install ./NomiFun_*_amd64.deb`。
+- **Fedora / RHEL 系**：`sudo rpm -i NomiFun-*.x86_64.rpm`。
+
+桌面界面依赖 WebKitGTK 4.1。若系统提示缺少共享库，请先通过发行版包管理器安装 `webkit2gtk-4.1` 对应的软件包。
+
+安装完成后启动 NomiFun；在侧边栏底部选择“检查更新”可查看新版本，系统设置的“关于”区域也会显示当前版本。
+
+## 从源码构建前的准备
+
+只有从源码构建时才需要以下工具链；直接下载安装包的用户可以跳过本节。
 
 1. **Rust**（stable，edition 2024）——编译后端；桌面端还需编译 Tauri 外壳。用 [rustup](https://rustup.rs/) 安装。
 2. **Bun ≥ 1.3.13**——前端包管理与构建，同时也是 agent 引擎的硬运行时依赖。`1.1.38` 存在 stdin 缺陷，请勿使用。
@@ -38,7 +60,7 @@ bun install
 
 ## 操作步骤
 
-按你的使用场景三选一。单机自用选 A；要从手机 / 局域网 / 服务器访问，选 B 或 C。
+按你的使用场景三选一。需要自己编译桌面端选 A；要从手机、局域网或服务器访问，选 B 或 C。
 
 ### A. 从源码构建桌面应用
 
@@ -48,7 +70,7 @@ bun install
 2. **出 Release 二进制**：先 `bun run build:ui` 把 SPA 构建到 `ui/dist`，再 `bun run build` 产出独立可执行文件与平台安装包（落在 `target/release/bundle/`：Windows 的 `.msi`/`.exe`、macOS 的 `.app`/`.dmg`、Linux 的 `.deb`/`.AppImage`）。
 3. **分发签名构建**（可选）：macOS 用 `bun run build:signed`（需配置签名密钥），Windows 签名仍需外部代码签名证书。
 
-装好后启动桌面应用，进入「设置 → 关于」即可看到当前版本号，确认安装成功：
+装好后启动桌面应用，进入“设置 → 系统设置 → 关于”即可看到当前版本号，确认安装成功：
 
 ![安装完成后的“关于”页 · 可见版本号](/images/zh/设置/关于.png)
 

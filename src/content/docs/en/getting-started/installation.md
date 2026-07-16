@@ -1,22 +1,44 @@
 ---
 title: Installation
-description: Three working paths to install NomiFun locally — desktop from source, web from source, and Docker self-hosting — with prerequisites, key commands, and verification.
+description: Install NomiFun on Windows, macOS, or Linux, or build from source and self-host with Docker.
 category: Getting Started
 order: 2
 lang: en-US
 ---
 
-NomiFun is a fully open-source, local-first "super AI workstation": one Rust backend plus a React 19 frontend, with two host modes — the desktop app `nomifun-desktop` (Tauri 2, started on a loopback port with a per-launch local-trust token, so the desktop window needs no login) and the self-hosted web service `nomifun-web` (axum, `127.0.0.1:8787` by default, login required by default). Both share the same backend, so providers, companions, and knowledge bases configured in one host are visible in the other.
+NomiFun now ships desktop installers for Windows, macOS, and Linux. Most users should install the desktop app directly; choose the web service or Docker when you need an always-on server or access from other devices.
 
 This page walks you through getting NomiFun onto your machine or server from scratch.
 
-> **Download entry**: the NomiFun app download page is [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases). Open it, choose a version, then pick the asset for your platform. If a release does not include your platform yet, you can still build from source (desktop Tauri / web axum) or self-host with Docker using the steps below.
+> **Download entry**: [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases). Choose `x64-setup.exe` for Windows, `universal.dmg` for macOS, or AppImage, `.deb`, or `.rpm` for Linux x86_64. Native build machines append platforms in sequence, so if the latest tag does not include yours yet, use the most recent release that does.
 >
 > For platform support and system requirements, see the [download page](/download).
 
-## Prerequisites
+## Install the desktop app
 
-Whichever path you take, you need a working build toolchain:
+### Windows
+
+Download `NomiFun_<version>_x64-setup.exe` and follow the installer. Windows 11 includes WebView2; on Windows 10 the installer guides you to fetch it if needed. The installer is protected by the Tauri updater signature but is not Authenticode-signed, so a manual download may show an unknown-publisher warning. Confirm that the file came from the official GitHub Releases page.
+
+### macOS
+
+Download `NomiFun_<version>_universal.dmg`, open it, and drag NomiFun into Applications. The universal build supports Apple Silicon and Intel and is signed and notarized for distribution.
+
+### Linux
+
+Linux x86_64 is available in three formats:
+
+- **AppImage**: run `chmod +x NomiFun_*.AppImage`, then double-click or start it from a terminal.
+- **Debian / Ubuntu**: `sudo apt install ./NomiFun_*_amd64.deb`.
+- **Fedora / RHEL family**: `sudo rpm -i NomiFun-*.x86_64.rpm`.
+
+The desktop UI requires WebKitGTK 4.1. If your distribution reports a missing shared library, install the corresponding `webkit2gtk-4.1` package first.
+
+After launch, use **Check for updates** at the bottom of the sidebar to look for a newer version. The About area in System Settings also shows the installed version.
+
+## Before building from source
+
+You only need this toolchain when building from source. Skip this section when using a prebuilt installer.
 
 1. **Rust** (stable, edition 2024) — compiles the backend; the desktop path also compiles the Tauri shell. Install via [rustup](https://rustup.rs/).
 2. **Bun ≥ 1.3.13** — frontend package manager and build, and also a hard runtime dependency of the agent engine. `1.1.38` has a stdin bug — do not use it.
@@ -38,7 +60,7 @@ All commands below assume your working directory is the repository root.
 
 ## Steps
 
-Pick one of three by how you'll use it. For a single-user machine, take A; to reach it from a phone, LAN, or server, take B or C.
+Choose one path for your use case. Pick A to compile the desktop app yourself; choose B or C for phone, LAN, or server access.
 
 ### A. Build the desktop app from source
 
@@ -48,7 +70,7 @@ The desktop app is a Tauri 2 shell that links the backend in-process and starts 
 2. **Produce a release binary**: first `bun run build:ui` to build the SPA into `ui/dist`, then `bun run build` to produce a standalone executable plus platform installers (under `target/release/bundle/`: `.msi`/`.exe` on Windows, `.app`/`.dmg` on macOS, `.deb`/`.AppImage` on Linux).
 3. **Distribute a signed build** (optional): on macOS use `bun run build:signed` (signing keys required); Windows signing still needs an external code-signing certificate.
 
-Once installed, launch the desktop app and open Settings → About to see the current version number and confirm the install succeeded:
+Once installed, launch the desktop app and open Settings → System Settings → About to see the current version number and confirm the install succeeded:
 
 ![The About page after install · shows the version](/images/en/设置/关于.png)
 

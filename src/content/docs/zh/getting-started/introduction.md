@@ -1,61 +1,45 @@
 ---
 title: 简介
-description: NomiFun 是什么、适合谁、两种运行形态与当前版本，以及一张主界面总览。
+description: 认识 NomiFun v0.2.23：跨平台 AI 工作台、会话协作、Skills、设定、语音输入、自动化与桌面伙伴。
 category: 快速上手
 order: 1
 lang: zh-CN
 ---
 
-**NomiFun** 是一项完全开源、本地优先的"超级 AI 工作站"。它把多种 AI agent、内置 nomi 引擎、模型 provider、MCP 服务、技能、终端、知识库与远程渠道收拢进同一个本地工作区——数据全在本地，免费商用，接受审计。
+**NomiFun** 是一项完全开源、本地优先的超级 AI 工作站。它把 Nomi、Claude Code、Codex、OpenCode 等 Agent，会话与项目、模型、Skills、MCP、知识库、自动化和桌面伙伴放进同一个工作台，让 AI 不只回答问题，也能持续处理真实工作。
 
-真实的 AI 工作流常被拆散在多个终端、浏览器标签与脚本之间。NomiFun 的目标不是再做一个聊天框，而是把这些运行时接到同一个工作区：一个会话入口对接多种 agent、一个模型目录处处复用、后端持久化驱动自动化、桌面与 Web 共用同一套后端。
+![NomiFun v0.2.23 主工作台](/screenshots/current-home-zh.png)
 
-下面这张主界面就是你日常工作的地方——左侧会话与导航、中间消息流、右侧文件树与预览面板，会话的工作目录、终端与各类能力都围绕它展开。
+## 最近更新
 
-![NomiFun 主界面 · 会话工作区总览](/images/zh/02会话/会话.png)
+官网内容已同步到 **v0.2.23**。与旧版文档相比，最值得关注的变化包括：
 
-## 它适合谁
+- **Windows、macOS、Linux 全平台桌面端**：GitHub Releases 提供 Windows x64、macOS Universal，以及 Linux x86_64 的 AppImage、Debian 与 RPM 安装包。
+- **Skills 与 Skill Market**：统一管理已安装 Skills，浏览 ClawHub / SkillHub 榜单，查看详情、筛选并在确认后交给 Nomi 安装。
+- **可复用设定**：把 Agent、模型、Skills、知识库与提示要求保存为一套设定，创建会话时一键复用。
+- **语音输入与本地 ASR**：直接录音转文字；既支持云端语音模型，也支持本地 Whisper 与中文优化的 FunASR。
+- **工作台界面焕新**：默认 Rhythm Dark 主题，重新整理导航与设置结构，侧边栏会提示可用更新；Browser Use 默认打开可见的系统浏览器。
+- **OpenClaw 远程控制**：可连接并验证远程 OpenClaw Agent，在新建会话时作为执行后端使用。
 
-NomiFun 面向已经在用 agent 做真实工作的用户。它要求你理解 API key、本地数据目录、CLI agent 安装与自托管边界——它不是零配置的 SaaS 聊天产品，而是一套你完全掌控的本地基础设施。
+## 你可以用它做什么
 
-如果你正在多个终端里分别跑不同的 agent、在浏览器里盯着自托管页面、旁边还散落着 MCP 服务与项目脚本，那么把它们收进一个工作区正是 NomiFun 想替你做的事。
+- **发起会话与项目**：为每项工作选择 Agent、模型、设定、Skills 和工作目录，在消息流中查看执行过程，并用文件树、预览与终端检查产物。
+- **多人式协作**：开启协作策略，把复杂目标拆给多个 Agent 并行或按依赖执行；在协作面板查看实时进度、调整计划或处理提问。
+- **管理模型与执行引擎**：统一配置模型服务与外部 Agent，设置模型优先级、备用模型和多模态能力。
+- **沉淀知识与能力**：把项目资料放进知识库，把可复用流程做成 Skills，再通过设定组合成随时可启动的工作方式。
+- **自动处理工作**：使用定时任务、需求平台与 AutoWork，让 NomiFun 在你不盯着界面时继续推进事项。
+- **随时访问**：桌面端本地使用，也可启用 WebUI 从同一局域网的手机、平板或另一台电脑访问。
 
-## 两种运行形态
+## 适合谁
 
-一套 Rust 后端 + 一套 React 19 前端，两种宿主：
+NomiFun 适合已经在使用 AI Agent 做真实工作，希望把分散的终端、浏览器、模型配置、项目资料和自动任务统一管理的个人与团队。它强调本地掌控和可审计性：应用本身完全免费、无广告、无会员，数据默认保存在你的设备上。
 
-1. **桌面应用 `nomifun-desktop`**：Tauri 2 外壳，在进程内启动后端、监听随机环回端口，桌面窗口通过每次启动生成的本地信任 token 免登录访问。适合单机工作站、日常开发。开启 WebUI 远程访问后，额外的局域网监听仍要求远程浏览器登录。
-2. **Web 服务 `nomifun-web`**：自托管 axum 服务，默认 `127.0.0.1:8787`，同一端口提供 SPA 与 API，**默认需要登录**，首次访问创建管理员。适合 LAN / VPN / VPS 自托管，Docker 与 systemd 部署都走这条路径。
+## 下一步
 
-两种形态共用同一份后端与同一份 React SPA，因此功能、界面与文档基本一致，差异主要在启动方式与鉴权边界。
+- [安装 NomiFun](/zh/docs/getting-started/installation)
+- [完成第一次对话](/zh/docs/getting-started/quick-start)
+- [使用 Skills 与技能市场](/zh/docs/guides/mcp-and-skills)
+- [创建可复用设定](/zh/docs/guides/assistants)
+- [配置语音输入](/zh/docs/guides/voice-input)
 
-## 你能在这里做什么
-
-进门后的常用入口（侧边栏 / 路由）一览：
-
-- **会话与工作区**：`/guid` 创建会话、`/conversation/:id` 运行会话；可选内置 nomi 或外部 CLI agent，每段会话有独立工作目录、文件树、预览面板与后端管理的 PTY 终端。
-- **模型配置**：`/models` 管理 4 个原生 provider（Anthropic、OpenAI 兼容、Amazon Bedrock、Google Vertex）、模型、凭据与全局**故障 failover 队列**（失败 / 限流时最多切换 4 次备用模型）。
-- **助手与技能**：`/assistants` 管理助手，`?tab=skills` 管理技能。
-- **MCP 与对外能力**：`/mcp` 管理 MCP server，`/open-capabilities` 管理 WebUI 远程访问与对外能力暴露。
-- **桌面伙伴**：`/nomi` 管理伙伴形象、远程渠道绑定与 companion 设置；内置 3 个纯代码 SVG 形象（Mochi 麻薯兔 / Ink 墨墨黑猫 / Bolt 波特机器人，默认 Mochi），也可自定义任意形象。
-- **终端与自动化**：`/terminal-new`、`/terminal/:id` 运行后端 PTY；`/scheduled` 管理 cron 计划任务；`/requirements` 管理 AutoWork 需求看板。
-
-## 要点与边界
-
-- **共享 / 私有记忆 + 专属技能**：记忆可全家共享，也可归属某只伙伴；技能库按伙伴隔离。
-- **IM 渠道（11+）**：已落地 Telegram、飞书 Lark、钉钉、微信、Slack、Discord、Matrix、Mattermost、Twitch、Nostr、QQ Bot；企业微信 WeCom 在途。
-- **完成通知是出站**：任务完成可通过 webhook 出站推送（飞书签名卡 / Slack / HTTP）。把 issue 或 IM 消息**入站转为需求**目前是路线图，敬请期待。
-- **知识库来源**：飞书 Feishu 连接器已实现（UI 内创建入口当前关闭）；Notion 来源为路线图，尚未实现。
-
-## 当前版本
-
-NomiFun 当前为 **0.1.0（pre-1.0）**，仍在活跃迭代，并以 **Apache-2.0** 许可开源。内置 nomi agent 为独立 CLI 二进制，随应用分发，无需额外安装。
-
-> 本门户只收敛"操作 / 使用"类内容，不重复 GitHub 上的全量技术文档与架构内幕。
-
-## 相关
-
-- [安装](/zh/docs/getting-started/installation) —— 把它跑起来。
-- [第一次对话](/zh/docs/getting-started/quick-start) —— 配置模型并完成第一段会话。
-
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整源码与发布记录 → [GitHub](https://github.com/nomifun/nomifun-tauri)

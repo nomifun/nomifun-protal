@@ -1,72 +1,73 @@
 ---
-title: MCP & skills
-description: Connect external MCP servers for more tools, manage skill knowledge packs, and tell external tools apart from a companion's own skill library.
+title: MCP & Skills
+description: Connect external MCP servers, manage installed Skills, and discover and review new capabilities in Skill Market.
 category: Knowledge & Open Capabilities
 order: 12
 lang: en-US
 ---
 
-NomiFun has two easily-confused extension paths. This page helps you tell them apart and set them up:
+NomiFun extends an agent in two complementary ways:
 
-- An **MCP server** is an external tool server that exposes callable tools over stdio / HTTP / SSE, giving the agent a batch of new "hands-on" abilities.
-- A **skill** is a markdown / folder knowledge pack that tells the agent *how* to complete a workflow — it is knowledge, not a long-running tool server.
+- An **MCP server** provides callable external tools such as search, data services, or third-party app actions.
+- A **Skill** is a knowledge pack with instructions and resources that teaches an agent how to perform a workflow consistently.
 
-In the other direction, NomiFun's own 151 capabilities are exposed through three public fronts — `/mcp` (full Remote), `/mcp-agent` (a curated do-work subset), and `/v1` (REST + OpenAPI 3.1 + SSE streaming) — so Claude / Codex / any agent can drive NomiFun directly via MCP/Skill.
+Use **MCP** in the sidebar for tool servers and **Skills** for local Skills and Skill Market.
 
-> Entry points: the sidebar **MCP** page (`/mcp`) configures external servers, the **Skills** page (`/assistants?tab=skills`) manages general skill packs, and outbound exposure lives under `/open-capabilities`. Old Settings URLs redirect to these pages.
+## Connect an MCP server
 
-## Connect an external MCP server
+1. Open MCP from the sidebar and click Add.
+2. Choose a transport: stdio for a local command, or HTTP / SSE for a remote service.
+3. Enter the command, arguments, environment variables, or URL. Follow the built-in OAuth flow when a service requires authorization.
+4. Test the connection before saving. NomiFun completes the handshake and lists tools, with distinct errors for commands, permissions, timeouts, networking, and protocol failures.
+5. Select the MCP servers a conversation should actually use. Global enablement makes a server available; it does not force it into every conversation.
 
-1. **Add a server.** Open `/mcp`, click add, name it, and pick a transport — stdio takes command / args / env, HTTP / SSE takes a URL. Importing from another agent's config preserves its raw JSON too.
+![Configure an MCP server](/images/en/助手&skill&mcp/mcp配置.png)
 
-   ![Configure an MCP server](/images/en/助手&skill&mcp/mcp配置.png)
+If another local agent already has MCP configuration, use import to scan and reuse it instead of entering everything again.
 
-2. **Test the connection.** Before saving, run the connection test: the backend starts a temporary MCP client, completes the handshake, lists tools, and persists the result. Failure codes distinguish missing command, permission, timeout, HTTP, RPC, and protocol errors, which makes debugging easier.
+## Manage Installed Skills
 
-3. **Handle OAuth.** HTTP / SSE servers that need OAuth go through the built-in OAuth flow; once authorized they connect.
-
-4. **Import / sync agent configs.** Detect MCP configs from supported local agent CLIs and import detected servers into NomiFun in one click; when the adapter supports writing, you can also sync NomiFun's MCP list back into a selected agent's config. This step is configuration management only.
-
-5. **Select per session.** Enabling globally only makes a server available — it does not auto-inject into every session. Which servers a given session actually sees is the merge of three sets: globally enabled servers + servers selected for that session + the builtin bridge servers the current capability set requires.
-
-## Manage skills (general knowledge packs)
-
-Open `/assistants?tab=skills` to manage skill packs shared across companions. A skill can be a single markdown file or a directory containing a `SKILL.md`, and is sourced one of three ways:
+Open Skills and stay on **Installed Skills**. The library combines three sources:
 
 | Source | Meaning |
 | --- | --- |
-| Builtin | Ships with the app; some are auto-injected into sessions |
-| Custom | Skills you import or drop into the config directory |
-| Extension | Provided by an installed extension |
+| Builtin | Skills shipped with NomiFun |
+| Custom | Skills you import, link, or write yourself |
+| Extension | Skills provided by installed extensions |
 
-Skills can be tagged, imported, exported / symlinked, scanned from external directories, and materialized for a specific agent backend.
+You can inspect details, search, tag, import folders, scan external locations, and prepare Skills for different agents.
 
-![Skills page](/images/en/助手&skill&mcp/skills.png)
+![Installed Skills](/screenshots/skills-library-en.png)
 
-## Two kinds of "skill" — don't mix them up
+## Discover Skills in Skill Market
 
-What you manage at `/assistants?tab=skills` are **cross-companion, general** skill knowledge packs. That is a different thing from a "companion's own skill library":
+Switch to **Skill Market** to sync public rankings from ClawHub and SkillHub. You can:
 
-- **General skills (this page)** — knowledge packs you curate by hand and every companion can share, sourced as Builtin / Custom / Extension.
-- **Per-companion skill library (on the companion page)** — each companion grows its own, **per-companion-isolated** set of skills. The evolution engine mines reusable skills from that companion's **tool-call sequences** (based on the sequence itself only, with **no parameter values**), produces a draft, and you review the resulting `SKILL.md` before enabling it; grown skills can also be **gifted** to other companions. See [Companions](/docs/guides/companions).
+1. switch between ClawHub and SkillHub;
+2. filter by search, audience tags, and scenario tags;
+3. inspect a card's description and source;
+4. click Add to hand an installation draft to Nomi;
+5. review the source, destination, and planned changes before installing.
 
-> Keep the memory-vs-skill boundary straight: **memory supports shared and per-companion private scopes**; shared memories are family-wide, private memories are visible only to their owning companion, and **skill libraries are isolated per companion**.
+![Skill Market](/screenshots/skills-market-en.png)
 
-## Exposing NomiFun to external agents
+Browsing the market never silently installs anything. Discovery and execution remain separate so you can review the source and purpose before adding a third-party Skill.
 
-Manage outbound fronts under `/open-capabilities`. Authentication is by companion-token (Bearer, SHA-256 stored, constant-time compared); the caller operates "as that companion" on the Remote surface. The headline capability is `nomi_agent_run` (streaming) + `nomi_agent_result` (polling) delegation. Review each front before enabling it.
+## General Skills and companion Skills
 
-## Notes & boundaries
+The sidebar Skills page manages general Skills that can be reused across conversations and companions. The skill library inside a companion belongs to that companion and captures working patterns developed through long-term collaboration. Both use the Skill format, but their scope is different.
 
-- **Enabled globally ≠ injected into a session.** Enabling an MCP server globally only makes it "available"; whether it enters a given session is decided by that session's selection.
-- **The connection test is a temporary client.** The test only handshakes, lists tools, and stores the result; it does not affect later real connections in sessions.
-- **The evolution engine sees sequences, not parameters.** Per-companion skill mining is based on tool-call **sequences** only and never records parameter values, so the distilled skills are safe to review and gift.
-- **Current version is 0.1.0 (pre-1.0).** Review some fronts (such as the open-capabilities panel) before turning them on.
+## Safety tips
+
+- Read `SKILL.md` and any bundled scripts before installing a third-party Skill.
+- Give each MCP server only the permissions required for its job.
+- Keep secrets in environment variables or app credential settings, not inside Skill files.
+- Select sensitive capabilities per conversation instead of enabling everything everywhere.
 
 ## Related
 
-- [Companions](/docs/guides/companions) — per-companion skill libraries, evolution mining, and skill gifting.
-- [Knowledge base](/docs/guides/knowledge-base) — attach a knowledge base to a session / terminal / companion so the agent can "look it up first".
-- [Terminal](/docs/guides/terminal) — where the agent actually runs commands.
+- [Presets](/docs/guides/assistants) — combine common Skills and models into a one-click setup.
+- [Knowledge base](/docs/guides/knowledge-base) — provide project material to a conversation.
+- [Companions](/docs/guides/companions) — companion-specific Skills and memory.
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Source code and release history → [GitHub](https://github.com/nomifun/nomifun-tauri)

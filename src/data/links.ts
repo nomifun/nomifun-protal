@@ -55,12 +55,12 @@ export const community: { id: string; label: string; url: string; icon: string }
 /** Download entry points. Platform buttons all land on GitHub Releases. */
 export const downloads = {
   macos: { label: 'macOS', ext: '.dmg', url: links.releases, arch: 'Apple Silicon / Intel' },
-  windows: { label: 'Windows', ext: '.msi / .exe', url: links.releases, arch: 'x64' },
-  linux: { label: 'Linux', ext: '.deb / .AppImage', url: links.releases, arch: 'x64' },
+  windows: { label: 'Windows', ext: '.exe', url: links.releases, arch: 'x64' },
+  linux: { label: 'Linux', ext: '.AppImage / .deb / .rpm', url: links.releases, arch: 'x86_64' },
 } as const;
 
 export const meta = {
-  version: '0.1.0',
+  version: '0.2.23',
   status: 'pre-1.0',
   license: 'Apache-2.0',
 } as const;

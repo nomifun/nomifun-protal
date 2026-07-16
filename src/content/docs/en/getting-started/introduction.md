@@ -1,61 +1,45 @@
 ---
 title: Introduction
-description: What NomiFun is, who it's for, its two host modes and current version, plus a look at the main UI.
+description: "Meet NomiFun v0.2.23: a cross-platform AI workspace with conversations, collaboration, Skills, presets, speech input, automation, and desktop companions."
 category: Getting Started
 order: 1
 lang: en-US
 ---
 
-**NomiFun** is a fully open-source, local-first "super AI workstation." It pulls multiple AI agents, the built-in nomi engine, model providers, MCP servers, skills, terminals, knowledge bases, and remote channels into one local workspace — all data stays local, free for commercial use, open to audit.
+**NomiFun** is a fully open-source, local-first super AI workstation. It brings Nomi, Claude Code, Codex, OpenCode, conversations and projects, models, Skills, MCP, knowledge bases, automation, and desktop companions into one workspace—so AI can keep doing real work instead of only answering questions.
 
-Real AI workflows get scattered across separate terminals, browser tabs, and scripts. NomiFun's goal is not another chat box, but to wire these runtimes into one workspace: one conversation surface for many agents, one model catalog reused everywhere, durable backend-driven automation, and a single backend shared by desktop and web.
+![NomiFun v0.2.23 main workspace](/screenshots/current-home-en.png)
 
-The main UI below is where you'll spend your day — conversations and navigation on the left, the message stream in the middle, the file tree and preview panel on the right, with each session's working directory, terminal, and capabilities arranged around it.
+## What's new
 
-![NomiFun main UI · the session workspace](/images/en/02会话/会话.png)
+The site now reflects **v0.2.23**. The most important changes since the previous documentation refresh are:
 
-## Who it's for
+- **Desktop apps for Windows, macOS, and Linux**: GitHub Releases includes Windows x64, macOS Universal, plus AppImage, Debian, and RPM packages for Linux x86_64.
+- **Skills and Skill Market**: manage installed Skills, browse ClawHub and SkillHub rankings, inspect details, filter results, and hand a reviewed installation to Nomi.
+- **Reusable presets**: save an agent, model, Skills, knowledge bases, and prompt requirements as one reusable setup.
+- **Speech input and local ASR**: record for transcription using a cloud speech model, local Whisper, or Chinese-optimized FunASR.
+- **Refreshed workspace**: Rhythm Dark is now the default theme, navigation and settings are reorganized, available updates appear in the sidebar, and Browser Use opens a visible system browser by default.
+- **OpenClaw remote control**: connect and validate a remote OpenClaw agent, then use it as an execution backend when starting a conversation.
 
-NomiFun targets people already doing real work with agents. It expects you to understand API keys, local data directories, CLI agent installation, and self-hosting boundaries — it is not a zero-config SaaS chat product, but infrastructure you fully control.
+## What you can do
 
-If you're already running different agents in separate terminals, watching a self-hosted page in the browser, with MCP servers and project scripts scattered alongside, then pulling them into one workspace is exactly what NomiFun is built to do for you.
+- **Start conversations and projects**: choose an agent, model, preset, Skills, and workspace for each job; follow the execution stream and inspect results in the file tree, preview, and terminal.
+- **Collaborate with multiple agents**: turn on collaboration, split a complex goal across agents, follow live progress, adjust the plan, and answer questions from the collaboration panel.
+- **Manage models and execution engines**: configure model services and external agents in one place, with provider ordering, fallback models, and multimodal capabilities.
+- **Build reusable knowledge**: organize project material in knowledge bases, capture repeatable workflows as Skills, and combine them into presets.
+- **Automate ongoing work**: use scheduled tasks, Requirements, and AutoWork to keep work moving while you are away.
+- **Work from another device**: use the desktop app locally, or enable WebUI for a phone, tablet, or another computer on the same trusted network.
 
-## Two host modes
+## Who it is for
 
-One Rust backend + one React 19 frontend, two hosts:
+NomiFun is for individuals and teams already using AI agents for real work who want one place for terminals, browsers, model configuration, project knowledge, and automation. It stays under your control: the app is completely free, has no ads or membership, and stores data on your device by default.
 
-1. **Desktop app `nomifun-desktop`** — a Tauri 2 shell that starts the backend in-process on a random loopback port; the window is trusted via a per-boot local trust token (no login). Best for a personal workstation and everyday dev. When WebUI remote access is enabled, the extra LAN listener still requires the remote browser to log in.
-2. **Web server `nomifun-web`** — a self-hosted axum service on `127.0.0.1:8787` by default, serving the SPA and API on one port, **login required by default**, with an admin created on first visit. Best for LAN / VPN / VPS self-hosting; Docker and systemd deployments take this path.
+## Next steps
 
-Both modes share the same backend and the same React SPA, so features, UI, and docs are essentially identical — the difference is in how they launch and where the auth boundary sits.
+- [Install NomiFun](/docs/getting-started/installation)
+- [Complete your first conversation](/docs/getting-started/quick-start)
+- [Use Skills and Skill Market](/docs/guides/mcp-and-skills)
+- [Create reusable presets](/docs/guides/assistants)
+- [Configure speech input](/docs/guides/voice-input)
 
-## What you can do here
-
-A tour of the common entry points (sidebar / routes) once you're in:
-
-- **Sessions & workspace** — `/guid` to create a session, `/conversation/:id` to run it; pick the built-in nomi or an external CLI agent. Each session has its own working directory, file tree, preview panel, and a backend-managed PTY terminal.
-- **Model setup** — `/models` manages the 4 native providers (Anthropic, OpenAI-compatible, Amazon Bedrock, Google Vertex), models, credentials, and a global **failover queue** (up to 4 fallback switches on failure / rate limit).
-- **Assistants & skills** — `/assistants` manages assistants; `?tab=skills` manages skills.
-- **MCP & outward capabilities** — `/mcp` manages MCP servers; `/open-capabilities` manages WebUI remote access and outward capability exposure.
-- **Desktop companions** — `/nomi` manages companion characters, remote channel binding, and companion settings; 3 built-in code-drawn SVG characters ship in (Mochi the bunny / Ink the black cat / Bolt the robot, Mochi by default), and you can bring any custom character.
-- **Terminals & automation** — `/terminal-new`, `/terminal/:id` run backend PTYs; `/scheduled` manages cron tasks; `/requirements` manages the AutoWork board.
-
-## Notes & boundaries
-
-- **Shared / private memory + per-companion skills** — memories can be family-wide or owned by one companion, while the skill library is isolated per companion.
-- **IM channels (11+)** — shipped: Telegram, Lark (Feishu), DingTalk, WeChat, Slack, Discord, Matrix, Mattermost, Twitch, Nostr, QQ Bot; WeCom (Enterprise WeChat) is in progress.
-- **Completion notifications are outbound** — tasks can push completion via outbound webhooks (Lark signed card / Slack / HTTP). Turning an issue or IM message **into an inbound requirement** is on the roadmap (coming soon).
-- **Knowledge base sources** — the Feishu connector is shipped (its in-UI creation entry is currently disabled); Notion as a source is on the roadmap, not yet implemented.
-
-## Current version
-
-NomiFun is at **0.1.0 (pre-1.0)**, under active iteration, and released under **Apache-2.0**. The built-in nomi agent ships as a standalone CLI binary bundled with the app — no extra install needed.
-
-> This portal covers operational / usage content only — it does not duplicate the full technical docs or architecture internals on GitHub.
-
-## Related
-
-- [Installation](/docs/getting-started/installation) — get it running.
-- [Your first conversation](/docs/getting-started/quick-start) — set up a model and complete your first session.
-
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Source code and release history → [GitHub](https://github.com/nomifun/nomifun-tauri)

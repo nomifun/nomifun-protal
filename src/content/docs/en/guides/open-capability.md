@@ -1,12 +1,12 @@
 ---
 title: Open capabilities (MCP / REST / OpenAPI)
-description: Expose NomiFun's 151 capabilities to any agent through /mcp, /mcp-agent, and /v1 with a single companion-token, and delegate tasks as that companion.
+description: Expose NomiFun's platform capabilities to any agent through /mcp, /mcp-agent, and /v1 with a single companion-token, and delegate tasks as that companion.
 category: Knowledge & Open Capabilities
 order: 13
 lang: en-US
 ---
 
-NomiFun exposes all 151 platform capabilities (agent / browser / computer / knowledge / files / platform control) through three network-reachable public fronts. Any MCP client or HTTP script can drive the platform like a "desktop companion" with just a URL plus an access token — this page covers opening the fronts, getting a token, connecting a client, and delegating a task in one call.
+NomiFun exposes its platform capabilities (Agent / browser / Computer Use / knowledge / files / platform control) through three network-reachable public fronts. Any MCP client or HTTP script can drive the platform like a "desktop companion" with just a URL plus an access token — this page covers opening the fronts, getting a token, connecting a client, and delegating a task in one call.
 
 > Entry point: view and manage these outbound fronts in the Open Capabilities panel (`/open-capabilities`); review each one before enabling it.
 

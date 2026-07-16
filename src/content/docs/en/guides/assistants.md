@@ -1,51 +1,54 @@
 ---
-title: Assistants
-description: An assistant is a reusable persona (system prompt + default backend + skill selection) you create, edit, and tag under /assistants, then pick on demand in any session.
-category: Knowledge & Open Capabilities
+title: Presets
+description: Save an agent, models, Skills, knowledge bases, and prompt requirements as a reusable preset for one-click conversation setup.
+category: Knowledge & Open Capability
 order: 11
 lang: en-US
 ---
 
-An **assistant** is a reusable persona: it bundles display info, a default agent backend, an optional model preference, a system prompt, and a skill selection into one entry, so you can pick it in one click when starting a session instead of rewriting prompts every time.
+A **preset** is a reusable conversation setup. It combines the agents, models, Skills, knowledge bases, prompt requirements, and scenarios you use together, so a new conversation can start with the full configuration in one click.
 
-The entry point is **`/assistants`** (the old `/settings/assistants` redirects to `/assistants?tab=assistants`). The **Skills** tab on the same page lives at `/assistants?tab=skills`.
+Open **Presets** from the sidebar, or click **Use preset** above the composer on the home screen.
 
-![Assistants list (builtin library)](/images/en/助手&skill&mcp/助手列表.png)
+![Preset library](/screenshots/presets-en.png)
 
-## Steps
+## Create a preset
 
-1. **Browse the assistant library.** Open `/assistants`. The list merges three sources: **Builtin** (shipped with the app), **Custom** (created by you), and **Extension** (provided by installed extensions). Every entry can be enabled/disabled and reordered, and the list also tracks recent use so you can grab one quickly in a session.
+1. Open Presets and click New.
+2. Add a name, description, and avatar so the preset is easy to recognize.
+3. Choose the primary agent and candidate models. Allow fallback when you want another available execution path to take over.
+4. Attach the Skills and knowledge bases this workflow normally needs.
+5. Write the prompt requirements: role, output format, working constraints, and quality bar.
+6. Add audience and scenario tags so the preset is easy to find later.
+7. Save it, return to the home screen, and click **Use preset** to apply it.
 
-2. **Create an assistant.** Click new, then fill in a name, description, and avatar; choose a **default agent backend** (e.g. the built-in `nomi`, or `claude` / `codex` / `gemini`); set a model preference if you want; write the **system prompt** (the assistant's instructions); and check the **skills** to attach when a session starts. Save, and it's ready to pick in a session.
+## Three sources
 
-   ![Create / edit an assistant](/images/en/助手&skill&mcp/新增助手.png)
+- **Builtin presets** ship with NomiFun. Their content is read-only, but you can use or duplicate them.
+- **Extension presets** come from installed extensions and are maintained by the extension.
+- **Custom presets** are yours to edit, duplicate, enable, disable, or delete.
 
-3. **Edit an assistant.** Custom assistants are fully editable — name, description, avatar, prompt, and skills — and can be deleted. Builtin assistants are read-only in content, but their enabled state, sort order, recent use, and a default-backend override are stored separately; Extension assistants are read-only here, with their lifecycle managed by the extension.
+## How presets relate to Skills
 
-4. **Organize with tags.** Create tags in tag management and apply them to assistants, then filter by tag at the top of the list — once you have many assistants, this is the fastest way to find one.
+Presets decide which capabilities belong together; Skills teach an agent how to perform a workflow. The same Skill can be reused by many presets, so you do not need to duplicate its content.
 
-   ![Tag management](/images/en/助手&skill&mcp/标签管理.png)
+If you still need a Skill, open **Skills** from the sidebar:
 
-5. **Pick one in a session.** When you start a session, or switch agents in the session header, choose an assistant; its prompt and enabled skills take effect automatically at session start. The assistant's skills merge with the auto-injected builtin skills — no need to copy skill directories by hand in normal use.
+- manage local capabilities under **Installed Skills**;
+- browse ClawHub and SkillHub rankings under **Skill Market**;
+- inspect the details, then hand a reviewed installation draft to Nomi.
 
-## Notes and limits
+## Practical tips
 
-- **Three sources, different editability.** Custom assistants are editable and deletable; Builtin assistants are read-only in content (only enabled/order/default-backend override are mutable); Extension assistants are read-only.
-- **Default backend and providers.** If you don't set a default backend when creating an assistant, you need at least one configured provider; the built-in `nomi` is used by default when it can be inferred.
-- **CLI agents need their own install.** Choosing `claude` / `codex` / `gemini` does not install those tools — they still require the matching CLI on the host beforehand.
-- **Skills are per-companion; memory has scopes.** Each companion has its own skill library; memories can be shared family-wide or private to one companion.
-- **Skills and MCP are managed separately.** The Skills tab is at `/assistants?tab=skills`, while MCP servers moved out to `/mcp`; both extend capability but are managed apart today.
-
-## FAQ
-
-- **How do assistants relate to sessions?** An assistant is a template; a session is an instance. Picking one makes its prompt, default backend, and skills the session's starting point; later tweaks inside the session don't rewrite the assistant itself.
-- **Can I edit a builtin assistant?** Not its content, but you can enable/disable it, reorder it, and override its default backend. For full customization, create a custom assistant instead.
-- **What happens when I delete a custom assistant?** Its associated rule, skill, and avatar files are cleaned up along with it.
+- Name presets after real workflows—such as “Code review,” “Weekly report,” or “Requirement breakdown”—instead of vague roles.
+- Keep stable rules in the preset and put the changing goal in the conversation composer.
+- Duplicate a builtin preset before customizing so the original remains available as a reference.
+- For long tasks, add fallback models so a temporary provider outage does not stop the workflow.
 
 ## Related
 
-- [MCP and skills](/docs/guides/mcp-and-skills) — manage skills and MCP servers to extend what an assistant can do.
-- [The session workspace](/docs/guides/sessions) — pick an assistant and get work done in a session.
-- [Model failover queue](/docs/guides/model-routing) — a safety net for an assistant's model preference.
+- [MCP and Skills](/docs/guides/mcp-and-skills)
+- [Your first conversation](/docs/getting-started/quick-start)
+- [Models and failover](/docs/guides/model-routing)
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Source code and release history → [GitHub](https://github.com/nomifun/nomifun-tauri)

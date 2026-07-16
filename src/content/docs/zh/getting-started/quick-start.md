@@ -20,13 +20,13 @@ lang: zh-CN
 
 2. **（可选）配置模型故障 failover 队列。** 需要无人值守长任务时，可在模型设置里编排一条 failover 队列：当某个模型失败、限流或不可用时，引擎会按序切换备用模型，最多切换 4 次后才放弃。首跑可以先跳过，配好一个模型即可。
 
-3. **从首页发起第一段会话。** 回到 `/guid`。首页集中了开始会话所需的几件事：agent 选择、模型选择、助手（预设 persona / system prompt / 技能组合）、工具与工作区，以及输入框。选择内置 **nomi**，选一个刚配好的模型，在输入框里写下第一条提示词，例如：
+3. **从首页发起第一段会话。** 首页集中了开始会话所需的几件事：Agent、模型、可复用设定、Skills、协作策略、工作区与输入框。选择内置 **Nomi**，选一个刚配好的模型，在输入框里写下第一条提示词，例如：
 
    > 写一个返回第 n 个斐波那契数的 Python 函数，并附一个小测试。
 
-   按发送。NomiFun 会创建新会话并跳转到 `/conversation/:id`，随后开始流式输出。输入时可用 `@` 引用文件、技能或助手。
+   按发送。NomiFun 会创建新会话并开始流式输出。输入时可用 `@` 引用文件或 Skills，也可以先点“使用设定”套用一整套工作配置。
 
-   ![从首页发起第一段会话](/images/zh/02会话/会话启动.png)
+   ![从首页发起第一段会话](/screenshots/current-home-zh.png)
 
 4. **用上会话工作区。** 每段会话都有独立工作目录。会话页通常包含四块：
 
@@ -53,7 +53,8 @@ lang: zh-CN
 ## 相关
 
 - [MCP 与技能](/zh/docs/guides/mcp-and-skills)
-- [助手](/zh/docs/guides/assistants)
+- [设定](/zh/docs/guides/assistants)
+- [语音输入](/zh/docs/guides/voice-input)
 - [终端](/zh/docs/guides/terminal)
 - [WebUI 远程访问](/zh/docs/guides/webui-remote)
 - [Web 服务部署](/zh/docs/getting-started/installation)

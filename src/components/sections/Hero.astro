@@ -40,6 +40,7 @@ const copy: Dict<{
 };
 
 const t = pick(copy, locale);
+const showcaseImage = locale === 'zh-CN' ? '/screenshots/current-home-zh.png' : '/screenshots/current-home-en.png';
 ---
 
 <section class="relative overflow-hidden">
@@ -102,10 +103,10 @@ const t = pick(copy, locale);
       </div>
       <div class="relative overflow-hidden rounded-3xl border border-ink-600 bg-ink-850 shadow-[0_0_90px_-22px_rgba(255,111,145,0.5)]">
         <img
-          src="/images/showcase/home-hero-demo.png"
+          src={showcaseImage}
           alt={t.showcaseAlt}
-          width="3420"
-          height="2224"
+          width="1224"
+          height="768"
           loading="lazy"
           decoding="async"
           class="block h-auto w-full"

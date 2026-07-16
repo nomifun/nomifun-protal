@@ -52,10 +52,10 @@ const copy: Dict<{
   'zh-CN': {
     eyebrow: '下载 · 自托管',
     title: '获取 NomiFun',
-    lead: '本地优先的超级 AI 工作站，完全开源、免费商用。桌面安装包与发布资产统一在 GitHub Releases；也可以按以下任一方式从源码构建或自托管运行。',
-    bannerTitle: '官方下载入口：GitHub Releases',
+    lead: '本地优先的超级 AI 工作站，完全开源、免费商用。现已提供 Windows、macOS 与 Linux 桌面安装包，也可以从源码构建或通过 Docker 自托管。',
+    bannerTitle: 'Windows、macOS 与 Linux 安装包已发布',
     bannerBody:
-      'NomiFun 的应用下载地址为 GitHub Releases。进入后选择对应版本和平台资产；如果当前版本暂未包含你的平台产物，可继续使用源码构建或 Docker 自托管路径。',
+      '官方下载统一在 GitHub Releases。Windows 选择 x64 setup.exe，macOS 选择 universal.dmg；Linux x86_64 可选 AppImage、Debian（.deb）或 RPM。各平台由原生构建机依次追加，若最新标签尚未出现你的平台，请选最近一个包含对应安装包的版本。',
     releasesCta: '打开 GitHub Releases',
     baiduTitle: '中国区备用：百度网盘',
     baiduBody:
@@ -89,7 +89,7 @@ const copy: Dict<{
       },
     ],
     platformTitle: '平台支持',
-    platformLead: '桌面构建产物覆盖以下平台。所有平台下载按钮统一前往 GitHub Releases，请在对应版本下选择具体资产。',
+    platformLead: '桌面端现已覆盖三大平台。所有按钮都会打开 GitHub Releases，请按文件名选择对应安装包。',
     platform: { reqTitle: '系统要求', comingSoon: 'GitHub Releases', download: '下载' },
     reqTitle: '系统要求 & 自托管',
     reqLead: '从源码构建或自托管运行前，请留意以下环境要求与生产部署建议。',
@@ -97,17 +97,17 @@ const copy: Dict<{
       {
         icon: 'i-simple-icons-windows',
         title: 'Windows：需要 WebView2',
-        body: '桌面端依赖 Microsoft WebView2 运行时（Win11 已内置；Win10 如缺失会在安装时引导获取）。安装包为 .msi / .exe。',
+        body: '桌面端依赖 Microsoft WebView2 运行时（Win11 已内置；Win10 如缺失会在安装时引导获取）。当前发布 x64 setup.exe。',
+      },
+      {
+        icon: 'i-simple-icons-linux',
+        title: 'Linux：三种安装格式',
+        body: 'Linux x86_64 提供免安装 AppImage，以及适用于 Debian / Ubuntu 的 .deb 和适用于 Fedora / RHEL 系的 .rpm。首次启动请确保系统已安装 WebKitGTK 4.1。',
       },
       {
         icon: 'i-mdi-lock-check-outline',
         title: 'Caddy TLS 反向代理',
         body: '生产环境建议在 Web 服务（127.0.0.1:8787）前挂一层 Caddy 反向代理，自动签发并续期 HTTPS 证书。',
-      },
-      {
-        icon: 'i-mdi-cog-sync-outline',
-        title: 'systemd 常驻服务',
-        body: '在 Linux 上用 systemd unit 托管 Web 服务，实现开机自启、崩溃重启与日志收敛，长期无人值守更稳。',
       },
     ],
     docsCta: '查看操作文档',
@@ -116,10 +116,10 @@ const copy: Dict<{
   'en-US': {
     eyebrow: 'Download · Self-host',
     title: 'Get NomiFun',
-    lead: 'A local-first super AI workstation — fully open source, free for commercial use. Desktop installers and release assets live on GitHub Releases; you can also build from source or self-host using any path below.',
-    bannerTitle: 'Official download entry: GitHub Releases',
+    lead: 'A local-first super AI workstation — fully open source and free for commercial use. Desktop installers are now available for Windows, macOS, and Linux; source builds and Docker self-hosting remain available.',
+    bannerTitle: 'Windows, macOS, and Linux builds are live',
     bannerBody:
-      'The NomiFun app download page is GitHub Releases. Open it, choose a version, then pick the asset for your platform. If a release does not include your platform yet, use the source-build or Docker self-host path below.',
+      'Official downloads live on GitHub Releases. Choose the x64 setup.exe for Windows, universal.dmg for macOS, or AppImage, Debian (.deb), or RPM for Linux x86_64. Native build machines append platforms in sequence, so if the newest tag does not include yours yet, use the most recent release that does.',
     releasesCta: 'Open GitHub Releases',
     baiduTitle: 'China mirror: Baidu Netdisk',
     baiduBody:
@@ -153,7 +153,7 @@ const copy: Dict<{
       },
     ],
     platformTitle: 'Platform support',
-    platformLead: 'Desktop builds target the platforms below. Every platform button opens GitHub Releases; choose the concrete asset under the version you need.',
+    platformLead: 'The desktop app now covers all three major platforms. Each button opens GitHub Releases; choose the matching installer filename.',
     platform: { reqTitle: 'Requirements', comingSoon: 'GitHub Releases', download: 'Download' },
     reqTitle: 'Requirements & self-host',
     reqLead: 'Before building from source or self-hosting, note these environment requirements and production deployment tips.',
@@ -161,17 +161,17 @@ const copy: Dict<{
       {
         icon: 'i-simple-icons-windows',
         title: 'Windows: needs WebView2',
-        body: 'The desktop app requires the Microsoft WebView2 runtime (bundled on Win11; the installer guides you to fetch it on Win10 if missing). Installers ship as .msi / .exe.',
+        body: 'The desktop app requires Microsoft WebView2 (bundled on Win11; the installer guides you to fetch it on Win10 if missing). Current releases ship an x64 setup.exe.',
+      },
+      {
+        icon: 'i-simple-icons-linux',
+        title: 'Linux: three package formats',
+        body: 'Linux x86_64 builds include a portable AppImage, a .deb for Debian / Ubuntu, and an .rpm for Fedora / RHEL families. Make sure WebKitGTK 4.1 is installed before first launch.',
       },
       {
         icon: 'i-mdi-lock-check-outline',
         title: 'Caddy TLS reverse proxy',
         body: 'In production, put a Caddy reverse proxy in front of the web server (127.0.0.1:8787) to issue and auto-renew HTTPS certificates.',
-      },
-      {
-        icon: 'i-mdi-cog-sync-outline',
-        title: 'systemd service',
-        body: 'On Linux, manage the web server with a systemd unit for start-on-boot, crash restarts, and centralized logs — steadier for long unattended runs.',
       },
     ],
     docsCta: 'Read the docs',
@@ -216,7 +216,7 @@ const platformList = (['macos', 'windows', 'linux'] as const).map((key) => ({
   </div>
 </section>
 
-<!-- Honest banner: no prebuilt installers yet -->
+<!-- Official release download banner -->
 <section class="container-x mt-10">
   <div
     class="card flex flex-col gap-3 border-warning/25 bg-warning/5 p-5 sm:flex-row sm:items-start sm:gap-4 sm:p-6"

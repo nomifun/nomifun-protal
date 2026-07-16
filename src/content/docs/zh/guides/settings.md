@@ -1,60 +1,73 @@
 ---
 title: 系统设置
-description: 查看与调整本地数据目录、深/浅主题，以及"关于"页的版本与开源许可信息。
+description: 调整主题、语言、启动与通知偏好，管理执行引擎、Browser Use、Computer Use，并检查应用更新。
 category: 远程与设置
 order: 18
 lang: zh-CN
 ---
 
-系统设置是 NomiFun 的"应用级"配置面：在这里查看本地数据存放在哪、切换深色 / 浅色主题，并在"关于"页确认当前版本与开源许可。它与伙伴、模型、渠道等业务配置相互独立——那些各有专门页面，本页只管应用本身。
+新版设置页把应用偏好、执行引擎、浏览器操作、电脑操作和关于信息拆成清晰的独立入口。侧边栏底部点击“设置”即可进入。
 
-> 入口：侧边栏底部「设置」，路由 `/settings`。
+![NomiFun v0.2.23 关于与更新页面](/screenshots/settings-system-zh.png)
 
-![系统设置](/images/zh/设置/系统设置.png)
+## 系统设置
 
-## 操作步骤
+这里管理日常使用偏好：
 
-1. **打开设置**。点击侧边栏底部的「设置」进入 `/settings`，左侧分为「主题」「关于」等分组。
+- 界面语言与消息发送快捷键；
+- 开机启动、保持系统唤醒与硬件加速；
+- 系统通知与定时任务通知；
+- 上传文件是否保存进工作区、Office 文件是否自动预览；
+- 默认工作目录与日志目录；
+- 恢复出厂设置。
 
-2. **切换主题**。在「主题」分组选择深色或浅色，界面即时生效，无需重启;选择会被记住，下次启动沿用。
+修改工作目录或硬件加速时，应用会提示重启后生效。
 
-   ![主题设置](/images/zh/设置/主题设置.png)
+## 主题
 
-3. **查看本地数据目录**。NomiFun 是本地优先应用，所有状态都落在按用户的应用数据目录下：
-   - macOS：`~/Library/Application Support/NomiFun/Nomi`
-   - Windows：`%LOCALAPPDATA%\NomiFun\Nomi`
-   - Linux：`$XDG_DATA_HOME/NomiFun/Nomi`（通常即 `~/.local/share/NomiFun/Nomi`）
+NomiFun v0.2.22 起默认使用 **Rhythm Dark（律动暗黑）**。当前内置主题包括：
 
-   该目录内含 SQLite 数据库（会话、设置）、`companion/`（伙伴 + 共享记忆中枢）、`knowledge/`（知识库）与 `logs/` 等。桌面应用、自托管 Web 与开发脚本默认共用同一目录——所以在一个宿主里配好的提供商或伙伴，在另一个宿主里同样可见。
+- 律动暗黑（默认）
+- 经典
+- 暗夜霓虹
+- 冰晶幻境
+- 落日余晖
 
-4. **查看关于信息**。打开「关于」分组，确认当前版本与开源许可。
+主题切换会立即生效并被记住。你也可以添加自定义 CSS 主题。
 
-   ![关于（版本 / 许可）](/images/zh/设置/关于.png)
+## 执行引擎
 
-## 关于本页信息
+“执行引擎”现在与“模型管理”分开。这里负责检测和配置 Nomi、Claude Code、Codex、OpenCode 等执行后端，以及远程 OpenClaw；“模型管理”只负责模型 Provider、本地模型与语音识别。
 
-- **版本**：当前为 `0.1.0`（pre-1.0）。仍在快速迭代阶段，配置项与界面可能随版本调整。
-- **许可证**：**Apache-2.0**。完全开源、接受审计，源码托管于 GitHub。
+这种分工让“谁来执行”和“使用哪个模型”更容易理解，也避免把 CLI 安装状态与模型凭据混在一起。
 
-## 要点与边界
+## Browser Use 与 Computer Use
 
-- **数据即数据库**：把数据目录当成数据库对待——做好备份、限制权限即可整体迁移；复制到新机器即可搬家，退出应用后删除该目录即可重置。
-- **隔离沙箱**：想让某次运行用独立目录，在启动前设置环境变量 `NOMIFUN_DATA_DIR=<绝对路径>`（桌面应用会在其后附加 `/Nomi`）。同一目录被两个后端同时占用会被机制性阻止——启动会带着持有者信息快速失败。
-- **共享 / 私有记忆，按伙伴技能**：数据目录里的 `companion/` 支持共享记忆和按伙伴私有记忆；技能库（skill）仍按伙伴隔离。
-- **本页不含运行配置**：computer-use / browser-use / nomi agent 的开关与权限不在系统设置里，详见 [电脑操作与浏览器操作](/zh/docs/guides/computer-browser-use)。
+- **Browser Use**：控制浏览器来源、可见性、登录状态与操作审批。新版默认打开可见的系统浏览器，便于你观察正在发生的操作。
+- **Computer Use**：控制截屏、鼠标、键盘与系统无障碍能力。首次使用时，macOS 会要求屏幕录制与辅助功能权限。
 
-## 常见问题
+只在需要时启用这些能力，并为敏感工作保留操作确认。
 
-**改主题需要重启吗？** 不需要，深 / 浅主题即时切换并被记住。
+## 关于与检查更新
 
-**怎么找到我的数据在哪？** 按上方平台路径定位；若设过 `NOMIFUN_DATA_DIR` 则在该路径下的 `Nomi` 子目录。
+“关于”页显示当前安装版本、源码仓库、更新日志、问题反馈与官网入口。桌面端可以在这里点击“检查更新”；侧边栏底部也会在检测到新版本时显示提示。
 
-**版本号在哪看？** 设置 →「关于」分组，当前为 `0.1.0`。
+本页文档同步到 **v0.2.23**。由于 NomiFun 仍处于 pre-1.0 快速迭代阶段，最终版本请以应用“关于”页和 [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases) 为准。
+
+## 数据与备份
+
+NomiFun 的会话、设置、伙伴、知识库和日志默认保存在当前用户的应用数据目录：
+
+- macOS：`~/Library/Application Support/NomiFun/Nomi`
+- Windows：`%LOCALAPPDATA%\NomiFun\Nomi`
+- Linux：`$XDG_DATA_HOME/NomiFun/Nomi`，通常为 `~/.local/share/NomiFun/Nomi`
+
+迁移或备份前先退出应用，再复制整个目录。恢复出厂设置会清除本地数据，执行前请先备份重要内容。
 
 ## 相关
 
-- [电脑操作与浏览器操作](/zh/docs/guides/computer-browser-use) —— computer-use / browser-use / agent 运行的开关与权限。
-- [WebUI 远程访问](/zh/docs/guides/webui-remote) —— 把桌面实例经登录暴露给手机 / 局域网。
-- [伙伴管理](/zh/docs/guides/companions) —— 共享 / 私有记忆作用域与按伙伴技能库。
+- [语音输入](/zh/docs/guides/voice-input)
+- [电脑操作与浏览器操作](/zh/docs/guides/computer-browser-use)
+- [WebUI 远程办公](/zh/docs/guides/webui-remote)
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整源码与发布记录 → [GitHub](https://github.com/nomifun/nomifun-tauri)

@@ -2,8 +2,8 @@
 /**
  * ScreenshotGallery — "真实界面一览 / Real screenshots".
  *
- * A restrained, dark-themed grid of REAL product captures (from the actual
- * running app, dark theme) — placed near the end of the homepage to back the
+ * A restrained grid of REAL product captures (from the installed desktop app)
+ * — placed near the end of the homepage to back the
  * code-rendered live demos with "see it for yourself" credibility. The live
  * islands above remain the primary storytelling; this section is the proof.
  *
@@ -11,22 +11,22 @@
  * descriptive — no capability claims beyond what the shot shows. Each card
  * links to the matching operation guide.
  *
- * i18n note: captures show the Chinese UI; we surface the same images on both
- * locales here (product screenshots, illustrative). The /docs pages use
- * locale-aware image paths (zh real / en `/images/en/` to be filled in).
+ * i18n note: each locale uses a capture from the matching app language.
  */
 import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
 
 const locale: Locale = getLocale(Astro.url);
 
-// Six curated captures spanning the product surface; href → matching guide.
+const languageSuffix = locale === 'zh-CN' ? 'zh' : 'en';
+
+// Six current captures spanning the product surface; href → matching guide.
 const shots: { img: string; href: string; w: number; h: number }[] = [
-  { img: '02会话/会话.png', href: '/docs/getting-started/quick-start', w: 1280, h: 832 },
-  { img: '桌面伙伴/桌面伙伴聊天页.png', href: '/docs/guides/companions', w: 1280, h: 832 },
-  { img: '05需求平台/需求平台列表.png', href: '/docs/guides/autowork', w: 1280, h: 832 },
-  { img: '01模型/模型列表.png', href: '/docs/guides/model-routing', w: 1280, h: 832 },
-  { img: '03知识库/知识库首页.png', href: '/docs/guides/knowledge-base', w: 1280, h: 832 },
-  { img: '开放能力/webui.png', href: '/docs/guides/webui-remote', w: 1452, h: 832 },
+  { img: `current-home-${languageSuffix}.png`, href: '/docs/getting-started/quick-start', w: 1224, h: 768 },
+  { img: `skills-market-${languageSuffix}.png`, href: '/docs/guides/mcp-and-skills', w: 1224, h: 768 },
+  { img: `skills-library-${languageSuffix}.png`, href: '/docs/guides/mcp-and-skills', w: 1224, h: 768 },
+  { img: `presets-${languageSuffix}.png`, href: '/docs/guides/assistants', w: 1224, h: 768 },
+  { img: `voice-input-${languageSuffix}.png`, href: '/docs/guides/voice-input', w: 1224, h: 768 },
+  { img: `settings-system-${languageSuffix}.png`, href: '/docs/guides/settings', w: 1224, h: 768 },
 ];
 
 const copy: Dict<{
@@ -41,33 +41,33 @@ const copy: Dict<{
   'zh-CN': {
     eyebrow: '真实界面 · 眼见为实',
     title: '不是渲染图，是<span class="text-grad-pink">真实运行界面</span>',
-    lead: '上面的演示是用前端代码实时绘制的；这里则是产品真机截图。每一张都来自实际运行的 NomiFun（深色主题），点开可直达对应操作文档。',
+    lead: '上面的演示是用前端代码实时绘制的；这里则是产品真机截图。每一张都来自正式安装版 NomiFun，点开可直达对应操作文档。',
     realBadge: '真机截图',
     viewLabel: '查看文档',
     footnote: '截图均取自实际运行的应用；界面持续迭代，最终以你本机版本为准。',
     captions: [
-      '会话工作区：消息流、文件树、预览与内置终端',
-      '与桌面伙伴对话',
-      '需求平台 · AutoWork 列表',
-      '模型管理与故障转移',
-      '知识库首页',
-      '开放能力 · WebUI 远程访问',
+      '新版工作台：首页、协作策略与会话入口',
+      'Skill Market：浏览榜单并准备安装',
+      '已安装 Skills：集中管理可复用能力',
+      '设定：组合 Agent、模型、Skill 与知识范围',
+      '本地语音识别：Paraformer 与 Whisper',
+      '关于 NomiFun：版本与更新入口',
     ],
   },
   'en-US': {
     eyebrow: 'Real UI · see for yourself',
     title: 'Not renders — <span class="text-grad-pink">the real running app</span>',
-    lead: 'The demos above are drawn live in front-end code; these are real product captures. Every shot is from an actual running NomiFun (dark theme) — tap through to the matching guide.',
+    lead: 'The demos above are drawn live in front-end code; these are real product captures from the installed NomiFun app. Tap through to the matching guide.',
     realBadge: 'Real capture',
     viewLabel: 'View guide',
     footnote: 'All captures are from the actual running app; the UI keeps evolving — your local build is the source of truth.',
     captions: [
-      'Session workspace: messages, file tree, preview & built-in terminal',
-      'Chatting with a desktop companion',
-      'Requirements · AutoWork list',
-      'Model management & failover',
-      'Knowledge base home',
-      'Open capabilities · WebUI remote access',
+      'New workspace: home, collaboration policy and session entry',
+      'Skill Market: browse rankings and prepare an install',
+      'Installed Skills: manage reusable capabilities',
+      'Presets: combine Agents, models, Skills and knowledge scope',
+      'Local speech recognition: Paraformer and Whisper',
+      'About NomiFun: version and update entry points',
     ],
   },
 };
@@ -98,7 +98,7 @@ const items = shots.map((s, i) => ({ ...s, caption: t.captions[i] }));
             >
               <span class="relative block overflow-hidden">
                 <img
-                  src={`/images/zh/${s.img}`}
+                  src={`/screenshots/${s.img}`}
                   alt={s.caption}
                   width={s.w}
                   height={s.h}

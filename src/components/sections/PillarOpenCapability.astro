@@ -4,7 +4,7 @@
  * super ecosystem.
  *
  * Accuracy red lines (spec §2/§3 pillar 4):
- *  - 151 项能力经三个公开门面：/mcp（全量 Remote）、/mcp-agent（精选 do-work 子集）、
+ *  - 平台能力经三个公开门面：/mcp（全量 Remote）、/mcp-agent（精选 do-work 子集）、
  *    /v1（REST + /v1/openapi.json OpenAPI 3.1 + SSE 流）。
  *  - companion-token（Bearer，SHA-256 存储，常量时间比对）鉴权，
  *    调用者「以该伙伴身份」在 Remote 面操作。
@@ -38,11 +38,11 @@ const copy: Dict<{
     eyebrow: '开放能力 · 超级生态',
     hook: '什么都有、什么都能用、什么都能与它配合。',
     title: '<span class="text-grad-pink">开放能力</span> · 超级生态',
-    lead: '151 项能力经 /mcp（全量 Remote）、/mcp-agent（精选 do-work 子集）、/v1（REST + OpenAPI 3.1 + SSE 流）三个公开门面对外开放。让 Claude / Codex / 任意 Agent 通过 MCP/Skill 直接驱动 NomiFun。',
+    lead: '平台能力经 /mcp（全量 Remote）、/mcp-agent（精选 do-work 子集）、/v1（REST + OpenAPI 3.1 + SSE 流）三个公开门面对外开放。让 Claude / Codex / 任意 Agent 通过 MCP/Skill 直接驱动 NomiFun。',
     points: [
       {
         icon: 'i-mdi-api',
-        title: '151 项能力 · 三个门面',
+        title: '平台能力 · 三个门面',
         body: '/mcp 暴露全量 Remote 能力面，/mcp-agent 精选 do-work 子集，/v1 提供 REST + /v1/openapi.json（OpenAPI 3.1）与 SSE 流式响应。',
       },
       {
@@ -64,11 +64,11 @@ const copy: Dict<{
     eyebrow: 'Open capability · super ecosystem',
     hook: 'Has everything, works with everything, plays well with everything.',
     title: '<span class="text-grad-pink">Open capability</span>, super ecosystem',
-    lead: '151 capabilities are exposed through three public facades: /mcp (full Remote surface), /mcp-agent (a curated do-work subset), and /v1 (REST + OpenAPI 3.1 + SSE streams). Let Claude, Codex, or any agent drive NomiFun directly over MCP/Skill.',
+    lead: 'Platform capabilities are exposed through three public facades: /mcp (full Remote surface), /mcp-agent (a curated do-work subset), and /v1 (REST + OpenAPI 3.1 + SSE streams). Let Claude, Codex, or any agent drive NomiFun directly over MCP/Skill.',
     points: [
       {
         icon: 'i-mdi-api',
-        title: '151 capabilities · three facades',
+        title: 'Platform capabilities · three facades',
         body: '/mcp exposes the full Remote surface, /mcp-agent a curated do-work subset, and /v1 offers REST + /v1/openapi.json (OpenAPI 3.1) with SSE streaming responses.',
       },
       {

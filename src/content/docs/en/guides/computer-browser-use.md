@@ -1,8 +1,8 @@
 ---
 title: Computer-use & browser
-description: Let the agent see and drive your desktop, and run a homegrown in-process browser engine for navigation and forms — the toggles, permissions, and approval boundaries for both system-level capabilities.
+description: Let an agent operate your desktop and browser, with clear browser visibility, login state, system permissions, and action approvals.
 category: Remote & Settings
-order: 17
+order: 19
 lang: en-US
 ---
 
@@ -24,7 +24,7 @@ Find them in system settings: **Computer Use** (`/settings/computer-use`) and **
 
    When a permission is missing the tool result tells you exactly what to grant — do it, then retry.
 
-3. **Open browser settings.** Go to `/settings/browser-use`. Same story: default on, switchable off. The browser is exposed as a **single `Browser` tool** whose ~32 actions cover navigation, observe/snapshot, click, type, wait, and more. **On first use the engine auto-acquires Chrome for Testing** (downloaded and unpacked into the engine's own user-data-dir, so it never touches your everyday browser) — no Node, npm, or Playwright required.
+3. **Open browser settings.** Go to `/settings/browser-use`. New installs default to a **visible system browser**, so you can watch what the agent opens, clicks, and fills. You can switch to a NomiFun-managed browser or turn on background silent mode to hide the window. Chrome for Testing is downloaded only when the managed source is selected.
 
    ![Browser-use settings](/images/en/设置/browser%20use设置.png)
 
@@ -36,22 +36,22 @@ Find them in system settings: **Computer Use** (`/settings/computer-use`) and **
 
 ## Notes & boundaries
 
-- **Three-axis capability gateway.** Every action is classified through **DangerTier × Surface × Decision**, so governance is fine-grained rather than all-or-nothing.
-- **Read-only vs. write approvals.** Read-only actions (screenshot, cursor position, list windows, wait, the browser's `observe`/snapshot) are **Info** class — auto-allowed in AutoEdit/Default mode. Acting actions (click, type, scroll, drag, focus window, browser navigation/forms) are **Exec** class — Default mode asks you to confirm first.
-- **Plan mode never touches the desktop.** During read-only planning the computer-use tool is hidden entirely, so nothing operates your desktop while planning.
-- **Screenshots & token governance.** Screenshots are auto-downsampled so the long edge stays under your cap (default 1568px, within the recommended vision range), and the model's coordinates are mapped back to the real screen (Retina scaling included). Only the most recent few image results are kept in history; older images are stripped at the end of a turn (their text stays), keeping session files and request tokens from ballooning.
-- **The build decides availability.** The desktop app ships both capabilities; the headless web/server build doesn't compile computer-use (no display) and doesn't enable a hosted browser. Misconfiguring computer-use there only logs a warning rather than erroring.
+- **System vs. managed browser**: the system option uses local Chrome / Edge; the managed option uses a separate Chrome for Testing profile maintained by NomiFun.
+- **Login state**: use **Log in to my browser** for sites that require authentication, then close the login window to save the state. Persistent login and unrestricted full control should not be enabled together.
+- **Visible vs. silent**: visible is the safer default for first-time and sensitive work. Silent mode is better reserved for familiar, low-risk, repetitive workflows.
+- **Approvals**: screenshots and page reads can normally proceed, while clicks, typing, uploads, and submissions that change external state should keep an approval step.
+- **Desktop availability**: Computer Use depends on a real desktop and operating-system permissions; it is primarily a desktop-app capability, not a headless-server feature.
 
 ## FAQ
 
 - **Screenshot comes back black or fails?** On macOS it's almost always missing Screen Recording permission. Grant it, restart the host app, and retry.
-- **Do I have to install Chrome or Node myself?** No. The browser engine auto-acquires Chrome for Testing on first use, kept separate from your everyday browser, with no Node/npm/Playwright needed.
+- **Do I have to install Chrome or Node myself?** The default uses system Chrome / Edge. If you choose the managed browser, NomiFun downloads Chrome for Testing automatically; Node, npm, and Playwright are not required.
 - **Can I still add community MCP browser/desktop tools?** Yes. The built-in computer-use and native browser don't block you from adding any community server in MCP settings — the tool names differ, so they don't collide.
 
 ## Related
 
 - [The session workspace](/docs/guides/sessions) — how the file tree, preview, and a session invoke these capabilities.
 - [MCP & skills](/docs/guides/mcp-and-skills) — wire up external tools alongside the built-ins.
-- [Intelligent decisioning · IDMM](/docs/guides/intelligent-decision) — add decision-watch escort to a long-running task.
+- [System settings](/docs/guides/settings) — themes, execution engines, updates, and other application preferences.
 
 Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)

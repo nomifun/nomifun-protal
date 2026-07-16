@@ -105,7 +105,7 @@ const CODE: Record<TabId, Tok[][]> = {
     [{ t: '{', c: 'punc' }],
     [{ t: '  "openapi"', c: 'key' }, { t: ': ', c: 'punc' }, { t: '"3.1.0"', c: 'str' }, { t: ',', c: 'punc' }],
     [{ t: '  "info"', c: 'key' }, { t: ': { ', c: 'punc' }, { t: '"title"', c: 'key' }, { t: ': ', c: 'punc' }, { t: '"NomiFun REST"', c: 'str' }, { t: ' },', c: 'punc' }],
-    [{ t: '  "paths"', c: 'key' }, { t: ': { ', c: 'punc' }, { t: '"/v1/tools"', c: 'str' }, { t: ': { … }, ', c: 'punc' }, { t: '/* 151 项能力 */', c: 'comment' }],
+    [{ t: '  "paths"', c: 'key' }, { t: ': { ', c: 'punc' }, { t: '"/v1/tools"', c: 'str' }, { t: ': { … }, ', c: 'punc' }, { t: '/* 平台能力 */', c: 'comment' }],
     [{ t: '}', c: 'punc' }],
     [{ t: '' }],
     [{ t: '# 把全部能力导入任意 OpenAPI 客户端', c: 'comment' }],

@@ -1,60 +1,73 @@
 ---
-title: Settings
-description: Review and adjust your local data directory, the dark/light theme, and the version and open-source license on the About page.
+title: System settings
+description: Adjust themes, language, startup and notification preferences; manage execution engines, Browser Use, Computer Use, and application updates.
 category: Remote & Settings
 order: 18
 lang: en-US
 ---
 
-Settings is NomiFun's app-level configuration surface: see where your local data lives, switch between dark and light themes, and confirm the current version and open-source license on the About page. It is separate from your companion, model, and channel configuration — those have their own pages; this one is about the app itself.
+The redesigned settings area separates application preferences, execution engines, Browser Use, Computer Use, and About into clear destinations. Open it from Settings at the bottom of the sidebar.
 
-> Entry point: **Settings** at the bottom of the sidebar, route `/settings`.
+![NomiFun v0.2.23 About and updates page](/screenshots/settings-system-en.png)
 
-![System settings](/images/en/设置/系统设置.png)
+## System settings
 
-## Steps
+This page controls everyday preferences:
 
-1. **Open Settings.** Click **Settings** at the bottom of the sidebar to reach `/settings`. The left side is split into groups such as **Theme** and **About**.
+- interface language and the message-send shortcut;
+- start on boot, keep awake, and hardware acceleration;
+- system and scheduled-task notifications;
+- whether uploads are saved to the workspace and Office files preview automatically;
+- the default working directory and log directory;
+- factory reset.
 
-2. **Switch the theme.** Under **Theme**, pick dark or light. The change applies instantly with no restart, and your choice is remembered for the next launch.
+When a working-directory or hardware-acceleration change requires a restart, NomiFun tells you before applying it.
 
-   ![Theme settings](/images/en/设置/主题设置.png)
+## Themes
 
-3. **Find your local data directory.** NomiFun is local-first, so all state lives under a per-user app-data directory:
-   - macOS: `~/Library/Application Support/NomiFun/Nomi`
-   - Windows: `%LOCALAPPDATA%\NomiFun\Nomi`
-   - Linux: `$XDG_DATA_HOME/NomiFun/Nomi` (usually `~/.local/share/NomiFun/Nomi`)
+Since v0.2.22, **Rhythm Dark** is the default. Builtin themes currently include:
 
-   That directory holds the SQLite database (sessions, settings), `companion/` (companions + the shared memory hub), `knowledge/` (knowledge base), `logs/`, and more. The desktop app, the self-hosted web host, and the dev scripts all default to the same directory — so a provider or companion you set up in one host is visible in the others.
+- Rhythm Dark (default)
+- Classic
+- Neon Night
+- Frosted Glass
+- Sunset Afterglow
 
-4. **Read the About page.** Open the **About** group to confirm the current version and open-source license.
+Theme changes apply immediately and persist across launches. You can also add a custom CSS theme.
 
-   ![About (version / license)](/images/en/设置/关于.png)
+## Execution engines
 
-## What's on this page
+Execution Engines now lives separately from Model Management. It detects and configures Nomi, Claude Code, Codex, OpenCode, and other execution backends, including remote OpenClaw. Model Management is focused on model providers, local models, and speech recognition.
 
-- **Version**: currently `0.1.0` (pre-1.0). NomiFun is iterating quickly, so settings and the UI may shift between releases.
-- **License**: **Apache-2.0**. Fully open-source and open to audit; the source lives on GitHub.
+This makes the distinction between “who performs the work” and “which model it uses” much clearer.
 
-## Notes & boundaries
+## Browser Use and Computer Use
 
-- **Treat data as a database.** Treat the data directory like a database — back it up and lock down its permissions, and you can move the whole thing: copy it to a new machine to migrate, or quit the app and delete it to reset.
-- **Isolated sandbox.** To make one run use a separate directory, set `NOMIFUN_DATA_DIR=<absolute path>` before launch (the desktop app appends `/Nomi`). Two backends sharing one directory is blocked by design — startup fails fast and names the current holder.
-- **Shared/private memory, per-companion skills.** Inside the data directory, `companion/` supports shared memories and per-companion private memories; skill libraries remain isolated per companion.
-- **No runtime config here.** The toggles and permissions for computer-use / browser-use / the nomi agent are not in Settings — see [Computer & browser use](/docs/guides/computer-browser-use).
+- **Browser Use** controls browser source, visibility, login state, and action approvals. New installs open a visible system browser by default so you can observe the work.
+- **Computer Use** controls screenshots, pointer, keyboard, and native accessibility. On macOS, the first use requires Screen Recording and Accessibility permissions.
 
-## FAQ
+Enable these capabilities only when needed and keep approval prompts for sensitive work.
 
-**Does changing the theme require a restart?** No — dark/light switches instantly and is remembered.
+## About and updates
 
-**How do I find where my data lives?** Use the per-platform path above; if you set `NOMIFUN_DATA_DIR`, look in the `Nomi` subdirectory of that path.
+About shows the installed version plus links to the source repository, release notes, issue tracker, and official website. Desktop builds can click **Check for updates** here; the bottom of the sidebar also surfaces an available update.
 
-**Where do I see the version?** Settings → **About** group; it currently reads `0.1.0`.
+This page reflects **v0.2.23**. NomiFun is still moving quickly before 1.0, so use the About page and [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases) as the source of truth for your installed and latest versions.
+
+## Data and backups
+
+Conversations, settings, companions, knowledge bases, and logs are stored in the current user's application data directory by default:
+
+- macOS: `~/Library/Application Support/NomiFun/Nomi`
+- Windows: `%LOCALAPPDATA%\NomiFun\Nomi`
+- Linux: `$XDG_DATA_HOME/NomiFun/Nomi`, usually `~/.local/share/NomiFun/Nomi`
+
+Quit NomiFun before copying the entire directory for migration or backup. Factory reset removes local data, so back up anything important first.
 
 ## Related
 
-- [Computer & browser use](/docs/guides/computer-browser-use) — toggles and permissions for computer-use / browser-use / the agent.
-- [WebUI remote access](/docs/guides/webui-remote) — expose the desktop instance over LAN behind a login.
-- [Companions](/docs/guides/companions) — shared/private memory scopes and per-companion skill libraries.
+- [Speech input](/docs/guides/voice-input)
+- [Computer Use and Browser Use](/docs/guides/computer-browser-use)
+- [WebUI remote work](/docs/guides/webui-remote)
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Source code and release history → [GitHub](https://github.com/nomifun/nomifun-tauri)

@@ -20,13 +20,13 @@ The desktop app (nomifun-desktop) and the self-hosted web server (nomifun-web) s
 
 2. **(Optional) Set up a model failover queue.** For unattended long tasks, you can compose a failover queue in model settings: when a model fails, gets rate-limited, or becomes unavailable, the engine cycles through backups in order, switching up to 4 times before giving up. You can skip this for a first run — one working model is enough.
 
-3. **Start your first session from the home screen.** Go back to `/guid`. The home screen gathers everything you need to begin: the agent picker, the model picker, an assistant (a preset persona / system prompt / skill bundle), tools & workspace, and the input box. Pick the built-in **nomi** engine, choose the model you just configured, and type your first prompt in the input box, for example:
+3. **Start your first conversation from the home screen.** The home screen gathers everything you need: an agent, model, reusable preset, Skills, collaboration policy, workspace, and composer. Pick the built-in **Nomi** engine, choose the model you just configured, and type your first prompt, for example:
 
    > Write a Python function that returns the nth Fibonacci number, with a small test.
 
-   Press send. NomiFun creates a new session, navigates to `/conversation/:id`, and starts streaming the reply. While typing you can use `@` to reference a file, skill, or assistant.
+   Press send. NomiFun creates a conversation and starts streaming the reply. While typing you can use `@` to reference files or Skills, or click **Use preset** first to apply a complete reusable setup.
 
-   ![Start your first session from home](/images/en/02会话/会话启动.png)
+   ![Start your first conversation from home](/screenshots/current-home-en.png)
 
 4. **Use the conversation workspace.** Every session has its own working directory. The session page typically has four areas:
 
@@ -53,7 +53,8 @@ The desktop app (nomifun-desktop) and the self-hosted web server (nomifun-web) s
 ## Related
 
 - [MCP and skills](/docs/guides/mcp-and-skills)
-- [Assistants](/docs/guides/assistants)
+- [Presets](/docs/guides/assistants)
+- [Speech input](/docs/guides/voice-input)
 - [Terminal](/docs/guides/terminal)
 - [WebUI remote access](/docs/guides/webui-remote)
 - [Web server deployment](/docs/getting-started/installation)

@@ -27,123 +27,137 @@ const copy: Dict<{
   cta: string;
 }> = {
   'zh-CN': {
-    eyebrow: '近期迭代 · 2026-07-01 真机版本',
-    title: '官网介绍已同步到 <span class="text-grad-pink">v0.1.13 的核心能力</span>',
+    eyebrow: '近期迭代 · 2026-07-17',
+    title: 'NomiFun 已更新到 <span class="text-grad-pink">v0.2.23</span>',
     lead:
-      '这次补充直接取自 nomifun-tauri 的最新 changelog、README 与设计记录：编排、浏览器、模型容错、伙伴记忆、开放能力与发版链路都有明显增量。',
-    release: 'v0.1.13',
-    proof: '截图来自 2026-07-01 的真实 NomiFun 桌面应用，不是渲染稿。',
+      '最近几个版本把跨平台安装、技能发现、可复用设定、语音输入与整体界面体验补齐。下面只列用户可以直接看到和使用的变化。',
+    release: 'v0.2.23',
+    proof: '截图来自 v0.2.23 的真实 NomiFun 桌面应用，不是渲染稿。',
     highlights: [
       {
-        icon: 'i-mdi-graph-outline',
-        title: '会话原生编排更可控',
+        icon: 'i-simple-icons-linux',
+        title: 'Linux 桌面端正式发布',
         body:
-          'DAG 节点可在启动前单独选模型、补预置要求；interactive run 会先停在待批准态，确认后再执行，并可点击节点查看真实 worker 会话。',
-        tags: ['DAG 预配置', '执行前批准', 'worker 投射'],
+          '除 Windows 与 macOS 外，GitHub Releases 现已提供 Linux x86_64 的 AppImage、Debian 与 RPM 安装包，三大桌面平台共享同一套工作台体验。',
+        tags: ['AppImage', 'Debian', 'RPM'],
       },
       {
-        icon: 'i-mdi-web-sync',
-        title: 'Browser Use 默认静默',
+        icon: 'i-mdi-store-search-outline',
+        title: '技能市场与技能详情',
         body:
-          '桌面版默认用静默托管 Chromium，也可切到系统 Chrome / Edge 本体；登录态可加密复用，高风险静默审批可附当前页面截图。',
-        tags: ['静默默认', '系统浏览器来源', '截图审批'],
+          '技能页新增 Skill Market，可浏览 ClawHub 与 SkillHub 榜单，按搜索和标签筛选、查看详情，再把安装确认交给 Nomi 完成。',
+        tags: ['ClawHub', 'SkillHub', '安装前确认'],
       },
       {
-        icon: 'i-mdi-image-refresh-outline',
-        title: '模型与多模态容错升级',
+        icon: 'i-mdi-tune-variant',
+        title: '可复用设定，一键启动',
         body:
-          '当模型不支持图片输入时自动剥离图片并在同一会话重试，同时保留可见提示；模型上下文窗口也可逐模型校准，避免长任务预算失真。',
-        tags: ['图片降级', '上下文窗口', '不中断会话'],
+          '把 Agent、模型、Skills、知识库与提示要求保存为“设定”，新建会话时一键复用；预置、扩展与自定义设定也有清晰的可编辑边界。',
+        tags: ['一键复用', '模型与 Skills', '知识库'],
       },
       {
-        icon: 'i-mdi-account-heart-outline',
-        title: '伙伴记忆进入共享 / 私有作用域',
+        icon: 'i-mdi-microphone-outline',
+        title: '语音输入与本地 ASR',
         body:
-          '伙伴记忆支持共享与按伙伴私有两种作用域，聊天记忆默认归属当前伙伴，学习中枢产出进入共享；记忆内容与归属都可编辑。',
-        tags: ['共享记忆', '私有记忆', '可编辑'],
+          '会话输入框现在可以直接录音转文字；既可连接云端语音模型，也可安装 Whisper 或中文优化的 FunASR 在本地转写。',
+        tags: ['录音转文字', 'Whisper', 'FunASR'],
+      },
+      {
+        icon: 'i-mdi-theme-light-dark',
+        title: '工作台界面整体焕新',
+        body:
+          '默认 Rhythm Dark 主题、重新整理的侧边栏与设置入口、侧边栏更新提示，以及默认使用可见系统浏览器的 Browser Use，让日常操作更直观。',
+        tags: ['Rhythm Dark', '更新提示', '可见浏览器'],
       },
     ],
     shots: [
       {
-        src: '/images/showcase/readme/readme-00-orchestration-hero.png',
-        alt: 'NomiFun 会话原生编排与 DAG 画布',
-        label: '会话编排',
+        src: '/screenshots/current-home-zh.png',
+        alt: 'NomiFun v0.2.23 主工作台',
+        label: '全新工作台',
       },
       {
-        src: '/images/showcase/readme/readme-05-companions.png',
-        alt: 'NomiFun 桌面伙伴概览',
-        label: '桌面伙伴',
+        src: '/screenshots/skills-market-zh.png',
+        alt: 'NomiFun 技能市场',
+        label: '技能市场',
       },
       {
-        src: '/images/showcase/readme/readme-04-model-agents.png',
-        alt: 'NomiFun 模型与 Agent 管理',
-        label: '模型与 Agent',
+        src: '/screenshots/presets-zh.png',
+        alt: 'NomiFun 可复用设定',
+        label: '设定',
       },
       {
-        src: '/images/showcase/readme/readme-07-requirements.png',
-        alt: 'NomiFun 需求平台与 AutoWork 入口',
-        label: '需求平台',
+        src: '/screenshots/voice-input-zh.png',
+        alt: 'NomiFun 语音输入与本地语音识别设置',
+        label: '语音输入',
       },
     ],
     cta: '查看完整文档',
   },
   'en-US': {
-    eyebrow: 'Recent iteration · 2026-07-01 desktop build',
-    title: 'The site now reflects the <span class="text-grad-pink">v0.1.13 core capabilities</span>',
+    eyebrow: 'Recent updates · 2026-07-17',
+    title: 'NomiFun is now at <span class="text-grad-pink">v0.2.23</span>',
     lead:
-      'This refresh is pulled directly from the latest nomifun-tauri changelog, README, and design records: orchestration, browser use, model resilience, companion memory, open capability, and release flow all moved forward.',
-    release: 'v0.1.13',
-    proof: 'Screenshots are real captures from the NomiFun desktop app on 2026-07-01, not renders.',
+      'Recent releases complete the cross-platform install story and add skill discovery, reusable presets, speech input, and a refreshed workspace. These are user-facing features you can use today.',
+    release: 'v0.2.23',
+    proof: 'Screenshots are real captures from NomiFun v0.2.23, not renders.',
     highlights: [
       {
-        icon: 'i-mdi-graph-outline',
-        title: 'Conversation-native orchestration is more controllable',
+        icon: 'i-simple-icons-linux',
+        title: 'Linux desktop packages are live',
         body:
-          'DAG nodes can be pre-configured with their own model and brief; interactive runs pause for approval before execution, and each node opens the real worker transcript.',
-        tags: ['DAG preflight', 'Approval before run', 'Worker projection'],
+          'Alongside Windows and macOS, GitHub Releases now includes AppImage, Debian, and RPM packages for Linux x86_64, with the same NomiFun workspace across all three desktop platforms.',
+        tags: ['AppImage', 'Debian', 'RPM'],
       },
       {
-        icon: 'i-mdi-web-sync',
-        title: 'Browser Use defaults to silent',
+        icon: 'i-mdi-store-search-outline',
+        title: 'Skill Market and skill details',
         body:
-          'Desktop builds default to silent managed Chromium, can switch to system Chrome / Edge, reuse encrypted login state, and attach screenshots to high-risk silent approvals.',
-        tags: ['Silent default', 'System browser source', 'Screenshot approval'],
+          'Browse ClawHub and SkillHub rankings, filter by search and tags, inspect skill details, then hand a reviewed installation draft to Nomi.',
+        tags: ['ClawHub', 'SkillHub', 'Review before install'],
       },
       {
-        icon: 'i-mdi-image-refresh-outline',
-        title: 'Model and multimodal resilience improved',
+        icon: 'i-mdi-tune-variant',
+        title: 'Reusable presets, one-click setup',
         body:
-          'If a model rejects images, NomiFun removes them, retries in the same conversation, and leaves a visible notice. Context windows can now be tuned per model.',
-        tags: ['Image fallback', 'Context window', 'No interrupted turn'],
+          'Save an agent, model, Skills, knowledge bases, and prompt requirements as a preset, then reuse the complete setup in one click when starting a conversation.',
+        tags: ['One-click reuse', 'Models & Skills', 'Knowledge bases'],
       },
       {
-        icon: 'i-mdi-account-heart-outline',
-        title: 'Companion memory has shared and private scopes',
+        icon: 'i-mdi-microphone-outline',
+        title: 'Speech input and local ASR',
         body:
-          'Companion memories now support shared and per-companion private scopes. Chat memories belong to the active companion, learner output is shared, and scope/content are editable.',
-        tags: ['Shared memory', 'Private scope', 'Editable'],
+          'Record directly in the composer for transcription. Use a cloud speech model, or install Whisper or Chinese-optimized FunASR for local recognition.',
+        tags: ['Voice to text', 'Whisper', 'FunASR'],
+      },
+      {
+        icon: 'i-mdi-theme-light-dark',
+        title: 'A refreshed everyday workspace',
+        body:
+          'Rhythm Dark is now the default theme, navigation and settings are reorganized, updates appear in the sidebar, and Browser Use opens a visible system browser by default.',
+        tags: ['Rhythm Dark', 'Update notice', 'Visible browser'],
       },
     ],
     shots: [
       {
-        src: '/images/showcase/readme/readme-00-orchestration-hero.png',
-        alt: 'NomiFun conversation-native orchestration and DAG canvas',
-        label: 'Orchestration',
+        src: '/screenshots/current-home-en.png',
+        alt: 'NomiFun v0.2.23 main workspace',
+        label: 'New workspace',
       },
       {
-        src: '/images/showcase/readme/readme-05-companions.png',
-        alt: 'NomiFun desktop companion overview',
-        label: 'Companions',
+        src: '/screenshots/skills-market-en.png',
+        alt: 'NomiFun Skill Market',
+        label: 'Skill Market',
       },
       {
-        src: '/images/showcase/readme/readme-04-model-agents.png',
-        alt: 'NomiFun models and agents management',
-        label: 'Models & Agents',
+        src: '/screenshots/presets-en.png',
+        alt: 'NomiFun reusable presets',
+        label: 'Presets',
       },
       {
-        src: '/images/showcase/readme/readme-07-requirements.png',
-        alt: 'NomiFun requirements platform and AutoWork entry',
-        label: 'Requirements',
+        src: '/screenshots/voice-input-en.png',
+        alt: 'NomiFun speech input and local speech recognition settings',
+        label: 'Speech input',
       },
     ],
     cta: 'Read the full docs',
@@ -208,8 +222,8 @@ const supportingShots = t.shots.slice(1);
           <img
             src={heroShot.src}
             alt={heroShot.alt}
-            width="2560"
-            height="1500"
+            width="1224"
+            height="768"
             loading="lazy"
             decoding="async"
             class="block aspect-[16/9] w-full object-cover object-left-top"
@@ -230,8 +244,8 @@ const supportingShots = t.shots.slice(1);
                 <img
                   src={shot.src}
                   alt={shot.alt}
-                  width="1280"
-                  height="832"
+                  width="1224"
+                  height="768"
                   loading="lazy"
                   decoding="async"
                   class="block aspect-[4/3] w-full object-cover object-left-top"

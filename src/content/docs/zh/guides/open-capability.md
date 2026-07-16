@@ -1,12 +1,12 @@
 ---
 title: 开放能力（MCP / REST / OpenAPI）
-description: 用一枚 companion-token 把 NomiFun 的 151 项能力经 /mcp、/mcp-agent、/v1 暴露给任意 Agent，并以伙伴身份远程委派任务。
+description: 用一枚 companion-token 把 NomiFun 的平台能力经 /mcp、/mcp-agent、/v1 暴露给任意 Agent，并以伙伴身份远程委派任务。
 category: 知识与开放能力
 order: 13
 lang: zh-CN
 ---
 
-NomiFun 把整个平台的 151 项能力（agent / 浏览器 / computer / 知识库 / 文件 / 平台控制）通过三个网络可达的公开门面对外暴露。任何 MCP 客户端或 HTTP 脚本，只要填一个 URL 加一枚访问令牌，就能像“桌面伙伴”一样驱动平台——这页讲怎么开通入口、拿令牌、连客户端，以及一句话委派任务。
+NomiFun 把整个平台的能力（Agent / 浏览器 / Computer Use / 知识库 / 文件 / 平台控制）通过三个网络可达的公开门面对外暴露。任何 MCP 客户端或 HTTP 脚本，只要填一个 URL 加一枚访问令牌，就能像“桌面伙伴”一样驱动平台——这页讲怎么开通入口、拿令牌、连客户端，以及一句话委派任务。
 
 > 入口：在“开放能力”面板（`/open-capabilities`）查看并管理这些对外门面；启用前请逐项审查。
 
