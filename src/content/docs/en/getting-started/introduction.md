@@ -1,6 +1,6 @@
 ---
 title: Introduction
-description: "Meet NomiFun v0.2.23: a cross-platform AI workspace with conversations, collaboration, Skills, presets, speech input, automation, and desktop companions."
+description: "Meet NomiFun: a cross-platform AI workspace with conversations, collaboration, Skills, presets, speech input, automation, and desktop companions."
 category: Getting Started
 order: 1
 lang: en-US
@@ -8,17 +8,17 @@ lang: en-US
 
 **NomiFun** is a fully open-source, local-first super AI workstation. It brings Nomi, Claude Code, Codex, OpenCode, conversations and projects, models, Skills, MCP, knowledge bases, automation, and desktop companions into one workspace—so AI can keep doing real work instead of only answering questions.
 
-![NomiFun v0.2.23 main workspace](/screenshots/current-home-en.png)
+![NomiFun main workspace](/screenshots/current-home-en.png)
 
-## What's new
+## Core capabilities
 
-The site now reflects **v0.2.23**. The most important changes since the previous documentation refresh are:
+The product surface is organized around these capabilities. For the current release and installers, use [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases/latest) and the app's About page as the source of truth:
 
 - **Desktop apps for Windows, macOS, and Linux**: GitHub Releases includes Windows x64, macOS Universal, plus AppImage, Debian, and RPM packages for Linux x86_64.
 - **Skills and Skill Market**: manage installed Skills, browse ClawHub and SkillHub rankings, inspect details, filter results, and hand a reviewed installation to Nomi.
 - **Reusable presets**: save an agent, model, Skills, knowledge bases, and prompt requirements as one reusable setup.
 - **Speech input and local ASR**: record for transcription using a cloud speech model, local Whisper, or Chinese-optimized FunASR.
-- **Refreshed workspace**: Rhythm Dark is now the default theme, navigation and settings are reorganized, available updates appear in the sidebar, and Browser Use opens a visible system browser by default.
+- **Workspace UI**: Rhythm Dark is the default theme, navigation and settings are organized around daily workflows, available updates appear in the sidebar, and Browser Use opens a visible system browser by default.
 - **OpenClaw remote control**: connect and validate a remote OpenClaw agent, then use it as an execution backend when starting a conversation.
 
 ## What you can do

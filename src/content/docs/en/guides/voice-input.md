@@ -6,7 +6,7 @@ order: 17
 lang: en-US
 ---
 
-NomiFun v0.2.23 can record and transcribe speech directly from the home screen or conversation composer. Use a configured cloud speech model, or download local ASR so recognition runs on your own device.
+NomiFun can record and transcribe speech directly from the home screen or conversation composer. Use a configured cloud speech model, or download local ASR so recognition runs on your own device.
 
 ![Speech input and speech recognition settings](/screenshots/voice-input-en.png)
 

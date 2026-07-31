@@ -10,6 +10,7 @@
 import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
 import { links, downloads, meta } from '@/data/links';
 import Badge from '@/components/ui/Badge.astro';
+import LatestReleaseBadge from '@/components/ui/LatestReleaseBadge.astro';
 
 const locale: Locale = getLocale(Astro.url);
 
@@ -241,7 +242,7 @@ const platformList = (['macos', 'windows', 'linux'] as const).map((key) => ({
     </h1>
     <p class="mt-6 max-w-2xl text-base leading-relaxed text-mid sm:text-lg" data-animate>{t.lead}</p>
     <div class="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs text-low" data-animate>
-      <Badge tone="neutral">v{meta.version}</Badge>
+      <LatestReleaseBadge locale={locale} />
       <Badge tone="soon">{meta.status}</Badge>
       <Badge tone="violet">{meta.license}</Badge>
     </div>

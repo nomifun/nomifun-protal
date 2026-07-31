@@ -11,6 +11,12 @@ export const links = {
   github: 'https://github.com/nomifun/nomifun-tauri',
   // GitHub Releases page (download buttons)
   releases: 'https://github.com/nomifun/nomifun-tauri/releases',
+  // GitHub redirect for the latest non-draft, non-prerelease release
+  releasesLatest: 'https://github.com/nomifun/nomifun-tauri/releases/latest',
+  // GitHub Releases API list; the site picks the newest non-draft item so prereleases can still be shown.
+  releasesApi: 'https://api.github.com/repos/nomifun/nomifun-tauri/releases?per_page=10',
+  // Direct GitHub latest endpoint, useful for integrations that only want stable latest semantics.
+  releasesLatestApi: 'https://api.github.com/repos/nomifun/nomifun-tauri/releases/latest',
   // Official Docker Hub image for nomifun-web
   dockerHub: 'https://hub.docker.com/repository/docker/nomifun/nomifun-web',
   // Baidu Netdisk mirror for users in mainland China
@@ -62,7 +68,6 @@ export const downloads = {
 } as const;
 
 export const meta = {
-  version: '0.2.23',
   status: 'pre-1.0',
   license: 'Apache-2.0',
 } as const;

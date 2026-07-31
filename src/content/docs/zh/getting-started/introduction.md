@@ -1,6 +1,6 @@
 ---
 title: 简介
-description: 认识 NomiFun v0.2.23：跨平台 AI 工作台、会话协作、Skills、设定、语音输入、自动化与桌面伙伴。
+description: 认识 NomiFun：跨平台 AI 工作台、会话协作、Skills、设定、语音输入、自动化与桌面伙伴。
 category: 快速上手
 order: 1
 lang: zh-CN
@@ -8,17 +8,17 @@ lang: zh-CN
 
 **NomiFun** 是一项完全开源、本地优先的超级 AI 工作站。它把 Nomi、Claude Code、Codex、OpenCode 等 Agent，会话与项目、模型、Skills、MCP、知识库、自动化和桌面伙伴放进同一个工作台，让 AI 不只回答问题，也能持续处理真实工作。
 
-![NomiFun v0.2.23 主工作台](/screenshots/current-home-zh.png)
+![NomiFun 主工作台](/screenshots/current-home-zh.png)
 
-## 最近更新
+## 核心能力
 
-官网内容已同步到 **v0.2.23**。与旧版文档相比，最值得关注的变化包括：
+当前产品表面围绕这些能力组织；具体版本与安装包请以 [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases/latest) 和应用“关于”页为准：
 
 - **Windows、macOS、Linux 全平台桌面端**：GitHub Releases 提供 Windows x64、macOS Universal，以及 Linux x86_64 的 AppImage、Debian 与 RPM 安装包。
 - **Skills 与 Skill Market**：统一管理已安装 Skills，浏览 ClawHub / SkillHub 榜单，查看详情、筛选并在确认后交给 Nomi 安装。
 - **可复用设定**：把 Agent、模型、Skills、知识库与提示要求保存为一套设定，创建会话时一键复用。
 - **语音输入与本地 ASR**：直接录音转文字；既支持云端语音模型，也支持本地 Whisper 与中文优化的 FunASR。
-- **工作台界面焕新**：默认 Rhythm Dark 主题，重新整理导航与设置结构，侧边栏会提示可用更新；Browser Use 默认打开可见的系统浏览器。
+- **工作台界面**：默认 Rhythm Dark 主题，整理导航与设置结构，侧边栏会提示可用更新；Browser Use 默认打开可见的系统浏览器。
 - **OpenClaw 远程控制**：可连接并验证远程 OpenClaw Agent，在新建会话时作为执行后端使用。
 
 ## 你可以用它做什么

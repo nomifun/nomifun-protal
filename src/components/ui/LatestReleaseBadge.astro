@@ -1,0 +1,151 @@
+---
+import { links } from '@/data/links';
+import type { Locale } from '@/i18n';
+
+interface Props {
+  locale: Locale;
+  class?: string;
+}
+
+const { locale, class: className = '' } = Astro.props;
+const copy =
+  locale === 'zh-CN'
+    ? {
+        fallback: '最新版本',
+        datePrefix: '发布于',
+        aria: '查看 GitHub 最新 Release',
+        ariaPrefix: '查看 GitHub Release',
+      }
+    : {
+        fallback: 'Latest release',
+        datePrefix: 'published',
+        aria: 'View the latest GitHub release',
+        ariaPrefix: 'View GitHub release',
+      };
+---
+
+<a
+  href={links.releasesLatest}
+  target="_blank"
+  rel="noopener"
+  data-latest-release
+  data-api-url={links.releasesApi}
+  data-fallback-label={copy.fallback}
+  data-date-prefix={copy.datePrefix}
+  data-aria-prefix={copy.ariaPrefix}
+  aria-label={copy.aria}
+  title={copy.aria}
+  class={`inline-flex items-center gap-1.5 rounded-full border border-ink-600 bg-ink-700/60 px-3 py-1 text-xs font-medium text-mid transition-colors hover:border-pink-500/40 hover:text-hi ${className}`}
+>
+  <span class="i-mdi-tag-outline text-sm" aria-hidden="true"></span>
+  <span data-release-tag>{copy.fallback}</span>
+  <span data-release-date class="hidden text-low/80 sm:inline"></span>
+</a>
+
+<script>
+  const CACHE_KEY = 'nomifun-latest-release';
+  const CACHE_TTL_MS = 10 * 60 * 1000;
+
+  type GithubRelease = {
+    tag_name?: string;
+    html_url?: string;
+    published_at?: string;
+    draft?: boolean;
+    prerelease?: boolean;
+  };
+
+  type CachedRelease = {
+    fetchedAt: number;
+    release: GithubRelease;
+  };
+
+  function normalizeTag(tagName?: string) {
+    if (!tagName) return '';
+    return tagName.startsWith('v') ? tagName : `v${tagName}`;
+  }
+
+  function formatReleaseDate(value: string | undefined, locale: string) {
+    if (!value) return '';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '';
+    return new Intl.DateTimeFormat(locale, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }).format(date);
+  }
+
+  function readCachedRelease() {
+    try {
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      const cached = JSON.parse(raw) as CachedRelease;
+      if (!cached.release?.tag_name || Date.now() - cached.fetchedAt > CACHE_TTL_MS) return null;
+      return cached.release;
+    } catch {
+      return null;
+    }
+  }
+
+  function writeCachedRelease(release: GithubRelease) {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ fetchedAt: Date.now(), release }));
+    } catch {
+      // Cache is optional; private-mode storage failures should not block the UI.
+    }
+  }
+
+  function pickDisplayRelease(payload: GithubRelease | GithubRelease[]) {
+    if (Array.isArray(payload)) {
+      return payload.find((release) => release.tag_name && !release.draft) || null;
+    }
+    return payload.tag_name && !payload.draft ? payload : null;
+  }
+
+  function renderRelease(element: HTMLElement, release: GithubRelease) {
+    const tag = normalizeTag(release.tag_name);
+    if (!tag) return;
+
+    const locale = document.documentElement.lang || navigator.language || 'en';
+    const date = formatReleaseDate(release.published_at, locale);
+    const datePrefix = element.dataset.datePrefix || '';
+    const tagNode = element.querySelector<HTMLElement>('[data-release-tag]');
+    const dateNode = element.querySelector<HTMLElement>('[data-release-date]');
+
+    if (tagNode) tagNode.textContent = tag;
+    if (dateNode && date) {
+      dateNode.textContent = `· ${datePrefix} ${date}`;
+      dateNode.classList.remove('hidden');
+    }
+    if (release.html_url) element.setAttribute('href', release.html_url);
+    const ariaPrefix = element.dataset.ariaPrefix || 'GitHub release';
+    element.setAttribute('aria-label', `${ariaPrefix} ${tag}`);
+    element.setAttribute('title', `${ariaPrefix} ${tag}${date ? ` · ${date}` : ''}`);
+  }
+
+  async function hydrateLatestRelease(element: HTMLElement) {
+    const cached = readCachedRelease();
+    if (cached) renderRelease(element, cached);
+
+    const apiUrl = element.dataset.apiUrl;
+    if (!apiUrl) return;
+
+    try {
+      const response = await fetch(apiUrl, {
+        headers: { Accept: 'application/vnd.github+json' },
+      });
+      if (!response.ok) return;
+      const payload = (await response.json()) as GithubRelease | GithubRelease[];
+      const release = pickDisplayRelease(payload);
+      if (!release?.tag_name) return;
+      writeCachedRelease(release);
+      renderRelease(element, release);
+    } catch {
+      // Keep the static fallback label and /releases/latest link.
+    }
+  }
+
+  for (const element of document.querySelectorAll<HTMLElement>('[data-latest-release]')) {
+    hydrateLatestRelease(element);
+  }
+</script>

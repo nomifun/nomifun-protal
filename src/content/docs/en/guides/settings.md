@@ -8,7 +8,7 @@ lang: en-US
 
 The redesigned settings area separates application preferences, execution engines, Browser Use, Computer Use, and About into clear destinations. Open it from Settings at the bottom of the sidebar.
 
-![NomiFun v0.2.23 About and updates page](/screenshots/settings-system-en.png)
+![NomiFun About and updates page](/screenshots/settings-system-en.png)
 
 ## System settings
 
@@ -25,7 +25,7 @@ When a working-directory or hardware-acceleration change requires a restart, Nom
 
 ## Themes
 
-Since v0.2.22, **Rhythm Dark** is the default. Builtin themes currently include:
+**Rhythm Dark** is the default. Builtin themes currently include:
 
 - Rhythm Dark (default)
 - Classic
@@ -52,7 +52,7 @@ Enable these capabilities only when needed and keep approval prompts for sensiti
 
 About shows the installed version plus links to the source repository, release notes, issue tracker, and official website. Desktop builds can click **Check for updates** here; the bottom of the sidebar also surfaces an available update.
 
-This page reflects **v0.2.23**. NomiFun is still moving quickly before 1.0, so use the About page and [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases) as the source of truth for your installed and latest versions.
+NomiFun is still moving quickly before 1.0, so use the About page and [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases/latest) as the source of truth for your installed and latest versions.
 
 ## Data and backups
 

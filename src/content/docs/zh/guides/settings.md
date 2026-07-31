@@ -8,7 +8,7 @@ lang: zh-CN
 
 新版设置页把应用偏好、执行引擎、浏览器操作、电脑操作和关于信息拆成清晰的独立入口。侧边栏底部点击“设置”即可进入。
 
-![NomiFun v0.2.23 关于与更新页面](/screenshots/settings-system-zh.png)
+![NomiFun 关于与更新页面](/screenshots/settings-system-zh.png)
 
 ## 系统设置
 
@@ -25,7 +25,7 @@ lang: zh-CN
 
 ## 主题
 
-NomiFun v0.2.22 起默认使用 **Rhythm Dark（律动暗黑）**。当前内置主题包括：
+NomiFun 默认使用 **Rhythm Dark（律动暗黑）**。当前内置主题包括：
 
 - 律动暗黑（默认）
 - 经典
@@ -52,7 +52,7 @@ NomiFun v0.2.22 起默认使用 **Rhythm Dark（律动暗黑）**。当前内置
 
 “关于”页显示当前安装版本、源码仓库、更新日志、问题反馈与官网入口。桌面端可以在这里点击“检查更新”；侧边栏底部也会在检测到新版本时显示提示。
 
-本页文档同步到 **v0.2.23**。由于 NomiFun 仍处于 pre-1.0 快速迭代阶段，最终版本请以应用“关于”页和 [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases) 为准。
+由于 NomiFun 仍处于 pre-1.0 快速迭代阶段，最终版本请以应用“关于”页和 [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases/latest) 为准。
 
 ## 数据与备份
 
