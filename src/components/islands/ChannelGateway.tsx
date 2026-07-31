@@ -188,7 +188,7 @@ export default function ChannelGateway({ locale }: Props) {
       <div className="flex flex-col overflow-hidden rounded-3xl border border-ink-600/70 bg-ink-900/70 shadow-[0_0_50px_-18px_rgba(255,111,145,0.35)]">
         {/* header */}
         <div className="flex items-center gap-2.5 border-b border-ink-700/70 bg-ink-850/70 px-4 py-3">
-          <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-pink-400 to-pink-600 text-ink-950">
+          <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-pink-400 to-pink-600 text-[var(--on-accent)]">
             <span className="i-mdi-robot-happy-outline text-lg" aria-hidden="true" />
           </span>
           <div className="leading-tight">
@@ -221,7 +221,7 @@ export default function ChannelGateway({ locale }: Props) {
                   className={[
                     'max-w-[85%] rounded-2xl px-3.5 py-2 text-[13px] leading-snug',
                     isYou
-                      ? 'rounded-br-md bg-gradient-to-br from-pink-400 to-pink-600 text-ink-950'
+                      ? 'rounded-br-md bg-gradient-to-br from-pink-400 to-pink-600 text-[var(--on-accent)]'
                       : done
                         ? 'rounded-bl-md border border-success/30 bg-success/10 text-hi'
                         : 'rounded-bl-md border border-ink-700/70 bg-ink-800/80 text-mid',

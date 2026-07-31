@@ -3,6 +3,7 @@ import { getLocale, localizePath, pick, type Locale } from '@/i18n';
 import { nav, brand } from '@/i18n/dict/common';
 import { links } from '@/data/links';
 import LangSwitch from './LangSwitch.astro';
+import ThemeToggle from './ThemeToggle.astro';
 
 const locale: Locale = getLocale(Astro.url);
 const t = pick(nav, locale);
@@ -48,6 +49,7 @@ function isActive(href: string) {
 
     <div class="flex items-center gap-2.5">
       <LangSwitch />
+      <ThemeToggle />
       <a
         href={links.github}
         target="_blank"
@@ -57,7 +59,7 @@ function isActive(href: string) {
         <span class="i-mdi-github text-base"></span>
         {t.github}
       </a>
-      <a href={localizePath('/download', locale)} class="btn-primary text-sm px-4 py-2">{t.cta}</a>
+      <a href={localizePath('/download', locale)} class="btn-primary hidden px-4 py-2 text-sm sm:inline-flex">{t.cta}</a>
       <button id="mobile-toggle" class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-lg border border-ink-600 text-hi" aria-label="Menu">
         <span class="i-mdi-menu text-xl"></span>
       </button>

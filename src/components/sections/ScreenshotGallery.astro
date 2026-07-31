@@ -19,7 +19,7 @@ const locale: Locale = getLocale(Astro.url);
 
 const languageSuffix = locale === 'zh-CN' ? 'zh' : 'en';
 
-// Six current captures spanning the product surface; href → matching guide.
+// Six product captures spanning the product surface; href → matching guide.
 const shots: { img: string; href: string; w: number; h: number }[] = [
   { img: `current-home-${languageSuffix}.png`, href: '/docs/getting-started/quick-start', w: 1224, h: 768 },
   { img: `skills-market-${languageSuffix}.png`, href: '/docs/guides/mcp-and-skills', w: 1224, h: 768 },
@@ -44,14 +44,14 @@ const copy: Dict<{
     lead: '上面的演示是用前端代码实时绘制的；这里则是产品真机截图。每一张都来自正式安装版 NomiFun，点开可直达对应操作文档。',
     realBadge: '真机截图',
     viewLabel: '查看文档',
-    footnote: '截图均取自实际运行的应用；界面持续迭代，最终以你本机版本为准。',
+    footnote: '截图均取自实际运行的应用；界面持续迭代，最终以实际应用界面为准。',
     captions: [
-      '新版工作台：首页、协作策略与会话入口',
+      '工作台：首页、协作策略与会话入口',
       'Skill Market：浏览榜单并准备安装',
       '已安装 Skills：集中管理可复用能力',
       '设定：组合 Agent、模型、Skill 与知识范围',
       '本地语音识别：Paraformer 与 Whisper',
-      '关于 NomiFun：版本与更新入口',
+      '系统设置：运行偏好与应用信息',
     ],
   },
   'en-US': {
@@ -60,14 +60,14 @@ const copy: Dict<{
     lead: 'The demos above are drawn live in front-end code; these are real product captures from the installed NomiFun app. Tap through to the matching guide.',
     realBadge: 'Real capture',
     viewLabel: 'View guide',
-    footnote: 'All captures are from the actual running app; the UI keeps evolving — your local build is the source of truth.',
+    footnote: 'All captures are from the actual running app; the UI keeps evolving, so the app you run is the source of truth.',
     captions: [
-      'New workspace: home, collaboration policy and session entry',
+      'Workspace: home, collaboration policy and session entry',
       'Skill Market: browse rankings and prepare an install',
       'Installed Skills: manage reusable capabilities',
       'Presets: combine Agents, models, Skills and knowledge scope',
       'Local speech recognition: Paraformer and Whisper',
-      'About NomiFun: version and update entry points',
+      'System settings: runtime preferences and app information',
     ],
   },
 };

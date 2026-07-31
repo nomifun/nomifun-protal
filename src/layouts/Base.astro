@@ -5,7 +5,7 @@ import Header from '@/components/layout/Header.astro';
 import Footer from '@/components/layout/Footer.astro';
 import JsonLd from '@/components/seo/JsonLd.astro';
 import { getLocale, htmlLang, delocalizePath, localizePath, type Locale } from '@/i18n';
-import { links, socialLinks, meta } from '@/data/links';
+import { links, socialLinks } from '@/data/links';
 import { activeVerifications } from '@/data/siteVerification';
 
 interface Props {
@@ -84,7 +84,6 @@ const appLd = {
   operatingSystem: 'macOS, Windows, Linux',
   url: 'https://www.nomifun.com/',
   downloadUrl: links.releases,
-  softwareVersion: meta.version,
   license: links.license,
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   description: defaults['en-US'].description,
@@ -93,11 +92,30 @@ const jsonLd = softwareApp ? [orgLd, siteLd, appLd] : [orgLd, siteLd];
 ---
 
 <!doctype html>
-<html lang={lang} class="scroll-pt-20">
+<html lang={lang} class="scroll-pt-20" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem('nomifun-theme');
+          const theme = stored === 'light' ? 'light' : 'dark';
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch {
+          document.documentElement.dataset.theme = 'dark';
+          document.documentElement.style.colorScheme = 'dark';
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0B0A10" />
+    <meta name="theme-color" content="#0B0A10" data-theme-color />
+    <script is:inline>
+      (() => {
+        const theme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+        document.querySelector('meta[data-theme-color]')?.setAttribute('content', theme === 'light' ? '#FBF7FA' : '#0B0A10');
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/brand/logo.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
