@@ -14,6 +14,12 @@ This page walks you through getting NomiFun onto your machine or server from scr
 >
 > For platform support and system requirements, see the [download page](/download).
 
+| Desktop installers | Official Docker image |
+| --- | --- |
+| Download the Windows, macOS, or Linux desktop package from [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases). | Pull `nomifun/nomifun-web:latest` from [Docker Hub](https://hub.docker.com/repository/docker/nomifun/nomifun-web). |
+| Best for a personal desktop workstation. | Best for a long-running web service on a server, NAS, LAN host, or VPS. |
+| Choose `.exe` / `.dmg` / `AppImage` / `.deb` / `.rpm` for your OS. | `docker pull nomifun/nomifun-web:latest` |
+
 ## Install the desktop app
 
 ### Windows
@@ -93,13 +99,35 @@ nomifun-web \
   --admin-password "change-me-to-something-strong"
 ```
 
-### C. Docker / Docker Compose
+### C. Deploy the official Docker image
 
-The repo ships a multi-stage `Dockerfile` and a `docker-compose.yml` that build a **GUI-less** image (SPA + `nomifun-web` + `bun` on `debian:bookworm-slim`).
+Official image: [nomifun/nomifun-web](https://hub.docker.com/repository/docker/nomifun/nomifun-web). The image includes the built SPA, `nomifun-web`, and required runtime dependencies, so it is the preferred Docker path for deploying the web service.
 
-1. From the repository root, run `docker compose up -d --build`.
-2. Visit `http://<server-ip>:8787`. The service is configured with `restart: unless-stopped`, so **installing it is enabling it on boot**. Persistent state lives in the named volume `nomifun-data` mounted at `/data` in the container — back it up like any other database.
-3. For any public-facing deployment, preseed the admin in `docker-compose.yml` (`NOMIFUN_ADMIN_USERNAME` / `NOMIFUN_ADMIN_PASSWORD`) and put TLS in front — the bundled `Caddyfile` and the commented-out `caddy` service are the recommended setup. When enabled, also set `NOMIFUN_HTTPS=true` so session cookies get the `Secure` flag.
+1. Pull the official image:
+
+```bash
+docker pull nomifun/nomifun-web:latest
+```
+
+2. Start the service and mount persistent data:
+
+```bash
+docker run -d \
+  --name nomifun-web \
+  --restart unless-stopped \
+  -p 8787:8787 \
+  -v nomifun-data:/data \
+  nomifun/nomifun-web:latest
+```
+
+3. Visit `http://<server-ip>:8787`. The service is configured with `--restart unless-stopped`, so **installing it is enabling it on boot**. Persistent state lives in the named volume `nomifun-data` mounted at `/data` in the container — back it up like any other database.
+4. For any public-facing deployment, preseed the admin (`NOMIFUN_ADMIN_USERNAME` / `NOMIFUN_ADMIN_PASSWORD`) and put TLS in front. When enabled, also set `NOMIFUN_HTTPS=true` so session cookies get the `Secure` flag.
+
+If you need to customize Compose, Caddy, or image build settings, the repo still ships a multi-stage `Dockerfile` and `docker-compose.yml`; run this from the repository root:
+
+```bash
+docker compose up -d --build
+```
 
 ## Notes and boundaries
 
@@ -111,13 +139,13 @@ The repo ships a multi-stage `Dockerfile` and a `docker-compose.yml` that build 
 
 ## Verify the install
 
-Whichever path you took, run a quick check:
+Run the quick check for the path you used:
 
 ```bash
-# The Rust workspace compiles cleanly
+# Source-build path: the Rust workspace compiles cleanly
 cargo check --workspace
 
-# The web host responds with the SPA + auth status
+# Web service / Docker path: the host responds with the SPA + auth status
 curl -sS http://127.0.0.1:8787/api/auth/status
 # → 200 {"success":true,"needs_setup":..., "user_count":...}
 ```

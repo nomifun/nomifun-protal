@@ -14,6 +14,12 @@ NomiFun 已提供 Windows、macOS 与 Linux 桌面安装包。多数用户直接
 >
 > 想了解平台支持与系统要求，可参考[下载页](/zh/download)。
 
+| 安装包安装 | 官方 Docker 镜像 |
+| --- | --- |
+| 从 [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases) 下载 Windows、macOS 或 Linux 桌面安装包。 | 从 [Docker Hub](https://hub.docker.com/repository/docker/nomifun/nomifun-web) 拉取 `nomifun/nomifun-web:latest`。 |
+| 适合个人电脑上的桌面工作台。 | 适合服务器、NAS、内网主机或云主机长期运行 Web 服务。 |
+| 按系统选择 `.exe` / `.dmg` / `AppImage` / `.deb` / `.rpm`。 | `docker pull nomifun/nomifun-web:latest` |
+
 ## 直接安装桌面版
 
 ### Windows
@@ -93,13 +99,35 @@ nomifun-web \
   --admin-password "换成一个足够强的密码"
 ```
 
-### C. Docker / Docker Compose
+### C. 使用官方 Docker 镜像
 
-仓库附带多阶段 `Dockerfile` 与 `docker-compose.yml`，构建出一个**无 GUI**镜像（`debian:bookworm-slim` 上的 SPA + `nomifun-web` + `bun`）。
+官方镜像地址：[nomifun/nomifun-web](https://hub.docker.com/repository/docker/nomifun/nomifun-web)。镜像内置已构建的 SPA、`nomifun-web` 与运行所需依赖，是部署 Web 服务的优先 Docker 方式。
 
-1. 在仓库根目录执行 `docker compose up -d --build`。
-2. 访问 `http://<server-ip>:8787`。服务配置了 `restart: unless-stopped`，**安装即等同于开机自启**；持久化状态存放在挂载到容器 `/data` 的命名卷 `nomifun-data`，请像其他数据库一样定期备份。
-3. 公网部署务必先在 `docker-compose.yml` 中预置管理员（`NOMIFUN_ADMIN_USERNAME` / `NOMIFUN_ADMIN_PASSWORD`），并在前面加一层 TLS——仓库附带 `Caddyfile` 与被注释掉的 `caddy` 服务即推荐做法，启用后记得设置 `NOMIFUN_HTTPS=true` 让会话 cookie 获得 `Secure` 标记。
+1. 拉取官方镜像：
+
+```bash
+docker pull nomifun/nomifun-web:latest
+```
+
+2. 启动服务并挂载持久化数据目录：
+
+```bash
+docker run -d \
+  --name nomifun-web \
+  --restart unless-stopped \
+  -p 8787:8787 \
+  -v nomifun-data:/data \
+  nomifun/nomifun-web:latest
+```
+
+3. 访问 `http://<server-ip>:8787`。服务配置了 `--restart unless-stopped`，**安装即等同于开机自启**；持久化状态存放在挂载到容器 `/data` 的命名卷 `nomifun-data`，请像其他数据库一样定期备份。
+4. 公网部署务必预置管理员（`NOMIFUN_ADMIN_USERNAME` / `NOMIFUN_ADMIN_PASSWORD`），并在前面加一层 TLS。启用 HTTPS 后记得设置 `NOMIFUN_HTTPS=true` 让会话 cookie 获得 `Secure` 标记。
+
+如果你需要改 Compose、Caddy 或镜像构建参数，仓库仍附带多阶段 `Dockerfile` 与 `docker-compose.yml`，可在仓库根目录执行：
+
+```bash
+docker compose up -d --build
+```
 
 ## 要点与注意
 
@@ -111,13 +139,13 @@ nomifun-web \
 
 ## 验证安装
 
-无论走哪条路径，都可以做一次快速检验：
+根据你的安装路径做一次快速检验：
 
 ```bash
-# Rust 工作区编译干净
+# 源码构建路径：Rust 工作区编译干净
 cargo check --workspace
 
-# Web 主机响应 SPA + 鉴权状态
+# Web 服务 / Docker 路径：主机响应 SPA + 鉴权状态
 curl -sS http://127.0.0.1:8787/api/auth/status
 # → 200 {"success":true,"needs_setup":..., "user_count":...}
 ```

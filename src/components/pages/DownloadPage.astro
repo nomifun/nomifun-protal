@@ -3,10 +3,9 @@
  * DownloadPage — shared implementation for /download, /zh/download, and legacy /en/download.
  * Reads the active locale from Astro.url so zh + en share one file.
  *
- * Platform cards map over `downloads` data. Official download entry points
- * land on GitHub Releases; China users also get a Baidu Netdisk mirror.
- * Source-build and Docker paths remain documented
- * for users who need to build or self-host.
+ * Platform cards map over `downloads` data. Official install entry points
+ * include desktop installers from GitHub Releases and the Docker Hub image.
+ * Source-build and advanced self-host paths remain documented.
  */
 import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
 import { links, downloads, meta } from '@/data/links';
@@ -29,9 +28,16 @@ const copy: Dict<{
   eyebrow: string;
   title: string;
   lead: string;
+  officialTitle: string;
+  officialLead: string;
   bannerTitle: string;
   bannerBody: string;
   releasesCta: string;
+  dockerBadge: string;
+  dockerTitle: string;
+  dockerBody: string;
+  dockerHubCta: string;
+  dockerCommands: string[];
   baiduTitle: string;
   baiduBody: string;
   baiduCta: string;
@@ -53,18 +59,30 @@ const copy: Dict<{
     eyebrow: '下载 · 自托管',
     title: '获取 NomiFun',
     lead: '本地优先的超级 AI 工作站，完全开源、免费商用。现已提供 Windows、macOS 与 Linux 桌面安装包，也可以从源码构建或通过 Docker 自托管。',
+    officialTitle: '官方安装入口',
+    officialLead: '桌面安装包与 Docker 官方镜像是并列的官方安装方式。桌面端适合个人电脑使用，Docker 镜像适合服务器、NAS、内网主机或云主机长期运行。',
     bannerTitle: 'Windows、macOS 与 Linux 安装包已发布',
     bannerBody:
       '官方下载统一在 GitHub Releases。Windows 选择 x64 setup.exe，macOS 选择 universal.dmg；Linux x86_64 可选 AppImage、Debian（.deb）或 RPM。各平台由原生构建机依次追加，若最新标签尚未出现你的平台，请选最近一个包含对应安装包的版本。',
     releasesCta: '打开 GitHub Releases',
+    dockerBadge: 'Docker Hub',
+    dockerTitle: '官方 Docker 镜像',
+    dockerBody:
+      '官方镜像为 nomifun-web 无头服务，默认在 8787 端口提供 WebUI、API 与 WebSocket。建议挂载 /data 保存状态，并在公网部署时放到 TLS 反向代理后面。',
+    dockerHubCta: '打开 Docker Hub',
+    dockerCommands: [
+      'docker pull nomifun/nomifun-web:latest',
+      'docker run -d --name nomifun-web --restart unless-stopped -p 8787:8787 -v nomifun-data:/data nomifun/nomifun-web:latest',
+      '# 打开 http://<server-ip>:8787',
+    ],
     baiduTitle: '中国区备用：百度网盘',
     baiduBody:
       '为中国区用户提供 nomifun 网盘分享，下载不稳定或访问 GitHub 较慢时可使用。GitHub Releases 仍是官方发布源。',
     baiduCta: '百度网盘下载',
     baiduFile: '分享内容：nomifun',
     baiduCode: '无需提取码',
-    pathsTitle: '三条上手路径',
-    pathsLead: '桌面端走 Tauri 构建，Web 端走自托管 axum 服务，或直接用 Docker / Compose 一键起服务。',
+    pathsTitle: '源码与高级部署路径',
+    pathsLead: '已经可以直接下载安装包或拉取官方镜像；只有需要自行编译、改构建参数或维护 Compose 编排时，才使用下面这些路径。',
     paths: [
       {
         icon: 'i-mdi-desktop-classic',
@@ -82,10 +100,10 @@ const copy: Dict<{
       },
       {
         icon: 'i-simple-icons-docker',
-        title: 'Docker 自托管',
-        desc: '用 Docker Compose 一键构建并后台运行，适合放在服务器上长期值守。',
+        title: 'Docker Compose 源码构建',
+        desc: '从仓库 Dockerfile 构建并后台运行，适合需要改 Compose、Caddy 或构建参数的自托管场景。',
         cmds: ['docker compose up -d --build', '# 打开 http://<server-ip>:8787'],
-        note: '建议搭配 Caddy 反向代理做 TLS（见下方）。',
+        note: '只想直接部署时优先使用上方官方镜像。',
       },
     ],
     platformTitle: '平台支持',
@@ -117,18 +135,32 @@ const copy: Dict<{
     eyebrow: 'Download · Self-host',
     title: 'Get NomiFun',
     lead: 'A local-first super AI workstation — fully open source and free for commercial use. Desktop installers are now available for Windows, macOS, and Linux; source builds and Docker self-hosting remain available.',
+    officialTitle: 'Official install options',
+    officialLead:
+      'Desktop installers and the official Docker image are peer install paths. Use the desktop app on a personal machine, or run the Docker image on a server, NAS, LAN host, or VPS.',
     bannerTitle: 'Windows, macOS, and Linux builds are live',
     bannerBody:
       'Official downloads live on GitHub Releases. Choose the x64 setup.exe for Windows, universal.dmg for macOS, or AppImage, Debian (.deb), or RPM for Linux x86_64. Native build machines append platforms in sequence, so if the newest tag does not include yours yet, use the most recent release that does.',
     releasesCta: 'Open GitHub Releases',
+    dockerBadge: 'Docker Hub',
+    dockerTitle: 'Official Docker image',
+    dockerBody:
+      'The official image runs the headless nomifun-web service and serves the WebUI, API, and WebSocket on port 8787 by default. Mount /data for state, and put public deployments behind a TLS reverse proxy.',
+    dockerHubCta: 'Open Docker Hub',
+    dockerCommands: [
+      'docker pull nomifun/nomifun-web:latest',
+      'docker run -d --name nomifun-web --restart unless-stopped -p 8787:8787 -v nomifun-data:/data nomifun/nomifun-web:latest',
+      '# open http://<server-ip>:8787',
+    ],
     baiduTitle: 'China mirror: Baidu Netdisk',
     baiduBody:
       'For users in mainland China, the nomifun share is also available through Baidu Netdisk when GitHub access is slow. GitHub Releases remains the canonical release source.',
     baiduCta: 'Download via Baidu Netdisk',
     baiduFile: 'Shared item: nomifun',
     baiduCode: 'No extraction code',
-    pathsTitle: 'Three ways to get started',
-    pathsLead: 'Build the Tauri desktop app, run the self-hosted axum web server, or spin everything up with Docker / Compose.',
+    pathsTitle: 'Source and advanced deployment paths',
+    pathsLead:
+      'Installers and the official Docker image are ready to use. Use these paths only when you need to compile from source, customize build flags, or maintain Compose orchestration.',
     paths: [
       {
         icon: 'i-mdi-desktop-classic',
@@ -146,10 +178,10 @@ const copy: Dict<{
       },
       {
         icon: 'i-simple-icons-docker',
-        title: 'Self-host with Docker',
-        desc: 'Build and run in the background with Docker Compose — ideal for an always-on server.',
+        title: 'Build with Docker Compose',
+        desc: 'Build from the repo Dockerfile and run in the background when you need custom Compose, Caddy, or build settings.',
         cmds: ['docker compose up -d --build', '# open http://<server-ip>:8787'],
-        note: 'Pair with a Caddy reverse proxy for TLS (see below).',
+        note: 'For a direct deployment, prefer the official image above.',
       },
     ],
     platformTitle: 'Platform support',
@@ -216,39 +248,57 @@ const platformList = (['macos', 'windows', 'linux'] as const).map((key) => ({
   </div>
 </section>
 
-<!-- Official release download banner -->
+<!-- Official install options -->
 <section class="container-x mt-10">
-  <div
-    class="card flex flex-col gap-3 border-warning/25 bg-warning/5 p-5 sm:flex-row sm:items-start sm:gap-4 sm:p-6"
-    data-animate
-  >
-    <span class="i-mdi-information-outline mt-0.5 shrink-0 text-2xl text-warning"></span>
-    <div class="flex flex-col gap-2">
+  <div class="mb-5 flex max-w-3xl flex-col gap-3" data-animate>
+    <h2 class="text-2xl font-bold leading-tight tracking-tight text-hi sm:text-3xl">{t.officialTitle}</h2>
+    <p class="text-sm leading-relaxed text-mid sm:text-base">{t.officialLead}</p>
+  </div>
+
+  <div class="grid gap-6 lg:grid-cols-2" data-stagger>
+    <article class="card card-hover flex min-w-0 flex-col gap-4 border-warning/25 bg-warning/5 p-5 sm:p-6">
       <div class="flex flex-wrap items-center gap-3">
         <Badge tone="soon"><span class="i-mdi-progress-wrench"></span>{t.platform.comingSoon}</Badge>
-        <h2 class="text-base font-semibold text-hi sm:text-lg">{t.bannerTitle}</h2>
+        <h3 class="text-base font-semibold text-hi sm:text-lg">{t.bannerTitle}</h3>
       </div>
-      <p class="max-w-3xl text-sm leading-relaxed text-mid">{t.bannerBody}</p>
-      <a href={links.releases} target="_blank" rel="noopener" class="btn-primary mt-1 w-fit text-sm">
+      <p class="text-sm leading-relaxed text-mid">{t.bannerBody}</p>
+      <a href={links.releases} target="_blank" rel="noopener" class="btn-primary w-fit text-sm">
         <span class="i-mdi-github text-base"></span>{t.releasesCta}
       </a>
-      <div class="mt-2 flex flex-col gap-3 border-t border-ink-700/70 pt-4 sm:flex-row sm:items-center sm:justify-between">
-        <div class="flex flex-col gap-2">
-          <div class="flex items-center gap-2 text-sm font-semibold text-hi">
-            <span class="i-mdi-cloud-download-outline text-lg text-violet-300"></span>
-            <span>{t.baiduTitle}</span>
-          </div>
-          <p class="max-w-3xl text-sm leading-relaxed text-mid">{t.baiduBody}</p>
-          <div class="flex flex-wrap gap-2">
-            <Badge tone="neutral">{t.baiduFile}</Badge>
-            <Badge tone="success">{t.baiduCode}</Badge>
-          </div>
+      <div class="mt-auto flex flex-col gap-3 border-t border-ink-700/70 pt-4">
+        <div class="flex items-center gap-2 text-sm font-semibold text-hi">
+          <span class="i-mdi-cloud-download-outline text-lg text-violet-300"></span>
+          <span>{t.baiduTitle}</span>
+        </div>
+        <p class="text-sm leading-relaxed text-mid">{t.baiduBody}</p>
+        <div class="flex flex-wrap gap-2">
+          <Badge tone="neutral">{t.baiduFile}</Badge>
+          <Badge tone="success">{t.baiduCode}</Badge>
         </div>
         <a href={links.baiduPan} target="_blank" rel="noopener" class="btn-ghost w-fit shrink-0 text-sm">
           <span class="i-mdi-link-variant text-base"></span>{t.baiduCta}
         </a>
       </div>
-    </div>
+    </article>
+
+    <article class="card card-hover flex min-w-0 flex-col gap-4 border-pink-500/25 bg-pink-500/5 p-5 sm:p-6">
+      <div class="flex flex-wrap items-center gap-3">
+        <Badge tone="violet"><span class="i-simple-icons-docker"></span>{t.dockerBadge}</Badge>
+        <h3 class="text-base font-semibold text-hi sm:text-lg">{t.dockerTitle}</h3>
+      </div>
+      <p class="text-sm leading-relaxed text-mid">{t.dockerBody}</p>
+      <pre class="group relative min-w-0 max-w-full overflow-x-auto rounded-xl border border-ink-700 bg-ink-950/70 p-4 font-mono text-[13px] leading-relaxed text-hi"><span class="pointer-events-none absolute right-3 top-3 text-[11px] text-low"><span class="i-mdi-content-copy align-middle" /></span>{t.dockerCommands.map((line) => (
+        <span class={`block ${line.startsWith('#') ? 'text-low' : ''}`}><span class="select-none text-pink-400/70">{line.startsWith('#') ? '  ' : '$ '}</span>{line.replace(/^#\s?/, '# ')}</span>
+      ))}</pre>
+      <div class="mt-auto flex flex-wrap gap-3">
+        <a href={links.dockerHub} target="_blank" rel="noopener" class="btn-primary text-sm">
+          <span class="i-simple-icons-docker text-base"></span>{t.dockerHubCta}
+        </a>
+        <a href={localizePath('/docs/getting-started/installation', locale)} class="btn-ghost text-sm">
+          <span class="i-mdi-book-open-variant text-base"></span>{t.docsCta}
+        </a>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -263,7 +313,7 @@ const platformList = (['macos', 'windows', 'linux'] as const).map((key) => ({
     <div class="grid gap-6 lg:grid-cols-3" data-stagger>
       {
         t.paths.map((p) => (
-          <article class="card card-hover flex flex-col gap-4 p-6">
+          <article class="card card-hover flex min-w-0 flex-col gap-4 p-6">
             <div class="flex items-center gap-3">
               <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-ink-600 bg-ink-800/80">
                 <span class={`${p.icon} text-2xl text-pink-400`} />
@@ -271,7 +321,7 @@ const platformList = (['macos', 'windows', 'linux'] as const).map((key) => ({
               <h3 class="text-lg font-semibold text-hi">{p.title}</h3>
             </div>
             <p class="text-sm leading-relaxed text-mid">{p.desc}</p>
-            <pre class="group relative overflow-x-auto rounded-xl border border-ink-700 bg-ink-950/70 p-4 font-mono text-[13px] leading-relaxed text-hi"><span class="pointer-events-none absolute right-3 top-3 text-[11px] text-low"><span class="i-mdi-content-copy align-middle" /></span>{p.cmds.map((line) => (
+            <pre class="group relative min-w-0 max-w-full overflow-x-auto rounded-xl border border-ink-700 bg-ink-950/70 p-4 font-mono text-[13px] leading-relaxed text-hi"><span class="pointer-events-none absolute right-3 top-3 text-[11px] text-low"><span class="i-mdi-content-copy align-middle" /></span>{p.cmds.map((line) => (
               <span class={`block ${line.startsWith('#') ? 'text-low' : ''}`}><span class="select-none text-pink-400/70">{line.startsWith('#') ? '  ' : '$ '}</span>{line.replace(/^#\s?/, '# ')}</span>
             ))}</pre>
             {p.note && (

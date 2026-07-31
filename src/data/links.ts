@@ -11,6 +11,8 @@ export const links = {
   github: 'https://github.com/nomifun/nomifun-tauri',
   // GitHub Releases page (download buttons)
   releases: 'https://github.com/nomifun/nomifun-tauri/releases',
+  // Official Docker Hub image for nomifun-web
+  dockerHub: 'https://hub.docker.com/repository/docker/nomifun/nomifun-web',
   // Baidu Netdisk mirror for users in mainland China
   baiduPan: 'https://pan.baidu.com/s/5GPonoJNrwJ7GciBSDgXLaA',
   // Issues
