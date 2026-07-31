@@ -13,6 +13,81 @@ NomiFun 是一项完全开源、无任何保留的超级 AI 工作站。它把 A
 - 中国区视频播放：[抖音演示](https://www.douyin.com/user/self?from_tab_name=main&modal_id=7657100052061523209) / [B站演示](https://www.bilibili.com/video/BV1kwKZ6UE5X/)
 - 海外视频播放：[YouTube](https://youtu.be/AsEToBDFR9s) / [X](https://x.com/colir0/status/2072001821640437776?s=20)
 
+## Docker 自托管部署
+
+NomiFun Web 服务器已经支持通过官方 Docker Hub 镜像部署：
+[nomifun/nomifun-web](https://hub.docker.com/repository/docker/nomifun/nomifun-web)。
+
+Docker 镜像适合在服务器、NAS、内网主机或云主机上运行 NomiFun Web 模式。它会在一个端口同时提供 API、WebSocket 和 WebUI，默认监听 `8787`，数据目录挂载到容器内 `/data`。下面示例使用主项目当前文档中的 `v0.3.4` tag；后续有新版本时，可以按 Docker Hub 页面替换为更新 tag。
+
+### 快速启动
+
+```bash
+docker run -d \
+  --name nomifun-web \
+  --restart unless-stopped \
+  -p 8787:8787 \
+  -v nomifun-data:/data \
+  nomifun/nomifun-web:v0.3.4
+```
+
+启动后打开：
+
+```text
+http://<服务器IP>:8787
+```
+
+首次访问时按页面提示创建首位管理员。之后再次访问时，需要通过登录表单进入。
+
+### 公网或无人值守部署
+
+如果服务会直接暴露给局域网以外的用户，或希望在自动化环境中部署，建议在端口可访问前预置首位管理员，避免首次运行期间被其他访问者抢先初始化：
+
+```bash
+docker run -d \
+  --name nomifun-web \
+  --restart unless-stopped \
+  -p 8787:8787 \
+  -v nomifun-data:/data \
+  -e NOMIFUN_ADMIN_USERNAME=admin \
+  -e NOMIFUN_ADMIN_PASSWORD='change-me-to-something-strong' \
+  nomifun/nomifun-web:v0.3.4
+```
+
+请把 `NOMIFUN_ADMIN_PASSWORD` 改成足够强的密码。管理员已经创建后，后续启动时这些预置环境变量会被忽略；需要轮换用户名或密码时，请在应用内操作。
+
+### 使用 Docker Compose
+
+也可以将下面内容保存为 `docker-compose.yml` 后启动：
+
+```yaml
+services:
+  nomifun:
+    image: nomifun/nomifun-web:v0.3.4
+    restart: unless-stopped
+    ports:
+      - "8787:8787"
+    volumes:
+      - nomifun-data:/data
+    environment:
+      NOMIFUN_ADMIN_USERNAME: admin
+      NOMIFUN_ADMIN_PASSWORD: "change-me-to-something-strong"
+      # 当 NomiFun 位于 HTTPS 反向代理之后时设置为 "true"。
+      NOMIFUN_HTTPS: "false"
+
+volumes:
+  nomifun-data:
+```
+
+启动与查看日志：
+
+```bash
+docker compose up -d
+docker compose logs -f nomifun
+```
+
+`nomifun-data` 卷中保存 SQLite 数据库、日志、运行缓存和 agent 状态，请按数据库数据对待并做好备份。公网部署时建议放在 Caddy、nginx 或其它 HTTPS 反向代理之后，并将 `NOMIFUN_HTTPS` 设置为 `"true"`。
+
 ## 核心承诺
 
 ### 数据安全：all in local
