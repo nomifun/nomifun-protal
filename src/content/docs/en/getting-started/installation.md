@@ -16,9 +16,9 @@ This page walks you through getting NomiFun onto your machine or server from scr
 
 | Desktop installers | Official Docker image |
 | --- | --- |
-| Download the Windows, macOS, or Linux desktop package from [GitHub Releases](https://github.com/nomifun/nomifun-desktop/releases). | Pull the published `v0.3.4` example image from [Docker Hub](https://hub.docker.com/repository/docker/nomifun/nomifun-web); replace it with a newer tag when Docker Hub provides one. |
+| Download the Windows, macOS, or Linux desktop package from [GitHub Releases](https://github.com/nomifun/nomifun-desktop/releases). | Pull the official `latest` image from [Docker Hub](https://hub.docker.com/repository/docker/nomifun/nomifun-web); this is the default stable rolling tag. |
 | Best for a personal desktop workstation. | Best for a long-running web service on a server, NAS, LAN host, or VPS. |
-| Choose `.exe` / `.dmg` / `AppImage` / `.deb` / `.rpm` for your OS. | `docker pull nomifun/nomifun-web:v0.3.4` |
+| Choose `.exe` / `.dmg` / `AppImage` / `.deb` / `.rpm` for your OS. | `docker pull nomifun/nomifun-web:latest` |
 
 ## Install the desktop app
 
@@ -101,12 +101,12 @@ nomifun-web \
 
 ### C. Deploy the official Docker image
 
-Official image: [nomifun/nomifun-web](https://hub.docker.com/repository/docker/nomifun/nomifun-web). The image includes the built SPA, `nomifun-web`, and required runtime dependencies, so it is the preferred Docker path for deploying the web service. The examples below use the published `v0.3.4` tag; check Docker Hub before deploying and replace it with a newer available tag.
+Official image: [nomifun/nomifun-web](https://hub.docker.com/repository/docker/nomifun/nomifun-web). The image includes the built SPA, `nomifun-web`, and required runtime dependencies, so it is the preferred Docker path for deploying the web service. The examples below use the official `latest` tag, the default stable rolling tag. For reproducible deployments, validate the image and then pin an explicit version published on Docker Hub or use `nomifun/nomifun-web@sha256:<digest>` to pin its digest.
 
 1. Pull the official image:
 
 ```bash
-docker pull nomifun/nomifun-web:v0.3.4
+docker pull nomifun/nomifun-web:latest
 ```
 
 2. Start the service and mount persistent data:
@@ -117,7 +117,7 @@ docker run -d \
   --restart unless-stopped \
   -p 8787:8787 \
   -v nomifun-data:/data \
-  nomifun/nomifun-web:v0.3.4
+  nomifun/nomifun-web:latest
 ```
 
 3. Visit `http://<server-ip>:8787`. The service is configured with `--restart unless-stopped`, so **installing it is enabling it on boot**. Persistent state lives in the named volume `nomifun-data` mounted at `/data` in the container — back it up like any other database.

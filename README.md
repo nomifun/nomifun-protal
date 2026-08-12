@@ -5,9 +5,9 @@ Desktop。它把桌面伙伴、会话协作、模型管理、知识库、Skill�
 WebUI 远程访问、Browser Use、Computer Use、需求管理、自动工作、创意工坊和
 Agent Desktop 小程序放进一套可审计、可扩展的工作站。
 
-本仓库是 NomiFun 官方网站与中英文文档门户源码。核心桌面产品位于
-[nomifun/nomifun-desktop](https://github.com/nomifun/nomifun-desktop)；移动端与硬件
-伙伴生态见下方的[NomiFun 开源生态家族](#nomifun-开源生态家族)。
+本仓库是 NomiFun 官方网站与中英文文档门户源码。NomiFun Desktop、Mobile 与
+Xiaozhi Yuntai 共同组成从桌面中枢、无云端移动连接到硬件多模态伙伴的开源产品家族；
+源码、官网产品介绍和接入文档见下方的[NomiFun 开源生态家族](#nomifun-开源生态家族)。
 
 ![NomiFun 自动工作与编排画布](public/images/showcase/autowork-flow-readme.png)
 
@@ -23,11 +23,24 @@ SLA，也没有强宣传或商业化增长诉求。欢迎使用、审计、二�
 
 ## NomiFun 开源生态家族
 
-| 项目 | 定位 |
-|---|---|
-| [NomiFun Desktop](https://github.com/nomifun/nomifun-desktop) | 跨平台主工作台：Windows、macOS、Linux；多模型、多 Agent、会话、终端、WebUI、知识库、自动化和本地伙伴能力。 |
-| [NomiFun Mobile](https://github.com/nomifun/nomifun-mobile) | 手机远控入口：优先在局域网中连接自己的 Desktop，查看状态、发送指令、处理确认项和管理定时任务。 |
-| [NomiFun Xiaozhi Yuntai](https://github.com/nomifun/nomifun-xiaozhi-yuntai) | 硬件多模态伙伴接入：把小智兼容设备的语音、显示和设备 MCP 能力接入 NomiFun。 |
+| 项目源码 | 定位 | 官网产品介绍 | 接入文档 |
+|---|---|---|---|
+| [NomiFun Desktop](https://github.com/nomifun/nomifun-desktop) | 跨平台主工作台与本地中枢：Windows、macOS、Linux；多模型、多 Agent、会话、终端、WebUI、知识库、自动化、小程序和本地伙伴能力。 | [Desktop 产品页](https://www.nomifun.com/zh/products/desktop/) | [Desktop 文档](https://www.nomifun.com/zh/docs/getting-started/introduction/) |
+| [NomiFun Mobile](https://github.com/nomifun/nomifun-mobile) | 手机移动入口：在局域网或用户自行建立的可信网络中直连自己的 Desktop，不依赖 NomiFun 云端中转服务器。 | [Mobile 产品页](https://www.nomifun.com/zh/products/mobile/) | [Mobile 与 Desktop 直连](https://www.nomifun.com/zh/docs/guides/mobile-bridge/) |
+| [NomiFun Xiaozhi Yuntai](https://github.com/nomifun/nomifun-xiaozhi-yuntai) | 硬件多模态伙伴接入：把小智兼容设备的语音、显示和设备 MCP 能力接入 NomiFun Desktop。 | [Xiaozhi Yuntai 产品页](https://www.nomifun.com/zh/products/xiaozhi-yuntai/) | [小智机器人接入文档](https://www.nomifun.com/zh/docs/guides/xiaozhi-robot/) |
+
+推荐以 **Desktop 作为本地数据、模型、Agent 与工具能力中枢**：Mobile 通过一次性配对凭据
+直连用户自己的 Desktop；Xiaozhi Yuntai 则把语音、显示、舵机和设备端 MCP 能力接入
+Desktop。三个项目既可独立阅读和二次开发，也能组合成桌面、手机与实体伙伴协同的完整系统。
+
+## 联系与交流
+
+- 官网：[https://www.nomifun.com](https://www.nomifun.com)
+- 问题与建议：[NomiFun Portal Issues](https://github.com/nomifun/nomifun-protal/issues)
+- 邮箱：[535526063@qq.com](mailto:535526063@qq.com)
+- 微信群：扫描下方二维码加入 NomiFun 交流群。
+
+![NomiFun 微信交流群二维码](public/images/zh/联系方式/wechat-group/qr.png)
 
 ## 下载与演示
 
@@ -77,33 +90,36 @@ MCP/REST、CDN 或其它连接，否则核心工作流不会自行把数据发�
 
 ## 前瞻布局
 
-以下内容用于说明 NomiFun 的产品方向，不等同于全部已经公开发布：
+以下时间线区分内部已投入使用与公开创新上线状态；其中仍有部分能力未对外完整开放。
 
-### 2025 年内部自研、逐步开放
+### 2025 年内部已经实现并投入使用
 
-- Xiaozhi 的 Computer Use / Browser Use；
-- Loop for Claude、Codex Agent 的自动化需求管理；
-- 三方决策、实施分离的 IDMM 智能决策容灾系统；
-- 硬件多模态接入伙伴；
-- Agent 知识库与工作上下文；
-- 伙伴的记忆、Skill、设定自进化、迁移与架构。
+以下能力均已完成内部自研，并已投入内部用户使用：
 
-### 2026 年初创新上线或逐步开放
+- Computer Use for XiaozhiAI、Browser Use for XiaozhiAI；
+- **【创新】自动化需求管理平台**：Loop for Claude、Codex Agent；
+- **【创新】三方决策、实施分离 Agent 系统**：智能决策容灾系统；
+- **【创新】硬件多模态接入伙伴**；
+- **【创新】知识库 for Agent CoT Work**；
+- **【创新】伙伴的记忆、Skill、设定自进化、迁移、架构**。
 
-- Agent Desktop 小程序；
-- 安全客服集群系统；
-- 手机移动端直连 Desktop 的控制路径；
-- 独创的 Agent 集群交互与 IM channel 网关；
-- 以及尚未公开的保密方向。
+### 2026 年初创新上线
 
-具体功能状态、支持平台和安全边界，以当前 Desktop release 与文档为准；内部布局不应被
-理解为对所有用户承诺的完整公开功能清单。
+- **【创新】Agent Desktop 小程序**；
+- **【创新】安全的客服集群系统**；
+- **【创新】手机移动端——直连 Desktop，无云端服务器架构**；
+- **【创新】独创的 Agent 集群交互**；
+- **【创新】超级桌面伙伴 Agent IM channel 网关**；
+- **【还有很多保密未推出的】**。
+
+具体功能的公开范围、支持平台和安全边界，以当前 Desktop release 与文档为准；内部已投入
+使用不等同于已经向所有公开版本开放，也不构成对所有用户的功能承诺。
 
 ## Docker 自托管（可选）
 
 需要无头 Web 宿主时，可使用官方 Docker Hub 镜像：
 [nomifun/nomifun-web](https://hub.docker.com/repository/docker/nomifun/nomifun-web)。
-版本与环境变量请以主项目当前文档为准，下面示例沿用已发布的 `v0.3.4` 标签；部署前请查看 Docker Hub，如有更新标签请替换为对应版本：
+版本与环境变量请以主项目当前文档为准。官方默认使用稳定滚动标签 `latest`；如需可复现部署，请在完成验证后自行固定 Docker Hub 发布的明确版本或镜像摘要（digest）：
 
 ```bash
 docker run -d \
@@ -111,7 +127,7 @@ docker run -d \
   --restart unless-stopped \
   -p 8787:8787 \
   -v nomifun-data:/data \
-  nomifun/nomifun-web:v0.3.4
+  nomifun/nomifun-web:latest
 ```
 
 启动后打开 `http://<服务器IP>:8787`，首次访问按页面提示创建管理员。公网部署请放在

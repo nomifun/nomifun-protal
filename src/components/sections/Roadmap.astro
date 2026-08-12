@@ -1,11 +1,10 @@
 ---
 /**
- * Roadmap — a dated, honest view of NomiFun's forward-looking product design.
+ * Roadmap — a dated, honest view of NomiFun's delivered product work.
  *
- * The timeline distinguishes capabilities already developed internally from
- * what is currently public and from work that is still being opened or kept
- * private. It is intentionally not written as a promise that every internal
- * experiment is already released.
+ * The timeline distinguishes internal production use from public release and
+ * from unreleased confidential work. Shipped work is not described as a future
+ * promise, while confidential details remain deliberately bounded.
  */
 import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
@@ -34,43 +33,45 @@ const copy: Dict<{
   cta: string;
 }> = {
   'zh-CN': {
-    eyebrow: '前瞻产品设计 · 2025 — 2026',
-    title: '提前布局，但<span class="text-grad-pink">不把内部实验冒充成承诺</span>',
-    lead: 'NomiFun 很多能力先在真实工作中自研、验证，再决定何时开放。下面按时间记录已经形成的方向：有些已进入公开版本，有些正在逐步开放，还有一些暂时保密。',
+    eyebrow: '已实现的产品创新 · 2025 — 2026',
+    title: '从内部投入使用，到<span class="text-grad-pink">创新能力正式上线</span>',
+    lead: '这不是未来功能愿望单。2025 年列出的能力已经由团队自研并投入内部真实工作；2026 年初列出的创新已经上线。开源范围、公开入口与内部投用范围可能不同，尚未推出的保密能力会明确单列。',
     statusLabels: {
-      live: '当前可见',
+      live: '已实现 / 已上线',
       ahead: '持续开放',
       private: '内部 / 保密',
     },
     eras: [
       {
         date: '2025',
-        label: '内部自研与验证',
-        title: '从 Agent 工具，走向可持续工作的系统',
-        body: '这一阶段围绕“让 Agent 真正完成工作”建立了多条底层能力线，并在真实项目中反复验证。',
-        icon: 'i-mdi-flask-outline',
-        tone: 'ahead',
+        label: '内部已实现并投入使用',
+        title: '把 Agent 从单点工具升级为可持续工作的系统',
+        body: '以下六条能力在 2025 年已经完成内部实现，并在真实项目和日常工作中投入使用；它们不是尚待兑现的前瞻概念。',
+        icon: 'i-mdi-check-decagram-outline',
+        tone: 'live',
         items: [
-          'computer use for xiaozhiAI · browse use for xiaozhiAI',
-          '自动化需求管理平台：Loop for Claude / Codex Agent',
-          '三方决策、实施分离的 IDMM 智能决策容灾系统',
-          '硬件多模态接入伙伴与 Agent 知识库',
-          '伙伴记忆、Skill、设定的自进化、迁移与架构',
+          '面向 XiaozhiAI 的 Computer Use 与 Browser Use',
+          '自动化需求管理平台：Loop for Claude、Codex Agent',
+          '三方决策、实施分离的 Agent 系统与智能决策容灾系统',
+          '硬件多模态接入伙伴',
+          '面向 Agent CoT Work 的知识库',
+          '伙伴的记忆、Skill 与设定自进化、迁移及架构体系',
         ],
       },
       {
         date: '2026 初',
-        label: '创新能力逐步上线',
+        label: '创新能力已经上线',
         title: '桌面、移动端、集群与服务一起演进',
-        body: 'UI 重构完成后，项目才正式走向开源。新的产品形态开始从单机工作站扩展到移动直连、Agent 集群与客服场景。',
+        body: '2026 年初，NomiFun 已从单机工作站扩展到小程序、移动直连、Agent 集群、客服系统与 IM Channel 网关；这些条目描述已上线能力，不再标记为“逐步开放”的未来方向。',
         icon: 'i-mdi-rocket-launch-outline',
-        tone: 'ahead',
+        tone: 'live',
         items: [
-          'Agent Desktop 小程序、普通会话迭代与本地发布工作副本',
+          'Agent Desktop 小程序',
           '安全的客服集群系统',
-          '手机移动端优先直连 Desktop；可选中继用于跨网络连接',
-          '独创的 Agent 集群交互与超级伙伴 IM 网关',
-          '更多能力仍在持续验证，部分暂不公开',
+          '手机移动端直连 Desktop：当前不依赖 NomiFun 云端服务器中转',
+          '独创的 Agent 集群交互',
+          '超级桌面伙伴 Agent IM Channel 网关',
+          '另有多项处于保密阶段、尚未推出的能力；未发布细节暂不对外披露',
         ],
       },
     ],
@@ -79,43 +80,45 @@ const copy: Dict<{
     cta: '了解如何共建',
   },
   'en-US': {
-    eyebrow: 'Forward-looking design · 2025 — 2026',
-    title: 'Move early, but <span class="text-grad-pink">never sell internal experiments as promises</span>',
-    lead: 'Many NomiFun capabilities were first built and tested in real work before we decided when to open them. This timeline separates what is visible today, what is being opened gradually, and what remains internal or private.',
+    eyebrow: 'Delivered product innovation · 2025 — 2026',
+    title: 'From internal production use to <span class="text-grad-pink">innovation shipped in product</span>',
+    lead: 'This is not a future-feature wish list. The 2025 capabilities were built in-house and put into real internal use; the early-2026 innovations have shipped. Open-source scope, public entry points, and internal deployment can differ, while unreleased confidential work is explicitly identified.',
     statusLabels: {
-      live: 'Visible today',
+      live: 'Built / shipped',
       ahead: 'Opening gradually',
       private: 'Internal / private',
     },
     eras: [
       {
         date: '2025',
-        label: 'Internal build & validation',
-        title: 'From Agent tools to a system that keeps working',
-        body: 'This phase established several foundations for making Agents finish real work, then tested them repeatedly in production-like workflows.',
-        icon: 'i-mdi-flask-outline',
-        tone: 'ahead',
+        label: 'Built and in internal production use',
+        title: 'Turning Agents from isolated tools into a system that keeps working',
+        body: 'These six capabilities were implemented in 2025 and used in real projects and daily internal work. They are delivered systems, not forward-looking concepts awaiting implementation.',
+        icon: 'i-mdi-check-decagram-outline',
+        tone: 'live',
         items: [
-          'computer use for xiaozhiAI · browse use for xiaozhiAI',
-          'Automation requirement platform: Loop for Claude / Codex Agent',
-          'IDMM disaster-resilient decision system with decision / implementation separation',
-          'Hardware multimodal companions and an Agent knowledge base',
-          'Self-evolving, portable companion memory, Skills, presets, and architecture',
+          'Computer Use and Browser Use for XiaozhiAI',
+          'Automated requirement-management platform: Loop for Claude and Codex Agent',
+          'A three-party Agent system separating decisions from implementation, with intelligent decision failover',
+          'Hardware multimodal companion integration',
+          'A knowledge base for Agent CoT work',
+          'Self-evolving and portable companion memory, Skills, presets, and architecture',
         ],
       },
       {
         date: 'Early 2026',
-        label: 'Innovation rolling into public builds',
+        label: 'Product innovations shipped',
         title: 'Desktop, mobile, clusters, and services evolving together',
-        body: 'The project only became public after the UI rebuild. New forms now extend the workstation into direct mobile access, Agent clusters, and customer-service scenarios.',
+        body: 'By early 2026, NomiFun had expanded beyond a standalone workstation into mini apps, direct mobile access, Agent clusters, customer service, and an IM Channel gateway. These entries describe shipped capabilities, not a gradual future rollout.',
         icon: 'i-mdi-rocket-launch-outline',
-        tone: 'ahead',
+        tone: 'live',
         items: [
-          'Agent Desktop mini apps, normal-session iteration, and local publish working copies',
+          'Agent Desktop mini apps',
           'A secure customer-service cluster system',
-          'Mobile prefers a direct Desktop connection, with an optional relay for cross-network access',
-          'Original Agent-cluster interaction and a super-companion IM gateway',
-          'More capabilities remain under validation; some are not public yet',
+          'Mobile connects directly to Desktop without a NomiFun cloud application server relaying current traffic',
+          'Original Agent-cluster interaction',
+          'Super desktop companion Agent IM Channel gateway',
+          'Additional capabilities remain confidential and unreleased; details are intentionally not disclosed',
         ],
       },
     ],

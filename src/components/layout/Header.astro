@@ -1,5 +1,5 @@
 ---
-import { getLocale, localizePath, pick, type Locale } from '@/i18n';
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
 import { nav, brand } from '@/i18n/dict/common';
 import { links } from '@/data/links';
 import LangSwitch from './LangSwitch.astro';
@@ -12,12 +12,49 @@ const pathname = Astro.url.pathname;
 
 const items = [
   { label: t.home, href: localizePath('/', locale) },
-  { label: t.products, href: localizePath('/products', locale) },
-  { label: t.docs, href: localizePath('/docs', locale) },
   { label: t.download, href: localizePath('/download', locale) },
   { label: t.friends, href: localizePath('/friends', locale) },
   { label: t.contact, href: localizePath('/contact', locale) },
 ];
+
+const menuCopy = pick(
+  {
+    'zh-CN': {
+      productOverview: '三个产品总览',
+      productOverviewDesc: '了解 Desktop、Mobile 与小智云台如何协同',
+      docsOverview: '全部操作文档',
+      docsOverviewDesc: '浏览 Desktop 的安装、配置与功能指南',
+      introduction: '产品介绍',
+      guide: '接入文档',
+      readme: 'GitHub README',
+      products: [
+        { id: 'desktop', name: 'NomiFun Desktop', desc: '本地 AI 工作站与服务中枢', icon: 'i-mdi-monitor-dashboard', guide: '/docs' },
+        { id: 'mobile', name: 'NomiFun Mobile', desc: '直连 Desktop 的随身客户端', icon: 'i-mdi-cellphone-link', guide: '/docs/guides/mobile-bridge' },
+        { id: 'xiaozhi-yuntai', name: 'NomiFun 小智云台', desc: '面向小智机器人的开源云台工程', icon: 'i-mdi-robot-outline', guide: '/docs/guides/xiaozhi-robot' },
+      ],
+    },
+    'en-US': {
+      productOverview: 'All three products',
+      productOverviewDesc: 'See how Desktop, Mobile, and Xiaozhi work together',
+      docsOverview: 'All operation docs',
+      docsOverviewDesc: 'Browse Desktop setup, configuration, and feature guides',
+      introduction: 'Product guide',
+      guide: 'Integration guide',
+      readme: 'GitHub README',
+      products: [
+        { id: 'desktop', name: 'NomiFun Desktop', desc: 'Local AI workstation and service hub', icon: 'i-mdi-monitor-dashboard', guide: '/docs' },
+        { id: 'mobile', name: 'NomiFun Mobile', desc: 'Pocket client that connects directly to Desktop', icon: 'i-mdi-cellphone-link', guide: '/docs/guides/mobile-bridge' },
+        { id: 'xiaozhi-yuntai', name: 'NomiFun Xiaozhi Yuntai', desc: 'Open pan-tilt project for Xiaozhi robots', icon: 'i-mdi-robot-outline', guide: '/docs/guides/xiaozhi-robot' },
+      ],
+    },
+  } satisfies Dict<any>,
+  locale,
+);
+
+const repoFor = (id: string) =>
+  id === 'desktop' ? links.desktopRepo : id === 'mobile' ? links.mobileRepo : links.xiaozhiRepo;
+const productsRoot = localizePath('/products', locale);
+const docsRoot = localizePath('/docs', locale);
 
 function isActive(href: string) {
   if (href === localizePath('/', locale)) return pathname === href;
@@ -35,8 +72,89 @@ function isActive(href: string) {
       <span class="text-lg font-bold tracking-tight text-hi">{b.name}</span>
     </a>
 
-    <nav class="hidden lg:flex items-center gap-1">
-      {items.map((it) => (
+    <nav class="hidden lg:flex items-center gap-1" aria-label={locale === 'zh-CN' ? '主导航' : 'Primary navigation'}>
+      <a
+        href={items[0].href}
+        class={`rounded-lg px-3.5 py-2 text-sm font-medium transition-colors ${
+          isActive(items[0].href) ? 'text-hi' : 'text-mid hover:text-hi'
+        }`}
+      >
+        {items[0].label}
+      </a>
+
+      <details class="nav-dropdown group relative">
+        <summary class={`flex cursor-pointer list-none items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium transition-colors ${
+          pathname.startsWith(productsRoot) ? 'text-hi' : 'text-mid hover:text-hi'
+        }`}>
+          {t.products}<span class="i-mdi-chevron-down text-base transition-transform group-open:rotate-180" aria-hidden="true"></span>
+        </summary>
+        <div class="absolute left-1/2 top-full w-[27rem] -translate-x-1/2 pt-3">
+          <div class="rounded-2xl border border-ink-600 bg-ink-900/98 p-3 shadow-2xl backdrop-blur-xl">
+            <a href={productsRoot} class="flex items-start gap-3 rounded-xl bg-ink-800/70 p-3 transition-colors hover:bg-ink-700/80">
+              <span class="i-mdi-view-grid-outline mt-0.5 text-xl text-pink-400" aria-hidden="true"></span>
+              <span>
+                <span class="block text-sm font-semibold text-hi">{menuCopy.productOverview}</span>
+                <span class="mt-0.5 block text-xs leading-relaxed text-low">{menuCopy.productOverviewDesc}</span>
+              </span>
+            </a>
+            <div class="mt-2 grid gap-1">
+              {menuCopy.products.map((product) => (
+                <div class="rounded-xl px-3 py-2.5 transition-colors hover:bg-ink-800/80">
+                  <div class="flex items-start gap-3">
+                    <span class:list={[product.icon, 'mt-0.5 text-xl text-violet-300']} aria-hidden="true"></span>
+                    <div class="min-w-0 flex-1">
+                      <a href={localizePath(`/products/${product.id}`, locale)} class="block text-sm font-semibold text-hi hover:text-pink-300">{product.name}</a>
+                      <p class="mt-0.5 text-xs leading-relaxed text-low">{product.desc}</p>
+                      <div class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs">
+                        <a href={localizePath(product.guide, locale)} class="text-violet-300 hover:text-violet-200">{menuCopy.guide}</a>
+                        <a href={`${repoFor(product.id)}#readme`} target="_blank" rel="noopener" class="text-mid hover:text-hi">{menuCopy.readme}<span class="i-mdi-open-in-new ml-0.5" aria-hidden="true"></span></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="nav-dropdown group relative">
+        <summary class={`flex cursor-pointer list-none items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium transition-colors ${
+          pathname.startsWith(docsRoot) ? 'text-hi' : 'text-mid hover:text-hi'
+        }`}>
+          {t.docs}<span class="i-mdi-chevron-down text-base transition-transform group-open:rotate-180" aria-hidden="true"></span>
+        </summary>
+        <div class="absolute left-1/2 top-full w-[27rem] -translate-x-1/2 pt-3">
+          <div class="rounded-2xl border border-ink-600 bg-ink-900/98 p-3 shadow-2xl backdrop-blur-xl">
+            <a href={docsRoot} class="flex items-start gap-3 rounded-xl bg-ink-800/70 p-3 transition-colors hover:bg-ink-700/80">
+              <span class="i-mdi-book-open-page-variant-outline mt-0.5 text-xl text-pink-400" aria-hidden="true"></span>
+              <span>
+                <span class="block text-sm font-semibold text-hi">{menuCopy.docsOverview}</span>
+                <span class="mt-0.5 block text-xs leading-relaxed text-low">{menuCopy.docsOverviewDesc}</span>
+              </span>
+            </a>
+            <div class="mt-2 grid gap-1">
+              {menuCopy.products.map((product) => (
+                <div class="rounded-xl px-3 py-2.5 transition-colors hover:bg-ink-800/80">
+                  <div class="flex items-start gap-3">
+                    <span class:list={[product.icon, 'mt-0.5 text-xl text-violet-300']} aria-hidden="true"></span>
+                    <div class="min-w-0 flex-1">
+                      <a href={localizePath(product.guide, locale)} class="block text-sm font-semibold text-hi hover:text-pink-300">{product.name}</a>
+                      <p class="mt-0.5 text-xs leading-relaxed text-low">{product.desc}</p>
+                      <div class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs">
+                        <a href={localizePath(`/products/${product.id}`, locale)} class="text-violet-300 hover:text-violet-200">{menuCopy.introduction}</a>
+                        <a href={`${repoFor(product.id)}#readme`} target="_blank" rel="noopener" class="text-mid hover:text-hi">{menuCopy.readme}<span class="i-mdi-open-in-new ml-0.5" aria-hidden="true"></span></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </details>
+
+      {items.slice(1).map((it) => (
         <a
           href={it.href}
           class={`rounded-lg px-3.5 py-2 text-sm font-medium transition-colors ${
@@ -68,9 +186,38 @@ function isActive(href: string) {
   </div>
 
   <!-- mobile menu -->
-  <div id="mobile-menu" class="lg:hidden hidden border-t border-ink-700 bg-ink-900/95 backdrop-blur-lg">
+  <div id="mobile-menu" class="lg:hidden hidden max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-ink-700 bg-ink-900/95 backdrop-blur-lg">
     <nav class="container-x flex flex-col py-3">
-      {items.map((it) => (
+      <a href={items[0].href} class="rounded-lg px-3 py-2.5 text-base font-medium text-mid hover:text-hi hover:bg-ink-800">{items[0].label}</a>
+      {[{ label: t.products, type: 'products' }, { label: t.docs, type: 'docs' }].map((section) => (
+        <details class="mobile-nav-group border-b border-ink-700/60 py-1">
+          <summary class="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-2.5 text-base font-medium text-mid hover:bg-ink-800 hover:text-hi">
+            {section.label}<span class="i-mdi-chevron-down text-lg transition-transform group-open:rotate-180" aria-hidden="true"></span>
+          </summary>
+          <div class="pb-2 pl-3">
+            <a href={section.type === 'products' ? productsRoot : docsRoot} class="block rounded-lg px-3 py-2 text-sm font-semibold text-pink-300 hover:bg-ink-800">
+              {section.type === 'products' ? menuCopy.productOverview : menuCopy.docsOverview}
+            </a>
+            {menuCopy.products.map((product) => (
+              <div class="rounded-lg px-3 py-2 hover:bg-ink-800/80">
+                <a
+                  href={section.type === 'products' ? localizePath(`/products/${product.id}`, locale) : localizePath(product.guide, locale)}
+                  class="flex items-center gap-2 text-sm font-semibold text-hi"
+                >
+                  <span class:list={[product.icon, 'text-base text-violet-300']} aria-hidden="true"></span>{product.name}
+                </a>
+                <div class="mt-1 flex flex-wrap gap-x-3 pl-6 text-xs">
+                  <a href={section.type === 'products' ? localizePath(product.guide, locale) : localizePath(`/products/${product.id}`, locale)} class="text-violet-300 hover:text-violet-200">
+                    {section.type === 'products' ? menuCopy.guide : menuCopy.introduction}
+                  </a>
+                  <a href={`${repoFor(product.id)}#readme`} target="_blank" rel="noopener" class="text-mid hover:text-hi">{menuCopy.readme}</a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </details>
+      ))}
+      {items.slice(1).map((it) => (
         <a href={it.href} class="rounded-lg px-3 py-2.5 text-base font-medium text-mid hover:text-hi hover:bg-ink-800">{it.label}</a>
       ))}
     </nav>
@@ -96,5 +243,32 @@ function isActive(href: string) {
   // Mobile menu toggle
   const toggle = document.getElementById('mobile-toggle');
   const menu = document.getElementById('mobile-menu');
-  toggle?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  const desktopDropdowns = Array.from(document.querySelectorAll<HTMLDetailsElement>('.nav-dropdown'));
+  desktopDropdowns.forEach((dropdown) => {
+    dropdown.addEventListener('toggle', () => {
+      if (!dropdown.open) return;
+      desktopDropdowns.forEach((other) => {
+        if (other !== dropdown) other.open = false;
+      });
+    });
+  });
+  document.addEventListener('click', (event) => {
+    desktopDropdowns.forEach((dropdown) => {
+      if (!dropdown.contains(event.target as Node)) dropdown.open = false;
+    });
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') desktopDropdowns.forEach((dropdown) => (dropdown.open = false));
+  });
 </script>
+
+<style>
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

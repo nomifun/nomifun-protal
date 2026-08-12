@@ -30,6 +30,17 @@ const shared = pick(
       ],
       more: '继续认识另外两个产品',
       video: '小智云台真实 Demo',
+      architectureEyebrow: '本地优先的直连架构',
+      architectureTitle: '手机是控制面，Desktop 才是能力与数据中枢',
+      architectureLead: 'NomiFun 没有为了做手机端再复制一套云端后端。Mobile 复用 Desktop 明确开启的 WebUI HTTP / WebSocket 能力面，在局域网中直接连接自己的电脑；当前版本没有接入 NomiFun 公网中继。',
+      architectureBoundary: '边界说明：Desktop 仍负责模型调用、Agent 执行、会话、文件与工作区数据。Mobile 保存连接配置与必要的客户端状态。若用户自行使用 VPN、端口转发或第三方网络服务，网络边界由该方案决定；不要把 25808 端口直接暴露到公网。',
+      architectureFlow: ['NomiFun Mobile', '局域网 HTTP / WebSocket', 'NomiFun Desktop', '模型 · Agent · 数据 · 文件'],
+      architecturePoints: [
+        ['i-mdi-lan-connect', '没有 NomiFun 云中转', '同一可信网络内，业务请求从手机直接到自己的 Desktop，不经过 NomiFun 统一账号或云端业务服务器。'],
+        ['i-mdi-shield-key-outline', '一次性凭证完成初次配对', '二维码由 Desktop 本机生成，包含短时、一次性使用的登录凭证；兑换完成后即失效，避免长期密钥直接出现在二维码中。'],
+        ['i-mdi-database-lock-outline', '电脑保持唯一能力边界', '模型密钥、伙伴记忆、工作区和执行权限继续由 Desktop 管理；手机不会变成第二份数据中心，也不直接获得宿主权限。'],
+        ['i-mdi-access-point-network', '一套 API，多种终端', 'Mobile 复用 Desktop 的 WebUI HTTP / WebSocket API 与事件流，桌面界面、手机和后续硬件入口围绕同一状态协同，而不是各自维护孤立副本。'],
+      ],
     },
     'en-US': {
       family: 'The NomiFun open-source family',
@@ -46,6 +57,17 @@ const shared = pick(
       ],
       more: 'Explore the other products',
       video: 'Real Xiaozhi Yuntai demo',
+      architectureEyebrow: 'A local-first direct-link architecture',
+      architectureTitle: 'Mobile is the control plane; Desktop remains the capability and data hub',
+      architectureLead: 'NomiFun did not create a second cloud backend just to ship a phone app. Mobile reuses the WebUI HTTP / WebSocket capability plane that you explicitly enable on Desktop and connects directly over the LAN. The current release does not integrate a NomiFun public relay.',
+      architectureBoundary: 'Boundary: Desktop still performs model calls and Agent execution and owns sessions, files, and workspace data. Mobile stores connection settings and the client state it needs. If you add a VPN, port forward, or third-party network service, that solution defines the network boundary; do not expose port 25808 directly to the public Internet.',
+      architectureFlow: ['NomiFun Mobile', 'LAN HTTP / WebSocket', 'NomiFun Desktop', 'Models · Agents · data · files'],
+      architecturePoints: [
+        ['i-mdi-lan-connect', 'No NomiFun cloud hop', 'On a trusted local network, business requests travel directly from the phone to your own Desktop, without a NomiFun account service or cloud application server in the middle.'],
+        ['i-mdi-shield-key-outline', 'One-time credentials for initial pairing', 'Desktop creates the QR code locally with a short-lived, single-use login credential. It is consumed during exchange instead of placing a long-term secret in the QR code.'],
+        ['i-mdi-database-lock-outline', 'The computer keeps the capability boundary', 'Model keys, companion memory, workspaces, and execution permissions remain under Desktop control. The phone is neither a second data hub nor a path to native host privileges.'],
+        ['i-mdi-access-point-network', 'One API plane, multiple surfaces', 'Mobile reuses the Desktop WebUI HTTP / WebSocket APIs and event stream, so desktop UI, phone, and later hardware surfaces coordinate around one state instead of isolated copies.'],
+      ],
     },
   } satisfies Dict<any>,
   locale,
@@ -73,7 +95,10 @@ const productCopy: Dict<Record<ProductId, {
       features: [
         { icon: 'i-mdi-robot-happy-outline', title: '伙伴与多 Agent', text: '为不同角色选择模型、知识、Skills、记忆与工作方式。' },
         { icon: 'i-mdi-puzzle-outline', title: 'Skills 与 MCP', text: '集中管理可复用能力，并按 Agent、设置或伙伴进行组合。' },
-        { icon: 'i-mdi-server-network-outline', title: '远程&开放能力', text: '通过 WebUI、REST、MCP 等明确启用的入口服务手机和机器人。' },
+        { icon: 'i-mdi-apps', title: 'Agent Desktop 小程序', text: '让 Agent 生成单文件网页工具，在本机预览、发布、运行并通过普通会话继续迭代。' },
+        { icon: 'i-mdi-cellphone-link', title: '手机直连 Desktop', text: 'Mobile 通过用户明确启用的局域网 WebUI HTTP / WebSocket API 使用会话、任务、需求与伙伴能力。' },
+        { icon: 'i-mdi-robot-industrial-outline', title: '机器人与硬件伙伴', text: '将小智 ESP32、语音、动作和设备 MCP 工具接入伙伴，让本地 AI 延伸到真实世界。' },
+        { icon: 'i-mdi-server-network-outline', title: '远程&开放能力', text: '按需开启 WebUI、REST、MCP 等入口，让电脑成为自己控制的服务中枢。' },
       ],
     },
     mobile: {
@@ -117,7 +142,10 @@ const productCopy: Dict<Record<ProductId, {
       features: [
         { icon: 'i-mdi-robot-happy-outline', title: 'Companions and Agents', text: 'Give each role its own models, knowledge, Skills, memory, and way of working.' },
         { icon: 'i-mdi-puzzle-outline', title: 'Skills and MCP', text: 'Manage reusable capabilities centrally, then compose them per Agent, preset, or companion.' },
-        { icon: 'i-mdi-server-network-outline', title: 'Remote & Open', text: 'Serve phones and robots through WebUI, REST, MCP, and other interfaces you explicitly enable.' },
+        { icon: 'i-mdi-apps', title: 'Agent Desktop mini apps', text: 'Have an Agent build a self-contained web tool, preview and publish it locally, then keep iterating through ordinary sessions.' },
+        { icon: 'i-mdi-cellphone-link', title: 'Mobile connects directly', text: 'Use sessions, tasks, requirements, and companions through the LAN WebUI HTTP / WebSocket APIs you explicitly enable.' },
+        { icon: 'i-mdi-robot-industrial-outline', title: 'Robots and hardware companions', text: 'Connect Xiaozhi ESP32 devices, voice, motion, and device MCP tools so local AI can act in the physical world.' },
+        { icon: 'i-mdi-server-network-outline', title: 'Remote & Open', text: 'Enable WebUI, REST, MCP, and other interfaces as needed, turning your computer into a service hub you control.' },
       ],
     },
     mobile: {
@@ -241,6 +269,51 @@ const mobileShots = [
       </div>
     </div>
   </section>
+
+  {product === 'desktop' && (
+    <section id="architecture" class="section-y bg-ink-850/35">
+      <div class="container-x">
+        <div class="mx-auto max-w-4xl text-center" data-animate>
+          <span class="eyebrow">{shared.architectureEyebrow}</span>
+          <h2 class="mt-5 text-3xl font-bold text-hi sm:text-4xl">{shared.architectureTitle}</h2>
+          <p class="mt-5 text-base leading-relaxed text-mid sm:text-lg">{shared.architectureLead}</p>
+        </div>
+
+        <div class="mx-auto mt-10 flex max-w-6xl flex-col items-stretch gap-3 md:flex-row md:items-center" aria-label={shared.architectureTitle} data-animate>
+          {shared.architectureFlow.map((stage: string, index: number) => (
+            <>
+              <div class={`flex min-h-20 flex-1 items-center justify-center rounded-2xl border px-4 py-4 text-center text-sm font-semibold ${
+                index === 0
+                  ? 'border-violet-400/35 bg-violet-500/10 text-violet-200'
+                  : index === 2
+                    ? 'border-pink-400/40 bg-pink-500/12 text-pink-200'
+                    : 'border-ink-600 bg-ink-800/70 text-hi'
+              }`}>
+                {stage}
+              </div>
+              {index < shared.architectureFlow.length - 1 && (
+                <span class="i-mdi-arrow-down mx-auto text-xl text-low md:i-mdi-arrow-right" aria-hidden="true"></span>
+              )}
+            </>
+          ))}
+        </div>
+
+        <div class="mt-8 grid gap-5 md:grid-cols-2" data-stagger>
+          {shared.architecturePoints.map((point: string[]) => (
+            <article class="rounded-2xl border border-ink-600/70 bg-ink-800/55 p-6">
+              <span class:list={[point[0], 'text-3xl text-pink-400']} aria-hidden="true"></span>
+              <h3 class="mt-4 text-lg font-semibold text-hi">{point[1]}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-mid">{point[2]}</p>
+            </article>
+          ))}
+        </div>
+
+        <aside class="mx-auto mt-6 max-w-5xl rounded-2xl border border-warning/30 bg-warning/8 px-5 py-4 text-sm leading-relaxed text-mid" data-animate>
+          <span class="i-mdi-shield-alert-outline mr-2 text-base text-warning" aria-hidden="true"></span>{shared.architectureBoundary}
+        </aside>
+      </div>
+    </section>
+  )}
 
   {product !== 'xiaozhi-yuntai' && (
     <section class="section-y bg-ink-850/35">
