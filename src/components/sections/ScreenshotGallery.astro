@@ -1,150 +1,88 @@
 ---
-/**
- * ScreenshotGallery — "真实界面一览 / Real screenshots".
- *
- * A restrained grid of REAL product captures (from the installed desktop app)
- * — placed near the end of the homepage to back the
- * code-rendered live demos with "see it for yourself" credibility. The live
- * islands above remain the primary storytelling; this section is the proof.
- *
- * Accuracy: these are genuine in-app screenshots. Captions stay neutral and
- * descriptive — no capability claims beyond what the shot shows. Each card
- * links to the matching operation guide.
- *
- * i18n note: each locale uses a capture from the matching app language.
- */
 import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
 
 const locale: Locale = getLocale(Astro.url);
-
-const languageSuffix = locale === 'zh-CN' ? 'zh' : 'en';
-
-// Six product captures spanning the product surface; href → matching guide.
-const shots: { img: string; href: string; w: number; h: number }[] = [
-  {
-    img: locale === 'zh-CN' ? 'current-home-zh.png' : 'current-home-en.png',
-    href: '/docs/getting-started/quick-start',
-    w: 1296,
-    h: 841,
-  },
-  { img: `skills-market-${languageSuffix}.png`, href: '/docs/guides/mcp-and-skills', w: 1224, h: 768 },
-  { img: `skills-library-${languageSuffix}.png`, href: '/docs/guides/mcp-and-skills', w: 1224, h: 768 },
-  { img: `presets-${languageSuffix}.png`, href: '/docs/guides/assistants', w: 1224, h: 768 },
-  { img: `voice-input-${languageSuffix}.png`, href: '/docs/guides/voice-input', w: 1224, h: 768 },
-  { img: `settings-system-${languageSuffix}.png`, href: '/docs/guides/settings', w: 1224, h: 768 },
-];
 
 const copy: Dict<{
   eyebrow: string;
   title: string;
   lead: string;
-  realBadge: string;
-  viewLabel: string;
-  footnote: string;
+  badge: string;
+  view: string;
   captions: string[];
 }> = {
   'zh-CN': {
-    eyebrow: '真实界面 · 眼见为实',
-    title: '不是渲染图，是<span class="text-grad-pink">真实运行界面</span>',
-    lead: '上面的演示是用前端代码实时绘制的；这里则是产品真机截图。每一张都来自正式安装版 NomiFun，点开可直达对应操作文档。',
-    realBadge: '真机截图',
-    viewLabel: '查看文档',
-    footnote: '截图均取自实际运行的应用；界面持续迭代，最终以实际应用界面为准。',
-    captions: [
-      '工作台：首页、协作策略与会话入口',
-      'Skill Market：浏览榜单并准备安装',
-      '已安装 Skills：集中管理可复用能力',
-      '设定：组合 Agent、模型、Skill 与知识范围',
-      '本地语音识别：Paraformer 与 Whisper',
-      '系统设置：运行偏好与应用信息',
-    ],
+    eyebrow: '2026 最新实拍',
+    title: 'Desktop 与 Mobile 的真实运行界面',
+    lead: '本页旧截图已由本机最新版 Desktop 与实际连接 Desktop 的 Mobile 重新拍摄。点击任一画面进入对应产品介绍。',
+    badge: '本次新截图',
+    view: '产品介绍',
+    captions: ['Desktop 工作台', 'Desktop 模型管理', 'Desktop 桌面伙伴', 'Desktop 技能中心', 'Mobile 会话与项目', 'Mobile 已连接状态'],
   },
   'en-US': {
-    eyebrow: 'Real UI · see for yourself',
-    title: 'Not renders — <span class="text-grad-pink">the real running app</span>',
-    lead: 'The demos above are drawn live in front-end code; these are real product captures from the installed NomiFun app. Tap through to the matching guide.',
-    realBadge: 'Real capture',
-    viewLabel: 'View guide',
-    footnote: 'All captures are from the actual running app; the UI keeps evolving, so the app you run is the source of truth.',
-    captions: [
-      'Workspace: home, collaboration policy and session entry',
-      'Skill Market: browse rankings and prepare an install',
-      'Installed Skills: manage reusable capabilities',
-      'Presets: combine Agents, models, Skills and knowledge scope',
-      'Local speech recognition: Paraformer and Whisper',
-      'System settings: runtime preferences and app information',
-    ],
+    eyebrow: 'Latest 2026 captures',
+    title: 'The real running Desktop and Mobile UI',
+    lead: 'The old site captures have been replaced with new screenshots from the installed Desktop and a Mobile client actually connected to it.',
+    badge: 'New capture',
+    view: 'Product guide',
+    captions: ['Desktop workspace', 'Desktop model management', 'Desktop companion', 'Desktop Skills center', 'Mobile sessions and projects', 'Mobile connected state'],
   },
 };
 
 const t = pick(copy, locale);
-const items = shots.map((s, i) => ({ ...s, caption: t.captions[i] }));
+const desktopSuffix = locale === 'zh-CN' ? 'zh' : 'en';
+const shots = [
+  { src: '/screenshots/desktop/desktop-home-' + desktopSuffix + '.png', href: '/products/desktop', caption: t.captions[0], kind: 'desktop' },
+  { src: '/screenshots/desktop/desktop-models-' + desktopSuffix + '.png', href: '/products/desktop', caption: t.captions[1], kind: 'desktop' },
+  { src: '/screenshots/desktop/desktop-companion-' + desktopSuffix + '.png', href: '/products/desktop', caption: t.captions[2], kind: 'desktop' },
+  { src: '/screenshots/desktop/desktop-skills-' + desktopSuffix + '.png', href: '/products/desktop', caption: t.captions[3], kind: 'desktop' },
+  { src: '/screenshots/mobile/mobile-sessions-zh.png', href: '/products/mobile', caption: t.captions[4], kind: 'mobile' },
+  { src: '/screenshots/mobile/mobile-profile-zh.png', href: '/products/mobile', caption: t.captions[5], kind: 'mobile' },
+];
 ---
 
-<section id="screenshots" class="relative section-y bg-ink-850/30">
+<section id="screenshots" class="relative section-y">
   <div class="container-x">
-    <!-- header -->
-    <div class="flex max-w-3xl flex-col gap-4" data-animate>
+    <div class="mx-auto max-w-3xl text-center" data-animate>
       <span class="eyebrow">{t.eyebrow}</span>
-      <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl lg:text-[2.75rem]">
-        <Fragment set:html={t.title} />
-      </h2>
-      <p class="text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
+      <h2 class="mt-5 text-3xl font-bold tracking-tight text-hi sm:text-4xl">{t.title}</h2>
+      <p class="mt-4 text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
     </div>
 
-    <!-- gallery grid -->
     <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
-      {
-        items.map((s) => (
-          <li class="min-w-0">
-            <a
-              href={localizePath(s.href, locale)}
-              class="shot group block min-w-0 overflow-hidden rounded-2xl border border-ink-600/70 bg-ink-800/60 transition-colors hover:border-pink-500/40"
-            >
-              <span class="relative block overflow-hidden">
-                <img
-                  src={`/screenshots/${s.img}`}
-                  alt={s.caption}
-                  width={s.w}
-                  height={s.h}
-                  loading="lazy"
-                  decoding="async"
-                  class="shot-img block aspect-[16/10] h-auto w-full object-cover object-top transition-transform duration-500"
-                />
-                <span class="pointer-events-none absolute right-2.5 top-2.5 inline-flex items-center gap-1 rounded-full border border-ink-600/80 bg-ink-900/80 px-2 py-1 text-[10px] font-medium text-mid backdrop-blur-sm">
-                  <span class="i-mdi-camera-outline text-[11px] text-pink-400" aria-hidden="true" />
-                  {t.realBadge}
-                </span>
+      {shots.map((shot) => (
+        <li class:list={['min-w-0', shot.kind === 'mobile' ? 'flex justify-center' : '']}>
+          <a
+            href={localizePath(shot.href, locale)}
+            class:list={[
+              'group block overflow-hidden rounded-2xl border border-ink-600/70 bg-ink-800/60 transition hover:border-pink-500/45',
+              shot.kind === 'mobile' ? 'w-full max-w-[260px]' : 'w-full',
+            ]}
+          >
+            <span class="relative block overflow-hidden bg-ink-950">
+              <img
+                src={shot.src}
+                alt={shot.caption}
+                width={shot.kind === 'mobile' ? 390 : 1648}
+                height={shot.kind === 'mobile' ? 844 : 980}
+                loading="lazy"
+                decoding="async"
+                class:list={[
+                  'block w-full transition duration-500 group-hover:scale-[1.025]',
+                  shot.kind === 'mobile' ? 'aspect-[390/844] object-contain' : 'aspect-[16/10] object-cover object-top',
+                ]}
+              />
+              <span class="absolute right-2.5 top-2.5 rounded-full border border-white/10 bg-ink-950/80 px-2 py-1 text-[10px] font-medium text-pink-300 backdrop-blur">
+                {t.badge}
               </span>
-              <span class="flex min-w-0 items-center justify-between gap-3 px-4 py-3.5">
-                <span class="min-w-0 truncate text-sm text-mid transition-colors group-hover:text-hi">{s.caption}</span>
-                <span class="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-low transition-colors group-hover:text-pink-300">
-                  {t.viewLabel}
-                  <span class="i-mdi-arrow-right text-sm transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-                </span>
-              </span>
-            </a>
-          </li>
-        ))
-      }
+            </span>
+            <span class="flex items-center justify-between gap-3 px-4 py-3.5">
+              <span class="truncate text-sm text-mid group-hover:text-hi">{shot.caption}</span>
+              <span class="shrink-0 text-xs font-medium text-low group-hover:text-pink-300">{t.view}</span>
+            </span>
+          </a>
+        </li>
+      ))}
     </ul>
-
-    <p class="mt-7 flex items-center gap-2 text-xs leading-relaxed text-low" data-animate>
-      <span class="i-mdi-information-outline text-sm" aria-hidden="true"></span>
-      <span>{t.footnote}</span>
-    </p>
   </div>
-
-  <style>
-    .shot:hover .shot-img {
-      transform: scale(1.035);
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .shot-img,
-      .shot:hover .shot-img {
-        transition: none;
-        transform: none;
-      }
-    }
-  </style>
 </section>

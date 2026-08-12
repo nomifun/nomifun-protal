@@ -1,0 +1,175 @@
+---
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+import { links } from '@/data/links';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+const locale: Locale = getLocale(Astro.url);
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  source: string;
+  details: string;
+  demo: string;
+  products: {
+    id: 'desktop' | 'mobile' | 'xiaozhi-yuntai';
+    label: string;
+    role: string;
+    title: string;
+    description: string;
+    highlights: string[];
+  }[];
+}> = {
+  'zh-CN': {
+    eyebrow: 'NomiFun 开源产品家族',
+    title: '三个产品，连接成一套完整体验',
+    lead: '先选择你最需要的入口。每个项目都有独立源码、安装方式和产品介绍；把它们连接起来，Desktop 会成为 Mobile 与机器人的本地能力中枢。',
+    source: '查看源码',
+    details: '产品介绍',
+    demo: '真实 Demo',
+    products: [
+      {
+        id: 'desktop',
+        label: '01 · DESKTOP',
+        role: '本地 AI 工作站',
+        title: 'NomiFun Desktop',
+        description: '在 Windows、macOS 与 Linux 上管理模型、伙伴、Skills、知识、任务与工作流，并向手机和机器人开放本地服务。',
+        highlights: ['本地数据与模型接入', '多 Agent / Skills / MCP', 'WebUI 与远程开放能力'],
+      },
+      {
+        id: 'mobile',
+        label: '02 · MOBILE',
+        role: '随身控制与协作',
+        title: 'NomiFun Mobile',
+        description: '连接你的 Desktop，在手机上查看会话、定时任务、需求队列和伙伴状态。计算与数据仍由自己的电脑承担。',
+        highlights: ['扫码连接 Desktop', '会话 / 任务 / 需求', '伙伴与模型管理'],
+      },
+      {
+        id: 'xiaozhi-yuntai',
+        label: '03 · XIAOZHI',
+        role: '开源机器人载体',
+        title: 'NomiFun 小智云台',
+        description: '面向小智机器人的开源云台工程，让语音助手拥有可转动的视角，并可与 NomiFun 的本地 AI 能力组合。',
+        highlights: ['ESP32-S3 开源硬件工程', '云台动作与视觉方向', '可接入 Desktop AI 服务'],
+      },
+    ],
+  },
+  'en-US': {
+    eyebrow: 'The NomiFun open-source family',
+    title: 'Three products, one connected experience',
+    lead: 'Start with the product you need. Each project has its own source, setup path, and product guide. Connect them and Desktop becomes the local capability hub for Mobile and the robot.',
+    source: 'View source',
+    details: 'Product guide',
+    demo: 'Real demo',
+    products: [
+      {
+        id: 'desktop',
+        label: '01 · DESKTOP',
+        role: 'Local AI workstation',
+        title: 'NomiFun Desktop',
+        description: 'Manage models, companions, Skills, knowledge, tasks, and workflows on Windows, macOS, and Linux — then expose those local capabilities to your phone and robot.',
+        highlights: ['Local data and model access', 'Multi-Agent / Skills / MCP', 'WebUI and remote APIs'],
+      },
+      {
+        id: 'mobile',
+        label: '02 · MOBILE',
+        role: 'Pocket control and collaboration',
+        title: 'NomiFun Mobile',
+        description: 'Connect to your Desktop and carry sessions, scheduled tasks, requirements, and companion status on your phone. Your own computer still does the work.',
+        highlights: ['QR connection to Desktop', 'Sessions / tasks / requirements', 'Companions and models'],
+      },
+      {
+        id: 'xiaozhi-yuntai',
+        label: '03 · XIAOZHI',
+        role: 'Open robot platform',
+        title: 'NomiFun Xiaozhi Yuntai',
+        description: 'An open-source pan-tilt project for Xiaozhi robots, giving a voice assistant a movable point of view and a path into NomiFun local AI capabilities.',
+        highlights: ['ESP32-S3 open hardware project', 'Pan-tilt motion and viewing direction', 'Connects to Desktop AI services'],
+      },
+    ],
+  },
+};
+
+const t = pick(copy, locale);
+const repos = {
+  desktop: links.desktopRepo,
+  mobile: links.mobileRepo,
+  'xiaozhi-yuntai': links.xiaozhiRepo,
+};
+---
+
+<section id="products" class:list={['relative bg-ink-850/35', compact ? 'py-16' : 'section-y']}>
+  <div class="container-x">
+    <div class="mx-auto max-w-3xl text-center" data-animate>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h2 class="mt-5 text-3xl font-bold tracking-tight text-hi sm:text-4xl lg:text-5xl">{t.title}</h2>
+      <p class="mt-5 text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
+    </div>
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-3" data-stagger>
+      {t.products.map((product) => (
+        <article class="group flex min-w-0 flex-col overflow-hidden rounded-3xl border border-ink-600/75 bg-ink-800/65 transition hover:-translate-y-1 hover:border-pink-500/45">
+          <div class="relative h-[250px] overflow-hidden border-b border-ink-700 bg-ink-950">
+            {product.id === 'desktop' && (
+              <img
+                src={locale === 'zh-CN' ? '/screenshots/desktop/desktop-home-zh.png' : '/screenshots/desktop/desktop-home-en.png'}
+                alt={product.title}
+                width="1648"
+                height="980"
+                class="h-full w-full object-cover object-left-top transition duration-500 group-hover:scale-[1.025]"
+              />
+            )}
+            {product.id === 'mobile' && (
+              <div class="absolute inset-0 flex items-end justify-center gap-2 bg-[radial-gradient(circle_at_50%_20%,rgba(117,131,178,.25),transparent_65%)] px-5 pt-5">
+                <img src="/screenshots/mobile/mobile-sessions-zh.png" alt="" width="390" height="844" class="h-[92%] w-auto rounded-t-2xl border border-ink-600 shadow-xl" />
+                <img src="/screenshots/mobile/mobile-companions-zh.png" alt={product.title} width="390" height="844" class="z-10 h-full w-auto rounded-t-2xl border border-pink-500/40 shadow-2xl" />
+                <img src="/screenshots/mobile/mobile-profile-zh.png" alt="" width="390" height="844" class="h-[92%] w-auto rounded-t-2xl border border-ink-600 shadow-xl" />
+              </div>
+            )}
+            {product.id === 'xiaozhi-yuntai' && (
+              <video
+                src="/media/xiaozhi-yuntai-demo.mp4"
+                controls
+                muted
+                playsinline
+                preload="metadata"
+                class="h-full w-full object-cover"
+                aria-label={product.title + ' · ' + t.demo}
+              ></video>
+            )}
+            <span class="absolute left-4 top-4 rounded-full border border-white/10 bg-ink-950/85 px-3 py-1 text-[11px] font-bold tracking-[0.18em] text-pink-300 backdrop-blur">
+              {product.label}
+            </span>
+          </div>
+
+          <div class="flex flex-1 flex-col p-6">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-violet-300">{product.role}</p>
+            <h3 class="mt-2 text-2xl font-bold text-hi">{product.title}</h3>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-mid">{product.description}</p>
+            <ul class="mt-5 space-y-2">
+              {product.highlights.map((item) => (
+                <li class="flex items-start gap-2 text-sm text-mid">
+                  <span class="i-mdi-check-circle-outline mt-0.5 shrink-0 text-pink-400"></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-6 flex flex-wrap gap-2">
+              <a href={localizePath('/products/' + product.id, locale)} class="btn-primary px-4 py-2.5 text-sm">
+                {t.details}<span class="i-mdi-arrow-right"></span>
+              </a>
+              <a href={repos[product.id]} target="_blank" rel="noopener" class="btn-ghost px-4 py-2.5 text-sm">
+                <span class="i-mdi-github"></span>{t.source}
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,318 @@
+---
+import Base from '@/layouts/Base.astro';
+import ProductFamily from '@/components/sections/ProductFamily.astro';
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+import { links } from '@/data/links';
+
+type ProductId = 'desktop' | 'mobile' | 'xiaozhi-yuntai';
+
+interface Props {
+  product: ProductId;
+}
+
+const { product } = Astro.props;
+const locale: Locale = getLocale(Astro.url);
+
+const shared = pick(
+  {
+    'zh-CN': {
+      family: 'NomiFun 开源产品家族',
+      source: 'GitHub 源码',
+      download: '下载 Desktop',
+      screenshots: '最新产品实拍',
+      screenshotsLead: '以下截图来自本机实际运行的当前版本，不是设计稿或历史宣传图。',
+      connectionTitle: '三个项目如何协同',
+      connectionLead: 'Desktop 保管数据并运行 AI 能力；Mobile 与小智设备通过明确开放的入口接入。',
+      steps: [
+        ['1', '启动 Desktop', '配置模型、伙伴和 Skills，并在“远程&开放能力”中启用需要的服务。'],
+        ['2', '连接 Mobile', '手机扫描 Desktop 生成的一次性二维码，随后使用会话、任务、需求与伙伴能力。'],
+        ['3', '接入机器人', '按小智云台 README 完成固件与硬件配置，再将语音和机器人能力接入 Desktop。'],
+      ],
+      more: '继续认识另外两个产品',
+      video: '小智云台真实 Demo',
+    },
+    'en-US': {
+      family: 'The NomiFun open-source family',
+      source: 'Source on GitHub',
+      download: 'Download Desktop',
+      screenshots: 'Latest product captures',
+      screenshotsLead: 'Every image below was captured from the currently running product — not a design mockup or an old marketing image.',
+      connectionTitle: 'How the three projects work together',
+      connectionLead: 'Desktop keeps the data and runs AI capabilities. Mobile and Xiaozhi devices connect through interfaces you explicitly enable.',
+      steps: [
+        ['1', 'Start Desktop', 'Configure models, companions, and Skills, then enable only the services you need under Remote & Open.'],
+        ['2', 'Connect Mobile', 'Scan Desktop’s one-time QR code, then use sessions, tasks, requirements, and companions from your phone.'],
+        ['3', 'Add the robot', 'Complete firmware and hardware setup from the Yuntai README, then connect voice and robot capabilities to Desktop.'],
+      ],
+      more: 'Explore the other products',
+      video: 'Real Xiaozhi Yuntai demo',
+    },
+  } satisfies Dict<any>,
+  locale,
+);
+
+const productCopy: Dict<Record<ProductId, {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  repo: string;
+  icon: string;
+  facts: string[];
+  featureTitle: string;
+  features: { icon: string; title: string; text: string }[];
+}>> = {
+  'zh-CN': {
+    desktop: {
+      eyebrow: '本地 AI 工作站与服务中枢',
+      title: 'NomiFun Desktop',
+      lead: '把模型、Agent、伙伴、知识、Skills、自动任务和本地文件组织在自己的电脑上，同时为 Mobile 与机器人提供可控的远程入口。',
+      repo: links.desktopRepo,
+      icon: 'i-mdi-monitor-dashboard',
+      facts: ['Windows / macOS / Linux', 'Apache-2.0', '数据本地优先'],
+      featureTitle: '一台电脑，承载完整 AI 工作流',
+      features: [
+        { icon: 'i-mdi-robot-happy-outline', title: '伙伴与多 Agent', text: '为不同角色选择模型、知识、Skills、记忆与工作方式。' },
+        { icon: 'i-mdi-puzzle-outline', title: 'Skills 与 MCP', text: '集中管理可复用能力，并按 Agent、设置或伙伴进行组合。' },
+        { icon: 'i-mdi-server-network-outline', title: '远程&开放能力', text: '通过 WebUI、REST、MCP 等明确启用的入口服务手机和机器人。' },
+      ],
+    },
+    mobile: {
+      eyebrow: '连接 Desktop 的随身客户端',
+      title: 'NomiFun Mobile',
+      lead: '不是另一个云端 AI 应用，而是你的 NomiFun Desktop 遥控器。手机负责交互，模型、数据和工作流继续留在自己的电脑。',
+      repo: links.mobileRepo,
+      icon: 'i-mdi-cellphone-link',
+      facts: ['Expo / React Native', '二维码连接', 'Desktop 提供服务'],
+      featureTitle: '离开电脑，也能掌握工作进度',
+      features: [
+        { icon: 'i-mdi-message-text-outline', title: '会话与项目', text: '继续伙伴会话，搜索消息，并从手机发起项目工作区会话。' },
+        { icon: 'i-mdi-clipboard-clock-outline', title: '任务与需求', text: '查看定时任务、需求队列及其执行状态，必要时发起新工作。' },
+        { icon: 'i-mdi-shield-lock-outline', title: '一次性二维码', text: '由 Desktop 生成短时一次性令牌，连接完成后由本地电脑持续提供服务。' },
+      ],
+    },
+    'xiaozhi-yuntai': {
+      eyebrow: '小智机器人的开源云台工程',
+      title: 'NomiFun 小智云台',
+      lead: '让小智机器人拥有可转动的视角和更生动的实体交互，并与 NomiFun Desktop 的本地模型、语音和 Agent 能力形成组合。',
+      repo: links.xiaozhiRepo,
+      icon: 'i-mdi-robot-outline',
+      facts: ['ESP32-S3', '开源固件与硬件', '语音 / 动作 / 视觉方向'],
+      featureTitle: '让本地 AI 走进真实世界',
+      features: [
+        { icon: 'i-mdi-axis-z-rotate-clockwise', title: '云台动作', text: '通过可控的水平与俯仰动作，让语音交互拥有明确的朝向反馈。' },
+        { icon: 'i-mdi-chip', title: '开放工程', text: '固件、硬件清单、接线与构建说明都在仓库中，便于复现与改造。' },
+        { icon: 'i-mdi-home-automation', title: '接入 NomiFun', text: '结合 Desktop 的模型与开放能力，扩展本地语音、Agent 和自动化场景。' },
+      ],
+    },
+  },
+  'en-US': {
+    desktop: {
+      eyebrow: 'Local AI workstation and service hub',
+      title: 'NomiFun Desktop',
+      lead: 'Organize models, Agents, companions, knowledge, Skills, automation, and local files on your own computer — then expose controlled interfaces to Mobile and robot devices.',
+      repo: links.desktopRepo,
+      icon: 'i-mdi-monitor-dashboard',
+      facts: ['Windows / macOS / Linux', 'Apache-2.0', 'Local-first data'],
+      featureTitle: 'One computer for the complete AI workflow',
+      features: [
+        { icon: 'i-mdi-robot-happy-outline', title: 'Companions and Agents', text: 'Give each role its own models, knowledge, Skills, memory, and way of working.' },
+        { icon: 'i-mdi-puzzle-outline', title: 'Skills and MCP', text: 'Manage reusable capabilities centrally, then compose them per Agent, preset, or companion.' },
+        { icon: 'i-mdi-server-network-outline', title: 'Remote & Open', text: 'Serve phones and robots through WebUI, REST, MCP, and other interfaces you explicitly enable.' },
+      ],
+    },
+    mobile: {
+      eyebrow: 'The pocket client for your Desktop',
+      title: 'NomiFun Mobile',
+      lead: 'Not another cloud AI app: it is a remote control for your own NomiFun Desktop. The phone handles interaction while your computer keeps the models, data, and workflows.',
+      repo: links.mobileRepo,
+      icon: 'i-mdi-cellphone-link',
+      facts: ['Expo / React Native', 'QR connection', 'Powered by Desktop'],
+      featureTitle: 'Keep work in view away from your desk',
+      features: [
+        { icon: 'i-mdi-message-text-outline', title: 'Sessions and projects', text: 'Continue companion chats, search messages, and start project workspace sessions from your phone.' },
+        { icon: 'i-mdi-clipboard-clock-outline', title: 'Tasks and requirements', text: 'Track scheduled tasks, requirement queues, and execution state — then start new work when needed.' },
+        { icon: 'i-mdi-shield-lock-outline', title: 'One-time QR login', text: 'Desktop issues a short-lived one-time token; after pairing, your computer continues to provide the service.' },
+      ],
+    },
+    'xiaozhi-yuntai': {
+      eyebrow: 'Open-source pan-tilt project for Xiaozhi',
+      title: 'NomiFun Xiaozhi Yuntai',
+      lead: 'Give a Xiaozhi robot a movable point of view and more expressive physical interaction, then combine it with local models, voice, and Agent capabilities from NomiFun Desktop.',
+      repo: links.xiaozhiRepo,
+      icon: 'i-mdi-robot-outline',
+      facts: ['ESP32-S3', 'Open firmware and hardware', 'Voice / motion / viewing direction'],
+      featureTitle: 'Bring local AI into the physical world',
+      features: [
+        { icon: 'i-mdi-axis-z-rotate-clockwise', title: 'Pan-tilt motion', text: 'Use controlled horizontal and vertical motion to give voice interaction a visible direction.' },
+        { icon: 'i-mdi-chip', title: 'An open project', text: 'Firmware, bill of materials, wiring, and build instructions live in the repository for reuse and modification.' },
+        { icon: 'i-mdi-home-automation', title: 'Connect NomiFun', text: 'Combine Desktop models and open interfaces with local voice, Agent, and automation scenarios.' },
+      ],
+    },
+  },
+};
+
+const t = productCopy[locale][product];
+const title = t.title + ' · NomiFun';
+
+const desktopShots = [
+  ['desktop-home', locale === 'zh-CN' ? '工作台与会话入口' : 'Workspace and session entry'],
+  ['desktop-models', locale === 'zh-CN' ? '模型管理' : 'Model management'],
+  ['desktop-companion', locale === 'zh-CN' ? '桌面伙伴' : 'Desktop companion'],
+  ['desktop-skills', locale === 'zh-CN' ? '技能中心' : 'Skills center'],
+];
+const mobileShots = [
+  ['mobile-sessions-zh.png', locale === 'zh-CN' ? '会话与项目' : 'Sessions and projects'],
+  ['mobile-tasks-zh.png', locale === 'zh-CN' ? '定时任务' : 'Scheduled tasks'],
+  ['mobile-requirements-zh.png', locale === 'zh-CN' ? '需求队列' : 'Requirements'],
+  ['mobile-companions-zh.png', locale === 'zh-CN' ? '伙伴状态' : 'Companions'],
+  ['mobile-profile-zh.png', locale === 'zh-CN' ? '已连接 Desktop' : 'Connected to Desktop'],
+];
+---
+
+<Base title={title} description={t.lead}>
+  <section class="relative overflow-hidden bg-mesh">
+    <div class="container-x py-20 sm:py-28">
+      <a href={localizePath('/products', locale)} class="inline-flex items-center gap-2 text-sm text-mid hover:text-pink-300">
+        <span class="i-mdi-arrow-left"></span>{shared.family}
+      </a>
+      <div class="mt-10 grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+        <div data-animate>
+          <div class="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-pink-500/30 bg-pink-500/10">
+            <span class:list={[t.icon, 'text-3xl text-pink-400']}></span>
+          </div>
+          <p class="mt-6 text-xs font-bold uppercase tracking-[0.18em] text-violet-300">{t.eyebrow}</p>
+          <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-hi sm:text-5xl">{t.title}</h1>
+          <p class="mt-6 max-w-2xl text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
+          <ul class="mt-7 flex flex-wrap gap-2">
+            {t.facts.map((fact) => (
+              <li class="rounded-full border border-ink-600 bg-ink-800/60 px-3 py-1.5 text-xs font-medium text-mid">{fact}</li>
+            ))}
+          </ul>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href={t.repo} target="_blank" rel="noopener" class="btn-primary px-6 py-3">
+              <span class="i-mdi-github"></span>{shared.source}
+            </a>
+            {product === 'desktop' && (
+              <a href={localizePath('/download', locale)} class="btn-ghost px-6 py-3">
+                <span class="i-mdi-download"></span>{shared.download}
+              </a>
+            )}
+          </div>
+        </div>
+
+        <div data-animate>
+          {product === 'desktop' && (
+            <img
+              src={locale === 'zh-CN' ? '/screenshots/desktop/desktop-home-zh.png' : '/screenshots/desktop/desktop-home-en.png'}
+              alt={t.title}
+              width="1648"
+              height="980"
+              class="w-full rounded-3xl border border-ink-600 shadow-2xl"
+            />
+          )}
+          {product === 'mobile' && (
+            <div class="flex items-end justify-center gap-3">
+              <img src="/screenshots/mobile/mobile-sessions-zh.png" alt="" width="390" height="844" class="w-[28%] rounded-2xl border border-ink-600 shadow-xl" />
+              <img src="/screenshots/mobile/mobile-profile-zh.png" alt={t.title} width="390" height="844" class="w-[33%] rounded-3xl border-2 border-pink-500/45 shadow-2xl" />
+              <img src="/screenshots/mobile/mobile-companions-zh.png" alt="" width="390" height="844" class="w-[28%] rounded-2xl border border-ink-600 shadow-xl" />
+            </div>
+          )}
+          {product === 'xiaozhi-yuntai' && (
+            <video src="/media/xiaozhi-yuntai-demo.mp4" controls playsinline preload="metadata" class="aspect-video w-full rounded-3xl border border-ink-600 bg-black object-cover shadow-2xl"></video>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-y">
+    <div class="container-x">
+      <div class="mx-auto max-w-3xl text-center" data-animate>
+        <h2 class="text-3xl font-bold text-hi sm:text-4xl">{t.featureTitle}</h2>
+      </div>
+      <div class="mt-10 grid gap-5 md:grid-cols-3" data-stagger>
+        {t.features.map((feature) => (
+          <article class="rounded-2xl border border-ink-600/70 bg-ink-800/55 p-6">
+            <span class:list={[feature.icon, 'text-3xl text-pink-400']}></span>
+            <h3 class="mt-4 text-lg font-semibold text-hi">{feature.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-mid">{feature.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {product !== 'xiaozhi-yuntai' && (
+    <section class="section-y bg-ink-850/35">
+      <div class="container-x">
+        <div class="max-w-3xl" data-animate>
+          <span class="eyebrow">{shared.screenshots}</span>
+          <h2 class="mt-5 text-3xl font-bold text-hi sm:text-4xl">{shared.screenshots}</h2>
+          <p class="mt-4 text-base text-mid">{shared.screenshotsLead}</p>
+        </div>
+
+        {product === 'desktop' && (
+          <div class="mt-10 grid gap-5 md:grid-cols-2" data-stagger>
+            {desktopShots.map((shot) => (
+              <figure class="overflow-hidden rounded-2xl border border-ink-600 bg-ink-800/60">
+                <img
+                  src={'/screenshots/desktop/' + shot[0] + '-' + (locale === 'zh-CN' ? 'zh' : 'en') + '.png'}
+                  alt={shot[1]}
+                  width="1648"
+                  height="980"
+                  class="aspect-[16/10] w-full object-cover object-top"
+                />
+                <figcaption class="px-4 py-3 text-sm text-mid">{shot[1]}</figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
+
+        {product === 'mobile' && (
+          <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5" data-stagger>
+            {mobileShots.map((shot) => (
+              <figure class="overflow-hidden rounded-2xl border border-ink-600 bg-ink-800/60">
+                <img src={'/screenshots/mobile/' + shot[0]} alt={shot[1]} width="390" height="844" class="w-full" />
+                <figcaption class="px-3 py-3 text-center text-xs text-mid">{shot[1]}</figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  {product === 'xiaozhi-yuntai' && (
+    <section class="section-y bg-ink-850/35">
+      <div class="container-x">
+        <div class="mx-auto max-w-4xl text-center" data-animate>
+          <span class="eyebrow">{shared.video}</span>
+          <h2 class="mt-5 text-3xl font-bold text-hi sm:text-4xl">{shared.video}</h2>
+          <video src="/media/xiaozhi-yuntai-demo.mp4" controls playsinline preload="metadata" class="mt-9 aspect-video w-full rounded-3xl border border-ink-600 bg-black shadow-2xl"></video>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section-y">
+    <div class="container-x">
+      <div class="mx-auto max-w-3xl text-center" data-animate>
+        <h2 class="text-3xl font-bold text-hi sm:text-4xl">{shared.connectionTitle}</h2>
+        <p class="mt-4 text-base text-mid">{shared.connectionLead}</p>
+      </div>
+      <ol class="mx-auto mt-10 grid max-w-5xl gap-5 md:grid-cols-3" data-stagger>
+        {shared.steps.map((step) => (
+          <li class="rounded-2xl border border-ink-600/70 bg-ink-800/55 p-6">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-pink-500 text-sm font-bold text-ink-950">{step[0]}</span>
+            <h3 class="mt-4 text-lg font-semibold text-hi">{step[1]}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-mid">{step[2]}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <div class="border-t border-ink-700">
+    <ProductFamily compact />
+  </div>
+</Base>

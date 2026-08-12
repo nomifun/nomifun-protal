@@ -3,6 +3,7 @@ import type { Dict } from '@/i18n';
 /** Navigation + footer + globally shared strings. */
 export const nav: Dict<{
   home: string;
+  products: string;
   docs: string;
   download: string;
   contact: string;
@@ -10,13 +11,13 @@ export const nav: Dict<{
   github: string;
   cta: string;
 }> = {
-  'zh-CN': { home: '功能速览', docs: '操作文档', download: '下载', contact: '联系我们', friends: '其他项目', github: 'GitHub', cta: '立即下载' },
-  'en-US': { home: 'Overview', docs: 'Docs', download: 'Download', contact: 'Contact', friends: 'Other projects', github: 'GitHub', cta: 'Get NomiFun' },
+  'zh-CN': { home: '首页', products: '产品', docs: '操作文档', download: '下载', contact: '联系我们', friends: '其他项目', github: 'GitHub', cta: '立即下载' },
+  'en-US': { home: 'Home', products: 'Products', docs: 'Docs', download: 'Download', contact: 'Contact', friends: 'Other projects', github: 'GitHub', cta: 'Get NomiFun' },
 };
 
 export const brand: Dict<{ name: string; tagline: string }> = {
-  'zh-CN': { name: 'NomiFun', tagline: '完全开源 · 本地优先的超级 AI 工作站' },
-  'en-US': { name: 'NomiFun', tagline: 'Fully open-source, local-first super AI workstation' },
+  'zh-CN': { name: 'NomiFun', tagline: 'Desktop · Mobile · 小智云台，三个关联的开源产品' },
+  'en-US': { name: 'NomiFun', tagline: 'Desktop · Mobile · Xiaozhi, three connected open-source products' },
 };
 
 export const footer: Dict<{
@@ -36,7 +37,11 @@ export const footer: Dict<{
     resourceTitle: '资源',
     communityTitle: '社区',
     links: [
-      { label: '功能速览', href: '/' },
+      { label: '首页', href: '/' },
+      { label: '三个开源产品', href: '/products' },
+      { label: 'NomiFun Desktop', href: '/products/desktop' },
+      { label: 'NomiFun Mobile', href: '/products/mobile' },
+      { label: 'NomiFun 小智云台', href: '/products/xiaozhi-yuntai' },
       { label: '操作文档', href: '/docs' },
       { label: '下载', href: '/download' },
       { label: '其他项目', href: '/friends' },
@@ -57,7 +62,11 @@ export const footer: Dict<{
     resourceTitle: 'Resources',
     communityTitle: 'Community',
     links: [
-      { label: 'Overview', href: '/' },
+      { label: 'Home', href: '/' },
+      { label: 'Three open-source products', href: '/products' },
+      { label: 'NomiFun Desktop', href: '/products/desktop' },
+      { label: 'NomiFun Mobile', href: '/products/mobile' },
+      { label: 'NomiFun Xiaozhi Yuntai', href: '/products/xiaozhi-yuntai' },
       { label: 'Docs', href: '/docs' },
       { label: 'Download', href: '/download' },
       { label: 'Other projects', href: '/friends' },

@@ -8,121 +8,101 @@ const copy: Dict<{
   eyebrow: string;
   titleA: string;
   titleHi: string;
-  titleB: string;
   lead: string;
-  ctaPrimary: string;
-  ctaSecondary: string;
-  chips: string[];
-  showcaseAlt: string;
+  ctaProducts: string;
+  ctaSource: string;
+  desktopAlt: string;
+  mobileAlt: string;
+  badges: string[];
 }> = {
   'zh-CN': {
-    eyebrow: '完全开源 · 本地优先 · 免费商用 · Windows / macOS / Linux',
-    titleA: '一套可以拿走、',
-    titleHi: '改造、长期维护的 Agent Desktop',
-    titleB: '让本地电脑成为你的 AI 工作站与服务器',
-    lead: '代码架构平实简单，数据 all in local：没有数据采集与遥测，除你主动配置的模型、渠道或其他外部连接外不默认外发。个人可以自由使用，企业也可以基于 Apache-2.0 二次开发自己的先进 Agent Desktop。',
-    ctaPrimary: '立即下载',
-    ctaSecondary: '在 GitHub 查看源码',
-    chips: ['Apache-2.0 · 可商用', '本地电脑就是服务器', '多模型 · 多 Agent', 'WebUI 远程控制', '交互式会话 · AI 终端', '音频 · 视频 · 图片画布', 'Windows · macOS · Linux'],
-    showcaseAlt: 'NomiFun 主界面会话工作区与桌面伙伴演示截图',
+    eyebrow: '三个产品 · 一套本地优先的开源 AI 生态',
+    titleA: '从电脑到手机，再到机器人',
+    titleHi: 'NomiFun 全部开放源码',
+    lead:
+      'Desktop 是本地 AI 工作站与服务中枢，Mobile 把会话、任务、需求和伙伴带到手机，小智云台让 AI 获得真实世界的视角与动作。三个项目可以独立使用，也能组合成完整体验。',
+    ctaProducts: '认识三个产品',
+    ctaSource: '查看开源项目',
+    desktopAlt: '最新版 NomiFun Desktop 工作台',
+    mobileAlt: '已连接 Desktop 的 NomiFun Mobile',
+    badges: ['Desktop · 本地 AI 中枢', 'Mobile · 随身遥控器', '小智云台 · 机器人载体'],
   },
   'en-US': {
-    eyebrow: 'Fully open-source · Local-first · Free to commercialize · Windows / macOS / Linux',
-    titleA: 'An Agent Desktop you can',
-    titleHi: 'take, change, and maintain',
-    titleB: 'Your computer becomes the workstation and the server',
-    lead: 'A plain, understandable architecture with all-in-local data. No collection or telemetry, and no default outbound traffic beyond the models, channels, or other external connections you explicitly configure. Use it freely, or build your own advanced Agent Desktop on Apache-2.0.',
-    ctaPrimary: 'Download',
-    ctaSecondary: 'View source on GitHub',
-    chips: ['Apache-2.0 · Commercial OK', 'Your computer is the server', 'Multi-model · Multi-agent', 'WebUI remote control', 'Interactive sessions · AI terminal', 'Audio · Video · Image canvas', 'Windows · macOS · Linux'],
-    showcaseAlt: 'NomiFun session workspace and desktop companion demo screenshot',
+    eyebrow: 'Three products · one local-first open-source AI ecosystem',
+    titleA: 'From desktop to phone to robot',
+    titleHi: 'every NomiFun product is open source',
+    lead:
+      'Desktop is the local AI workstation and service hub. Mobile brings sessions, tasks, requirements, and companions to your phone. Xiaozhi Yuntai gives AI a view of — and a way to move through — the physical world. Use each project alone or connect all three.',
+    ctaProducts: 'Explore the products',
+    ctaSource: 'Browse the source',
+    desktopAlt: 'Latest NomiFun Desktop workspace',
+    mobileAlt: 'NomiFun Mobile connected to Desktop',
+    badges: ['Desktop · local AI hub', 'Mobile · pocket remote', 'Xiaozhi · robot platform'],
   },
 };
 
 const t = pick(copy, locale);
-const showcaseImage = locale === 'zh-CN' ? '/screenshots/current-home-zh.png' : '/screenshots/current-home-en.png';
+const desktopImage =
+  locale === 'zh-CN'
+    ? '/screenshots/desktop/desktop-home-zh.png'
+    : '/screenshots/desktop/desktop-home-en.png';
 ---
 
 <section class="relative overflow-hidden">
-  <!-- ambient glows -->
   <div class="pointer-events-none absolute inset-0 -z-10 bg-mesh"></div>
-  <div class="pointer-events-none absolute left-1/2 top-[-10%] -z-10 h-[520px] w-[820px] -translate-x-1/2 rounded-full opacity-60 blur-3xl" style="background: radial-gradient(closest-side, rgba(255,111,145,0.20), transparent)"></div>
+  <div
+    class="pointer-events-none absolute left-1/2 top-[-8%] -z-10 h-[620px] w-[980px] -translate-x-1/2 rounded-full opacity-70 blur-3xl"
+    style="background: radial-gradient(closest-side, rgba(255,111,145,0.2), transparent)"
+  ></div>
 
-  <div class="container-x relative flex flex-col items-center pt-28 pb-20 text-center sm:pt-36 lg:pt-40">
-    <!-- animated logo bowl -->
-    <div class="hero-bowl mb-8" data-animate>
-      <div class="relative h-24 w-24 sm:h-28 sm:w-28">
-        <div class="absolute inset-0 rounded-[26px] blur-2xl opacity-70" style="background: radial-gradient(closest-side, rgba(255,111,145,0.55), transparent)"></div>
-        <svg viewBox="0 0 80 80" class="relative h-full w-full drop-shadow-[0_8px_32px_rgba(255,111,145,0.35)]" fill="none" aria-hidden="true">
-          <defs>
-            <linearGradient id="hb-bg" x1="0" y1="0" x2="0" y2="80" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1B1822"/><stop offset="1" stop-color="#0B0A10"/></linearGradient>
-            <linearGradient id="hb-bowl" x1="15" y1="49" x2="65" y2="69" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FF9FB4"/><stop offset="1" stop-color="#FF6F91"/></linearGradient>
-          </defs>
-          <rect width="80" height="80" rx="18" fill="url(#hb-bg)"/>
-          <g class="steam"><path d="M33 17 q-4.5 -4 0 -8.5" stroke="#FF8FA8" stroke-width="3" fill="none" stroke-linecap="round"/></g>
-          <g class="steam steam-2"><path d="M40 15 q-4.5 -4 0 -8.5" stroke="#FFB3C4" stroke-width="3" fill="none" stroke-linecap="round"/></g>
-          <g class="steam steam-3"><path d="M47 17 q-4.5 -4 0 -8.5" stroke="#FF8FA8" stroke-width="3" fill="none" stroke-linecap="round"/></g>
-          <path d="M22 46 Q22 27 40 27 Q58 27 58 46 Z" fill="#FFFFFF"/>
-          <path d="M14 49 H66 Q61.5 70 40 70 Q18.5 70 14 49 Z" fill="url(#hb-bowl)"/>
-        </svg>
+  <div class="container-x grid items-center gap-14 pb-20 pt-24 sm:pt-32 lg:grid-cols-[0.9fr_1.1fr] lg:pb-28 lg:pt-36">
+    <div class="text-center lg:text-left">
+      <span class="eyebrow" data-animate>{t.eyebrow}</span>
+      <h1 class="mt-6 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl" data-animate>
+        <span class="text-hi">{t.titleA}</span>
+        <span class="mt-3 block text-grad-pink">{t.titleHi}</span>
+      </h1>
+      <p class="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-mid sm:text-lg lg:mx-0" data-animate>
+        {t.lead}
+      </p>
+      <div class="mt-9 flex flex-col items-center gap-3 sm:flex-row lg:justify-start" data-animate>
+        <a href={localizePath('/products', locale)} class="btn-primary px-7 py-3.5 text-base">
+          <span class="i-mdi-view-grid-outline text-lg"></span>{t.ctaProducts}
+        </a>
+        <a href={links.desktopRepo} target="_blank" rel="noopener" class="btn-ghost px-7 py-3.5 text-base">
+          <span class="i-mdi-github text-lg"></span>{t.ctaSource}
+        </a>
       </div>
+      <ul class="mt-8 flex flex-wrap justify-center gap-2 lg:justify-start" data-stagger>
+        {t.badges.map((badge) => (
+          <li class="rounded-full border border-ink-600/80 bg-ink-800/55 px-3 py-1.5 text-xs font-medium text-mid">
+            {badge}
+          </li>
+        ))}
+      </ul>
     </div>
 
-    <span class="eyebrow mb-5" data-animate>{t.eyebrow}</span>
-
-    <h1 class="max-w-4xl text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl" data-animate>
-      <span class="text-hi">{t.titleA}</span>
-      <span class="text-grad-pink"> {t.titleHi}</span>
-      <span class="mt-2 block text-2xl font-bold text-mid sm:text-3xl lg:text-4xl">{t.titleB}</span>
-    </h1>
-
-    <p class="mt-7 max-w-2xl text-base leading-relaxed text-mid sm:text-lg" data-animate>{t.lead}</p>
-
-    <div class="mt-9 flex flex-col items-center gap-3 sm:flex-row" data-animate>
-      <a href={localizePath('/download', locale)} class="btn-primary text-base px-7 py-3.5">
-        <span class="i-mdi-download text-lg"></span>{t.ctaPrimary}
-      </a>
-      <a href={links.github} target="_blank" rel="noopener" class="btn-ghost text-base px-7 py-3.5">
-        <span class="i-mdi-github text-lg"></span>{t.ctaSecondary}
-      </a>
-    </div>
-
-    <ul class="mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-2.5" data-stagger>
-      {t.chips.map((c) => (
-        <li class="rounded-full border border-ink-600/80 bg-ink-800/50 px-3.5 py-1.5 text-xs font-medium text-mid backdrop-blur-sm sm:text-sm">{c}</li>
-      ))}
-    </ul>
-
-    <!-- real product showcase screenshot -->
-    <figure class="hero-shot relative mt-16 w-full max-w-4xl" data-animate>
+    <div class="relative mx-auto w-full max-w-3xl" data-animate>
       <div
-        class="pointer-events-none absolute inset-0 -z-10 rounded-[2.75rem] opacity-60 blur-3xl sm:-inset-6"
-        style="background: radial-gradient(closest-side, rgba(255,111,145,0.22), transparent)"
-        aria-hidden="true"
-      >
-      </div>
-      <div class="relative overflow-hidden rounded-3xl border border-ink-600 bg-ink-850 shadow-[0_0_90px_-22px_rgba(255,111,145,0.5)]">
+        class="pointer-events-none absolute -inset-8 -z-10 rounded-[3rem] opacity-60 blur-3xl"
+        style="background: radial-gradient(closest-side, rgba(255,111,145,0.2), transparent)"
+      ></div>
+      <figure class="overflow-hidden rounded-2xl border border-ink-600 bg-ink-850 shadow-[0_30px_100px_-45px_rgba(255,111,145,0.7)]">
+        <img src={desktopImage} alt={t.desktopAlt} width="1648" height="980" class="block h-auto w-full" />
+      </figure>
+      <figure class="absolute -bottom-9 right-3 w-[30%] min-w-[118px] max-w-[190px] overflow-hidden rounded-[1.4rem] border-[5px] border-ink-900 bg-white shadow-2xl sm:-bottom-12 sm:right-8">
         <img
-          src={showcaseImage}
-          alt={t.showcaseAlt}
-          width={1296}
-          height={841}
-          loading="lazy"
-          decoding="async"
+          src="/screenshots/mobile/mobile-profile-zh.png"
+          alt={t.mobileAlt}
+          width="390"
+          height="844"
           class="block h-auto w-full"
         />
-        <div class="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5" aria-hidden="true"></div>
+      </figure>
+      <div class="absolute -left-3 -top-5 inline-flex items-center gap-2 rounded-full border border-ink-600 bg-ink-900/90 px-3 py-2 text-xs font-semibold text-hi shadow-xl backdrop-blur sm:left-4">
+        <span class="i-mdi-open-source-initiative text-lg text-pink-400"></span>
+        Apache-2.0
       </div>
-    </figure>
+    </div>
   </div>
 </section>
-
-<style>
-  .hero-bowl { animation: float 6s ease-in-out infinite; }
-  .steam { transform-origin: center bottom; animation: steam 2.6s ease-in-out infinite; }
-  .steam-2 { animation-delay: 0.5s; }
-  .steam-3 { animation-delay: 1s; }
-  @media (prefers-reduced-motion: reduce) {
-    .hero-bowl, .steam { animation: none; }
-  }
-</style>
