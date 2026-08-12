@@ -70,4 +70,4 @@ NomiFun 用两种方式扩展能力：
 - [知识库](/zh/docs/guides/knowledge-base) —— 为会话提供项目资料。
 - [超级伙伴](/zh/docs/guides/companions) —— 伙伴自己的技能与记忆。
 
-完整源码与发布记录 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整源码与发布记录 → [GitHub](https://github.com/nomifun/nomifun-desktop)

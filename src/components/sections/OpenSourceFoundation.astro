@@ -1,0 +1,131 @@
+---
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+import { links } from '@/data/links';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+
+const locale: Locale = getLocale(Astro.url);
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  cards: { icon: string; title: string; body: string; tag: string }[];
+  noteTitle: string;
+  noteBody: string;
+  repoCta: string;
+  ecosystemCta: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '开源底座 · 为二次开发准备',
+    title: '架构平实简单，<span class="text-grad-pink">不是只能看的产品演示</span>',
+    lead: 'NomiFun 是一套可以真正拿走、修改和长期维护的 Agent Desktop 底座。React 19 + Tauri 2 + Rust 2024，桌面与 Web 共用一套前后端能力，适合需要自研先进 Agent Desktop 的公司与团队二次开发。',
+    cards: [
+      {
+        icon: 'i-mdi-source-repository-multiple',
+        title: '完全开源 · 免费 · 无商业化限制',
+        body: 'Apache-2.0 许可，个人与企业都可以学习、内部使用、二次开发与商业化，无需额外申请授权。',
+        tag: 'Apache-2.0',
+      },
+      {
+        icon: 'i-mdi-layers-triple-outline',
+        title: '平实、可理解的代码架构',
+        body: '一套 React 前端、一套 Rust 后端，桌面与 Web 共用同一套 SPA 和服务能力；不依赖云账号，也不把关键能力藏在私有服务里。',
+        tag: 'React 19 · Tauri 2 · Rust',
+      },
+      {
+        icon: 'i-mdi-laptop',
+        title: '三大桌面操作系统',
+        body: 'Windows、macOS、Linux 均有桌面实现与安装路径，企业可按自己的系统、模型、权限与业务流程继续扩展。',
+        tag: 'Win · macOS · Linux',
+      },
+      {
+        icon: 'i-mdi-office-building-cog-outline',
+        title: '适合作为企业自研底座',
+        body: '多模型、多 Agent、MCP / REST、知识库、终端、浏览器与电脑操控都已形成清晰模块，可按需裁剪、接入内网并继续演进。',
+        tag: 'fork-friendly',
+      },
+    ],
+    noteTitle: '本地电脑就是服务器',
+    noteBody: '桌面应用内已经运行完整后端。开启 WebUI 后，手机或平板可以在可信网络中直连这台电脑；默认没有 NomiFun 云端中转，也没有数据采集或遥测。',
+    repoCta: '阅读 Desktop 源码',
+    ecosystemCta: '查看开源生态家族',
+  },
+  'en-US': {
+    eyebrow: 'Open foundation · ready to extend',
+    title: 'A plain, understandable architecture — <span class="text-grad-pink">not a locked product demo</span>',
+    lead: 'NomiFun is an Agent Desktop foundation you can actually take, change, and maintain. React 19 + Tauri 2 + Rust 2024, with the desktop and web hosts sharing one frontend and backend capability set — a practical starting point for companies building their own advanced Agent Desktop.',
+    cards: [
+      {
+        icon: 'i-mdi-source-repository-multiple',
+        title: 'Open source, free, no commercial restriction',
+        body: 'Apache-2.0 lets individuals and companies learn from it, use it internally, fork it, and commercialize it without seeking extra permission.',
+        tag: 'Apache-2.0',
+      },
+      {
+        icon: 'i-mdi-layers-triple-outline',
+        title: 'Plain, readable architecture',
+        body: 'One React frontend and one Rust backend, shared by the desktop and web hosts. No cloud account dependency, and no core capability hidden behind a private service.',
+        tag: 'React 19 · Tauri 2 · Rust',
+      },
+      {
+        icon: 'i-mdi-laptop',
+        title: 'All major desktop systems',
+        body: 'Windows, macOS, and Linux are supported, so teams can adapt the system, models, permissions, and workflows to their own environment.',
+        tag: 'Win · macOS · Linux',
+      },
+      {
+        icon: 'i-mdi-office-building-cog-outline',
+        title: 'A practical enterprise starting point',
+        body: 'Multi-model, multi-agent, MCP / REST, knowledge, terminals, browser use, and computer use are modular enough to trim, integrate on-prem, and keep evolving.',
+        tag: 'fork-friendly',
+      },
+    ],
+    noteTitle: 'Your computer is the server',
+    noteBody: 'The desktop app already runs the full backend. Turn on WebUI and a phone or tablet can connect directly over a trusted network — with no NomiFun cloud relay, data collection, or telemetry by default.',
+    repoCta: 'Read the Desktop source',
+    ecosystemCta: 'Explore the open-source family',
+  },
+};
+
+const t = pick(copy, locale);
+---
+
+<section id="open-foundation" class="relative section-y bg-ink-850/30">
+  <div class="container-x">
+    <SectionHeader eyebrow={t.eyebrow} title={t.title} lead={t.lead} />
+
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
+      {t.cards.map((card) => (
+        <article class="card card-hover flex flex-col p-6">
+          <span class="grid h-11 w-11 place-items-center rounded-xl border border-pink-500/25 bg-pink-500/10">
+            <span class={`${card.icon} text-xl text-pink-400`} aria-hidden="true"></span>
+          </span>
+          <h3 class="mt-4 text-lg font-semibold text-hi">{card.title}</h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-mid">{card.body}</p>
+          <span class="mt-4 inline-flex w-fit rounded-full border border-ink-600 bg-ink-700/60 px-2.5 py-1 font-mono text-[11px] text-mid">{card.tag}</span>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-8 card relative overflow-hidden p-6 sm:p-8" data-animate>
+      <div class="pointer-events-none absolute -right-14 -top-14 h-40 w-40 rounded-full opacity-50 blur-3xl" style="background: radial-gradient(closest-side, rgba(255,111,145,0.2), transparent)" aria-hidden="true"></div>
+      <div class="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+        <div class="max-w-3xl">
+          <h3 class="flex items-center gap-2.5 text-xl font-semibold text-hi">
+            <span class="i-mdi-server-security text-2xl text-pink-400" aria-hidden="true"></span>
+            {t.noteTitle}
+          </h3>
+          <p class="mt-3 text-sm leading-relaxed text-mid sm:text-base">{t.noteBody}</p>
+        </div>
+        <div class="flex shrink-0 flex-col gap-3 sm:flex-row">
+          <a href={links.desktopRepo} target="_blank" rel="noopener" class="btn-primary text-sm">
+            <span class="i-mdi-github text-base" aria-hidden="true"></span>{t.repoCta}
+          </a>
+          <a href={localizePath('/friends', locale)} class="btn-ghost text-sm">
+            <span class="i-mdi-source-fork text-base" aria-hidden="true"></span>{t.ecosystemCta}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

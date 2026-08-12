@@ -52,7 +52,7 @@ Enable these capabilities only when needed and keep approval prompts for sensiti
 
 About shows the installed version plus links to the source repository, release notes, issue tracker, and official website. Desktop builds can click **Check for updates** here; the bottom of the sidebar also surfaces an available update.
 
-NomiFun is still moving quickly before 1.0, so use the About page and [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases/latest) as the source of truth for your installed and latest versions.
+NomiFun is still moving quickly before 1.0, so use the About page and [GitHub Releases](https://github.com/nomifun/nomifun-desktop/releases/latest) as the source of truth for your installed and latest versions.
 
 ## Data and backups
 
@@ -70,4 +70,4 @@ Quit NomiFun before copying the entire directory for migration or backup. Factor
 - [Computer Use and Browser Use](/docs/guides/computer-browser-use)
 - [WebUI remote work](/docs/guides/webui-remote)
 
-Source code and release history → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Source code and release history → [GitHub](https://github.com/nomifun/nomifun-desktop)

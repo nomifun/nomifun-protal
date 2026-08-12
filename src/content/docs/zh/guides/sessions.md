@@ -20,7 +20,7 @@ lang: zh-CN
    - **文件树**——本会话工作目录中的文件，随 agent 的读写实时变化。
    - **预览面板**——直接预览代码、Markdown、PDF、Office、HTML 以及 diff。
    - **终端**——一个挂载到工作目录的 PTY，可与会话并排操作同一份文件。
-3. **挂载知识库（可选）。** 在会话内把已建好的知识库挂进来，**会话里的 agent**（不论 nomi、ACP Agent 还是终端 CLI）回答时即可引用其中内容。来源以**飞书 Feishu 连接器**与 **URL 实时快照**（带 SSRF 防护）为主。
+3. **挂载知识库（可选）。** 在会话内把已建好的知识库挂进来，**会话里的 agent**（不论 nomi、ACP Agent 还是终端 CLI）回答时即可引用其中内容。当前来源包括本地 Markdown、URL 快照，以及按版本逐步开放的**飞书 Feishu 连接器**（带 SSRF 防护）。
 
    ![为会话挂载知识库](/images/zh/02会话/会话挂载知识库.png)
 
@@ -51,4 +51,4 @@ lang: zh-CN
 - [智能值守 · AutoWork](/zh/docs/guides/autowork)——自动工作与 **IDMM 决策值守**的完整说明。
 - [MCP 与技能](/zh/docs/guides/mcp-and-skills)——为会话接入工具与技能。
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整文档 → [GitHub](https://github.com/nomifun/nomifun-desktop)

@@ -88,4 +88,4 @@ NomiFun 的数字伙伴从"单只 nomi"升级为**多伙伴家庭**：你可以�
 - [渠道](/zh/docs/guides/channels) —— 渠道主 Agent 模式与每平台伙伴绑定。
 - [知识库](/zh/docs/guides/knowledge-base) —— 知识库创建、URL 快照与会话挂载。
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整文档 → [GitHub](https://github.com/nomifun/nomifun-desktop)

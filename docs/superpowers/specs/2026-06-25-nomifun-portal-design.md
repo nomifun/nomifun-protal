@@ -1,8 +1,12 @@
 # NomiFun 官方门户 — 设计规格（Design Spec）
 
-> 状态：已批准方向（2026-06-25）。本文件是**唯一事实来源（single source of truth）**，所有并行 subagent 在实现前必须先读本文件，按此规格产出，保证文案准确、视觉一致、接口契约统一。
+> 状态：已批准方向（2026-06-25）的历史设计记录。它不再是当前产品事实的唯一来源；
+> 截至 2026-08-12，门户源码、README 与 Desktop 当前代码优先于本文件中的旧数字和旧状态。
 >
-> 源仓库参考：`/Users/jyxc-dz-0100640/code/my/nomifun-release/nomifun-tauri`（产品本体，勿改动）。本仓库：`nomifun-portal`（门户，从零搭建）。
+> 初始源仓库参考为早期产品本体目录（产品本体，勿改动）。当前公开产品仓库为
+> [`nomifun/nomifun-desktop`](https://github.com/nomifun/nomifun-desktop)；本仓库：
+> `nomifun-portal`（门户，从零搭建）。本文件保留 2026-06-25 的设计历史，当前链接与
+> 产品事实以门户源码、README 和 Desktop 仓库为准。
 
 ---
 
@@ -31,31 +35,36 @@
 | 主题 | ❌ 不要写 | ✅ 正确口径 |
 |---|---|---|
 | 伙伴记忆 | "既有共享记忆又有专属记忆" | **共享记忆中枢**（全体伙伴共享）+ **每个伙伴专属技能库**（skill 按伙伴隔离）。可加"细分私有记忆敬请期待" |
-| IM 渠道数 | "12+ 渠道" | **11 个已落地渠道**：Telegram、飞书 Lark、钉钉、微信、Slack、Discord、Matrix、Mattermost、Twitch、Nostr、QQ Bot；**企业微信 WeCom 在途** |
+| IM 渠道数 | 过时的渠道数量或“在途”描述 | **截至 2026-08-12，默认 Desktop 构建已包含 12 个内置渠道**：Telegram、飞书 Lark、钉钉、微信、企业微信 WeCom、Slack、Discord、Matrix、Mattermost、Twitch、Nostr、QQ Bot |
 | 需求入站 | "可对接在线 issue、slack、lark 入站转需求" | 完成通知**出站**可推送 **Lark / Slack / HTTP webhook**；issue/IM **入站转需求 = 敬请期待** |
 | 知识库来源 | "支持飞书、Notion 来源" | **飞书 Feishu 已实现**（连接器已注册，UI 内创建入口当前关闭）；**Notion = 路线图未实现** |
 
-**可大胆宣传（全部属实）**：自研 in-process CDP 浏览器引擎（Chromium-only，无 Playwright/Node）；原生 computer-use（macOS AX / Windows UIA / Linux AT-SPI）；三轴能力网关（危险级 × 调用面 × 决策）；151 项 MCP/REST 能力（`/mcp` `/mcp-agent` `/v1`+OpenAPI 3.1）；17 个 ACP 直连 Agent；IDMM 值守（规则层 + 旁路模型层）；安全回写暂存区（IM 写入永远进 `_inbox` 待审）；模型故障 failover 队列；URL 实时快照知识库（SSRF 防护）；WebUI 局域网扫码远控（5 分钟一次性 token）；技能进化挖掘 + 伙伴间技能 gift。
+**当前可宣传口径**：自研 in-process CDP 浏览器引擎（Chromium-only，无 Playwright/Node）；原生 computer-use（macOS AX / Windows UIA / Linux AT-SPI）；三轴能力网关（危险级 × 调用面 × 决策）；MCP / REST / OpenAPI 开放能力（`/mcp` `/mcp-agent` `/v1`）；多 ACP Agent；IDMM 值守（规则层 + 旁路模型层）；按挂载策略控制的知识回写（Disabled / Manual / Auto，正文追加与 compare-and-swap，外部 IM 另受 `channel_write_enabled` 控制）；模型故障 failover 队列；URL 实时快照知识库（SSRF 防护）；WebUI 局域网扫码远控（5 分钟一次性 token）；技能进化挖掘 + 伙伴间技能 gift。精确数量和版本随迭代变化，不在历史规格中固化。
 
 ---
 
 ## 3. 产品事实库（写文案的素材，全部已核对）
 
-**定位**：本地优先的超级 AI 工作站 / 编码工作空间。一套 Rust 后端 + 一套 React 19 前端 + 两种宿主形态：`nomifun-desktop`（Tauri 2 桌面，环回端口 + 每次启动本地信任 token）/ `nomifun-web`（自托管 axum 服务，`127.0.0.1:8787`，默认需登录）。15 个 `nomi-*` agent crate、29 个 `nomifun-*` 后端 crate。Apache-2.0。当前版本 **0.1.0（pre-1.0）**。
+**定位**：本地优先的超级 AI 工作站 / 编码工作空间。一套 Rust 后端 + 一套 React 19 前端 + 两种宿主形态：`nomifun-desktop`（Tauri 2 桌面，环回端口 + 每次启动本地信任 token）/ `nomifun-web`（自托管 axum 服务，`127.0.0.1:8787`，默认需登录）。Apache-2.0。**截至 2026-08-12，Desktop 仓库版本为 v0.6.1，仍处于 pre-1.0；精确 crate 数量以当前仓库为准。**
 
 **7 大支柱（首页叙事骨架）**：
 
-1. **数据安全 · 源码开放**：all-in-local，绝不主动外发数据，除调用 LLM 厂商外无第三方网络对接。Apache-2.0 完全开源、接受审计、免费商用、无广告无会员。SQLite 为唯一事实源，每个会话独立工作目录。补充叙事：为保障安全，主动砍掉了若干先进功能（开源版移除），把"放心"放第一位。
-2. **超级伙伴养成体系**：**3 个内置形象**（Mochi 麻薯兔 / Ink 墨墨黑猫 / Bolt 波特机器人，纯代码绘制 SVG，无图片资源，默认 Mochi）+ 自定义任意 IP 形象（甚至家人 / 宠物）+ 人格预设（活泼/沉静/俏皮 + 自由文本）；行为采集（opt-in，多数默认关）→ LLM 蒸馏长期记忆；进化引擎自动挖掘 skill（仅基于工具调用序列，不含参数值）→ 生成可评审 `SKILL.md` 与你商议；**技能 gift**（把一个伙伴的技能复制给另一个）；**共享记忆中枢 + 专属技能库**；伙伴即超级网关 → 连接 **11 个 IM 渠道**，远程指挥伙伴操作电脑。每伙伴可独立绑定知识库。〔注：角色集 2026-06 由 6 缩减为 3，roux/pixel/boo 已下线。〕
+1. **数据安全 · 源码开放**：all-in-local，不做数据采集或遥测；模型、渠道、Webhook、
+   外部知识源等网络连接仅在用户主动配置和使用时发生。Apache-2.0 完全开源、接受审计、
+   免费商用、无广告无会员。SQLite 为唯一事实源，每个会话独立工作目录。补充叙事：
+   为保障安全，主动砍掉了若干先进功能（开源版移除），把“放心”放第一位。
+2. **超级伙伴养成体系**：**3 个内置形象**（Mochi 麻薯兔 / Ink 墨墨黑猫 / Bolt 波特机器人，纯代码绘制 SVG，无图片资源，默认 Mochi）+ 自定义任意 IP 形象（甚至家人 / 宠物）+ 人格预设（活泼/沉静/俏皮 + 自由文本）；行为采集（opt-in，多数默认关）→ LLM 蒸馏长期记忆；进化引擎自动挖掘 skill（仅基于工具调用序列，不含参数值）→ 生成可评审 `SKILL.md` 与你商议；**技能 gift**（把一个伙伴的技能复制给另一个）；**共享记忆中枢 + 专属技能库**；伙伴即超级网关 → 当前默认构建连接 **12 个内置 IM 渠道**，远程指挥伙伴操作电脑。每伙伴可独立绑定知识库。〔注：角色集 2026-06 由 6 缩减为 3，roux/pixel/boo 已下线。〕
 3. **智能值守（需求平台 + AutoWork + IDMM）**：需求看板 Pending→InProgress→Done/Failed/NeedsReview，按 tag 轮转、单循环执行；租约清扫 60s 重派孤儿任务、开机自恢复（后端是唯一事实源）→ 高可靠保活、无人值守。完成通知 webhook（Lark 签名卡 / Slack / HTTP）。**IDMM** = 每会话监督层：规则层（重试/退避/空闲推动/只读权限自动确认）+ 旁路模型层（真正决策卡点升级到轻量模型）；两个默认关的值守（故障值守 / 决策值守）；可触发模型 failover 队列（max 4 次切换）。
-4. **开放能力 · 超级生态**：151 项能力经三个公开门面暴露——`/mcp`（全量 Remote）、`/mcp-agent`（精选 do-work 子集）、`/v1`（REST + `/v1/openapi.json` OpenAPI 3.1 + SSE 流）。companion-token（Bearer，SHA-256 存储，常量时间比对）鉴权，调用者"以该伙伴身份"在 Remote 面操作。让 Claude / Codex / 任意 Agent 通过 MCP/Skill 直接驱动 NomiFun。头部能力：`nomi_agent_run`（流式）+ `nomi_agent_result`（轮询）委派。
-5. **无限搭配 · config one, use anywhere**：统一管理知识库 / skill / agent / mcp / 模型。知识库 = 用户策展的 markdown 目录，挂载进会话工作区；**URL 实时快照**（Live/Snapshot，SSRF 防护，JS 重页面走无头浏览器）；**安全回写**（Disabled/Staged/Direct，IM 写入永远 Staged 进 `_inbox` 待审/合并）；飞书连接器已实现。绑定类型：workpath/conversation/terminal/companion。
+4. **开放能力 · 超级生态**：能力经三个公开门面暴露——`/mcp`（全量 Remote）、`/mcp-agent`（精选 do-work 子集）、`/v1`（REST + `/v1/openapi.json` OpenAPI 3.1 + SSE 流）。companion-token（Bearer，SHA-256 存储，常量时间比对）鉴权，调用者"以该伙伴身份"在 Remote 面操作。让 Claude / Codex / 任意 Agent 通过 MCP/Skill 直接驱动 NomiFun。头部能力：`nomi_agent_run`（流式）+ `nomi_agent_result`（轮询）委派；精确能力数量以当前代码为准。
+5. **无限搭配 · config one, use anywhere**：统一管理知识库 / skill / agent / mcp / 模型。知识库 = 用户策展的 markdown 目录，挂载进会话工作区；**URL 实时快照**（Live/Snapshot，SSRF 防护，JS 重页面走无头浏览器）；**安全回写**采用 Disabled / Manual / Auto：关闭、仅在用户明确要求时写入、或允许回合末自动沉淀。符合条件的内容直接写入知识库正文，已有文档采用追加与 compare-and-swap；外部 IM 另受 `channel_write_enabled` 控制。飞书连接器已实现。绑定类型：workpath/conversation/terminal/companion。
 6. **更 native 的实现**：自研 in-process Rust **CDP 浏览器引擎**（Chromium-only，无 Playwright/Node，首用自动获取 Chrome for Testing，~32 个动作）；原生 **computer-use**（xcap 截屏 + enigo 输入 + 平台 a11y：macOS AXUIElement+Vision OCR / Windows UIAutomation+Media.Ocr / Linux AT-SPI2，~21 个动作）。以 native tools 形式服务模型 → 更快、更省 token、可细粒度管控。**三轴能力网关**：DangerTier(Read/Write/Destructive/Sensitive) × Surface(Desktop/Channel/Remote) × Decision(Allow/Confirm/Deny)。**WebUI 局域网扫码远控**（`0.0.0.0:25808`，QR 一次性 token 5 分钟 TTL，Host/Origin 白名单防 DNS rebinding，非社交平台、直连局域网）。
 7. **专为提效 · 海量创新敬请期待**：开发者兼职、精力有限，迭代/修复可能不达预期；很多惊喜 feature 未上线。召集贡献者/社区运营/布道者共建。
 
-**开箱即用 nomi agent**：内置无需额外安装（CLI 二进制 `nomi`）。4 个原生 provider 后端：**Anthropic / OpenAI 兼容 / Amazon Bedrock / Google Vertex**（OpenAI 兼容可达 DeepSeek/Gemini/Qwen/Kimi/Ollama/vLLM/Azure 等）。**17 个 ACP 直连 Agent**：Claude Code、Codex CLI、Gemini CLI、Qwen、CodeBuddy、Droid、Goose、Auggie、Kimi、OpenCode、Copilot、Qoder、Vibe、Cursor、Kiro、Hermes、Snow（+ Nanobot / OpenClaw 两个非 ACP 托管）。交互式会话与 PTY 终端均可用（终端预设：Shell / Claude Code / Codex / Gemini）。
+**开箱即用 nomi agent**：内置无需额外安装（CLI 二进制 `nomi`）。4 个原生 provider 后端：**Anthropic / OpenAI 兼容 / Amazon Bedrock / Google Vertex**（OpenAI 兼容可达 DeepSeek/Gemini/Qwen/Kimi/Ollama/vLLM/Azure 等）。**多个 ACP 直连 Agent**：Claude Code、Codex CLI、Gemini CLI、Qwen、CodeBuddy、Droid、Goose、Auggie、Kimi、OpenCode、Copilot、Qoder、Vibe、Cursor、Kiro、Hermes、Snow（+ Nanobot / OpenClaw 两个非 ACP 托管）。交互式会话与 PTY 终端均可用（终端预设：Shell / Claude Code / Codex / Gemini）。
 
-**许可与推荐**：Apache-2.0 © 2025-2026 NomiFun（nomifun.com，未核实）。AionUi（https://github.com/iOfficeAI/AionUi ，Apache-2.0）只在友情推荐页中作为友好推荐与设计参考致谢，不放入全站页脚。
+**许可与其他项目**：Apache-2.0 © 2025-2026 NomiFun（nomifun.com，未核实）。AionUi
+（https://github.com/iOfficeAI/AionUi，Apache-2.0）只在“其他项目”页的“友情推荐”栏中
+作为友好推荐与设计参考致谢，不放入全站页脚。
 
 ---
 
@@ -160,8 +169,8 @@ nomifun-portal/
 | 文件 | 名称 | 交互 | 数据源 |
 |---|---|---|---|
 | `CompanionDemo.tsx` | 桌面伙伴 | 粉色热气碗：悬停冒蒸汽动画；点击切换人格(活泼/沉静/俏皮)与角色名；旁边"技能进化"卡片打字机生成 | inline + props |
-| `ChannelGateway.tsx` | 超级网关 | 11 渠道 logo 网格依次点亮；手机气泡演示"Telegram 下令 → 伙伴操作电脑"流程时间轴 | `data/channels.ts` |
-| `CapabilityGateway.tsx` | 能力网关三轴 | 危险级×调用面 矩阵，hover 单元格高亮决策(Allow/Confirm/Deny)；强调"IM 写入永远进暂存区" | inline 矩阵 |
+| `ChannelGateway.tsx` | 超级网关 | 12 渠道 logo 网格依次点亮；手机气泡演示"Telegram 下令 → 伙伴操作电脑"流程时间轴 | `data/channels.ts` |
+| `CapabilityGateway.tsx` | 能力网关三轴 | 危险级×调用面 矩阵，hover 单元格高亮决策(Allow/Confirm/Deny)；另行说明 Disabled / Manual / Auto 知识回写与外部 IM 独立开关 | inline 矩阵 |
 | `OpenApiTabs.tsx` | 开放能力 | 三 Tab：MCP(`/mcp`) / REST(`curl /v1/tools`) / OpenAPI；切换带打字机/高亮代码 | inline 代码样例 |
 | `AutoWorkBoard.tsx` | 智能值守看板 | 需求卡自动从 Pending→InProgress→Done 轮转动画 + IDMM"值守"脉冲指示灯 | inline 模拟卡片 |
 
@@ -191,15 +200,18 @@ nomifun-portal/
 
 ## 8. 其余页面
 
-- **`/download`**：官方下载入口横幅（GitHub Releases：`https://github.com/nomifun/nomifun-tauri/releases`）→ 三条路径卡（桌面源码构建 / Web 源码 / Docker 自托管）→ 平台卡（macOS/Windows/Linux，统一跳转 Releases 选择对应资产）→ 系统要求 + 自托管指引（Caddy/systemd）。
+- **`/download`**：官方下载入口横幅（GitHub Releases：
+  `https://github.com/nomifun/nomifun-desktop/releases`）→ 三条路径卡（桌面源码构建 /
+  Web 源码 / Docker 自托管）→ 平台卡（macOS/Windows/Linux，统一跳转 Releases 选择对应
+  资产）→ 系统要求 + 自托管指引（Caddy/systemd）。
 - **`/contact`**：共建召集（贡献值/社区运营/布道者）+ 商用告知通道（"渴望一场认可，非授权"）+ 使用反馈 + 渠道占位（GitHub/邮箱/社群 — 待补真实地址，先用占位常量集中放 `data/links.ts`）。
-- **`/docs`**：侧边栏 + 内容区 + 站内搜索（轻量，pagefind 或前端过滤）+ i18n。v1 精选：快速上手(介绍/安装/第一次对话)、核心操作(伙伴/渠道/知识库/AutoWork/IDMM/终端/MCP&Skill/WebUI 远程/模型路由)。底部"完整技术文档 →"外链 Git。内容迁移自 tauri `docs/getting-started` + `docs/guides`（仅操作类，bucket B），改写为门户语气，**不照搬技术内幕**。
+- **`/docs`**：侧边栏 + 内容区 + 站内搜索（轻量，pagefind 或前端过滤）+ i18n。v1 精选：快速上手(介绍/安装/第一次对话)、核心操作(伙伴/渠道/知识库/AutoWork/IDMM/终端/MCP&Skill/WebUI 远程/模型路由)。底部"完整技术文档 →"外链 Git。内容参考同级 `nomifun-desktop` 的 `docs/getting-started` + `docs/guides`（仅操作类，bucket B），改写为门户语气，**不照搬技术内幕**。
 
 ---
 
 ## 9. 资源策略
 
-- **直接复用 tauri 资源**（copy 进 `public/`）：`logo.svg`、12 个 channel-logos、provider/ACP logos、`docs/images/*.png` 截图（按需挑选）。
+- **直接复用 Desktop 资源**（copy 进 `public/`）：`logo.svg`、12 个 channel-logos、provider/ACP logos、`docs/images/*.png` 截图（按需挑选）。
 - **需作者补充**（详见 `docs/RESOURCES-TODO.md`）：OG 分享图、横版 wordmark、真实联系方式（GitHub/邮箱/社群）、可选桌宠真机演示视频。缺失项一律用占位常量 + 占位图，不阻塞开发。
 
 ---

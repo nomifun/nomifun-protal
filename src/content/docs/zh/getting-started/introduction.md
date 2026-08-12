@@ -12,7 +12,7 @@ lang: zh-CN
 
 ## 核心能力
 
-当前产品表面围绕这些能力组织；具体版本与安装包请以 [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases/latest) 和应用“关于”页为准：
+当前产品表面围绕这些能力组织；具体版本与安装包请以 [GitHub Releases](https://github.com/nomifun/nomifun-desktop/releases/latest) 和应用“关于”页为准：
 
 - **Windows、macOS、Linux 全平台桌面端**：GitHub Releases 提供 Windows x64、macOS Universal，以及 Linux x86_64 的 AppImage、Debian 与 RPM 安装包。
 - **Skills 与 Skill Market**：统一管理已安装 Skills，浏览 ClawHub / SkillHub 榜单，查看详情、筛选并在确认后交给 Nomi 安装。
@@ -42,4 +42,4 @@ NomiFun 适合已经在使用 AI Agent 做真实工作，希望把分散的终�
 - [创建可复用设定](/zh/docs/guides/assistants)
 - [配置语音输入](/zh/docs/guides/voice-input)
 
-完整源码与发布记录 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整源码与发布记录 → [GitHub](https://github.com/nomifun/nomifun-desktop)

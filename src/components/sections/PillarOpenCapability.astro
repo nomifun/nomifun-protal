@@ -10,7 +10,7 @@
  *    调用者「以该伙伴身份」在 Remote 面操作。
  *  - 让 Claude / Codex / 任意 Agent 通过 MCP/Skill 直接驱动 NomiFun。
  *  - 头部能力 nomi_agent_run（流式）+ nomi_agent_result（轮询）。
- *  - 细粒度三轴能力网关守护安全；IM 写入永远进暂存区待审。
+ *  - 细粒度三轴能力网关守护安全；知识回写按策略控制。
  */
 import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
 import OpenApiTabs from '@/components/islands/OpenApiTabs.tsx';
@@ -53,7 +53,7 @@ const copy: Dict<{
       {
         icon: 'i-mdi-shield-check-outline',
         title: '三轴能力网关守护',
-        body: '危险级 × 调用面 × 决策三轴细粒度管控每一次调用；来自 IM 的写入永远进入暂存区待审，安全边界从不松动。',
+        body: '危险级 × 调用面 × 决策三轴细粒度管控每一次调用；知识写入还会按 Disabled / Manual / Auto 策略控制。',
       },
     ],
     tabsLabel: '接入方式',
@@ -79,7 +79,7 @@ const copy: Dict<{
       {
         icon: 'i-mdi-shield-check-outline',
         title: 'Three-axis gateway guard',
-        body: 'DangerTier × Surface × Decision finely govern every call; writes from IM channels always land in a review staging area — the safety boundary never gives.',
+        body: 'DangerTier × Surface × Decision finely govern every call; knowledge writes are additionally controlled by Disabled / Manual / Auto policy.',
       },
     ],
     tabsLabel: 'How to connect',

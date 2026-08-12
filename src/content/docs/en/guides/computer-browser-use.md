@@ -54,4 +54,4 @@ Find them in system settings: **Computer Use** (`/settings/computer-use`) and **
 - [MCP & skills](/docs/guides/mcp-and-skills) — wire up external tools alongside the built-ins.
 - [System settings](/docs/guides/settings) — themes, execution engines, updates, and other application preferences.
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)

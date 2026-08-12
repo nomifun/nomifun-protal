@@ -1,20 +1,13 @@
 ---
 /**
- * FriendsPage — 友情推荐 / Friendly picks.
- * A curated page recommending other products we genuinely like.
- * Rendered inside <Base> by /friends, /zh/friends, and legacy /en/friends.
+ * Other projects — the NomiFun open-source family first, followed by a
+ * smaller friendly-picks section. The /friends route is kept for backwards
+ * compatibility with existing links.
  */
-import { links } from '@/data/links';
+import { ecosystemRepos, links } from '@/data/links';
 import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
 
 const locale: Locale = getLocale(Astro.url);
-
-// Locale-invariant product facts.
-const PRODUCTS = [
-  { id: 'saytive', name: 'Saytive', url: 'https://saytive.app', domain: 'saytive.app', icon: 'i-mdi-microphone-message', accent: 'pink' as const },
-  { id: 'fast', name: 'Fast', url: 'https://fast.saien.pro', domain: 'fast.saien.pro', icon: 'i-mdi-magnify-expand', accent: 'violet' as const },
-  { id: 'aionui', name: 'AionUi', url: links.aionui, domain: 'github.com/iOfficeAI/AionUi', icon: 'i-mdi-robot-happy-outline', accent: 'cyan' as const },
-];
 
 interface ProductCopy {
   tagline: string;
@@ -23,10 +16,24 @@ interface ProductCopy {
   tags: string[];
 }
 
+const PRODUCTS = [
+  { id: 'saytive', name: 'Saytive', url: 'https://saytive.app', domain: 'saytive.app', icon: 'i-mdi-microphone-message', accent: 'pink' as const },
+  { id: 'fast', name: 'Fast', url: 'https://fast.saien.pro', domain: 'fast.saien.pro', icon: 'i-mdi-magnify-expand', accent: 'violet' as const },
+  { id: 'aionui', name: 'AionUi', url: links.aionui, domain: 'github.com/iOfficeAI/AionUi', icon: 'i-mdi-robot-happy-outline', accent: 'cyan' as const },
+];
+
 const copy: Dict<{
   eyebrow: string;
   title: string;
   lead: string;
+  familyTitle: string;
+  familyEyebrow: string;
+  familyLead: string;
+  repoVisit: string;
+  repos: Record<string, { tagline: string; desc: string; tags: string[] }>;
+  friendsEyebrow: string;
+  friendsTitle: string;
+  friendsLead: string;
   visit: string;
   products: Record<string, ProductCopy>;
   bottomTitle: string;
@@ -34,61 +41,109 @@ const copy: Dict<{
   bottomCta: string;
 }> = {
   'zh-CN': {
-    eyebrow: '友情推荐',
-    title: '我们也<span class="text-grad-pink">由衷喜欢</span>的好产品',
-    lead: '除了 NomiFun，这些也是我们由衷喜欢、想分享给你的好产品。',
+    eyebrow: '其他项目',
+    title: '从 NomiFun 开源生态，<span class="text-grad-pink">一起把想法做成现实</span>',
+    lead: '这里集中展示 NomiFun 的开源项目家族，也保留我们真心喜欢的友情推荐。项目从自用与内容朋友的小范围使用开始，保持实验性、公益性与克制的开放节奏。',
+    familyTitle: 'NomiFun 开源生态家族',
+    familyEyebrow: '开源生态家族',
+    familyLead: '一套本地优先的 Agent Desktop 底座，连接桌面、移动端与硬件伙伴。所有仓库都欢迎阅读、二次开发与共建。',
+    repoVisit: '查看 GitHub 仓库',
+    repos: {
+      desktop: {
+        tagline: '跨平台 Agent Desktop 主工作台',
+        desc: 'NomiFun 的核心桌面应用。开源、免费、无商业化限制，支持 Windows、macOS 与 Linux；多模型、多 Agent、终端、WebUI 远程控制、知识库、自动化与本地伙伴能力都在这里汇聚。',
+        tags: ['Windows · macOS · Linux', 'Apache-2.0', '本地就是服务器'],
+      },
+      mobile: {
+        tagline: '手机直连 Desktop 的移动端生态',
+        desc: '面向移动场景的轻量入口：优先在局域网中直连自己的 Desktop；需要跨网络时，也可按部署选择端到端加密的中继路径。适合随时查看会话、发起指令与远程协作。',
+        tags: ['局域网直连', '可选加密中继', '移动端'],
+      },
+      xiaozhi: {
+        tagline: '硬件多模态伙伴与小智接入',
+        desc: '把麦克风、扬声器、屏幕、舵机等硬件能力接入 NomiFun 伙伴，让桌面 Agent 走进真实设备与更多交互场景。',
+        tags: ['硬件伙伴', '语音与多模态', '开放接入'],
+      },
+    },
+    friendsEyebrow: '友情推荐',
+    friendsTitle: '我们也<span class="text-grad-pink">由衷喜欢</span>的好产品',
+    friendsLead: '除了 NomiFun，这些也是我们愿意分享给你的其他好产品。它们各自解决不同问题，也给过我们很多启发。',
     visit: '前往了解',
     products: {
       saytive: {
         tagline: 'Be Creative, Be Saytive.',
         category: '创意语音输入法',
-        desc: '专为创意工作者打造的语音输入法。通过顶级模型与精心的产品设计，自动感知你的工作上下文，提供快速、准确而贴合场景的转写体验。',
-        tags: ['语音转写', '上下文感知', '顶级模型'],
+        desc: '专为创意工作者打造的语音输入法。通过模型与产品设计感知工作上下文，提供快速、准确而贴合场景的转写体验。',
+        tags: ['语音转写', '上下文感知', '创意工作'],
       },
       fast: {
         tagline: '搜索，一触即达。',
         category: '极速搜索直达',
-        desc: '只需输入文字并点击，即可直达小红书、抖音、美团等数十个主流应用的搜索结果页。拒绝信息流，专注搜索本身——搜索本该如此简单。',
-        tags: ['一触直达', '数十个应用', '无信息流'],
+        desc: '只需输入文字并点击，即可直达小红书、抖音、美团等主流应用的搜索结果页。拒绝信息流，专注搜索本身。',
+        tags: ['一触直达', '多应用', '无信息流'],
       },
       aionui: {
         tagline: '内置 Agent 引擎，安装即用。',
-        category: 'AI agent 工作台',
-        desc: 'NomiFun 的部分 UI 设计借鉴了 AionUi；在此感谢 AionUi 带来的设计启发。AionUi 内置完整 AI agent 引擎，无需单独安装 CLI agent，也无需复杂配置，粘贴任意 API Key 即可开始，并支持文件读写、Web 搜索、图片生成、MCP 工具与 21 个内置专业助手。',
-        tags: ['内置 agent 引擎', '无需 CLI', '21 个专业助手'],
+        category: 'AI Agent 工作台',
+        desc: 'NomiFun 的部分 UI 设计借鉴了 AionUi，在此感谢它带来的设计启发。AionUi 也提供开箱即用的 Agent 工作体验。',
+        tags: ['内置 Agent', '开箱即用', '设计启发'],
       },
     },
-    bottomTitle: '有想被推荐的好产品？',
-    bottomBody: '如果你也做了一款用心的好产品，欢迎联系我们——好东西值得被更多人看见。',
+    bottomTitle: '想一起参与生态建设？',
+    bottomBody: '欢迎提交代码、文档、问题反馈或真实使用经验。项目人力有限，但每一份认真贡献都会让这套公益性工具走得更远。',
     bottomCta: '联系我们',
   },
   'en-US': {
-    eyebrow: 'FRIENDLY PICKS',
-    title: 'Products we <span class="text-grad-pink">genuinely love</span> too',
-    lead: 'Beyond NomiFun, these are other products we genuinely love and want to share with you.',
+    eyebrow: 'OTHER PROJECTS',
+    title: 'The NomiFun open-source family, <span class="text-grad-pink">built to make ideas real</span>',
+    lead: 'This page puts the NomiFun open-source family first, while keeping a smaller list of products we genuinely recommend. NomiFun began as a tool for our own work and friends, so we keep its experimental, public-interest spirit and a deliberately measured pace.',
+    familyTitle: 'NomiFun open-source family',
+    familyEyebrow: 'OPEN-SOURCE FAMILY',
+    familyLead: 'One local-first Agent Desktop foundation spanning desktop, mobile access, and hardware companions. Every repository is open for reading, forking, and building on.',
+    repoVisit: 'View on GitHub',
+    repos: {
+      desktop: {
+        tagline: 'The cross-platform Agent Desktop workbench',
+        desc: 'The core NomiFun desktop app. Open source, free to commercialize, and available on Windows, macOS, and Linux, bringing together multi-provider models, multi-agent work, terminals, WebUI remote control, knowledge, automation, and local companions.',
+        tags: ['Windows · macOS · Linux', 'Apache-2.0', 'Your computer is the server'],
+      },
+      mobile: {
+        tagline: 'A mobile bridge to your own Desktop',
+        desc: 'A lightweight mobile entry point that prefers a direct LAN connection to your Desktop and can use an end-to-end encrypted relay when you explicitly deploy one for cross-network access.',
+        tags: ['Direct LAN link', 'Optional encrypted relay', 'Mobile'],
+      },
+      xiaozhi: {
+        tagline: 'Hardware multimodal companions',
+        desc: 'Connect microphones, speakers, displays, servos, and other hardware capabilities to NomiFun companions, bringing desktop agents into physical devices and new interaction surfaces.',
+        tags: ['Hardware companions', 'Voice & multimodal', 'Open integration'],
+      },
+    },
+    friendsEyebrow: 'FRIENDLY PICKS',
+    friendsTitle: 'Products we <span class="text-grad-pink">genuinely love</span> too',
+    friendsLead: 'Beyond NomiFun, these are other thoughtful products we are happy to share. Each solves a different problem and has influenced our work in its own way.',
     visit: 'Visit',
     products: {
       saytive: {
         tagline: 'Be Creative, Be Saytive.',
         category: 'Voice input for creators',
-        desc: 'A voice input method built for creative workers. Powered by top-tier models and thoughtful design, it senses your working context to deliver fast, accurate, context-aware transcription.',
-        tags: ['Transcription', 'Context-aware', 'Top models'],
+        desc: 'A voice input method for creative workers, designed to understand working context and deliver fast, accurate transcription.',
+        tags: ['Transcription', 'Context-aware', 'Creative work'],
       },
       fast: {
         tagline: 'Search, one tap away.',
         category: 'Instant search launcher',
-        desc: 'Just type and tap to jump straight to the search results of dozens of mainstream apps — Xiaohongshu, Douyin, Meituan and more. No feeds, just search — the way search should be.',
-        tags: ['One-tap', 'Dozens of apps', 'No feed'],
+        desc: 'Type once and jump straight to search results across mainstream apps. No feed, just the destination you asked for.',
+        tags: ['One tap', 'Many apps', 'No feed'],
       },
       aionui: {
         tagline: 'Built-in agent engine. Ready on install.',
         category: 'AI agent workspace',
-        desc: 'NomiFun borrows part of its UI design from AionUi; thank you to AionUi for the design reference. AionUi ships with a complete AI agent engine: no separate CLI agents, no complex setup, paste any API key to start, with file read/write, web search, image generation, MCP tools, and 21 built-in professional assistants.',
-        tags: ['Built-in agents', 'No CLI setup', '21 assistants'],
+        desc: 'Part of NomiFun’s UI was inspired by AionUi; we are grateful for that design reference. AionUi also offers an approachable, ready-to-use Agent workspace.',
+        tags: ['Built-in agents', 'Ready to use', 'Design reference'],
       },
     },
-    bottomTitle: 'Have a product we should feature?',
-    bottomBody: 'If you’ve built something thoughtful too, get in touch — good things deserve to be seen.',
+    bottomTitle: 'Want to help build the ecosystem?',
+    bottomBody: 'Code, documentation, issue reports, and real-world feedback are all welcome. Bandwidth is limited, but every careful contribution helps this public-interest project go further.',
     bottomCta: 'Contact us',
   },
 };
@@ -116,8 +171,7 @@ const accentMap = {
 
 <section class="relative section-y bg-mesh">
   <div class="container-x">
-    <!-- header -->
-    <div class="flex max-w-3xl flex-col gap-4" data-animate>
+    <div class="flex max-w-4xl flex-col gap-4" data-animate>
       <span class="eyebrow">{t.eyebrow}</span>
       <h1 class="text-4xl font-bold leading-tight tracking-tight text-hi sm:text-5xl">
         <Fragment set:html={t.title} />
@@ -125,47 +179,90 @@ const accentMap = {
       <p class="text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
     </div>
 
-    <!-- product cards -->
-    <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3" data-stagger>
-      {PRODUCTS.map((p) => {
-        const c = t.products[p.id];
-        const a = accentMap[p.accent];
-        return (
-          <article class="card card-hover flex flex-col p-7 sm:p-8">
-            <div class="flex items-center gap-4">
-              <span class={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border text-2xl ${a.tile}`} aria-hidden="true">
-                <span class={p.icon}></span>
-              </span>
-              <div class="min-w-0">
-                <h2 class="text-xl font-bold text-hi">{p.name}</h2>
-                <a href={p.url} target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs text-low transition-colors hover:text-pink-300">
-                  <span class="i-mdi-link-variant text-xs" aria-hidden="true"></span>{p.domain}
-                </a>
+    <div class="mt-14" data-animate>
+      <div class="flex max-w-3xl flex-col gap-3">
+        <span class="eyebrow text-pink-300">{t.familyEyebrow}</span>
+        <h2 class="text-3xl font-bold tracking-tight text-hi sm:text-4xl">{t.familyTitle}</h2>
+        <p class="text-base leading-relaxed text-mid sm:text-lg">{t.familyLead}</p>
+      </div>
+
+      <div class="mt-8 grid gap-5 lg:grid-cols-3" data-stagger>
+        {ecosystemRepos.map((repo) => {
+          const c = t.repos[repo.id];
+          const a = accentMap[repo.accent];
+          return (
+            <article class="card card-hover flex flex-col p-6 sm:p-7">
+              <div class="flex items-start justify-between gap-4">
+                <span class={`flex h-13 w-13 shrink-0 items-center justify-center rounded-2xl border text-2xl ${a.tile}`} aria-hidden="true">
+                  <span class={repo.icon}></span>
+                </span>
+                <span class="rounded-full border border-ink-600 bg-ink-800/60 px-2.5 py-1 text-[11px] font-mono text-low">open source</span>
               </div>
-            </div>
-
-            <p class="mt-5 text-lg font-semibold text-grad-pink">{c.tagline}</p>
-            <span class={`mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium ${a.tag}`}>
-              {c.category}
-            </span>
-            <p class="mt-4 flex-1 text-sm leading-relaxed text-mid">{c.desc}</p>
-
-            <div class="mt-5 flex flex-wrap gap-2">
-              {c.tags.map((tag) => (
-                <span class="inline-flex items-center rounded-full border border-ink-600 bg-ink-700/50 px-2.5 py-1 text-[11px] text-mid">{tag}</span>
-              ))}
-            </div>
-
-            <a href={p.url} target="_blank" rel="noopener" class={`mt-7 ${a.btn} text-sm`}>
-              <span class="i-mdi-arrow-top-right text-base" aria-hidden="true"></span>
-              {t.visit} {p.name}
-            </a>
-          </article>
-        );
-      })}
+              <h3 class="mt-5 text-xl font-bold text-hi">{repo.name}</h3>
+              <p class="mt-2 text-base font-semibold text-grad-pink">{c.tagline}</p>
+              <p class="mt-4 flex-1 text-sm leading-relaxed text-mid">{c.desc}</p>
+              <div class="mt-5 flex flex-wrap gap-2">
+                {c.tags.map((tag) => (
+                  <span class={`inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] ${a.tag}`}>{tag}</span>
+                ))}
+              </div>
+              <a href={repo.url} target="_blank" rel="noopener" class={`mt-7 ${a.btn} text-sm`}>
+                <span class="i-mdi-github text-base" aria-hidden="true"></span>
+                {t.repoVisit}
+                <span class="i-mdi-arrow-top-right text-base" aria-hidden="true"></span>
+              </a>
+            </article>
+          );
+        })}
+      </div>
     </div>
 
-    <!-- bottom CTA -->
+    <div class="mt-20 border-t border-ink-700/70 pt-16" data-animate>
+      <div class="flex max-w-3xl flex-col gap-3">
+        <span class="eyebrow">{t.friendsEyebrow}</span>
+        <h2 class="text-3xl font-bold leading-tight tracking-tight text-hi sm:text-4xl">
+          <Fragment set:html={t.friendsTitle} />
+        </h2>
+        <p class="text-base leading-relaxed text-mid sm:text-lg">{t.friendsLead}</p>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3" data-stagger>
+        {PRODUCTS.map((p) => {
+          const c = t.products[p.id];
+          const a = accentMap[p.accent];
+          return (
+            <article class="card card-hover flex flex-col p-7 sm:p-8">
+              <div class="flex items-center gap-4">
+                <span class={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border text-2xl ${a.tile}`} aria-hidden="true">
+                  <span class={p.icon}></span>
+                </span>
+                <div class="min-w-0">
+                  <h3 class="text-xl font-bold text-hi">{p.name}</h3>
+                  <a href={p.url} target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs text-low transition-colors hover:text-pink-300">
+                    <span class="i-mdi-link-variant text-xs" aria-hidden="true"></span>{p.domain}
+                  </a>
+                </div>
+              </div>
+              <p class="mt-5 text-lg font-semibold text-grad-pink">{c.tagline}</p>
+              <span class={`mt-3 inline-flex w-fit items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium ${a.tag}`}>
+                {c.category}
+              </span>
+              <p class="mt-4 flex-1 text-sm leading-relaxed text-mid">{c.desc}</p>
+              <div class="mt-5 flex flex-wrap gap-2">
+                {c.tags.map((tag) => (
+                  <span class="inline-flex items-center rounded-full border border-ink-600 bg-ink-700/50 px-2.5 py-1 text-[11px] text-mid">{tag}</span>
+                ))}
+              </div>
+              <a href={p.url} target="_blank" rel="noopener" class={`mt-7 ${a.btn} text-sm`}>
+                <span class="i-mdi-arrow-top-right text-base" aria-hidden="true"></span>
+                {t.visit} {p.name}
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+
     <div class="mt-12 rounded-3xl border border-ink-600/70 bg-ink-850/50 p-8 text-center sm:p-10" data-animate>
       <h3 class="text-xl font-semibold text-hi sm:text-2xl">{t.bottomTitle}</h3>
       <p class="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-mid">{t.bottomBody}</p>

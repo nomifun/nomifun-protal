@@ -59,4 +59,4 @@ Beyond the native providers, NomiFun also connects to about 19 external ecosyste
 - [MCP & skills](/docs/guides/mcp-and-skills)
 - [Channels · super gateway](/docs/guides/channels)
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)

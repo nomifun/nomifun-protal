@@ -62,4 +62,4 @@ NomiFun 支持在首页和会话输入框中直接录音转文字。你可以选
 - [模型管理与故障转移](/zh/docs/guides/model-routing)
 - [系统设置](/zh/docs/guides/settings)
 
-完整源码与发布记录 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整源码与发布记录 → [GitHub](https://github.com/nomifun/nomifun-desktop)

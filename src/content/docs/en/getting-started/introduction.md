@@ -12,7 +12,7 @@ lang: en-US
 
 ## Core capabilities
 
-The product surface is organized around these capabilities. For the current release and installers, use [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases/latest) and the app's About page as the source of truth:
+The product surface is organized around these capabilities. For the current release and installers, use [GitHub Releases](https://github.com/nomifun/nomifun-desktop/releases/latest) and the app's About page as the source of truth:
 
 - **Desktop apps for Windows, macOS, and Linux**: GitHub Releases includes Windows x64, macOS Universal, plus AppImage, Debian, and RPM packages for Linux x86_64.
 - **Skills and Skill Market**: manage installed Skills, browse ClawHub and SkillHub rankings, inspect details, filter results, and hand a reviewed installation to Nomi.
@@ -42,4 +42,4 @@ NomiFun is for individuals and teams already using AI agents for real work who w
 - [Create reusable presets](/docs/guides/assistants)
 - [Configure speech input](/docs/guides/voice-input)
 
-Source code and release history → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Source code and release history → [GitHub](https://github.com/nomifun/nomifun-desktop)

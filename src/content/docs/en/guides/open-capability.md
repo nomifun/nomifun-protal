@@ -78,4 +78,4 @@ All three share one capability bus and the same companion-token auth. The headli
 - [Companions](/docs/guides/companions)
 - [Knowledge base](/docs/guides/knowledge-base)
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)

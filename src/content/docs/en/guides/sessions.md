@@ -20,7 +20,7 @@ Creating a session takes you to `/conversation/:id`. Start one from the sidebar'
    - **File tree** — files in this session's working directory, updating live as the agent reads and writes.
    - **Preview panel** — view code, Markdown, PDF, Office, HTML, and diffs directly.
    - **Terminal** — a PTY mounted to the working directory, operating on the same files as the session.
-3. **Mount a knowledge base (optional).** Attach an existing knowledge base to the session so the agent running in it (nomi, an ACP agent, or a terminal CLI) can ground its answers in that content. Sources today are the **Feishu connector** and **live URL snapshots** (with SSRF protection).
+3. **Mount a knowledge base (optional).** Attach an existing knowledge base to the session so the agent running in it (nomi, an ACP agent, or a terminal CLI) can ground its answers in that content. Current sources include local Markdown, URL snapshots, and the progressively opened **Feishu connector** (with SSRF protection).
 
    ![Mount a knowledge base into the session](/images/en/02会话/会话挂载知识库.png)
 
@@ -51,4 +51,4 @@ Creating a session takes you to `/conversation/:id`. Start one from the sidebar'
 - [Unattended automation · AutoWork](/docs/guides/autowork) — the full write-up on AutoWork and the **IDMM decision watch**.
 - [MCP and skills](/docs/guides/mcp-and-skills) — wire tools and skills into a session.
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)

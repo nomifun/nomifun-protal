@@ -51,4 +51,4 @@ If you still need a Skill, open **Skills** from the sidebar:
 - [Your first conversation](/docs/getting-started/quick-start)
 - [Models and failover](/docs/guides/model-routing)
 
-Source code and release history → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Source code and release history → [GitHub](https://github.com/nomifun/nomifun-desktop)

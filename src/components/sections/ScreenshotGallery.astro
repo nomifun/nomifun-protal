@@ -21,7 +21,12 @@ const languageSuffix = locale === 'zh-CN' ? 'zh' : 'en';
 
 // Six product captures spanning the product surface; href → matching guide.
 const shots: { img: string; href: string; w: number; h: number }[] = [
-  { img: `current-home-${languageSuffix}.png`, href: '/docs/getting-started/quick-start', w: 1224, h: 768 },
+  {
+    img: locale === 'zh-CN' ? 'current-home-zh.png' : 'current-home-en.png',
+    href: '/docs/getting-started/quick-start',
+    w: 1296,
+    h: 841,
+  },
   { img: `skills-market-${languageSuffix}.png`, href: '/docs/guides/mcp-and-skills', w: 1224, h: 768 },
   { img: `skills-library-${languageSuffix}.png`, href: '/docs/guides/mcp-and-skills', w: 1224, h: 768 },
   { img: `presets-${languageSuffix}.png`, href: '/docs/guides/assistants', w: 1224, h: 768 },

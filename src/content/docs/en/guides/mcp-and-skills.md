@@ -70,4 +70,4 @@ The sidebar Skills page manages general Skills that can be reused across convers
 - [Knowledge base](/docs/guides/knowledge-base) — provide project material to a conversation.
 - [Companions](/docs/guides/companions) — companion-specific Skills and memory.
 
-Source code and release history → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Source code and release history → [GitHub](https://github.com/nomifun/nomifun-desktop)

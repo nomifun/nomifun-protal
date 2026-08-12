@@ -11,7 +11,7 @@ type CompanionId = 'mochi' | 'ink' | 'bolt' | 'custom';
 
 /**
  * The 3 current built-in companion characters (+ a custom slot).
- * Source of truth: nomifun-tauri ui/.../companion/characters/index.ts
+ * Source of truth: nomifun-desktop ui/.../companion/characters/index.ts
  *   mochi = mochi bunny (麻薯兔), ink = amber-eyed black cat (琥珀眼黑猫),
  *   bolt = hovering robot (悬浮机器人). Default = mochi.
  * Custom = upload any IP you like, even your own family or pets.

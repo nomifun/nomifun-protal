@@ -10,15 +10,15 @@ NomiFun 已提供 Windows、macOS 与 Linux 桌面安装包。多数用户直接
 
 本页带你从零把 NomiFun 装到本机或服务器上。
 
-> **下载入口**：[GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases)。Windows 选择 `x64-setup.exe`，macOS 选择 `universal.dmg`；Linux x86_64 可选 `AppImage`、`.deb` 或 `.rpm`。不同平台的安装包会由各自构建机依次追加，如果最新标签暂时没有你的平台，请使用最近一个包含对应文件的版本。
+> **下载入口**：[GitHub Releases](https://github.com/nomifun/nomifun-desktop/releases)。Windows 选择 `x64-setup.exe`，macOS 选择 `universal.dmg`；Linux x86_64 可选 `AppImage`、`.deb` 或 `.rpm`。不同平台的安装包会由各自构建机依次追加，如果最新标签暂时没有你的平台，请使用最近一个包含对应文件的版本。
 >
 > 想了解平台支持与系统要求，可参考[下载页](/zh/download)。
 
-| 安装包安装 | 官方 Docker 镜像 |
+| 桌面安装包 | 官方 Docker 镜像 |
 | --- | --- |
-| 从 [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases) 下载 Windows、macOS 或 Linux 桌面安装包。 | 从 [Docker Hub](https://hub.docker.com/repository/docker/nomifun/nomifun-web) 拉取 `nomifun/nomifun-web:latest`。 |
+| 从 [GitHub Releases](https://github.com/nomifun/nomifun-desktop/releases) 下载 Windows、macOS 或 Linux 桌面安装包。 | 从 [Docker Hub](https://hub.docker.com/repository/docker/nomifun/nomifun-web) 拉取已发布的 `v0.3.4` 示例镜像；如 Docker Hub 有更新标签，请替换为更新版本。 |
 | 适合个人电脑上的桌面工作台。 | 适合服务器、NAS、内网主机或云主机长期运行 Web 服务。 |
-| 按系统选择 `.exe` / `.dmg` / `AppImage` / `.deb` / `.rpm`。 | `docker pull nomifun/nomifun-web:latest` |
+| 按系统选择 `.exe` / `.dmg` / `AppImage` / `.deb` / `.rpm`。 | `docker pull nomifun/nomifun-web:v0.3.4` |
 
 ## 直接安装桌面版
 
@@ -57,8 +57,8 @@ Linux x86_64 提供三种格式：
 克隆仓库后，先安装一次 JS 依赖（后续 `package.json` 变动时重跑）：
 
 ```bash
-git clone https://github.com/nomifun/nomifun-tauri.git
-cd nomifun
+git clone https://github.com/nomifun/nomifun-desktop.git
+cd nomifun-desktop
 bun install
 ```
 
@@ -101,12 +101,12 @@ nomifun-web \
 
 ### C. 使用官方 Docker 镜像
 
-官方镜像地址：[nomifun/nomifun-web](https://hub.docker.com/repository/docker/nomifun/nomifun-web)。镜像内置已构建的 SPA、`nomifun-web` 与运行所需依赖，是部署 Web 服务的优先 Docker 方式。
+官方镜像地址：[nomifun/nomifun-web](https://hub.docker.com/repository/docker/nomifun/nomifun-web)。镜像内置已构建的 SPA、`nomifun-web` 与运行所需依赖，是部署 Web 服务的优先 Docker 方式。下面示例沿用已发布的 `v0.3.4` 标签；部署前请查看 Docker Hub，如有更新标签，请将命令中的版本替换为对应标签。
 
 1. 拉取官方镜像：
 
 ```bash
-docker pull nomifun/nomifun-web:latest
+docker pull nomifun/nomifun-web:v0.3.4
 ```
 
 2. 启动服务并挂载持久化数据目录：
@@ -117,7 +117,7 @@ docker run -d \
   --restart unless-stopped \
   -p 8787:8787 \
   -v nomifun-data:/data \
-  nomifun/nomifun-web:latest
+  nomifun/nomifun-web:v0.3.4
 ```
 
 3. 访问 `http://<server-ip>:8787`。服务配置了 `--restart unless-stopped`，**安装即等同于开机自启**；持久化状态存放在挂载到容器 `/data` 的命名卷 `nomifun-data`，请像其他数据库一样定期备份。
@@ -166,4 +166,4 @@ curl -sS http://127.0.0.1:8787/api/auth/status
 - [快速上手](/zh/docs/getting-started/quick-start) —— 装好后的第一段会话。
 - [WebUI 局域网远控](/zh/docs/guides/webui-remote) —— 把现有桌面安装变成可扫码远程访问的实例。
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整文档 → [GitHub](https://github.com/nomifun/nomifun-desktop)

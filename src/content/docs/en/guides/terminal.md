@@ -14,7 +14,7 @@ Create one from the **Terminal** section in the sidebar, or navigate to `/termin
 
 1. **Create a terminal.** Click **+** in the sidebar's terminal section to open the create page. The session row is persisted, so it stays in the list after you restart the app.
 
-   ![Create a terminal](/images/en/02会话/新建终端.png)
+   ![Create a terminal](/images/en/02会话/新建终端会话.png)
 
 2. **Pick a working directory.** Set the directory the child process is spawned in. Attach it to a session's working directory and the terminal operates on the same files as the message stream. Recently used directories are remembered.
 
@@ -22,7 +22,7 @@ Create one from the **Terminal** section in the sidebar, or navigate to `/termin
    - **Shell** — resolves at launch to your platform's login shell (PowerShell/`cmd` on Windows, `$SHELL` on macOS/Linux).
    - **Claude Code / Codex / Gemini** — launches the matching agent CLI binary, which must already be installed and on `PATH`.
 
-   ![Pick a terminal preset (Shell / Claude Code / Codex / Gemini)](/images/en/02会话/选择终端启动方式.png)
+   ![Pick a terminal preset (Shell / Claude Code / Codex / Gemini)](/images/en/02会话/选择终端会话启动方式.png)
 
 4. **Set the permission mode (agent presets only).** `Default` keeps interactive approvals; `Full Auto` appends the CLI's own non-interactive flag to skip step-by-step confirmations. Full Auto grants the CLI broad power on your machine — treat a Full Auto terminal like a logged-in shell.
 
@@ -59,4 +59,4 @@ Create one from the **Terminal** section in the sidebar, or navigate to `/termin
 - [Unattended automation · AutoWork](/docs/guides/autowork) — bind a terminal to a tag and let the orchestrator drive it unattended.
 - [Intelligent decisioning · IDMM](/docs/guides/intelligent-decision) — add a layer of decision-watch to a long-running terminal session.
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)

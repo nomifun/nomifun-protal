@@ -65,4 +65,4 @@ The desktop process serves one backend (routes built once) on **two** sockets:
 - [Terminal and local capabilities](/docs/guides/terminal)
 - [Open capabilities overview](/docs/guides/open-capability)
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)

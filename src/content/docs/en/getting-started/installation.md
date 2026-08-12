@@ -10,15 +10,15 @@ NomiFun now ships desktop installers for Windows, macOS, and Linux. Most users s
 
 This page walks you through getting NomiFun onto your machine or server from scratch.
 
-> **Download entry**: [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases). Choose `x64-setup.exe` for Windows, `universal.dmg` for macOS, or AppImage, `.deb`, or `.rpm` for Linux x86_64. Native build machines append platforms in sequence, so if the latest tag does not include yours yet, use the most recent release that does.
+> **Download entry**: [GitHub Releases](https://github.com/nomifun/nomifun-desktop/releases). Choose `x64-setup.exe` for Windows, `universal.dmg` for macOS, or AppImage, `.deb`, or `.rpm` for Linux x86_64. Native build machines append platforms in sequence, so if the latest tag does not include yours yet, use the most recent release that does.
 >
 > For platform support and system requirements, see the [download page](/download).
 
 | Desktop installers | Official Docker image |
 | --- | --- |
-| Download the Windows, macOS, or Linux desktop package from [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases). | Pull `nomifun/nomifun-web:latest` from [Docker Hub](https://hub.docker.com/repository/docker/nomifun/nomifun-web). |
+| Download the Windows, macOS, or Linux desktop package from [GitHub Releases](https://github.com/nomifun/nomifun-desktop/releases). | Pull the published `v0.3.4` example image from [Docker Hub](https://hub.docker.com/repository/docker/nomifun/nomifun-web); replace it with a newer tag when Docker Hub provides one. |
 | Best for a personal desktop workstation. | Best for a long-running web service on a server, NAS, LAN host, or VPS. |
-| Choose `.exe` / `.dmg` / `AppImage` / `.deb` / `.rpm` for your OS. | `docker pull nomifun/nomifun-web:latest` |
+| Choose `.exe` / `.dmg` / `AppImage` / `.deb` / `.rpm` for your OS. | `docker pull nomifun/nomifun-web:v0.3.4` |
 
 ## Install the desktop app
 
@@ -57,8 +57,8 @@ On the machine that actually runs NomiFun, also install `ripgrep` (the code-sear
 Clone the repo and install JS dependencies once (re-run whenever `package.json` changes):
 
 ```bash
-git clone https://github.com/nomifun/nomifun-tauri.git
-cd nomifun
+git clone https://github.com/nomifun/nomifun-desktop.git
+cd nomifun-desktop
 bun install
 ```
 
@@ -101,12 +101,12 @@ nomifun-web \
 
 ### C. Deploy the official Docker image
 
-Official image: [nomifun/nomifun-web](https://hub.docker.com/repository/docker/nomifun/nomifun-web). The image includes the built SPA, `nomifun-web`, and required runtime dependencies, so it is the preferred Docker path for deploying the web service.
+Official image: [nomifun/nomifun-web](https://hub.docker.com/repository/docker/nomifun/nomifun-web). The image includes the built SPA, `nomifun-web`, and required runtime dependencies, so it is the preferred Docker path for deploying the web service. The examples below use the published `v0.3.4` tag; check Docker Hub before deploying and replace it with a newer available tag.
 
 1. Pull the official image:
 
 ```bash
-docker pull nomifun/nomifun-web:latest
+docker pull nomifun/nomifun-web:v0.3.4
 ```
 
 2. Start the service and mount persistent data:
@@ -117,7 +117,7 @@ docker run -d \
   --restart unless-stopped \
   -p 8787:8787 \
   -v nomifun-data:/data \
-  nomifun/nomifun-web:latest
+  nomifun/nomifun-web:v0.3.4
 ```
 
 3. Visit `http://<server-ip>:8787`. The service is configured with `--restart unless-stopped`, so **installing it is enabling it on boot**. Persistent state lives in the named volume `nomifun-data` mounted at `/data` in the container — back it up like any other database.
@@ -166,4 +166,4 @@ If you see `nomifun-web: embedded backend + SPA on one port` in the logs and `/a
 - [Quick Start](/docs/getting-started/quick-start) — your first session after installing.
 - [WebUI LAN remote control](/docs/guides/webui-remote) — turn an existing desktop install into a QR-scan remote instance.
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)

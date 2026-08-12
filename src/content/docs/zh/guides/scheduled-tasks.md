@@ -50,4 +50,4 @@ lang: zh-CN
 - [会话工作区](/zh/docs/guides/sessions)——定时任务生成的会话就在这里继续。
 - [应用内终端](/zh/docs/guides/terminal)——需要实时 shell 时的去处。
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整文档 → [GitHub](https://github.com/nomifun/nomifun-desktop)

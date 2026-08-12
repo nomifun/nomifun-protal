@@ -1,89 +1,62 @@
 ---
 title: Knowledge bases
-description: User-curated markdown directories, live URL snapshots, a safe staged write-back inbox, and session mounting so the agent retrieves before it answers.
+description: Manage local Markdown, URL snapshots, and write-back policy so any Agent can share traceable context across sessions, terminals, and companions.
 category: Knowledge & Open Capabilities
 order: 10
 lang: en-US
 ---
 
-A knowledge base is NomiFun's "config one, use anywhere" idea applied to content: a markdown directory you curate, mounted into a session workspace so the agent **retrieves before it answers** per an explicit protocol, rather than answering from memory. A base can bind to a session, a terminal, a specific companion, or a working directory, and can be exported / imported as a `.zip`.
+A knowledge base is NomiFun’s “config one, use anywhere” content layer: curate a local Markdown directory, mount it into a session, terminal, working directory, or companion, and let any Agent **retrieve before it answers** under an explicit protocol.
 
-> Entry point: the **Knowledge** item in the left sidebar (route `/knowledge`). Everything below — creating bases, setting write-back, binding, and mounting — lives here.
+> Entry point: **Knowledge** in the left sidebar (`/knowledge`). Exact controls and labels follow the version of the app you have installed.
 
-![Knowledge base home](/images/en/03知识库/知识库首页.png)
+## Knowledge sources
 
-## Three knowledge sources
+1. **Local Markdown** — handbooks, specifications, project notes, and team material.
+2. **URL snapshots** — fetch public pages into Markdown, with persistent Snapshot and runtime Live modes plus SSRF protection.
+3. **Feishu** — the connector is being opened progressively; availability depends on the current build.
 
-1. **Local markdown** — a directory you organize yourself; the most direct option, ideal for handbooks, specs, and project notes.
-2. **Live URL snapshots** — supply up to 16 public URLs at creation. **Snapshot** mode fetches each page now and converts it to markdown into the base (oversized pages compressed by AI); **Live** mode leaves fetching to the agent at runtime. Built-in SSRF protection accepts only `http/https`, and JS-heavy pages are fetched through a headless browser to recover their content.
-3. **Feishu** — connector implemented (the in-UI creation entry is currently off).
+> **Notion as a source remains on the roadmap.** Do not treat it as a currently public capability.
 
-> **Notion source = roadmap, not yet implemented.** The available sources today are local markdown, URL snapshots, and the Feishu connector.
+## Basic workflow
 
-## Steps
+1. Create a base with a name, description, and local Markdown directory.
+2. Optionally add URL sources and choose Snapshot (stable saved copy) or Live (fetch the latest at runtime).
+3. Generate a description and summary so the Agent can decide when the base is relevant.
+4. Bind the base to a session, terminal, working directory, or companion.
+5. Verify that the Agent retrieves the relevant context before answering or acting.
 
-1. **Create a local base.** On the knowledge page, click new, give it a name, organize or select the markdown directory, and optionally add URL sources.
+## Write-back policy
 
-   ![Create a local knowledge base](/images/en/03知识库/新增本地知识库.png)
+The current product should not be described as “every IM write always goes into `_inbox`.” The actual behavior depends on the mounted base and the app version. Common modes include:
 
-2. **Add live-snapshot URL sources** (optional). Paste up to 16 public links and choose Snapshot or Live per link. Snapshot suits stable reference pages; Live suits pages where you want the latest version every time.
+- **Disabled** — the Agent cannot write back.
+- **Manual** — turn-end automatic extraction is off; the Agent writes only when you explicitly ask it in the current conversation to record, save, or remember something.
+- **Auto** — the Agent may decide at turn end to retain knowledge that is durable, reusable, clearly relevant, and sufficiently certain.
 
-   ![URL live-snapshot knowledge base](/images/en/03知识库/网页抓取知识库.png)
+These modes are not a universal `_inbox` staging flow: qualifying writes land in the knowledge-base body. Updates to existing documents use append and compare-and-swap protections where applicable, reducing silent overwrites and concurrent collisions. External IM channels have a separate `channel_write_enabled` opt-in; when enabled, they also write to the body. Keep important material in version control and back it up regardless.
 
-3. **AI-generate a description.** Click "AI generate" to call `autogen` and produce the base's description and `README.md` (requires a configured AI provider). The description feeds the agent's "when to consult" hint — the clearer it reads, the better the matches.
+## What the Agent sees
 
-4. **Configure write-back mode and settings.** In base settings, decide how knowledge produced in conversation flows back:
+The base is mounted at a controlled workspace path. Context injection can include the base description, summary, directory hints, and retrieval protocol. Built-in Nomi, ACP agents, terminal CLIs, and companions can use the same knowledge capability; the effective scope is determined by the binding.
 
-   - **Disabled** — no write-back.
-   - **Staged** — write-back lands in the base's `_inbox/` for you to review before merging. **Writes from IM always go Staged**, never direct.
-   - **Direct** — skips staging and writes straight into the base body.
-
-   ![Knowledge base settings (write-back mode, etc.)](/images/en/03知识库/知识库设置.png)
-
-5. **Inspect the base detail.** After creation, open the detail page to browse the directory tree, fetched snapshot files, pending `_inbox/` entries, and the base's description and stats.
-
-   ![Knowledge base detail](/images/en/03知识库/新增成功后对应的知识库详情.png)
-
-6. **Bind / mount it to a use case.** Bind the base to the current session, a terminal, a companion, or a working directory. Once bound to a companion, its companion chats and channel sessions all mount that companion's bases automatically; once mounted into a session workspace, the agent retrieves-before-answering inside that session.
-
-   ![Mount into a session workspace](/images/en/03知识库/知识库挂载使用.png)
-
-## Four binding types
-
-| Binding type | Meaning |
-| --- | --- |
-| **workpath** | Bound to a working directory; sessions under it mount by default |
-| **conversation** | Bound to this one session only |
-| **terminal** | Bound to a terminal session |
-| **companion** | Bound to a companion; its companion chats and channel sessions mount it throughout |
-
-## What the agent sees
-
-Bases mount at `{workspace}/.nomi/knowledge/`. The injected context carries each base's description, an AI summary, a "when to consult" hint, and a budgeted table of contents (20 entries per base / 60 global), plus an explicit retrieval protocol that steers the agent to retrieve before it answers. Companions can also grow their own bases — the Desktop Gateway provides knowledge tools (create base / write file / fetch URL), so a companion can quietly distill notes during a chat.
-
-## Notes & boundaries
-
-- **Any agent can use it:** once a base is bound to a session / terminal / working directory / companion, whatever agent runs in that context — the built-in nomi, an ACP direct-connect agent (Claude Code / Codex, etc.), or a terminal CLI — retrieves-before-answering by the same protocol. It is not tied to one kind of agent.
-- **Safe write-back is a hard rule:** any write originating from an IM channel lands in `_inbox/` for review first and never goes straight to the body; you decide whether to merge it from the detail page.
-- **URL fetching is SSRF-guarded:** only `http/https` is accepted, and internal/loopback addresses are blocked.
-- **Retrieval has a budget:** the injected table of contents caps at 20 entries per base and 60 global; anything beyond that doesn't enter context — organize the most important material up front.
-- **Source status:** local markdown, URL snapshots, and the Feishu connector are available; Notion is roadmap.
+URL fetching accepts only `http/https`, and internal or loopback destinations are restricted by SSRF protection. Requests to external URLs, model providers, or channel platforms follow the providers and connections you explicitly configure.
 
 ## FAQ
 
-**Q: How do I choose between Snapshot and Live?**
-A: Use Snapshot for reference pages that rarely change (fetched once, stable and predictable); use Live for pages where you need the latest version each time (fetched at runtime, higher cost).
+**Does NomiFun automatically save every conversation?**
+No. Write-back follows the selected policy and the Agent’s decision. Disable it entirely, use Manual mode for explicit-request-only writes, or use Auto mode when you want the Agent to retain durable knowledge by itself.
 
-**Q: Where does the note I asked a companion to record over IM end up?**
-A: In that base's `_inbox/`, waiting for you to review and merge from the detail page before it reaches the body. This safeguard cannot be bypassed.
+**Can one base serve multiple sessions?**
+Yes. Bind it by working directory or companion for shared use, or mount it only into one session.
 
-**Q: Can one base serve multiple sessions at once?**
-A: Yes. Bind by workpath or companion to let multiple sessions share the same base.
+**When will Notion be available?**
+It remains a forward-looking direction. Use the sources visible in your installed app as the current source of truth.
 
 ## Related
 
-- [Companions](/docs/guides/companions) — bind a base to a companion to grow its own knowledge
-- [Sessions](/docs/guides/sessions) — enable and mount a base from the session header
-- [Channels · Super Gateway](/docs/guides/channels) — why IM writes always go through the staging inbox
+- [Companions](/docs/guides/companions) — bind knowledge to a companion
+- [Session workspace](/docs/guides/sessions) — mount a base in a session
+- [Channels](/docs/guides/channels) — command a companion from chat
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)

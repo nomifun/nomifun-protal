@@ -9,7 +9,7 @@ interface Props {
 /** Self-contained bilingual strings (the island holds its own dict). */
 const STR = {
   'zh-CN': {
-    gridTitle: '一个伙伴，连接 11+ 社交渠道',
+    gridTitle: '一个伙伴，连接 12 个内置 IM 渠道',
     shipped: '已接入',
     inProgress: '在途',
     chatName: '你的伙伴',
@@ -22,7 +22,7 @@ const STR = {
     timeHint: '通过任意社交 App 下令，伙伴在你的电脑上完成工作',
   },
   'en-US': {
-    gridTitle: 'One companion, 11+ chat channels',
+    gridTitle: 'One companion, 12 built-in IM channels',
     shipped: 'Live',
     inProgress: 'In progress',
     chatName: 'Your companion',
@@ -177,10 +177,12 @@ export default function ChannelGateway({ locale }: Props) {
             <span className="h-1.5 w-1.5 rounded-full bg-success" aria-hidden="true" />
             {t.shipped}
           </span>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-warning" aria-hidden="true" />
-            {t.inProgress} · WeCom
-          </span>
+          {channels.some((channel) => !channel.shipped) && (
+            <span className="inline-flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-warning" aria-hidden="true" />
+              {t.inProgress}
+            </span>
+          )}
         </div>
       </div>
 

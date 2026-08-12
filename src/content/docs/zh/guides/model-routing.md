@@ -59,4 +59,4 @@ lang: zh-CN
 - [MCP 与技能](/zh/docs/guides/mcp-and-skills)
 - [渠道 · 超级网关](/zh/docs/guides/channels)
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整文档 → [GitHub](https://github.com/nomifun/nomifun-desktop)

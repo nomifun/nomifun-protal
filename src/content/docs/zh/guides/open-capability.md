@@ -78,4 +78,4 @@ NomiFun 把整个平台的能力（Agent / 浏览器 / Computer Use / 知识库 
 - [伙伴](/zh/docs/guides/companions)
 - [知识库](/zh/docs/guides/knowledge-base)
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整文档 → [GitHub](https://github.com/nomifun/nomifun-desktop)

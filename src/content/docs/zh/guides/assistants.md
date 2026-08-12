@@ -51,4 +51,4 @@ lang: zh-CN
 - [第一次对话](/zh/docs/getting-started/quick-start)
 - [模型与故障转移](/zh/docs/guides/model-routing)
 
-完整源码与发布记录 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整源码与发布记录 → [GitHub](https://github.com/nomifun/nomifun-desktop)

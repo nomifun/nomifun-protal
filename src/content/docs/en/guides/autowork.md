@@ -37,7 +37,7 @@ The list is a flat table you can filter by tag, status, or full text, and batch-
 
 Before you have any requirements you see the empty state — start right there with "New requirement."
 
-![Requirements (empty state)](/images/en/05需求平台/需求平台列表-空.png)
+![Requirements list](/images/en/05需求平台/需求平台列表.png)
 
 Switch to the board view (`/requirements?view=board`) and the selected tag gets one column per status, refreshed live as the orchestrator moves things. The board does **not** change status by drag-and-drop — use the detail drawer for that.
 
@@ -85,4 +85,4 @@ Back in the Notify tab, pick a webhook for the target tag from the dropdown. Whe
 - [Sessions](/docs/guides/sessions) — session targets and the AutoWork control
 - [Channels](/docs/guides/channels) — current state of IM integrations
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)

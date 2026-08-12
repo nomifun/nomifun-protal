@@ -10,7 +10,7 @@ Scheduled tasks let you trigger a companion on a clock (cron) to do something: a
 
 Open **Scheduled tasks** from the sidebar (route `/scheduled`). With no jobs yet you see the empty state, and a **keep-awake** banner at the top — a job only fires while the host process is running.
 
-![Scheduled tasks (empty state + keep-awake banner)](/images/en/04定时任务/定时任务首页空.png)
+![Scheduled tasks list and keep-awake banner](/images/en/04定时任务/定时任务首页列表.png)
 
 ## Steps
 
@@ -28,7 +28,7 @@ Open **Scheduled tasks** from the sidebar (route `/scheduled`). With no jobs yet
 
 7. **Act from the detail page.** Open `/scheduled/:job_id` to **Run now** (fire immediately, ignoring the schedule), **Pause / Resume**, **Edit**, or **Delete**. The detail page also shows the schedule, the run history, and the conversations this task created.
 
-   ![Job detail: schedule / Run now / history](/images/en/04定时任务/但是任务详情.png)
+![Job detail: schedule / Run now / history](/images/en/04定时任务/定时任务详情.png)
 
 ## Notes & boundaries
 
@@ -50,4 +50,4 @@ Open **Scheduled tasks** from the sidebar (route `/scheduled`). With no jobs yet
 - [Session workspace](/docs/guides/sessions) — where the conversations a scheduled task creates continue.
 - [In-app terminal](/docs/guides/terminal) — when you need a live shell instead.
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)

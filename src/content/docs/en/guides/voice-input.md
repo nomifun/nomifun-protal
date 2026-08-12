@@ -62,4 +62,4 @@ The same speech configuration works on both the home screen and active conversat
 - [Model management and failover](/docs/guides/model-routing)
 - [System settings](/docs/guides/settings)
 
-Source code and release history → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Source code and release history → [GitHub](https://github.com/nomifun/nomifun-desktop)

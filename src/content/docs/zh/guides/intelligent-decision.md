@@ -48,4 +48,4 @@ IDMM 由两层组成：**规则层**用确定性策略处理机械性停滞（�
 
 - [智能值守 · AutoWork](/zh/docs/guides/autowork)——IDMM 最常守护的自动化场景。
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整文档 → [GitHub](https://github.com/nomifun/nomifun-desktop)

@@ -1,6 +1,6 @@
 ---
 title: Channels
-description: Connect a companion to 11+ IM channels, authorize chat users with a QR scan or pairing code, and command your computer from a phone or group chat.
+description: Connect a companion to 12 built-in IM channels, authorize chat users with a QR scan or pairing code, and command your computer from a phone or group chat.
 category: Companions & Channels
 order: 9
 lang: en-US
@@ -16,9 +16,9 @@ Open the **Nomi page** (sidebar "Companions & Channels", route `/nomi`), pick a 
 
 ![Companion remote-connection / channel binding](/images/en/桌面伙伴/桌面伙伴远程连接配置.png)
 
-## The 11+ shipped channels
+## The 12 channels in the default build
 
-Telegram, Lark / Feishu, DingTalk, WeChat, Slack, Discord, Matrix, Mattermost, Twitch, Nostr, and QQ Bot — 11 shipped channels. **WeCom (Enterprise WeChat) is in progress** and lands in a later release.
+Telegram, Lark / Feishu, DingTalk, WeChat, WeCom (Enterprise WeChat), Slack, Discord, Matrix, Mattermost, Twitch, Nostr, and QQ Bot — 12 built-in channels compiled into the default Desktop backend. Each platform still requires you to create its bot or app, provide credentials, and follow that platform's network and review requirements.
 
 ## Steps
 
@@ -64,4 +64,4 @@ Not yet doable from IM: creating a team (use the desktop / WebUI), file uploads 
 - [Companions](/docs/guides/companions) — multi-companion management, shared/private memory scopes, and per-companion skill libraries.
 - [AutoWork & Requirements](/docs/guides/autowork) — outbound completion-notification webhooks and requirement logging.
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)

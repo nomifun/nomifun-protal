@@ -6,17 +6,17 @@ const locale: Locale = getLocale(Astro.url);
 const copy: Dict<{ items: { icon: string; label: string }[] }> = {
   'zh-CN': {
     items: [
-      { icon: 'i-mdi-shield-lock-outline', label: '数据全在本地' },
+      { icon: 'i-mdi-shield-lock-outline', label: '数据全在本地 · 无遥测' },
       { icon: 'i-mdi-source-branch', label: 'Apache-2.0 完全开源' },
-      { icon: 'i-mdi-cash-remove', label: '免费商用 · 无广告无会员' },
+      { icon: 'i-mdi-cash-remove', label: '免费商用 · 无商业化限制' },
       { icon: 'i-mdi-magnify-scan', label: '源码公开 · 接受审计' },
     ],
   },
   'en-US': {
     items: [
-      { icon: 'i-mdi-shield-lock-outline', label: 'All data stays local' },
+      { icon: 'i-mdi-shield-lock-outline', label: 'All data local · no telemetry' },
       { icon: 'i-mdi-source-branch', label: 'Apache-2.0 open source' },
-      { icon: 'i-mdi-cash-remove', label: 'Free commercial use · no ads' },
+      { icon: 'i-mdi-cash-remove', label: 'Free to commercialize · no paywall' },
       { icon: 'i-mdi-magnify-scan', label: 'Open source · open to audit' },
     ],
   },

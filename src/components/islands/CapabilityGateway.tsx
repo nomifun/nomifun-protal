@@ -8,7 +8,9 @@ import type { Locale } from '@/i18n';
  * Decision (Allow = success tone, Confirm = warning tone, Deny = danger tone).
  *
  * Hovering or tapping a cell highlights it and surfaces the decision label in a
- * caption area. A fixed caption emphasizes the IM-channel staging rule.
+ * caption area. A fixed caption explains the current knowledge write-back
+ * policy without pretending that this illustrative matrix is the full
+ * authorization table.
  *
  * Self-contained — no network, all strings keyed by `locale`. Honors
  * `prefers-reduced-motion` (drops the hover/highlight transitions). Responsive:
@@ -59,7 +61,7 @@ const STR: Record<Locale, {
   axisDecision: string;
   illustrative: string;
   hint: string;
-  staging: string;
+  writebackPolicy: string;
   cellAria: (surface: string, tier: string, decision: string) => string;
 }> = {
   'zh-CN': {
@@ -72,8 +74,8 @@ const STR: Record<Locale, {
     axisDecision: '决策 Decision',
     illustrative: '示意策略',
     hint: '悬停或点击单元格查看该调用面在对应危险级上的决策。',
-    staging:
-      '来自 IM 渠道（Channel）的写入永远进入暂存区待审；Channel 面拒绝高危与敏感操作。',
+    writebackPolicy:
+      '知识回写不是统一的 IM 暂存规则：关闭时只读，Manual 仅在你明确要求时写入，Auto 才会在回合结束后自动沉淀。外部 IM 渠道还需要单独开启 channel_write_enabled；开启后写入知识库正文。',
     cellAria: (surface, tier, decision) => `${surface} · ${tier}：${decision}`,
   },
   'en-US': {
@@ -86,8 +88,8 @@ const STR: Record<Locale, {
     axisDecision: 'Decision',
     illustrative: 'Illustrative policy',
     hint: 'Hover or tap a cell to see the decision for that surface at that danger tier.',
-    staging:
-      'Writes from IM channels always land in a review staging area; the Channel surface denies destructive & sensitive actions.',
+    writebackPolicy:
+      'Knowledge write-back is not a universal IM staging rule: Disabled is read-only, Manual writes only when you explicitly ask, and Auto may extract durable knowledge at turn end. External IM channels also require channel_write_enabled; when enabled, writes land in the knowledge-base body.',
     cellAria: (surface, tier, decision) => `${surface} · ${tier}: ${decision}`,
   },
 };
@@ -211,10 +213,10 @@ export default function CapabilityGateway({ locale }: Props) {
         </span>
       </div>
 
-      {/* Fixed staging rule — the load-bearing safety guarantee */}
+      {/* Current write-back policy — separate from this illustrative matrix */}
       <div className="mt-3 flex items-start gap-2.5 rounded-xl border border-warning/25 bg-warning/10 px-3.5 py-3">
-        <span className="i-mdi-tray-arrow-down mt-0.5 shrink-0 text-base text-warning" aria-hidden="true" />
-        <p className="text-xs leading-relaxed text-mid">{s.staging}</p>
+        <span className="i-mdi-shield-edit-outline mt-0.5 shrink-0 text-base text-warning" aria-hidden="true" />
+        <p className="text-xs leading-relaxed text-mid">{s.writebackPolicy}</p>
       </div>
 
       {/* Decision legend */}

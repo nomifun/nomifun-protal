@@ -52,7 +52,7 @@ NomiFun 默认使用 **Rhythm Dark（律动暗黑）**。当前内置主题包�
 
 “关于”页显示当前安装版本、源码仓库、更新日志、问题反馈与官网入口。桌面端可以在这里点击“检查更新”；侧边栏底部也会在检测到新版本时显示提示。
 
-由于 NomiFun 仍处于 pre-1.0 快速迭代阶段，最终版本请以应用“关于”页和 [GitHub Releases](https://github.com/nomifun/nomifun-tauri/releases/latest) 为准。
+由于 NomiFun 仍处于 pre-1.0 快速迭代阶段，最终版本请以应用“关于”页和 [GitHub Releases](https://github.com/nomifun/nomifun-desktop/releases/latest) 为准。
 
 ## 数据与备份
 
@@ -70,4 +70,4 @@ NomiFun 的会话、设置、伙伴、知识库和日志默认保存在当前用
 - [电脑操作与浏览器操作](/zh/docs/guides/computer-browser-use)
 - [WebUI 远程办公](/zh/docs/guides/webui-remote)
 
-完整源码与发布记录 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整源码与发布记录 → [GitHub](https://github.com/nomifun/nomifun-desktop)

@@ -54,4 +54,4 @@ NomiFun 给 agent 内置了两项可选的系统级能力：**电脑操控（Com
 - [MCP 与技能](/zh/docs/guides/mcp-and-skills) —— 在内置能力之外再接外部工具。
 - [系统设置](/zh/docs/guides/settings) —— 主题、执行引擎、更新与其它应用偏好。
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整文档 → [GitHub](https://github.com/nomifun/nomifun-desktop)

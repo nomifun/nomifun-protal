@@ -10,8 +10,8 @@ export const nav: Dict<{
   github: string;
   cta: string;
 }> = {
-  'zh-CN': { home: '功能速览', docs: '操作文档', download: '下载', contact: '联系我们', friends: '友情推荐', github: 'GitHub', cta: '立即下载' },
-  'en-US': { home: 'Overview', docs: 'Docs', download: 'Download', contact: 'Contact', friends: 'Picks', github: 'GitHub', cta: 'Get NomiFun' },
+  'zh-CN': { home: '功能速览', docs: '操作文档', download: '下载', contact: '联系我们', friends: '其他项目', github: 'GitHub', cta: '立即下载' },
+  'en-US': { home: 'Overview', docs: 'Docs', download: 'Download', contact: 'Contact', friends: 'Other projects', github: 'GitHub', cta: 'Get NomiFun' },
 };
 
 export const brand: Dict<{ name: string; tagline: string }> = {
@@ -39,12 +39,12 @@ export const footer: Dict<{
       { label: '功能速览', href: '/' },
       { label: '操作文档', href: '/docs' },
       { label: '下载', href: '/download' },
-      { label: '友情推荐', href: '/friends' },
+      { label: '其他项目', href: '/friends' },
       { label: '联系我们', href: '/contact' },
     ],
     resources: [
-      { label: 'GitHub 仓库', href: '#github' },
-      { label: '完整技术文档', href: '#github' },
+      { label: 'Desktop GitHub 仓库', href: '#github' },
+      { label: 'Mobile / Xiaozhi 项目', href: '/friends' },
       { label: 'Apache-2.0 许可', href: '#license' },
     ],
     license: '基于 Apache License 2.0 开源',
@@ -60,12 +60,12 @@ export const footer: Dict<{
       { label: 'Overview', href: '/' },
       { label: 'Docs', href: '/docs' },
       { label: 'Download', href: '/download' },
-      { label: 'Picks', href: '/friends' },
+      { label: 'Other projects', href: '/friends' },
       { label: 'Contact', href: '/contact' },
     ],
     resources: [
-      { label: 'GitHub repo', href: '#github' },
-      { label: 'Full technical docs', href: '#github' },
+      { label: 'Desktop GitHub repo', href: '#github' },
+      { label: 'Mobile / Xiaozhi projects', href: '/friends' },
       { label: 'Apache-2.0 license', href: '#license' },
     ],
     license: 'Open-source under the Apache License 2.0',

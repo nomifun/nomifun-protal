@@ -85,4 +85,4 @@ lang: zh-CN
 - [会话](/zh/docs/guides/sessions)——会话目标与 AutoWork 控件
 - [消息渠道](/zh/docs/guides/channels)——IM 接入现状
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整文档 → [GitHub](https://github.com/nomifun/nomifun-desktop)

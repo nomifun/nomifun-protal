@@ -16,25 +16,25 @@ const copy: Dict<{
   showcaseAlt: string;
 }> = {
   'zh-CN': {
-    eyebrow: '完全开源 · 本地优先 · 免费商用',
-    titleA: '一项毫无保留的',
-    titleHi: '超级 AI 工作站',
-    titleB: '满足你对 AI 工作站的全部想象',
-    lead: '丰富的创新能力，极高的生产提效。数据全在本地，绝不主动外发——个人与企业都能放心使用、自由商用、接受审计。',
+    eyebrow: '完全开源 · 本地优先 · 免费商用 · Windows / macOS / Linux',
+    titleA: '一套可以拿走、',
+    titleHi: '改造、长期维护的 Agent Desktop',
+    titleB: '让本地电脑成为你的 AI 工作站与服务器',
+    lead: '代码架构平实简单，数据 all in local：没有数据采集与遥测，除你主动配置的模型、渠道或其他外部连接外不默认外发。个人可以自由使用，企业也可以基于 Apache-2.0 二次开发自己的先进 Agent Desktop。',
     ctaPrimary: '立即下载',
     ctaSecondary: '在 GitHub 查看源码',
-    chips: ['源码开放 · 数据全本地', '超级伙伴 · 智能进化', '智能值守 · 需求管理', '开放能力 · 超级生态', '无限搭配 · config one', '更 native 的实现', '专为提效 · 海量创新'],
+    chips: ['Apache-2.0 · 可商用', '本地电脑就是服务器', '多模型 · 多 Agent', 'WebUI 远程控制', '交互式会话 · AI 终端', '音频 · 视频 · 图片画布', 'Windows · macOS · Linux'],
     showcaseAlt: 'NomiFun 主界面会话工作区与桌面伙伴演示截图',
   },
   'en-US': {
-    eyebrow: 'Fully open-source · Local-first · Free for commercial use',
-    titleA: 'A no-holds-barred',
-    titleHi: 'super AI workstation',
-    titleB: 'everything you imagine an AI workstation to be',
-    lead: 'Rich, inventive capabilities and serious productivity gains. All data stays local and is never sent out on its own — safe for individuals and enterprises alike, free to commercialize, open to audit.',
+    eyebrow: 'Fully open-source · Local-first · Free to commercialize · Windows / macOS / Linux',
+    titleA: 'An Agent Desktop you can',
+    titleHi: 'take, change, and maintain',
+    titleB: 'Your computer becomes the workstation and the server',
+    lead: 'A plain, understandable architecture with all-in-local data. No collection or telemetry, and no default outbound traffic beyond the models, channels, or other external connections you explicitly configure. Use it freely, or build your own advanced Agent Desktop on Apache-2.0.',
     ctaPrimary: 'Download',
     ctaSecondary: 'View source on GitHub',
-    chips: ['Open source · Local data', 'Evolving companions', 'Unattended automation', 'Open ecosystem', 'config one, use anywhere', 'Truly native', 'Built for productivity'],
+    chips: ['Apache-2.0 · Commercial OK', 'Your computer is the server', 'Multi-model · Multi-agent', 'WebUI remote control', 'Interactive sessions · AI terminal', 'Audio · Video · Image canvas', 'Windows · macOS · Linux'],
     showcaseAlt: 'NomiFun session workspace and desktop companion demo screenshot',
   },
 };
@@ -105,8 +105,8 @@ const showcaseImage = locale === 'zh-CN' ? '/screenshots/current-home-zh.png' : 
         <img
           src={showcaseImage}
           alt={t.showcaseAlt}
-          width="1224"
-          height="768"
+          width={1296}
+          height={841}
           loading="lazy"
           decoding="async"
           class="block h-auto w-full"

@@ -65,4 +65,4 @@ lang: zh-CN
 - [终端与本地能力](/zh/docs/guides/terminal)
 - [开放能力总览](/zh/docs/guides/open-capability)
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整文档 → [GitHub](https://github.com/nomifun/nomifun-desktop)

@@ -59,4 +59,4 @@ lang: zh-CN
 - [WebUI 远程访问](/zh/docs/guides/webui-remote)
 - [Web 服务部署](/zh/docs/getting-started/installation)
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整文档 → [GitHub](https://github.com/nomifun/nomifun-desktop)

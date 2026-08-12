@@ -88,4 +88,4 @@ The memory model is the key thing to understand:
 - [Channels](/docs/guides/channels) — channel master-agent mode and per-platform companion binding.
 - [Knowledge base](/docs/guides/knowledge-base) — knowledge-base creation, URL snapshots, and session mounting.
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)

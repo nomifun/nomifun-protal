@@ -1,6 +1,6 @@
 ---
 title: 渠道接入
-description: 把伙伴接入 11+ 个 IM 渠道，用扫码或配对码授权聊天用户，从手机或群聊远程指挥它操作电脑。
+description: 把伙伴接入 12 个内置 IM 渠道，用扫码或配对码授权聊天用户，从手机或群聊远程指挥它操作电脑。
 category: 超级伙伴
 order: 9
 lang: zh-CN
@@ -16,9 +16,9 @@ lang: zh-CN
 
 ![伙伴远程连接 / 渠道绑定配置](/images/zh/桌面伙伴/桌面伙伴远程连接配置.png)
 
-## 已落地的 11+ 个渠道
+## 默认构建中的 12 个内置渠道
 
-Telegram、飞书 Lark、钉钉、微信、Slack、Discord、Matrix、Mattermost、Twitch、Nostr、QQ Bot——共 11 个已落地渠道。**企业微信 WeCom 在途**，将随后续版本上线。
+Telegram、飞书 Lark、钉钉、微信、企业微信 WeCom、Slack、Discord、Matrix、Mattermost、Twitch、Nostr、QQ Bot——共 12 个内置渠道，均已进入默认 Desktop 后端构建。各平台仍需要你自行创建机器人或应用、提供凭证，并遵守对应平台的网络与审核要求。
 
 ## 操作步骤
 
@@ -64,4 +64,4 @@ Telegram、飞书 Lark、钉钉、微信、Slack、Discord、Matrix、Mattermost
 - [伙伴](/zh/docs/guides/companions)——多伙伴管理、共享 / 私有记忆作用域与每伙伴技能库。
 - [需求平台与 AutoWork](/zh/docs/guides/autowork)——出站完成通知 webhook 与需求登记。
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整文档 → [GitHub](https://github.com/nomifun/nomifun-desktop)

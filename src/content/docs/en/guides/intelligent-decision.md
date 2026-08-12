@@ -48,4 +48,4 @@ When a provider keeps failing, IDMM can trigger a **model failover queue**: it s
 
 - [Unattended automation · AutoWork](/docs/guides/autowork) — the automation IDMM most often guards.
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)

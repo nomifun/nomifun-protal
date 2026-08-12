@@ -1,0 +1,114 @@
+---
+import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
+import SectionHeader from '@/components/ui/SectionHeader.astro';
+
+const locale: Locale = getLocale(Astro.url);
+
+const copy: Dict<{
+  eyebrow: string;
+  title: string;
+  lead: string;
+  cards: { icon: string; title: string; body: string; tags: string[]; href: string }[];
+  cta: string;
+}> = {
+  'zh-CN': {
+    eyebrow: '创作能力 · 从对话走向作品',
+    title: '会话、终端、无限画布与小程序，<span class="text-grad-pink">都在同一台本地工作站</span>',
+    lead: 'NomiFun 不只处理文本任务。交互式 Agent 会话与真实 PTY 终端负责执行，创意工坊用无限画布组织音频、视频、图片与生成节点，小程序则把一次会话产出的工具沉淀成可持续迭代的本地应用。',
+    cards: [
+      {
+        icon: 'i-mdi-message-processing-outline',
+        title: '交互式 Agent 会话',
+        body: '多模型、多 Agent、协作执行图、文件预览与工作目录在一段会话里连贯工作，适合从讨论一路推进到真实产物。',
+        tags: ['多 Agent', '协作执行', '文件工作区'],
+        href: '/docs/guides/sessions',
+      },
+      {
+        icon: 'i-mdi-console-line',
+        title: 'AI 终端会话',
+        body: '应用内真实 PTY，可运行 Shell、Claude Code、Codex、Gemini 等工作流，并把同一套知识与本地能力带进终端。',
+        tags: ['PTY', 'Claude · Codex', '共享能力'],
+        href: '/docs/guides/terminal',
+      },
+      {
+        icon: 'i-mdi-vector-combine',
+        title: '无限画布创意工坊',
+        body: '在无限画布中组合图片、文字、视频、生成器与语音节点，围绕视觉、音频和视频内容进行非线性创作。',
+        tags: ['图片', '视频', '音频 / TTS'],
+        href: '/docs/guides/creative-workshop',
+      },
+      {
+        icon: 'i-mdi-application-brackets-outline',
+        title: 'Agent Desktop 小程序',
+        body: '让普通会话创建单文件小程序，再从小程序库物化工作副本、继续迭代、导入与发布，把一次性输出变成随手可用的本地工具。',
+        tags: ['普通会话', '工作副本', '本地发布'],
+        href: '/docs/guides/mini-apps',
+      },
+    ],
+    cta: '查看操作文档',
+  },
+  'en-US': {
+    eyebrow: 'Creation · from conversation to artifact',
+    title: 'Sessions, terminals, infinite canvas, and mini apps — <span class="text-grad-pink">on one local workstation</span>',
+    lead: 'NomiFun goes beyond text tasks. Interactive Agent sessions and real PTYs handle execution, Creative Workshop arranges image, video, audio, and generation nodes on an infinite canvas, and mini apps turn a session artifact into a local tool you can keep iterating.',
+    cards: [
+      {
+        icon: 'i-mdi-message-processing-outline',
+        title: 'Interactive Agent sessions',
+        body: 'Multi-model, multi-agent collaboration, execution graphs, previews, and working directories stay connected from discussion through delivery.',
+        tags: ['Multi-agent', 'Collaboration', 'File workspace'],
+        href: '/docs/guides/sessions',
+      },
+      {
+        icon: 'i-mdi-console-line',
+        title: 'AI terminal sessions',
+        body: 'A real in-app PTY for Shell, Claude Code, Codex, Gemini, and other workflows, with the same knowledge and local capabilities available inside.',
+        tags: ['PTY', 'Claude · Codex', 'Shared capabilities'],
+        href: '/docs/guides/terminal',
+      },
+      {
+        icon: 'i-mdi-vector-combine',
+        title: 'Infinite-canvas workshop',
+        body: 'Arrange images, text, video, generators, and speech nodes on an infinite canvas for nonlinear visual, audio, and video creation.',
+        tags: ['Images', 'Video', 'Audio / TTS'],
+        href: '/docs/guides/creative-workshop',
+      },
+      {
+        icon: 'i-mdi-application-brackets-outline',
+        title: 'Agent Desktop mini apps',
+        body: 'Create a single-file mini app from a normal session, then materialize a working copy from the library to iterate, import, and publish instead of losing it as a one-off answer.',
+        tags: ['Normal session', 'Working copy', 'Local publish'],
+        href: '/docs/guides/mini-apps',
+      },
+    ],
+    cta: 'Read the guide',
+  },
+};
+
+const t = pick(copy, locale);
+---
+
+<section id="creation-suite" class="relative section-y bg-ink-850/30">
+  <div class="container-x">
+    <SectionHeader eyebrow={t.eyebrow} title={t.title} lead={t.lead} />
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
+      {t.cards.map((card) => (
+        <article class="card card-hover flex flex-col p-6">
+          <span class="grid h-11 w-11 place-items-center rounded-xl border border-violet-400/25 bg-violet-500/10">
+            <span class={`${card.icon} text-xl text-violet-300`} aria-hidden="true"></span>
+          </span>
+          <h3 class="mt-4 text-lg font-semibold text-hi">{card.title}</h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-mid">{card.body}</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {card.tags.map((tag) => (
+              <span class="rounded-full border border-ink-600 bg-ink-700/60 px-2.5 py-1 text-[11px] text-mid">{tag}</span>
+            ))}
+          </div>
+          <a href={localizePath(card.href, locale)} class="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-pink-300 transition-colors hover:text-pink-400">
+            {t.cta}<span class="i-mdi-arrow-right text-base" aria-hidden="true"></span>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

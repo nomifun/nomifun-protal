@@ -72,8 +72,8 @@ const copy: Dict<{
       '官方镜像为 nomifun-web 无头服务，默认在 8787 端口提供 WebUI、API 与 WebSocket。建议挂载 /data 保存状态，并在公网部署时放到 TLS 反向代理后面。',
     dockerHubCta: '打开 Docker Hub',
     dockerCommands: [
-      'docker pull nomifun/nomifun-web:latest',
-      'docker run -d --name nomifun-web --restart unless-stopped -p 8787:8787 -v nomifun-data:/data nomifun/nomifun-web:latest',
+      'docker pull nomifun/nomifun-web:v0.3.4',
+      'docker run -d --name nomifun-web --restart unless-stopped -p 8787:8787 -v nomifun-data:/data nomifun/nomifun-web:v0.3.4',
       '# 打开 http://<server-ip>:8787',
     ],
     baiduTitle: '中国区备用：百度网盘',
@@ -149,8 +149,8 @@ const copy: Dict<{
       'The official image runs the headless nomifun-web service and serves the WebUI, API, and WebSocket on port 8787 by default. Mount /data for state, and put public deployments behind a TLS reverse proxy.',
     dockerHubCta: 'Open Docker Hub',
     dockerCommands: [
-      'docker pull nomifun/nomifun-web:latest',
-      'docker run -d --name nomifun-web --restart unless-stopped -p 8787:8787 -v nomifun-data:/data nomifun/nomifun-web:latest',
+      'docker pull nomifun/nomifun-web:v0.3.4',
+      'docker run -d --name nomifun-web --restart unless-stopped -p 8787:8787 -v nomifun-data:/data nomifun/nomifun-web:v0.3.4',
       '# open http://<server-ip>:8787',
     ],
     baiduTitle: 'China mirror: Baidu Netdisk',

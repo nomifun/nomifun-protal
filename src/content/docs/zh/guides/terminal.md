@@ -59,4 +59,4 @@ NomiFun 在应用内附带了一个**真正的终端**。每个终端都是后�
 - [智能值守 · AutoWork](/zh/docs/guides/autowork)——把终端绑定 tag、交给编排器无人值守驱动。
 - [智能决策 · IDMM](/zh/docs/guides/intelligent-decision)——为长跑终端会话加一层决策值守。
 
-完整文档 → [GitHub](https://github.com/nomifun/nomifun-tauri)
+完整文档 → [GitHub](https://github.com/nomifun/nomifun-desktop)

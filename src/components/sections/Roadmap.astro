@@ -1,15 +1,11 @@
 ---
 /**
- * Roadmap — 敬请期待 / On the roadmap.
+ * Roadmap — a dated, honest view of NomiFun's forward-looking product design.
  *
- * Honest, warm tone. These items are upcoming OR deliberately withheld from
- * the open-source build for data-security reasons (spec §2/§3 pillar 7):
- *  - App 内置浏览器视图
- *  - issue / IM 入站转需求
- *  - Notion 知识库来源
- *  - 企业微信 WeCom 渠道
- *  - 更多因数据安全考量暂未在开源版开放的惊艳功能
- * Author works part-time — set expectations graciously, invite co-building.
+ * The timeline distinguishes capabilities already developed internally from
+ * what is currently public and from work that is still being opened or kept
+ * private. It is intentionally not written as a promise that every internal
+ * experiment is already released.
  */
 import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
 import SectionHeader from '@/components/ui/SectionHeader.astro';
@@ -17,98 +13,114 @@ import Badge from '@/components/ui/Badge.astro';
 
 const locale: Locale = getLocale(Astro.url);
 
-interface Item {
-  icon: string;
+interface Era {
+  date: string;
+  label: string;
   title: string;
   body: string;
-  reason?: string;
+  icon: string;
+  items: string[];
+  tone: 'live' | 'ahead' | 'private';
 }
 
 const copy: Dict<{
   eyebrow: string;
   title: string;
   lead: string;
-  soonLabel: string;
-  withheldLabel: string;
-  items: Item[];
+  statusLabels: { live: string; ahead: string; private: string };
+  eras: Era[];
   honestTitle: string;
   honestBody: string;
   cta: string;
 }> = {
   'zh-CN': {
-    eyebrow: '诚实路线图 · 敬请期待',
-    title: '还有一些能力，<span class="text-grad-pink">敬请期待</span>',
-    lead: '我们只宣传已经实现的能力。下面这些要么还在路上，要么出于数据安全考量暂未在开源版开放——把话说在前面，胜过让你踩空。',
-    soonLabel: '敬请期待',
-    withheldLabel: '安全考量 · 暂未开源',
-    items: [
+    eyebrow: '前瞻产品设计 · 2025 — 2026',
+    title: '提前布局，但<span class="text-grad-pink">不把内部实验冒充成承诺</span>',
+    lead: 'NomiFun 很多能力先在真实工作中自研、验证，再决定何时开放。下面按时间记录已经形成的方向：有些已进入公开版本，有些正在逐步开放，还有一些暂时保密。',
+    statusLabels: {
+      live: '当前可见',
+      ahead: '持续开放',
+      private: '内部 / 保密',
+    },
+    eras: [
       {
-        icon: 'i-mdi-application-brackets-outline',
-        title: 'App 内置浏览器视图',
-        body: 'Browser Use 已支持静默托管浏览器与系统 Chrome / Edge 来源；真正嵌入应用内的可观察浏览器视图仍在后续路线。',
+        date: '2025',
+        label: '内部自研与验证',
+        title: '从 Agent 工具，走向可持续工作的系统',
+        body: '这一阶段围绕“让 Agent 真正完成工作”建立了多条底层能力线，并在真实项目中反复验证。',
+        icon: 'i-mdi-flask-outline',
+        tone: 'ahead',
+        items: [
+          'computer use for xiaozhiAI · browse use for xiaozhiAI',
+          '自动化需求管理平台：Loop for Claude / Codex Agent',
+          '三方决策、实施分离的 IDMM 智能决策容灾系统',
+          '硬件多模态接入伙伴与 Agent 知识库',
+          '伙伴记忆、Skill、设定的自进化、迁移与架构',
+        ],
       },
       {
-        icon: 'i-mdi-import',
-        title: 'issue / IM 入站转需求',
-        body: '完成通知可出站推送 Lark / Slack / HTTP webhook；反向的「从 issue 或 IM 入站自动转成需求」尚未上线。',
-      },
-      {
-        icon: 'i-simple-icons-notion',
-        title: 'Notion 知识库来源',
-        body: '飞书 Feishu 连接器已实现；Notion 作为知识库来源仍在路线图上，暂未实现。',
-      },
-      {
-        icon: 'i-simple-icons-wechat',
-        title: '企业微信 WeCom 渠道',
-        body: '11 个 IM 渠道已落地，企业微信 WeCom 正在途中，落地后即补齐企业内部协同的最后一块。',
-      },
-      {
-        icon: 'i-mdi-shield-star-outline',
-        title: '更多惊艳能力',
-        body: '出于数据安全考量，若干更先进的功能暂未在开源版开放。把「放心」放在第一位，是刻意的取舍。',
-        reason: 'withheld',
+        date: '2026 初',
+        label: '创新能力逐步上线',
+        title: '桌面、移动端、集群与服务一起演进',
+        body: 'UI 重构完成后，项目才正式走向开源。新的产品形态开始从单机工作站扩展到移动直连、Agent 集群与客服场景。',
+        icon: 'i-mdi-rocket-launch-outline',
+        tone: 'ahead',
+        items: [
+          'Agent Desktop 小程序、普通会话迭代与本地发布工作副本',
+          '安全的客服集群系统',
+          '手机移动端优先直连 Desktop；可选中继用于跨网络连接',
+          '独创的 Agent 集群交互与超级伙伴 IM 网关',
+          '更多能力仍在持续验证，部分暂不公开',
+        ],
       },
     ],
-    honestTitle: '一句实在话',
-    honestBody: '本项目由作者兼职开发、精力有限，迭代与修复速度可能不达预期。感谢你的理解，也真诚欢迎你一起共建——多一双手，路就走得更快。',
+    honestTitle: '项目为什么现在才公开？',
+    honestBody: 'NomiFun 最初只是我们自己使用、再分享给内容朋友的实验性工具。直到 2026 年 UI 重构完成后才开放源码。它仍然是一个人力有限、实验性与公益性并存的项目，我们更希望把代码、边界和真实进度讲清楚，而不是强行营销。',
     cta: '了解如何共建',
   },
   'en-US': {
-    eyebrow: 'Honest roadmap · On the way',
-    title: 'A few things are still <span class="text-grad-pink">on the roadmap</span>',
-    lead: 'We only advertise what already ships. The items below are either on the way, or deliberately held back from the open-source build for data-security reasons — better said upfront than discovered the hard way.',
-    soonLabel: 'On the roadmap',
-    withheldLabel: 'Security-conscious · not in OSS yet',
-    items: [
+    eyebrow: 'Forward-looking design · 2025 — 2026',
+    title: 'Move early, but <span class="text-grad-pink">never sell internal experiments as promises</span>',
+    lead: 'Many NomiFun capabilities were first built and tested in real work before we decided when to open them. This timeline separates what is visible today, what is being opened gradually, and what remains internal or private.',
+    statusLabels: {
+      live: 'Visible today',
+      ahead: 'Opening gradually',
+      private: 'Internal / private',
+    },
+    eras: [
       {
-        icon: 'i-mdi-application-brackets-outline',
-        title: 'In-app browser view',
-        body: 'Browser Use already supports silent managed runs and system Chrome / Edge sources; a fully observable browser view inside the app remains on the roadmap.',
+        date: '2025',
+        label: 'Internal build & validation',
+        title: 'From Agent tools to a system that keeps working',
+        body: 'This phase established several foundations for making Agents finish real work, then tested them repeatedly in production-like workflows.',
+        icon: 'i-mdi-flask-outline',
+        tone: 'ahead',
+        items: [
+          'computer use for xiaozhiAI · browse use for xiaozhiAI',
+          'Automation requirement platform: Loop for Claude / Codex Agent',
+          'IDMM disaster-resilient decision system with decision / implementation separation',
+          'Hardware multimodal companions and an Agent knowledge base',
+          'Self-evolving, portable companion memory, Skills, presets, and architecture',
+        ],
       },
       {
-        icon: 'i-mdi-import',
-        title: 'Inbound issue / IM → tasks',
-        body: 'Completion notices push outbound to Lark / Slack / HTTP webhook; the reverse — turning inbound issues or IM messages into tasks — is not live yet.',
-      },
-      {
-        icon: 'i-simple-icons-notion',
-        title: 'Notion as a knowledge source',
-        body: 'The Feishu connector is implemented; Notion as a knowledge-base source is still on the roadmap, not yet implemented.',
-      },
-      {
-        icon: 'i-simple-icons-wechat',
-        title: 'WeCom (企业微信) channel',
-        body: '11 IM channels have landed. WeCom is on the way — once shipped it closes the last gap for in-company collaboration.',
-      },
-      {
-        icon: 'i-mdi-shield-star-outline',
-        title: 'More dazzling capabilities',
-        body: 'For data-security reasons, several more advanced features are held back from the open-source build. Putting peace of mind first is a deliberate trade-off.',
-        reason: 'withheld',
+        date: 'Early 2026',
+        label: 'Innovation rolling into public builds',
+        title: 'Desktop, mobile, clusters, and services evolving together',
+        body: 'The project only became public after the UI rebuild. New forms now extend the workstation into direct mobile access, Agent clusters, and customer-service scenarios.',
+        icon: 'i-mdi-rocket-launch-outline',
+        tone: 'ahead',
+        items: [
+          'Agent Desktop mini apps, normal-session iteration, and local publish working copies',
+          'A secure customer-service cluster system',
+          'Mobile prefers a direct Desktop connection, with an optional relay for cross-network access',
+          'Original Agent-cluster interaction and a super-companion IM gateway',
+          'More capabilities remain under validation; some are not public yet',
+        ],
       },
     ],
-    honestTitle: 'A word, plainly',
-    honestBody: 'This project is built part-time by a solo author with limited bandwidth, so iteration and fixes may not move as fast as you would like. Thank you for your patience — and a genuine invitation to build it together. More hands, faster road.',
+    honestTitle: 'Why is the project only public now?',
+    honestBody: 'NomiFun began as an experimental tool for our own work and a few content-creator friends. We opened the source after the 2026 UI rebuild. Bandwidth is still limited, and the project remains both experimental and public-interest oriented, so we would rather explain the code, boundaries, and real progress than push hard marketing.',
     cta: 'See how to contribute',
   },
 };
@@ -120,29 +132,41 @@ const t = pick(copy, locale);
   <div class="container-x">
     <SectionHeader eyebrow={t.eyebrow} title={t.title} lead={t.lead} />
 
-    <!-- roadmap grid -->
-    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
-      {t.items.map((item) => (
-        <li class="card card-hover flex flex-col p-6">
-          <div class="flex items-start justify-between gap-3">
-            <span class="grid h-11 w-11 place-items-center rounded-xl border border-warning/25 bg-warning/10">
-              <span class={`${item.icon} text-xl text-warning`} aria-hidden="true"></span>
-            </span>
-            <Badge tone="soon">
-              <span class="i-mdi-clock-outline text-xs" aria-hidden="true"></span>
-              {item.reason === 'withheld' ? t.withheldLabel : t.soonLabel}
+    <div class="mt-12 grid gap-6 lg:grid-cols-2" data-stagger>
+      {t.eras.map((era) => (
+        <article class="card card-hover flex flex-col p-6 sm:p-8">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <span class="grid h-12 w-12 place-items-center rounded-2xl border border-pink-500/25 bg-pink-500/10">
+                <span class={`${era.icon} text-2xl text-pink-400`} aria-hidden="true"></span>
+              </span>
+              <div>
+                <p class="font-mono text-sm font-semibold text-pink-300">{era.date}</p>
+                <p class="mt-0.5 text-xs text-low">{era.label}</p>
+              </div>
+            </div>
+            <Badge tone={era.tone === 'live' ? 'success' : era.tone === 'private' ? 'soon' : 'violet'}>
+              <span class={`inline-block h-1.5 w-1.5 rounded-full ${era.tone === 'live' ? 'bg-success' : era.tone === 'private' ? 'bg-warning' : 'bg-violet-300'}`} aria-hidden="true"></span>
+              {t.statusLabels[era.tone]}
             </Badge>
           </div>
-          <h3 class="mt-4 text-base font-semibold text-hi">{item.title}</h3>
-          <p class="mt-2 text-sm leading-relaxed text-mid">{item.body}</p>
-        </li>
+          <h3 class="mt-6 text-xl font-semibold leading-tight text-hi">{era.title}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-mid">{era.body}</p>
+          <ul class="mt-5 flex flex-col gap-3 border-t border-ink-700/70 pt-5">
+            {era.items.map((item) => (
+              <li class="flex items-start gap-2.5 text-sm leading-relaxed text-mid">
+                <span class="i-mdi-check-circle-outline mt-0.5 shrink-0 text-base text-pink-400" aria-hidden="true"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
       ))}
-    </ul>
+    </div>
 
-    <!-- honest, gracious note -->
     <div class="mt-10" data-animate>
       <div class="card relative overflow-hidden p-6 sm:p-8">
-        <div class="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full opacity-50 blur-3xl" style="background: radial-gradient(closest-side, rgba(255,111,145,0.18), transparent)"></div>
+        <div class="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full opacity-50 blur-3xl" style="background: radial-gradient(closest-side, rgba(255,111,145,0.18), transparent)" aria-hidden="true"></div>
         <div class="relative flex flex-col gap-4 sm:flex-row sm:items-start">
           <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-pink-500/30 bg-pink-500/10">
             <span class="i-mdi-hand-heart-outline text-xl text-pink-400" aria-hidden="true"></span>

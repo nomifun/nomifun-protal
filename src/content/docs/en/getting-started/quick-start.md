@@ -59,4 +59,4 @@ The desktop app (nomifun-desktop) and the self-hosted web server (nomifun-web) s
 - [WebUI remote access](/docs/guides/webui-remote)
 - [Web server deployment](/docs/getting-started/installation)
 
-Full docs → [GitHub](https://github.com/nomifun/nomifun-tauri)
+Full docs → [GitHub](https://github.com/nomifun/nomifun-desktop)
