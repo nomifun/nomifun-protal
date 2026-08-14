@@ -69,6 +69,7 @@ public/screenshots/current-home-en.png
 | Desktop 源码 | `https://github.com/nomifun/nomifun-desktop` |
 | Mobile 源码 | `https://github.com/nomifun/nomifun-mobile` |
 | Xiaozhi Yuntai 源码 | `https://github.com/nomifun/nomifun-xiaozhi-yuntai` |
+| NomiFun Net Infra 源码 | `https://github.com/nomifun/nomifun-net-infra` |
 | Desktop Releases | `https://github.com/nomifun/nomifun-desktop/releases` |
 | Desktop Issues | `https://github.com/nomifun/nomifun-desktop/issues` |
 | Docker Hub | `https://hub.docker.com/repository/docker/nomifun/nomifun-web` |

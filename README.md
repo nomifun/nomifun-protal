@@ -5,8 +5,9 @@ Desktop。它把桌面伙伴、会话协作、模型管理、知识库、Skill�
 WebUI 远程访问、Browser Use、Computer Use、需求管理、自动工作、创意工坊和
 Agent Desktop 小程序放进一套可审计、可扩展的工作站。
 
-本仓库是 NomiFun 官方网站与中英文文档门户源码。NomiFun Desktop、Mobile 与
-Xiaozhi Yuntai 共同组成从桌面中枢、无云端移动连接到硬件多模态伙伴的开源产品家族；
+本仓库是 NomiFun 官方网站与中英文文档门户源码。NomiFun Desktop、Mobile、
+Xiaozhi Yuntai 与 Net Infra 共同组成从桌面中枢、移动连接、硬件多模态伙伴到
+自托管跨网中继的开源项目家族；
 源码、官网产品介绍和接入文档见下方的[NomiFun 开源生态家族](#nomifun-开源生态家族)。
 
 ![NomiFun 自动工作与编排画布](public/images/showcase/autowork-flow-readme.png)
@@ -28,10 +29,12 @@ SLA，也没有强宣传或商业化增长诉求。欢迎使用、审计、二�
 | [NomiFun Desktop](https://github.com/nomifun/nomifun-desktop) | 跨平台主工作台与本地中枢：Windows、macOS、Linux；多模型、多 Agent、会话、终端、WebUI、知识库、自动化、小程序和本地伙伴能力。 | [Desktop 产品页](https://www.nomifun.com/zh/products/desktop/) | [Desktop 文档](https://www.nomifun.com/zh/docs/getting-started/introduction/) |
 | [NomiFun Mobile](https://github.com/nomifun/nomifun-mobile) | 手机移动入口：在局域网或用户自行建立的可信网络中直连自己的 Desktop，不依赖 NomiFun 云端中转服务器。 | [Mobile 产品页](https://www.nomifun.com/zh/products/mobile/) | [Mobile 与 Desktop 直连](https://www.nomifun.com/zh/docs/guides/mobile-bridge/) |
 | [NomiFun Xiaozhi Yuntai](https://github.com/nomifun/nomifun-xiaozhi-yuntai) | 硬件多模态伙伴接入：把小智兼容设备的语音、显示和设备 MCP 能力接入 NomiFun Desktop。 | [Xiaozhi Yuntai 产品页](https://www.nomifun.com/zh/products/xiaozhi-yuntai/) | [小智机器人接入文档](https://www.nomifun.com/zh/docs/guides/xiaozhi-robot/) |
+| [NomiFun Net Infra](https://github.com/nomifun/nomifun-net-infra) | 自托管网络中继：把 NAT 后的 Desktop、家庭或工厂 HTTP/WebSocket/TCP/UDP 服务安全提供给手机与 IoT 设备。 | [Net Infra 产品页](https://www.nomifun.com/zh/products/net-infra/) | [网络中继接入文档](https://www.nomifun.com/zh/docs/guides/net-infra/) |
 
 推荐以 **Desktop 作为本地数据、模型、Agent 与工具能力中枢**：Mobile 通过一次性配对凭据
 直连用户自己的 Desktop；Xiaozhi Yuntai 则把语音、显示、舵机和设备端 MCP 能力接入
-Desktop。三个项目既可独立阅读和二次开发，也能组合成桌面、手机与实体伙伴协同的完整系统。
+Desktop；需要跨网络访问时，可由用户自行部署 NomiRelay 与 nfagent 承载业务流量。
+四个项目既可独立阅读和二次开发，也能组合成桌面、手机、实体伙伴与跨网访问协同的完整系统。
 
 ## 联系与交流
 
@@ -40,7 +43,7 @@ Desktop。三个项目既可独立阅读和二次开发，也能组合成桌面�
 - 邮箱：[535526063@qq.com](mailto:535526063@qq.com)
 - 微信群：扫描下方二维码加入 NomiFun 交流群。
 
-![NomiFun 微信交流群二维码](public/images/zh/联系方式/wechat-group/qr.png)
+![NomiFun 微信交流群二维码](public/images/contact/nomifun-wechat-group.jpg)
 
 ## 下载与演示
 

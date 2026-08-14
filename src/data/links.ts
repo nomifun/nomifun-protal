@@ -11,6 +11,7 @@ export const links = {
   desktopRepo: 'https://github.com/nomifun/nomifun-desktop',
   mobileRepo: 'https://github.com/nomifun/nomifun-mobile',
   xiaozhiRepo: 'https://github.com/nomifun/nomifun-xiaozhi-yuntai',
+  netInfraRepo: 'https://github.com/nomifun/nomifun-net-infra',
   // GitHub Releases page (download buttons)
   releases: 'https://github.com/nomifun/nomifun-desktop/releases',
   // GitHub redirect for the latest non-draft, non-prerelease release
@@ -67,6 +68,13 @@ export const ecosystemRepos = [
     url: links.xiaozhiRepo,
     icon: 'i-mdi-robot-outline',
     accent: 'cyan',
+  },
+  {
+    id: 'net-infra',
+    name: 'NomiFun Net Infra',
+    url: links.netInfraRepo,
+    icon: 'i-mdi-server-network-outline',
+    accent: 'amber',
   },
 ] as const;
 

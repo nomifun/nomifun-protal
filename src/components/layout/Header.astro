@@ -20,8 +20,8 @@ const items = [
 const menuCopy = pick(
   {
     'zh-CN': {
-      productOverview: '三个产品总览',
-      productOverviewDesc: '了解 Desktop、Mobile 与小智云台如何协同',
+      productOverview: '四个项目总览',
+      productOverviewDesc: '了解 Desktop、Mobile、小智云台与 Net Infra 如何协同',
       docsOverview: '全部操作文档',
       docsOverviewDesc: '浏览 Desktop 的安装、配置与功能指南',
       introduction: '产品介绍',
@@ -31,11 +31,12 @@ const menuCopy = pick(
         { id: 'desktop', name: 'NomiFun Desktop', desc: '本地 AI 工作站与服务中枢', icon: 'i-mdi-monitor-dashboard', guide: '/docs' },
         { id: 'mobile', name: 'NomiFun Mobile', desc: '直连 Desktop 的随身客户端', icon: 'i-mdi-cellphone-link', guide: '/docs/guides/mobile-bridge' },
         { id: 'xiaozhi-yuntai', name: 'NomiFun 小智云台', desc: '面向小智机器人的开源云台工程', icon: 'i-mdi-robot-outline', guide: '/docs/guides/xiaozhi-robot' },
+        { id: 'net-infra', name: 'NomiFun Net Infra', desc: '自托管的跨网中继与访问基础设施', icon: 'i-mdi-server-network-outline', guide: '/docs/guides/net-infra' },
       ],
     },
     'en-US': {
-      productOverview: 'All three products',
-      productOverviewDesc: 'See how Desktop, Mobile, and Xiaozhi work together',
+      productOverview: 'All four projects',
+      productOverviewDesc: 'See how Desktop, Mobile, Xiaozhi, and Net Infra work together',
       docsOverview: 'All operation docs',
       docsOverviewDesc: 'Browse Desktop setup, configuration, and feature guides',
       introduction: 'Product guide',
@@ -45,6 +46,7 @@ const menuCopy = pick(
         { id: 'desktop', name: 'NomiFun Desktop', desc: 'Local AI workstation and service hub', icon: 'i-mdi-monitor-dashboard', guide: '/docs' },
         { id: 'mobile', name: 'NomiFun Mobile', desc: 'Pocket client that connects directly to Desktop', icon: 'i-mdi-cellphone-link', guide: '/docs/guides/mobile-bridge' },
         { id: 'xiaozhi-yuntai', name: 'NomiFun Xiaozhi Yuntai', desc: 'Open pan-tilt project for Xiaozhi robots', icon: 'i-mdi-robot-outline', guide: '/docs/guides/xiaozhi-robot' },
+        { id: 'net-infra', name: 'NomiFun Net Infra', desc: 'Self-hosted relay infrastructure for cross-network access', icon: 'i-mdi-server-network-outline', guide: '/docs/guides/net-infra' },
       ],
     },
   } satisfies Dict<any>,
@@ -52,7 +54,13 @@ const menuCopy = pick(
 );
 
 const repoFor = (id: string) =>
-  id === 'desktop' ? links.desktopRepo : id === 'mobile' ? links.mobileRepo : links.xiaozhiRepo;
+  id === 'desktop'
+    ? links.desktopRepo
+    : id === 'mobile'
+      ? links.mobileRepo
+      : id === 'xiaozhi-yuntai'
+        ? links.xiaozhiRepo
+        : links.netInfraRepo;
 const productsRoot = localizePath('/products', locale);
 const docsRoot = localizePath('/docs', locale);
 
@@ -88,7 +96,7 @@ function isActive(href: string) {
         }`}>
           {t.products}<span class="i-mdi-chevron-down text-base transition-transform group-open:rotate-180" aria-hidden="true"></span>
         </summary>
-        <div class="absolute left-1/2 top-full w-[27rem] -translate-x-1/2 pt-3">
+        <div class="absolute left-1/2 top-full w-[30rem] -translate-x-1/2 pt-3">
           <div class="rounded-2xl border border-ink-600 bg-ink-900/98 p-3 shadow-2xl backdrop-blur-xl">
             <a href={productsRoot} class="flex items-start gap-3 rounded-xl bg-ink-800/70 p-3 transition-colors hover:bg-ink-700/80">
               <span class="i-mdi-view-grid-outline mt-0.5 text-xl text-pink-400" aria-hidden="true"></span>
@@ -124,7 +132,7 @@ function isActive(href: string) {
         }`}>
           {t.docs}<span class="i-mdi-chevron-down text-base transition-transform group-open:rotate-180" aria-hidden="true"></span>
         </summary>
-        <div class="absolute left-1/2 top-full w-[27rem] -translate-x-1/2 pt-3">
+        <div class="absolute left-1/2 top-full w-[30rem] -translate-x-1/2 pt-3">
           <div class="rounded-2xl border border-ink-600 bg-ink-900/98 p-3 shadow-2xl backdrop-blur-xl">
             <a href={docsRoot} class="flex items-start gap-3 rounded-xl bg-ink-800/70 p-3 transition-colors hover:bg-ink-700/80">
               <span class="i-mdi-book-open-page-variant-outline mt-0.5 text-xl text-pink-400" aria-hidden="true"></span>

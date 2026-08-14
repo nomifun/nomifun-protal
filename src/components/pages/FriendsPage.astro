@@ -46,7 +46,7 @@ const copy: Dict<{
     lead: '这里集中展示 NomiFun 的开源项目家族，也保留我们真心喜欢的友情推荐。项目从自用与内容朋友的小范围使用开始，保持实验性、公益性与克制的开放节奏。',
     familyTitle: 'NomiFun 开源生态家族',
     familyEyebrow: '开源生态家族',
-    familyLead: '一套本地优先的 Agent Desktop 底座，连接桌面、移动端与硬件伙伴。所有仓库都欢迎阅读、二次开发与共建。',
+    familyLead: '一套本地优先的 Agent Desktop 底座，连接桌面、移动端、硬件伙伴与自托管网络中继。所有仓库都欢迎阅读、二次开发与共建。',
     repoVisit: '查看 GitHub 仓库',
     repos: {
       desktop: {
@@ -63,6 +63,11 @@ const copy: Dict<{
         tagline: '硬件多模态伙伴与小智接入',
         desc: '把麦克风、扬声器、屏幕、舵机等硬件能力接入 NomiFun 伙伴，让桌面 Agent 走进真实设备与更多交互场景。',
         tags: ['硬件伙伴', '语音与多模态', '开放接入'],
+      },
+      'net-infra': {
+        tagline: '自托管的跨网络中继基础设施',
+        desc: 'NomiRelay 用 QUIC 优先、TLS/TCP 回退的承载，把 NAT 后的 HTTP、WebSocket、TCP 与 UDP 服务安全提供给手机和 IoT 设备，并保留清晰的运维与权限边界。',
+        tags: ['自托管', 'QUIC / TCP / UDP', 'MIT'],
       },
     },
     friendsEyebrow: '友情推荐',
@@ -99,7 +104,7 @@ const copy: Dict<{
     lead: 'This page puts the NomiFun open-source family first, while keeping a smaller list of products we genuinely recommend. NomiFun began as a tool for our own work and friends, so we keep its experimental, public-interest spirit and a deliberately measured pace.',
     familyTitle: 'NomiFun open-source family',
     familyEyebrow: 'OPEN-SOURCE FAMILY',
-    familyLead: 'One local-first Agent Desktop foundation spanning desktop, mobile access, and hardware companions. Every repository is open for reading, forking, and building on.',
+    familyLead: 'One local-first Agent Desktop foundation spanning desktop, mobile access, hardware companions, and self-hosted network relaying. Every repository is open for reading, forking, and building on.',
     repoVisit: 'View on GitHub',
     repos: {
       desktop: {
@@ -116,6 +121,11 @@ const copy: Dict<{
         tagline: 'Hardware multimodal companions',
         desc: 'Connect microphones, speakers, displays, servos, and other hardware capabilities to NomiFun companions, bringing desktop agents into physical devices and new interaction surfaces.',
         tags: ['Hardware companions', 'Voice & multimodal', 'Open integration'],
+      },
+      'net-infra': {
+        tagline: 'Self-hosted cross-network relay infrastructure',
+        desc: 'NomiRelay uses QUIC-first transport with TLS/TCP fallback to expose HTTP, WebSocket, TCP, and UDP services behind NAT to phones and IoT devices while preserving explicit operator and trust boundaries.',
+        tags: ['Self-hosted', 'QUIC / TCP / UDP', 'MIT'],
       },
     },
     friendsEyebrow: 'FRIENDLY PICKS',
@@ -166,6 +176,11 @@ const accentMap = {
     btn: 'btn-ghost',
     tag: 'border-cyan-400/25 text-cyan-100',
   },
+  amber: {
+    tile: 'border-amber-300/30 bg-amber-400/10 text-amber-200',
+    btn: 'btn-ghost',
+    tag: 'border-amber-300/25 text-amber-100',
+  },
 };
 ---
 
@@ -186,7 +201,7 @@ const accentMap = {
         <p class="text-base leading-relaxed text-mid sm:text-lg">{t.familyLead}</p>
       </div>
 
-      <div class="mt-8 grid gap-5 lg:grid-cols-3" data-stagger>
+      <div class="mt-8 grid gap-5 lg:grid-cols-2" data-stagger>
         {ecosystemRepos.map((repo) => {
           const c = t.repos[repo.id];
           const a = accentMap[repo.accent];

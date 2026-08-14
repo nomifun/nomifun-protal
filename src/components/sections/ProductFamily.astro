@@ -17,7 +17,7 @@ const copy: Dict<{
   details: string;
   demo: string;
   products: {
-    id: 'desktop' | 'mobile' | 'xiaozhi-yuntai';
+    id: 'desktop' | 'mobile' | 'xiaozhi-yuntai' | 'net-infra';
     label: string;
     role: string;
     title: string;
@@ -27,8 +27,8 @@ const copy: Dict<{
 }> = {
   'zh-CN': {
     eyebrow: 'NomiFun 开源产品家族',
-    title: '三个产品，连接成一套完整体验',
-    lead: '先选择你最需要的入口。每个项目都有独立源码、安装方式和产品介绍；把它们连接起来，Desktop 会成为 Mobile 与机器人的本地能力中枢。',
+    title: '四个开源项目，连接成一套完整体验',
+    lead: 'Desktop 负责本地能力与数据，Mobile 和小智云台提供不同交互入口；需要跨网络访问时，可自行部署 Net Infra。每个项目都有独立源码、安装方式和产品文档。',
     source: '查看源码',
     details: '产品介绍',
     demo: '真实 Demo',
@@ -57,12 +57,20 @@ const copy: Dict<{
         description: '面向小智机器人的开源云台工程，让语音助手拥有可转动的视角，并可与 NomiFun 的本地 AI 能力组合。',
         highlights: ['ESP32-S3 开源硬件工程', '云台动作与视觉方向', '可接入 Desktop AI 服务'],
       },
+      {
+        id: 'net-infra',
+        label: '04 · NET INFRA',
+        role: '自托管网络中继',
+        title: 'NomiFun Net Infra',
+        description: 'NomiRelay 将 NAT 后的 Desktop、家庭或工厂服务安全暴露给手机与 IoT 设备，提供 QUIC 优先承载、TCP 回退、Web 控制台与细粒度访问策略。',
+        highlights: ['HTTP / WebSocket / TCP / UDP', 'QUIC 优先与 TLS/TCP 回退', '自托管、可审计、无托管依赖'],
+      },
     ],
   },
   'en-US': {
     eyebrow: 'The NomiFun open-source family',
-    title: 'Three products, one connected experience',
-    lead: 'Start with the product you need. Each project has its own source, setup path, and product guide. Connect them and Desktop becomes the local capability hub for Mobile and the robot.',
+    title: 'Four open-source projects, one connected experience',
+    lead: 'Desktop owns local capabilities and data; Mobile and Xiaozhi provide different interaction surfaces. When access must cross networks, you can deploy Net Infra yourself. Every project has its own source, setup path, and product guide.',
     source: 'View source',
     details: 'Product guide',
     demo: 'Real demo',
@@ -91,6 +99,14 @@ const copy: Dict<{
         description: 'An open-source pan-tilt project for Xiaozhi robots, giving a voice assistant a movable point of view and a path into NomiFun local AI capabilities.',
         highlights: ['ESP32-S3 open hardware project', 'Pan-tilt motion and viewing direction', 'Connects to Desktop AI services'],
       },
+      {
+        id: 'net-infra',
+        label: '04 · NET INFRA',
+        role: 'Self-hosted network relay',
+        title: 'NomiFun Net Infra',
+        description: 'NomiRelay exposes Desktop and other services behind NAT to phones and IoT devices with QUIC-first transport, TCP fallback, a web console, and explicit access policy.',
+        highlights: ['HTTP / WebSocket / TCP / UDP', 'QUIC first with TLS/TCP fallback', 'Self-hosted, auditable, no hosted dependency'],
+      },
     ],
   },
 };
@@ -100,6 +116,7 @@ const repos = {
   desktop: links.desktopRepo,
   mobile: links.mobileRepo,
   'xiaozhi-yuntai': links.xiaozhiRepo,
+  'net-infra': links.netInfraRepo,
 };
 ---
 
@@ -111,7 +128,7 @@ const repos = {
       <p class="mt-5 text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
     </div>
 
-    <div class="mt-12 grid gap-6 lg:grid-cols-3" data-stagger>
+    <div class="mt-12 grid gap-6 lg:grid-cols-2" data-stagger>
       {t.products.map((product) => (
         <article class="group flex min-w-0 flex-col overflow-hidden rounded-3xl border border-ink-600/75 bg-ink-800/65 transition hover:-translate-y-1 hover:border-pink-500/45">
           <div class="relative h-[250px] overflow-hidden border-b border-ink-700 bg-ink-950">
@@ -141,6 +158,17 @@ const repos = {
                 class="h-full w-full object-cover"
                 aria-label={product.title + ' · ' + t.demo}
               ></video>
+            )}
+            {product.id === 'net-infra' && (
+              <div class="absolute inset-0 flex items-center justify-center bg-[radial-gradient(circle_at_50%_45%,rgba(255,184,77,.2),transparent_62%)] p-8" aria-hidden="true">
+                <div class="flex w-full max-w-md items-center justify-between gap-3">
+                  <span class="flex h-16 w-16 items-center justify-center rounded-2xl border border-violet-400/35 bg-violet-500/10 text-3xl text-violet-200"><span class="i-mdi-cellphone-link"></span></span>
+                  <span class="h-px flex-1 bg-gradient-to-r from-violet-400/60 to-amber-300/70"></span>
+                  <span class="flex h-24 w-24 items-center justify-center rounded-3xl border border-amber-300/45 bg-amber-400/10 text-5xl text-amber-200 shadow-[0_0_55px_rgba(251,191,36,.18)]"><span class="i-mdi-server-network-outline"></span></span>
+                  <span class="h-px flex-1 bg-gradient-to-r from-amber-300/70 to-pink-400/60"></span>
+                  <span class="flex h-16 w-16 items-center justify-center rounded-2xl border border-pink-400/35 bg-pink-500/10 text-3xl text-pink-200"><span class="i-mdi-monitor-dashboard"></span></span>
+                </div>
+              </div>
             )}
             <span class="absolute left-4 top-4 rounded-full border border-white/10 bg-ink-950/85 px-3 py-1 text-[11px] font-bold tracking-[0.18em] text-pink-300 backdrop-blur">
               {product.label}

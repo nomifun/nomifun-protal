@@ -16,8 +16,8 @@ export const nav: Dict<{
 };
 
 export const brand: Dict<{ name: string; tagline: string }> = {
-  'zh-CN': { name: 'NomiFun', tagline: 'Desktop · Mobile · 小智云台，三个关联的开源产品' },
-  'en-US': { name: 'NomiFun', tagline: 'Desktop · Mobile · Xiaozhi, three connected open-source products' },
+  'zh-CN': { name: 'NomiFun', tagline: 'Desktop · Mobile · 小智云台 · Net Infra，四个关联的开源项目' },
+  'en-US': { name: 'NomiFun', tagline: 'Desktop · Mobile · Xiaozhi · Net Infra, four connected open-source projects' },
 };
 
 export const footer: Dict<{
@@ -38,10 +38,11 @@ export const footer: Dict<{
     communityTitle: '社区',
     links: [
       { label: '首页', href: '/' },
-      { label: '三个开源产品', href: '/products' },
+      { label: '四个开源项目', href: '/products' },
       { label: 'NomiFun Desktop', href: '/products/desktop' },
       { label: 'NomiFun Mobile', href: '/products/mobile' },
       { label: 'NomiFun 小智云台', href: '/products/xiaozhi-yuntai' },
+      { label: 'NomiFun Net Infra', href: '/products/net-infra' },
       { label: '操作文档', href: '/docs' },
       { label: '下载', href: '/download' },
       { label: '其他项目', href: '/friends' },
@@ -49,7 +50,7 @@ export const footer: Dict<{
     ],
     resources: [
       { label: 'Desktop GitHub 仓库', href: '#github' },
-      { label: 'Mobile / Xiaozhi 项目', href: '/friends' },
+      { label: 'Mobile / Xiaozhi / Net Infra', href: '/friends' },
       { label: 'Apache-2.0 许可', href: '#license' },
     ],
     license: '基于 Apache License 2.0 开源',
@@ -63,10 +64,11 @@ export const footer: Dict<{
     communityTitle: 'Community',
     links: [
       { label: 'Home', href: '/' },
-      { label: 'Three open-source products', href: '/products' },
+      { label: 'Four open-source projects', href: '/products' },
       { label: 'NomiFun Desktop', href: '/products/desktop' },
       { label: 'NomiFun Mobile', href: '/products/mobile' },
       { label: 'NomiFun Xiaozhi Yuntai', href: '/products/xiaozhi-yuntai' },
+      { label: 'NomiFun Net Infra', href: '/products/net-infra' },
       { label: 'Docs', href: '/docs' },
       { label: 'Download', href: '/download' },
       { label: 'Other projects', href: '/friends' },
@@ -74,7 +76,7 @@ export const footer: Dict<{
     ],
     resources: [
       { label: 'Desktop GitHub repo', href: '#github' },
-      { label: 'Mobile / Xiaozhi projects', href: '/friends' },
+      { label: 'Mobile / Xiaozhi / Net Infra', href: '/friends' },
       { label: 'Apache-2.0 license', href: '#license' },
     ],
     license: 'Open-source under the Apache License 2.0',

@@ -4,7 +4,7 @@ import ProductFamily from '@/components/sections/ProductFamily.astro';
 import { getLocale, localizePath, pick, type Dict, type Locale } from '@/i18n';
 import { links } from '@/data/links';
 
-type ProductId = 'desktop' | 'mobile' | 'xiaozhi-yuntai';
+type ProductId = 'desktop' | 'mobile' | 'xiaozhi-yuntai' | 'net-infra';
 
 interface Props {
   product: ProductId;
@@ -21,22 +21,23 @@ const shared = pick(
       download: '下载 Desktop',
       screenshots: '最新产品实拍',
       screenshotsLead: '以下截图来自本机实际运行的当前版本，不是设计稿或历史宣传图。',
-      connectionTitle: '三个项目如何协同',
-      connectionLead: 'Desktop 保管数据并运行 AI 能力；Mobile 与小智设备通过明确开放的入口接入。',
+      connectionTitle: '四个项目如何协同',
+      connectionLead: 'Desktop 保管数据并运行 AI 能力；Mobile 与小智设备负责交互；Net Infra 在用户明确部署时提供跨网承载。',
       steps: [
         ['1', '启动 Desktop', '配置模型、伙伴和 Skills，并在“远程&开放能力”中启用需要的服务。'],
         ['2', '连接 Mobile', '手机扫描 Desktop 生成的一次性二维码，随后使用会话、任务、需求与伙伴能力。'],
         ['3', '接入机器人', '按小智云台 README 完成固件与硬件配置，再将语音和机器人能力接入 Desktop。'],
+        ['4', '按需部署中继', '跨网络访问时，自行部署 NomiRelay 与 nfagent；Mobile 只连接业务入口，不持有中继管理员凭据。'],
       ],
-      more: '继续认识另外两个产品',
+      more: '继续认识其他开源项目',
       video: '小智云台真实 Demo',
       architectureEyebrow: '本地优先的直连架构',
       architectureTitle: '手机是控制面，Desktop 才是能力与数据中枢',
-      architectureLead: 'NomiFun 没有为了做手机端再复制一套云端后端。Mobile 复用 Desktop 明确开启的 WebUI HTTP / WebSocket 能力面，在局域网中直接连接自己的电脑；当前版本没有接入 NomiFun 公网中继。',
-      architectureBoundary: '边界说明：Desktop 仍负责模型调用、Agent 执行、会话、文件与工作区数据。Mobile 保存连接配置与必要的客户端状态。若用户自行使用 VPN、端口转发或第三方网络服务，网络边界由该方案决定；不要把 25808 端口直接暴露到公网。',
-      architectureFlow: ['NomiFun Mobile', '局域网 HTTP / WebSocket', 'NomiFun Desktop', '模型 · Agent · 数据 · 文件'],
+      architectureLead: 'NomiFun 没有为了手机端复制一套云端业务后端。可信局域网内，Mobile 直接连接 Desktop；跨网络时可以由用户自行部署 NomiRelay，将同一套 HTTP / WebSocket 业务入口转发回自己的 Desktop。',
+      architectureBoundary: '边界说明：Desktop 仍负责模型调用、Agent 执行、会话、文件与工作区数据。NomiRelay 负责网络承载而不是业务逻辑；Mobile 不接触 Relay 管理员密码、enrol token 或控制台 API。局域网监听器不要直接暴露到公网，公网部署必须配置 HTTPS/WSS 或等价安全边界。',
+      architectureFlow: ['NomiFun Mobile', '局域网直连 / NomiRelay 业务入口', 'NomiFun Desktop', '模型 · Agent · 数据 · 文件'],
       architecturePoints: [
-        ['i-mdi-lan-connect', '没有 NomiFun 云中转', '同一可信网络内，业务请求从手机直接到自己的 Desktop，不经过 NomiFun 统一账号或云端业务服务器。'],
+        ['i-mdi-lan-connect', '局域网仍然直接连接', '同一可信网络内，业务请求从手机直接到自己的 Desktop，不经过 NomiFun 统一账号或云端业务服务器。'],
         ['i-mdi-shield-key-outline', '一次性凭证完成初次配对', '二维码由 Desktop 本机生成，包含短时、一次性使用的登录凭证；兑换完成后即失效，避免长期密钥直接出现在二维码中。'],
         ['i-mdi-database-lock-outline', '电脑保持唯一能力边界', '模型密钥、伙伴记忆、工作区和执行权限继续由 Desktop 管理；手机不会变成第二份数据中心，也不直接获得宿主权限。'],
         ['i-mdi-access-point-network', '一套 API，多种终端', 'Mobile 复用 Desktop 的 WebUI HTTP / WebSocket API 与事件流，桌面界面、手机和后续硬件入口围绕同一状态协同，而不是各自维护孤立副本。'],
@@ -48,22 +49,23 @@ const shared = pick(
       download: 'Download Desktop',
       screenshots: 'Latest product captures',
       screenshotsLead: 'Every image below was captured from the currently running product — not a design mockup or an old marketing image.',
-      connectionTitle: 'How the three projects work together',
-      connectionLead: 'Desktop keeps the data and runs AI capabilities. Mobile and Xiaozhi devices connect through interfaces you explicitly enable.',
+      connectionTitle: 'How the four projects work together',
+      connectionLead: 'Desktop keeps the data and runs AI capabilities. Mobile and Xiaozhi provide interaction surfaces. Net Infra carries traffic across networks only when you deploy it.',
       steps: [
         ['1', 'Start Desktop', 'Configure models, companions, and Skills, then enable only the services you need under Remote & Open.'],
         ['2', 'Connect Mobile', 'Scan Desktop’s one-time QR code, then use sessions, tasks, requirements, and companions from your phone.'],
         ['3', 'Add the robot', 'Complete firmware and hardware setup from the Yuntai README, then connect voice and robot capabilities to Desktop.'],
+        ['4', 'Deploy a relay when needed', 'For cross-network access, self-host NomiRelay and nfagent. Mobile connects only to the business endpoint and never holds relay-admin credentials.'],
       ],
-      more: 'Explore the other products',
+      more: 'Explore the other open-source projects',
       video: 'Real Xiaozhi Yuntai demo',
       architectureEyebrow: 'A local-first direct-link architecture',
       architectureTitle: 'Mobile is the control plane; Desktop remains the capability and data hub',
-      architectureLead: 'NomiFun did not create a second cloud backend just to ship a phone app. Mobile reuses the WebUI HTTP / WebSocket capability plane that you explicitly enable on Desktop and connects directly over the LAN. The current release does not integrate a NomiFun public relay.',
-      architectureBoundary: 'Boundary: Desktop still performs model calls and Agent execution and owns sessions, files, and workspace data. Mobile stores connection settings and the client state it needs. If you add a VPN, port forward, or third-party network service, that solution defines the network boundary; do not expose port 25808 directly to the public Internet.',
-      architectureFlow: ['NomiFun Mobile', 'LAN HTTP / WebSocket', 'NomiFun Desktop', 'Models · Agents · data · files'],
+      architectureLead: 'NomiFun did not create a second cloud application backend for Mobile. On a trusted LAN, Mobile connects directly to Desktop. Across networks, you can self-host NomiRelay to carry the same HTTP / WebSocket business endpoint back to your own Desktop.',
+      architectureBoundary: 'Boundary: Desktop still performs model calls and Agent execution and owns sessions, files, and workspace data. NomiRelay transports network traffic rather than application logic; Mobile never receives the relay admin password, enrol token, or console API. Do not expose the LAN listener directly to the public Internet; public deployments require HTTPS/WSS or an equivalent security boundary.',
+      architectureFlow: ['NomiFun Mobile', 'Direct LAN / NomiRelay business endpoint', 'NomiFun Desktop', 'Models · Agents · data · files'],
       architecturePoints: [
-        ['i-mdi-lan-connect', 'No NomiFun cloud hop', 'On a trusted local network, business requests travel directly from the phone to your own Desktop, without a NomiFun account service or cloud application server in the middle.'],
+        ['i-mdi-lan-connect', 'The LAN path stays direct', 'On a trusted local network, business requests travel directly from the phone to your own Desktop, without a NomiFun account service or cloud application server in the middle.'],
         ['i-mdi-shield-key-outline', 'One-time credentials for initial pairing', 'Desktop creates the QR code locally with a short-lived, single-use login credential. It is consumed during exchange instead of placing a long-term secret in the QR code.'],
         ['i-mdi-database-lock-outline', 'The computer keeps the capability boundary', 'Model keys, companion memory, workspaces, and execution permissions remain under Desktop control. The phone is neither a second data hub nor a path to native host privileges.'],
         ['i-mdi-access-point-network', 'One API plane, multiple surfaces', 'Mobile reuses the Desktop WebUI HTTP / WebSocket APIs and event stream, so desktop UI, phone, and later hardware surfaces coordinate around one state instead of isolated copies.'],
@@ -129,6 +131,23 @@ const productCopy: Dict<Record<ProductId, {
         { icon: 'i-mdi-home-automation', title: '接入 NomiFun', text: '结合 Desktop 的模型与开放能力，扩展本地语音、Agent 和自动化场景。' },
       ],
     },
+    'net-infra': {
+      eyebrow: '自托管的跨网络访问基础设施',
+      title: 'NomiFun Net Infra',
+      lead: 'NomiRelay 将 NAT 后的 Desktop、家庭或工厂服务安全暴露给手机与 IoT 设备。它是可独立部署的通用中继，不托管你的 NomiFun 业务数据。',
+      repo: links.netInfraRepo,
+      icon: 'i-mdi-server-network-outline',
+      facts: ['Go 1.26', 'MIT', 'QUIC / TLS / TCP / UDP'],
+      featureTitle: '让跨网访问保持自托管、可观察、可约束',
+      features: [
+        { icon: 'i-mdi-swap-horizontal-bold', title: '通用业务隧道', text: '承载 HTTP、WebSocket、TCP 与 UDP，让公网客户端访问 NAT 后的服务。' },
+        { icon: 'i-mdi-shield-key-outline', title: '明确的信任边界', text: 'SPKI 指纹绑定、一次性入网令牌、目标默认拒绝策略与细粒度连接/带宽限制。' },
+        { icon: 'i-mdi-access-point-network', title: '弱网与受限网络适配', text: '优先使用 QUIC/UDP，并在 UDP 被封锁时回退到 TLS/TCP + smux；UDP 能力会如实标记降级。' },
+        { icon: 'i-mdi-view-dashboard-outline', title: '内置 Web 控制台', text: '完成首次初始化、agent 入网、隧道管理、事件审计和运行状态观察。' },
+        { icon: 'i-mdi-router-network', title: 'NomiFun 生态接入', text: '可将 Mobile 的 HTTP/WebSocket 流量转发到自己的 Desktop，也可服务机器人、家庭和工厂网络。' },
+        { icon: 'i-mdi-server-security', title: '完全自托管', text: '中继、agent、SQLite 状态与访问策略都由部署者掌控；项目不提供强制托管云依赖。' },
+      ],
+    },
   },
   'en-US': {
     desktop: {
@@ -174,6 +193,23 @@ const productCopy: Dict<Record<ProductId, {
         { icon: 'i-mdi-axis-z-rotate-clockwise', title: 'Pan-tilt motion', text: 'Use controlled horizontal and vertical motion to give voice interaction a visible direction.' },
         { icon: 'i-mdi-chip', title: 'An open project', text: 'Firmware, bill of materials, wiring, and build instructions live in the repository for reuse and modification.' },
         { icon: 'i-mdi-home-automation', title: 'Connect NomiFun', text: 'Combine Desktop models and open interfaces with local voice, Agent, and automation scenarios.' },
+      ],
+    },
+    'net-infra': {
+      eyebrow: 'Self-hosted infrastructure for cross-network access',
+      title: 'NomiFun Net Infra',
+      lead: 'NomiRelay exposes Desktop and other home or factory services behind NAT to phones and IoT devices. It is a general-purpose relay you deploy yourself; it does not host your NomiFun application data.',
+      repo: links.netInfraRepo,
+      icon: 'i-mdi-server-network-outline',
+      facts: ['Go 1.26', 'MIT', 'QUIC / TLS / TCP / UDP'],
+      featureTitle: 'Keep remote access self-hosted, observable, and constrained',
+      features: [
+        { icon: 'i-mdi-swap-horizontal-bold', title: 'General-purpose tunnels', text: 'Carry HTTP, WebSocket, TCP, and UDP from public clients to services behind NAT.' },
+        { icon: 'i-mdi-shield-key-outline', title: 'Explicit trust boundaries', text: 'SPKI pinning, one-time enrolment, default-deny target policy, and per-tunnel connection and bandwidth limits.' },
+        { icon: 'i-mdi-access-point-network', title: 'Restricted-network fallback', text: 'Prefer QUIC/UDP and fall back to TLS/TCP + smux when UDP is blocked, while reporting UDP degradation honestly.' },
+        { icon: 'i-mdi-view-dashboard-outline', title: 'Embedded web console', text: 'Initialize the relay, enrol agents, manage tunnels, audit events, and inspect runtime state.' },
+        { icon: 'i-mdi-router-network', title: 'NomiFun ecosystem integration', text: 'Carry Mobile HTTP/WebSocket traffic back to your own Desktop, or serve robot, home, and factory networks.' },
+        { icon: 'i-mdi-server-security', title: 'Fully self-hosted', text: 'The relay, agent, SQLite state, and access policy remain under operator control with no mandatory hosted-cloud dependency.' },
       ],
     },
   },
@@ -248,6 +284,17 @@ const mobileShots = [
           {product === 'xiaozhi-yuntai' && (
             <video src="/media/xiaozhi-yuntai-demo.mp4" controls playsinline preload="metadata" class="aspect-video w-full rounded-3xl border border-ink-600 bg-black object-cover shadow-2xl"></video>
           )}
+          {product === 'net-infra' && (
+            <div class="flex min-h-[300px] items-center justify-center rounded-3xl border border-ink-600 bg-ink-900/75 p-4 shadow-2xl sm:min-h-[360px] sm:p-8">
+              <div class="flex w-full max-w-xl items-center justify-between gap-2 sm:gap-4" aria-label={t.title}>
+                <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-violet-400/35 bg-violet-500/10 text-3xl text-violet-200 sm:h-20 sm:w-20 sm:text-4xl"><span class="i-mdi-cellphone-link"></span></span>
+                <span class="h-px flex-1 bg-gradient-to-r from-violet-400/60 to-amber-300/70"></span>
+                <span class="flex h-24 w-24 shrink-0 items-center justify-center rounded-3xl border border-amber-300/45 bg-amber-400/10 text-5xl text-amber-200 shadow-[0_0_70px_rgba(251,191,36,.2)] sm:h-32 sm:w-32 sm:rounded-[2rem] sm:text-6xl"><span class="i-mdi-server-network-outline"></span></span>
+                <span class="h-px flex-1 bg-gradient-to-r from-amber-300/70 to-pink-400/60"></span>
+                <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-pink-400/35 bg-pink-500/10 text-3xl text-pink-200 sm:h-20 sm:w-20 sm:text-4xl"><span class="i-mdi-monitor-dashboard"></span></span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -315,7 +362,7 @@ const mobileShots = [
     </section>
   )}
 
-  {product !== 'xiaozhi-yuntai' && (
+  {(product === 'desktop' || product === 'mobile') && (
     <section class="section-y bg-ink-850/35">
       <div class="container-x">
         <div class="max-w-3xl" data-animate>
@@ -373,7 +420,7 @@ const mobileShots = [
         <h2 class="text-3xl font-bold text-hi sm:text-4xl">{shared.connectionTitle}</h2>
         <p class="mt-4 text-base text-mid">{shared.connectionLead}</p>
       </div>
-      <ol class="mx-auto mt-10 grid max-w-5xl gap-5 md:grid-cols-3" data-stagger>
+      <ol class="mx-auto mt-10 grid max-w-6xl gap-5 md:grid-cols-2 xl:grid-cols-4" data-stagger>
         {shared.steps.map((step) => (
           <li class="rounded-2xl border border-ink-600/70 bg-ink-800/55 p-6">
             <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-pink-500 text-sm font-bold text-ink-950">{step[0]}</span>
