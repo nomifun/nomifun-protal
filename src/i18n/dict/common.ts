@@ -7,12 +7,12 @@ export const nav: Dict<{
   docs: string;
   download: string;
   contact: string;
-  friends: string;
+  blog: string;
   github: string;
   cta: string;
 }> = {
-  'zh-CN': { home: '首页', products: '产品', docs: '操作文档', download: '下载', contact: '联系我们', friends: '其他项目', github: 'GitHub', cta: '立即下载' },
-  'en-US': { home: 'Home', products: 'Products', docs: 'Docs', download: 'Download', contact: 'Contact', friends: 'Other projects', github: 'GitHub', cta: 'Get NomiFun' },
+  'zh-CN': { home: '首页', products: '产品', docs: '操作文档', download: '下载', contact: '联系我们', blog: '博客文章', github: 'GitHub', cta: '立即下载' },
+  'en-US': { home: 'Home', products: 'Products', docs: 'Docs', download: 'Download', contact: 'Contact', blog: 'Blog', github: 'GitHub', cta: 'Get NomiFun' },
 };
 
 export const brand: Dict<{ name: string; tagline: string }> = {
@@ -45,12 +45,12 @@ export const footer: Dict<{
       { label: 'NomiFun Net Infra', href: '/products/net-infra' },
       { label: '操作文档', href: '/docs' },
       { label: '下载', href: '/download' },
-      { label: '其他项目', href: '/friends' },
+      { label: '博客文章', href: '/blog' },
       { label: '联系我们', href: '/contact' },
     ],
     resources: [
       { label: 'Desktop GitHub 仓库', href: '#github' },
-      { label: 'Mobile / Xiaozhi / Net Infra', href: '/friends' },
+      { label: 'Mobile / Xiaozhi / Net Infra', href: '/products' },
       { label: 'Apache-2.0 许可', href: '#license' },
     ],
     license: '基于 Apache License 2.0 开源',
@@ -71,12 +71,12 @@ export const footer: Dict<{
       { label: 'NomiFun Net Infra', href: '/products/net-infra' },
       { label: 'Docs', href: '/docs' },
       { label: 'Download', href: '/download' },
-      { label: 'Other projects', href: '/friends' },
+      { label: 'Blog', href: '/blog' },
       { label: 'Contact', href: '/contact' },
     ],
     resources: [
       { label: 'Desktop GitHub repo', href: '#github' },
-      { label: 'Mobile / Xiaozhi / Net Infra', href: '/friends' },
+      { label: 'Mobile / Xiaozhi / Net Infra', href: '/products' },
       { label: 'Apache-2.0 license', href: '#license' },
     ],
     license: 'Open-source under the Apache License 2.0',

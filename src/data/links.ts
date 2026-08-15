@@ -48,8 +48,6 @@ export const links = {
   },
   // Public contact / security email
   email: '535526063@qq.com',
-  // Upstream attribution (Apache-2.0)
-  aionui: 'https://github.com/iOfficeAI/AionUi',
   license: 'https://www.apache.org/licenses/LICENSE-2.0',
 } as const;
 

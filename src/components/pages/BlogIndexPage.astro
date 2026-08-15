@@ -1,0 +1,69 @@
+---
+import { getLocale, localizePath, type Locale } from '@/i18n';
+import { blogSlug, getPublishedBlogPosts } from '@/lib/blog';
+
+const locale: Locale = getLocale(Astro.url);
+const posts = await getPublishedBlogPosts();
+const t = locale === 'zh-CN'
+  ? {
+      eyebrow: '博客文章',
+      title: '记录 NomiFun 的想法、进展与故事',
+      lead: '这里会持续收录项目自述、设计思考、开发进展与社区故事。每篇文章都是独立的 Markdown 文件，方便长期维护与扩展。',
+      read: '阅读全文',
+      language: '中文',
+      empty: '文章正在准备中。',
+    }
+  : {
+      eyebrow: 'Blog',
+      title: 'Ideas, progress, and stories from NomiFun',
+      lead: 'A growing collection of project stories, design notes, development updates, and community writing.',
+      read: 'Read article',
+      language: 'Chinese',
+      empty: 'Articles are on the way.',
+    };
+
+const dateFormatter = new Intl.DateTimeFormat(locale === 'zh-CN' ? 'zh-CN' : 'en', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<section class="relative section-y bg-mesh">
+  <div class="container-x">
+    <header class="max-w-3xl" data-animate>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h1 class="mt-4 text-4xl font-bold leading-tight tracking-tight text-hi sm:text-5xl">{t.title}</h1>
+      <p class="mt-5 text-base leading-relaxed text-mid sm:text-lg">{t.lead}</p>
+    </header>
+
+    {posts.length > 0 ? (
+      <div class="mt-12 grid gap-6" data-stagger>
+        {posts.map((post) => (
+          <article class="card card-hover group p-6 sm:p-8">
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-low">
+              <time datetime={post.data.publishedAt.toISOString()}>{dateFormatter.format(post.data.publishedAt)}</time>
+              <span aria-hidden="true">·</span>
+              <span>{post.data.author}</span>
+              <span class="rounded-full border border-violet-400/25 bg-violet-500/10 px-2.5 py-1 text-violet-200">{t.language}</span>
+            </div>
+            <h2 class="mt-4 text-2xl font-bold tracking-tight text-hi transition-colors group-hover:text-pink-300 sm:text-3xl">
+              <a href={localizePath(`/blog/${blogSlug(post.id)}`, locale)}>{post.data.title}</a>
+            </h2>
+            <p class="mt-4 max-w-3xl text-sm leading-relaxed text-mid sm:text-base">{post.data.description}</p>
+            {post.data.tags.length > 0 && (
+              <div class="mt-5 flex flex-wrap gap-2">
+                {post.data.tags.map((tag) => <span class="rounded-full border border-ink-600 bg-ink-700/50 px-2.5 py-1 text-xs text-mid">{tag}</span>)}
+              </div>
+            )}
+            <a href={localizePath(`/blog/${blogSlug(post.id)}`, locale)} class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-pink-300 transition-colors hover:text-pink-500">
+              {t.read}<span class="i-mdi-arrow-right text-base" aria-hidden="true"></span>
+            </a>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <p class="mt-12 text-mid">{t.empty}</p>
+    )}
+  </div>
+</section>

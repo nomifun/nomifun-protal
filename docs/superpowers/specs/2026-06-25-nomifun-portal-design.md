@@ -62,9 +62,7 @@
 
 **开箱即用 nomi agent**：内置无需额外安装（CLI 二进制 `nomi`）。4 个原生 provider 后端：**Anthropic / OpenAI 兼容 / Amazon Bedrock / Google Vertex**（OpenAI 兼容可达 DeepSeek/Gemini/Qwen/Kimi/Ollama/vLLM/Azure 等）。**多个 ACP 直连 Agent**：Claude Code、Codex CLI、Gemini CLI、Qwen、CodeBuddy、Droid、Goose、Auggie、Kimi、OpenCode、Copilot、Qoder、Vibe、Cursor、Kiro、Hermes、Snow（+ Nanobot / OpenClaw 两个非 ACP 托管）。交互式会话与 PTY 终端均可用（终端预设：Shell / Claude Code / Codex / Gemini）。
 
-**许可与其他项目**：Apache-2.0 © 2025-2026 NomiFun（nomifun.com，未核实）。AionUi
-（https://github.com/iOfficeAI/AionUi，Apache-2.0）只在“其他项目”页的“友情推荐”栏中
-作为友好推荐与设计参考致谢，不放入全站页脚。
+**许可**：Apache-2.0 © 2025-2026 NomiFun（nomifun.com，未核实）。
 
 ---
 

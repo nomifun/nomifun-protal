@@ -22,4 +22,24 @@ const docs = defineCollection({
   }),
 });
 
-export const collections = { docs };
+/**
+ * Blog posts are standalone Markdown files under `src/content/blog`.
+ * Adding a post only requires a new file with this frontmatter; the blog index
+ * and both localized route trees are generated automatically.
+ */
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: 'src/content/blog' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    publishedAt: z.coerce.date(),
+    updatedAt: z.coerce.date().optional(),
+    author: z.string(),
+    contact: z.string().optional(),
+    lang: z.enum(['zh-CN', 'en-US']),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { docs, blog };

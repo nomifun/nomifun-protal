@@ -1,0 +1,71 @@
+---
+import Base from '@/layouts/Base.astro';
+import { getLocale, localizePath, type Locale } from '@/i18n';
+import type { BlogEntry } from '@/lib/blog';
+
+interface Props {
+  entry: BlogEntry;
+  Content: any;
+}
+
+const { entry, Content } = Astro.props;
+const locale: Locale = getLocale(Astro.url);
+const t = locale === 'zh-CN'
+  ? { back: '返回全部文章', languageNotice: '', published: '发布于', updated: '更新于' }
+  : { back: 'Back to all articles', languageNotice: 'This article is currently available in Chinese.', published: 'Published', updated: 'Updated' };
+const dateFormatter = new Intl.DateTimeFormat(locale === 'zh-CN' ? 'zh-CN' : 'en', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Base title={`${entry.data.title} · NomiFun`} description={entry.data.description}>
+  <article class="relative bg-mesh">
+    <div class="mx-auto w-full max-w-4xl px-5 py-12 sm:px-8 sm:py-16 lg:py-20">
+      <a href={localizePath('/blog', locale)} class="inline-flex items-center gap-1.5 text-sm text-mid transition-colors hover:text-pink-300">
+        <span class="i-mdi-arrow-left text-base" aria-hidden="true"></span>{t.back}
+      </a>
+
+      <header class="mt-9 border-b border-ink-700 pb-9">
+        <span class="eyebrow">{locale === 'zh-CN' ? '博客文章' : 'Blog'}</span>
+        <h1 class="mt-4 text-3xl font-bold leading-tight tracking-tight text-hi sm:text-5xl">{entry.data.title}</h1>
+        <p class="mt-5 text-base leading-relaxed text-mid sm:text-lg">{entry.data.description}</p>
+        <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-low">
+          <span>{entry.data.author}</span>
+          <span aria-hidden="true">·</span>
+          <span>{t.published} <time datetime={entry.data.publishedAt.toISOString()}>{dateFormatter.format(entry.data.publishedAt)}</time></span>
+          {entry.data.updatedAt && <span>· {t.updated} {dateFormatter.format(entry.data.updatedAt)}</span>}
+          {entry.data.contact && <a class="text-pink-300 hover:text-pink-500" href={`mailto:${entry.data.contact}`}>{entry.data.contact}</a>}
+        </div>
+        {entry.data.tags.length > 0 && (
+          <div class="mt-5 flex flex-wrap gap-2">
+            {entry.data.tags.map((tag) => <span class="rounded-full border border-ink-600 bg-ink-800/70 px-2.5 py-1 text-xs text-mid">{tag}</span>)}
+          </div>
+        )}
+      </header>
+
+      {t.languageNotice && <p class="mt-8 rounded-xl border border-violet-400/30 bg-violet-500/10 px-4 py-3 text-sm text-violet-200">{t.languageNotice}</p>}
+      <div class="blog-prose mt-10"><Content /></div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .blog-prose { color: var(--text-mid); font-size: 1.05rem; line-height: 1.9; }
+  .blog-prose > :first-child { margin-top: 0; }
+  .blog-prose :global(p) { margin: 1.35rem 0; }
+  .blog-prose :global(strong) { color: var(--text-hi); font-weight: 650; }
+  .blog-prose :global(h2), .blog-prose :global(h3) { color: var(--text-hi); font-weight: 700; line-height: 1.35; scroll-margin-top: 6rem; }
+  .blog-prose :global(h2) { margin: 3rem 0 1.1rem; font-size: 1.65rem; }
+  .blog-prose :global(h3) { margin: 2.25rem 0 0.9rem; font-size: 1.3rem; }
+  .blog-prose :global(ol), .blog-prose :global(ul) { margin: 1.35rem 0; padding-left: 1.6rem; }
+  .blog-prose :global(ol) { list-style: decimal; }
+  .blog-prose :global(ul) { list-style: disc; }
+  .blog-prose :global(li) { margin: 0.55rem 0; padding-left: 0.25rem; }
+  .blog-prose :global(li::marker) { color: var(--pink-400); }
+  .blog-prose :global(a) { color: var(--pink-300); border-bottom: 1px solid rgb(var(--color-pink-400) / 0.35); }
+  .blog-prose :global(a:hover) { color: var(--pink-500); border-bottom-color: var(--pink-500); }
+  .blog-prose :global(blockquote) { margin: 1.8rem 0; border-left: 3px solid var(--pink-500); background: rgb(var(--color-pink-500) / 0.06); padding: 0.8rem 1.2rem; }
+  .blog-prose :global(code) { border: 1px solid rgb(var(--color-pink-500) / 0.18); border-radius: 6px; background: rgb(var(--color-pink-500) / 0.1); color: var(--pink-300); padding: 0.1em 0.4em; font-size: 0.88em; }
+</style>
