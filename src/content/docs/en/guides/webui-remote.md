@@ -10,7 +10,7 @@ The desktop app already runs a backend on a loopback port for its own WebView �
 
 It is **per-instance** — it lives inside the desktop app you're already running — and is distinct from a dedicated `nomifun-web` deployment. Use this when you already have a desktop install and just want to reach it from another device on the same network; use the dedicated server for a long-running headless deployment (see the cross-links at the end).
 
-![NomiFun running on a laptop and a tablet at once — the same experience as desktop](/images/showcase/webui-cross-device.png)
+![Current NomiFun remote workspace after authentication](/images/showcase/webui-cross-device.png)
 
 > Entry point: the **Open Capabilities** sidebar item, route `/open-capabilities`, then the "WebUI remote access" panel. The legacy `/settings/webui` route redirects here.
 

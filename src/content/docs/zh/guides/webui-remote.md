@@ -10,7 +10,7 @@ lang: zh-CN
 
 它是**按实例启用**的，存在于你已运行的桌面应用内，与专用的 `nomifun-web` 部署不同。当你已有桌面安装、只想从同一网络的另一台设备访问时，用这个；需要长期无头部署时，用专用服务器（见文末交叉链接）。
 
-![NomiFun 同时运行在笔记本与平板上——手机 / 平板与桌面同体验](/images/showcase/webui-cross-device.png)
+![当前 NomiFun 远程工作台认证后的界面](/images/showcase/webui-cross-device.png)
 
 > 入口：侧边栏 **开放能力**，路由 `/open-capabilities` 中的「WebUI 远程访问」面板。旧的 `/settings/webui` 路由会重定向到这里。
 
