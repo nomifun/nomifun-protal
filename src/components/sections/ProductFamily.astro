@@ -14,6 +14,7 @@ const copy: Dict<{
   title: string;
   lead: string;
   source: string;
+  giteeSource: string;
   details: string;
   demo: string;
   products: {
@@ -30,6 +31,7 @@ const copy: Dict<{
     title: '四个开源项目，连接成一套完整体验',
     lead: 'Desktop 负责本地能力与数据，Mobile 和小智云台提供不同交互入口；需要跨网络访问时，可自行部署 Net Infra。每个项目都有独立源码、安装方式和产品文档。',
     source: '查看源码',
+    giteeSource: 'Gitee 镜像',
     details: '产品介绍',
     demo: '真实 Demo',
     products: [
@@ -72,6 +74,7 @@ const copy: Dict<{
     title: 'Four open-source projects, one connected experience',
     lead: 'Desktop owns local capabilities and data; Mobile and Xiaozhi provide different interaction surfaces. When access must cross networks, you can deploy Net Infra yourself. Every project has its own source, setup path, and product guide.',
     source: 'View source',
+    giteeSource: 'Gitee mirror',
     details: 'Product guide',
     demo: 'Real demo',
     products: [
@@ -117,6 +120,12 @@ const repos = {
   mobile: links.mobileRepo,
   'xiaozhi-yuntai': links.xiaozhiRepo,
   'net-infra': links.netInfraRepo,
+};
+const giteeRepos = {
+  desktop: links.desktopGiteeRepo,
+  mobile: links.mobileGiteeRepo,
+  'xiaozhi-yuntai': links.xiaozhiGiteeRepo,
+  'net-infra': links.netInfraGiteeRepo,
 };
 ---
 
@@ -193,6 +202,9 @@ const repos = {
               </a>
               <a href={repos[product.id]} target="_blank" rel="noopener" class="btn-ghost px-4 py-2.5 text-sm">
                 <span class="i-mdi-github"></span>{t.source}
+              </a>
+              <a href={giteeRepos[product.id]} target="_blank" rel="noopener" class="btn-ghost px-4 py-2.5 text-sm">
+                <span class="i-simple-icons-gitee"></span>{t.giteeSource}
               </a>
             </div>
           </div>

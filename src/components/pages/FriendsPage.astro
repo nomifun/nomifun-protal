@@ -30,6 +30,7 @@ const copy: Dict<{
   familyEyebrow: string;
   familyLead: string;
   repoVisit: string;
+  giteeVisit: string;
   repos: Record<string, { tagline: string; desc: string; tags: string[] }>;
   friendsEyebrow: string;
   friendsTitle: string;
@@ -48,6 +49,7 @@ const copy: Dict<{
     familyEyebrow: '开源生态家族',
     familyLead: '一套本地优先的 Agent Desktop 底座，连接桌面、移动端、硬件伙伴与自托管网络中继。所有仓库都欢迎阅读、二次开发与共建。',
     repoVisit: '查看 GitHub 仓库',
+    giteeVisit: '访问 Gitee 镜像',
     repos: {
       desktop: {
         tagline: '跨平台 Agent Desktop 主工作台',
@@ -106,6 +108,7 @@ const copy: Dict<{
     familyEyebrow: 'OPEN-SOURCE FAMILY',
     familyLead: 'One local-first Agent Desktop foundation spanning desktop, mobile access, hardware companions, and self-hosted network relaying. Every repository is open for reading, forking, and building on.',
     repoVisit: 'View on GitHub',
+    giteeVisit: 'China mirror on Gitee',
     repos: {
       desktop: {
         tagline: 'The cross-platform Agent Desktop workbench',
@@ -221,11 +224,18 @@ const accentMap = {
                   <span class={`inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] ${a.tag}`}>{tag}</span>
                 ))}
               </div>
-              <a href={repo.url} target="_blank" rel="noopener" class={`mt-7 ${a.btn} text-sm`}>
-                <span class="i-mdi-github text-base" aria-hidden="true"></span>
-                {t.repoVisit}
-                <span class="i-mdi-arrow-top-right text-base" aria-hidden="true"></span>
-              </a>
+              <div class="mt-7 flex flex-wrap gap-2">
+                <a href={repo.url} target="_blank" rel="noopener" class={`${a.btn} text-sm`}>
+                  <span class="i-mdi-github text-base" aria-hidden="true"></span>
+                  {t.repoVisit}
+                  <span class="i-mdi-arrow-top-right text-base" aria-hidden="true"></span>
+                </a>
+                <a href={repo.giteeUrl} target="_blank" rel="noopener" class="btn-ghost text-sm">
+                  <span class="i-simple-icons-gitee text-base" aria-hidden="true"></span>
+                  {t.giteeVisit}
+                  <span class="i-mdi-arrow-top-right text-base" aria-hidden="true"></span>
+                </a>
+              </div>
             </article>
           );
         })}

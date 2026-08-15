@@ -18,6 +18,7 @@ const shared = pick(
     'zh-CN': {
       family: 'NomiFun 开源产品家族',
       source: 'GitHub 源码',
+      giteeSource: 'Gitee 中国区镜像',
       download: '下载 Desktop',
       screenshots: '最新产品实拍',
       screenshotsLead: '以下截图来自本机实际运行的当前版本，不是设计稿或历史宣传图。',
@@ -46,6 +47,7 @@ const shared = pick(
     'en-US': {
       family: 'The NomiFun open-source family',
       source: 'Source on GitHub',
+      giteeSource: 'China mirror on Gitee',
       download: 'Download Desktop',
       screenshots: 'Latest product captures',
       screenshotsLead: 'Every image below was captured from the currently running product — not a design mockup or an old marketing image.',
@@ -216,6 +218,12 @@ const productCopy: Dict<Record<ProductId, {
 };
 
 const t = productCopy[locale][product];
+const giteeRepos = {
+  desktop: links.desktopGiteeRepo,
+  mobile: links.mobileGiteeRepo,
+  'xiaozhi-yuntai': links.xiaozhiGiteeRepo,
+  'net-infra': links.netInfraGiteeRepo,
+};
 const title = t.title + ' · NomiFun';
 
 const desktopShots = [
@@ -255,6 +263,9 @@ const mobileShots = [
           <div class="mt-8 flex flex-wrap gap-3">
             <a href={t.repo} target="_blank" rel="noopener" class="btn-primary px-6 py-3">
               <span class="i-mdi-github"></span>{shared.source}
+            </a>
+            <a href={giteeRepos[product]} target="_blank" rel="noopener" class="btn-ghost px-6 py-3">
+              <span class="i-simple-icons-gitee"></span>{shared.giteeSource}
             </a>
             {product === 'desktop' && (
               <a href={localizePath('/download', locale)} class="btn-ghost px-6 py-3">

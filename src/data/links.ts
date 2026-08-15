@@ -8,10 +8,17 @@
 export const links = {
   // The desktop repository is the primary public entry point.
   github: 'https://github.com/nomifun/nomifun-desktop',
+  gitee: 'https://gitee.com/nomifun/nomifun-desktop',
+  portalRepo: 'https://github.com/nomifun/nomifun-protal',
+  portalGiteeRepo: 'https://gitee.com/nomifun/nomifun-protal',
   desktopRepo: 'https://github.com/nomifun/nomifun-desktop',
+  desktopGiteeRepo: 'https://gitee.com/nomifun/nomifun-desktop',
   mobileRepo: 'https://github.com/nomifun/nomifun-mobile',
+  mobileGiteeRepo: 'https://gitee.com/nomifun/nomifun-mobile',
   xiaozhiRepo: 'https://github.com/nomifun/nomifun-xiaozhi-yuntai',
+  xiaozhiGiteeRepo: 'https://gitee.com/nomifun/nomifun-xiaozhi-yuntai',
   netInfraRepo: 'https://github.com/nomifun/nomifun-net-infra',
+  netInfraGiteeRepo: 'https://gitee.com/nomifun/nomifun-net-infra',
   // GitHub Releases page (download buttons)
   releases: 'https://github.com/nomifun/nomifun-desktop/releases',
   // GitHub redirect for the latest non-draft, non-prerelease release
@@ -52,6 +59,7 @@ export const ecosystemRepos = [
     id: 'desktop',
     name: 'NomiFun Desktop',
     url: links.desktopRepo,
+    giteeUrl: links.desktopGiteeRepo,
     icon: 'i-mdi-monitor-dashboard',
     accent: 'pink',
   },
@@ -59,6 +67,7 @@ export const ecosystemRepos = [
     id: 'mobile',
     name: 'NomiFun Mobile',
     url: links.mobileRepo,
+    giteeUrl: links.mobileGiteeRepo,
     icon: 'i-mdi-cellphone-link',
     accent: 'violet',
   },
@@ -66,6 +75,7 @@ export const ecosystemRepos = [
     id: 'xiaozhi',
     name: 'NomiFun Xiaozhi Yuntai',
     url: links.xiaozhiRepo,
+    giteeUrl: links.xiaozhiGiteeRepo,
     icon: 'i-mdi-robot-outline',
     accent: 'cyan',
   },
@@ -73,6 +83,7 @@ export const ecosystemRepos = [
     id: 'net-infra',
     name: 'NomiFun Net Infra',
     url: links.netInfraRepo,
+    giteeUrl: links.netInfraGiteeRepo,
     icon: 'i-mdi-server-network-outline',
     accent: 'amber',
   },
@@ -90,6 +101,7 @@ export const socialLinks = {
 /** Primary community entries rendered before platform-specific social links. */
 export const community: { id: string; label: string; url: string; icon: string }[] = [
   { id: 'github', label: 'GitHub', url: links.github, icon: 'i-mdi-github' },
+  { id: 'gitee', label: 'Gitee', url: links.gitee, icon: 'i-simple-icons-gitee' },
   // { id: 'discord', label: 'Discord', url: '#', icon: 'i-mdi-discord' },
   // { id: 'wechat', label: '微信群', url: '#', icon: 'i-mdi-wechat' },
   // { id: 'telegram', label: 'Telegram', url: '#', icon: 'i-mdi-telegram' },
