@@ -11,8 +11,8 @@ interface Props {
 const { entry, Content } = Astro.props;
 const locale: Locale = getLocale(Astro.url);
 const t = locale === 'zh-CN'
-  ? { back: '返回全部文章', languageNotice: '', published: '发布于', updated: '更新于' }
-  : { back: 'Back to all articles', languageNotice: 'This article is currently available in Chinese.', published: 'Published', updated: 'Updated' };
+  ? { back: '返回全部文章', published: '发布于', updated: '更新于' }
+  : { back: 'Back to all articles', published: 'Published', updated: 'Updated' };
 const dateFormatter = new Intl.DateTimeFormat(locale === 'zh-CN' ? 'zh-CN' : 'en', {
   year: 'numeric',
   month: 'long',
@@ -45,7 +45,6 @@ const dateFormatter = new Intl.DateTimeFormat(locale === 'zh-CN' ? 'zh-CN' : 'en
         )}
       </header>
 
-      {t.languageNotice && <p class="mt-8 rounded-xl border border-violet-400/30 bg-violet-500/10 px-4 py-3 text-sm text-violet-200">{t.languageNotice}</p>}
       <div class="blog-prose mt-10"><Content /></div>
     </div>
   </article>

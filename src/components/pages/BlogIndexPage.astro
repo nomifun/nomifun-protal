@@ -3,7 +3,7 @@ import { getLocale, localizePath, type Locale } from '@/i18n';
 import { blogSlug, getPublishedBlogPosts } from '@/lib/blog';
 
 const locale: Locale = getLocale(Astro.url);
-const posts = await getPublishedBlogPosts();
+const posts = await getPublishedBlogPosts(locale);
 const t = locale === 'zh-CN'
   ? {
       eyebrow: '博客文章',
@@ -18,7 +18,7 @@ const t = locale === 'zh-CN'
       title: 'Ideas, progress, and stories from NomiFun',
       lead: 'A growing collection of project stories, design notes, development updates, and community writing.',
       read: 'Read article',
-      language: 'Chinese',
+      language: 'English',
       empty: 'Articles are on the way.',
     };
 

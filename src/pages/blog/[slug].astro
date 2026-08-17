@@ -4,7 +4,7 @@ import BlogPostPage from '@/components/pages/BlogPostPage.astro';
 import { blogSlug, getPublishedBlogPosts } from '@/lib/blog';
 
 export async function getStaticPaths() {
-  const posts = await getPublishedBlogPosts();
+  const posts = await getPublishedBlogPosts('en-US');
   return posts.map((entry) => ({ params: { slug: blogSlug(entry.id) }, props: { entry } }));
 }
 

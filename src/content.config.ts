@@ -23,9 +23,9 @@ const docs = defineCollection({
 });
 
 /**
- * Blog posts are standalone Markdown files under `src/content/blog`.
- * Adding a post only requires a new file with this frontmatter; the blog index
- * and both localized route trees are generated automatically.
+ * Blog posts live under `src/content/blog/<lang>`.
+ * Matching translations use the same filename so each localized route keeps
+ * the same slug while the indexes only load content for their active locale.
  */
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: 'src/content/blog' }),
