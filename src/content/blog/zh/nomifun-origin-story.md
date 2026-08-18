@@ -3,7 +3,6 @@ title: 开源项目糯米饭（NomiFun）的自述
 description: 从小智 AI 机器人与桌面宠物出发，回顾 NomiFun 的诞生、开源重构、产品理念，以及 Desktop、Mobile、小智与跨平台小程序的设计思考。
 publishedAt: "2026-08-15"
 author: nomifun
-contact: noreply@nomifun.com
 lang: zh-CN
 tags:
   - NomiFun

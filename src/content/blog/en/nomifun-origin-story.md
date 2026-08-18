@@ -3,7 +3,6 @@ title: The Story of NomiFun, an Open-Source Project
 description: From a Xiaozhi AI robot and a desktop companion to NomiFun's creation, open-source rebuild, product philosophy, and the thinking behind Desktop, Mobile, Xiaozhi, and cross-platform mini apps.
 publishedAt: "2026-08-15"
 author: nomifun
-contact: noreply@nomifun.com
 lang: en-US
 tags:
   - NomiFun
