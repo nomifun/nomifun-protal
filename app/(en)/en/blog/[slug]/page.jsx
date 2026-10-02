@@ -1,7 +1,7 @@
 import BlogPostPage, {
   getBlogPostMetadata,
   getBlogStaticParams,
-} from "@/app/(zh)/blog/[slug]/page";
+} from "@/app/(zh)/zh/blog/[slug]/page";
 export function generateStaticParams() {
   return getBlogStaticParams("en");
 }

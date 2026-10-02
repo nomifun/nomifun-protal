@@ -1,4 +1,4 @@
-import BlogPage, { getBlogMetadata } from "@/app/(zh)/blog/page";
+import BlogPage, { getBlogMetadata } from "@/app/(zh)/zh/blog/page";
 export function generateMetadata() {
   return getBlogMetadata("en");
 }

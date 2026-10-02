@@ -1,7 +1,7 @@
 import ProductPage, {
   getProductMetadata,
   generateStaticParams,
-} from "@/app/(zh)/products/[slug]/page";
+} from "@/app/(zh)/zh/products/[slug]/page";
 export { generateStaticParams };
 export async function generateMetadata({ params }) {
   return getProductMetadata(params, "en");

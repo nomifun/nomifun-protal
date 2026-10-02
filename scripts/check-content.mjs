@@ -26,10 +26,7 @@ let linkCount = 0,
 for (const page of pages) {
   const html = fs.readFileSync(page, "utf8"),
     rel = path.relative(root, page);
-  const english =
-    rel === "en.html" ||
-    rel.replaceAll(path.sep, "/").startsWith("en/") ||
-    rel === "404.html";
+  const english = !/^zh(?:\.html$|\/)/.test(rel.replaceAll(path.sep, "/"));
   if (!html.includes(`lang="${english ? "en" : "zh-CN"}"`))
     issues.push(`${rel}: wrong document language`);
   if ((html.match(/<main\b/g) || []).length !== 1)
@@ -86,6 +83,7 @@ const required = [
 for (const expected of [
   ...required,
   ...required.map((route) => `/en${route === "/" ? "" : route}`),
+  ...required.map((route) => `/zh${route === "/" ? "" : route}`),
 ])
   if (!existsRoute(expected)) issues.push(`Missing required page: ${expected}`);
 if (issues.length) {

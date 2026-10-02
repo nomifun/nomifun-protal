@@ -1,5 +1,5 @@
 import { getPosts } from "@/lib/blog";
-import { localizePath, locales } from "@/lib/i18n";
+import { DEFAULT_LOCALE, localizePath, locales } from "@/lib/i18n";
 export const dynamic = "force-static";
 export default function sitemap() {
   const routes = [
@@ -23,7 +23,7 @@ export default function sitemap() {
         languages: {
           "zh-CN": url(route, "zh"),
           en: url(route, "en"),
-          "x-default": url(route, "zh"),
+          "x-default": url(route, DEFAULT_LOCALE),
         },
       },
       changeFrequency: route === "" ? "weekly" : "monthly",

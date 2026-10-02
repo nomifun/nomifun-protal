@@ -39,17 +39,6 @@ export const documentViewport = {
 export default function DocumentLayout({ locale, children }) {
   return (
     <html lang={locale === "en" ? "en" : "zh-CN"} data-locale={locale}>
-      <head>
-        {locale === "zh" && (
-          <script
-            id="nomifun-language-preference"
-            dangerouslySetInnerHTML={{
-              __html:
-                "try{if(location.pathname==='/'&&localStorage.getItem('nomifun-portal-locale')==='en'){location.replace('/en'+location.search+location.hash)}}catch{}",
-            }}
-          />
-        )}
-      </head>
       <body>
         <LocaleProvider locale={locale}>
           <SiteShell>{children}</SiteShell>

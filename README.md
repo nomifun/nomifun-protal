@@ -1,6 +1,6 @@
 # NomiFun 官方门户
 
-以产品宣传为中心的 NomiFun 门户，使用 Next.js / React，静态导出，可部署到常规静态托管。支持简体中文和英语，首次访问默认中文。根目录是独立 Git 仓库，以当前源码快照作为初始版本。
+以产品宣传为中心的 NomiFun 门户，使用 Next.js / React，静态导出，可部署到常规静态托管。支持简体中文和英语，首次访问默认英文。根目录是独立 Git 仓库，以当前源码快照作为初始版本。
 
 ## 本地运行
 
@@ -19,11 +19,11 @@ npm run dev -- --port 3107
 
 ## 页面与内容
 
-中文保留原地址，英文使用 `/en` 前缀，例如 `/en`、`/en/products/desktop`、`/en/blog`。顶栏和目录中的语言入口切换到同一页面，保留查询参数和锚点；浏览器只保存语言偏好，不保存个人数据。直接访问英文URL保持英文，回到根首页时会恢复上次语言选择。
+英文使用根路径，例如 `/`、`/products/desktop`、`/blog`；`/en` 及其内页也提供完整英文内容，canonical指向对应根路径。中文统一使用 `/zh` 前缀，例如 `/zh`、`/zh/products/desktop`、`/zh/blog`。顶栏和目录中的语言入口切换到同一页面，保留查询参数和锚点。页面语言由URL决定，根路径始终为英文，不依赖浏览器存储或客户端语言跳转。
 
-两种语言分别静态导出完整HTML、`html lang`、标题/摘要、Open Graph语言和canonical/hreflang，sitemap收录24个内容地址。维护规则见 `docs/i18n.md`，英文素材来源见 `docs/english-assets.md`。
+两种语言及英文别名分别静态导出完整HTML、`html lang`、标题/摘要、Open Graph语言和canonical/hreflang，sitemap只收录24个规范内容地址。维护规则见 `docs/i18n.md`，英文素材来源见 `docs/english-assets.md`。
 
-- `/`：Desktop 产品首页。场景切换、能力装配、会话 Agent 接力、伙伴/记忆/渠道、IDMM 与持续工作、创作画布、小程序/无头插件、开发者架构、产品起源和生态弧形拖拽。
+- `/`、`/en`、`/zh`：Desktop 产品首页。场景切换、能力装配、会话 Agent 接力、伙伴/记忆/渠道、IDMM 与持续工作、创作画布、小程序/无头插件、开发者架构、产品起源和生态弧形拖拽。
 - `/products` 和四个产品详情：Desktop、Mobile、小智云台、Net Infra。
 - `/download`：正式 Releases 与备用下载链接。没有硬编码或虚构“最新版本”。
 - `/blog`：可筛选的 Markdown 博客。文章放在 `content/blog/*.md`，自动生成详情页，`draft: true` 不发布。原起源文章保留为历史归档。

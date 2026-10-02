@@ -236,7 +236,7 @@ export default function SiteShell({ children }) {
       await navigator.clipboard.writeText(
         t(
           "NomiFun：本地优先的开源 Agent 工作空间。可组合能力、桌面伙伴、多模态创作与持续工作，在自己的电脑上发生。https://www.nomifun.com",
-          "NomiFun: your local-first, open-source Agent workspace. Compose capabilities, create with AI, and keep work moving with desktop companions—all on your own computer. https://www.nomifun.com/en",
+          "NomiFun: your local-first, open-source Agent workspace. Compose capabilities, create with AI, and keep work moving with desktop companions—all on your own computer. https://www.nomifun.com/",
         ),
       );
       setToast(

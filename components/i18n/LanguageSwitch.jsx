@@ -23,13 +23,6 @@ export default function LanguageSwitch({ variant = "header" }) {
     };
   }, [nextPath]);
 
-  const remember = () => {
-    try {
-      localStorage.setItem("nomifun-portal-locale", nextLocale);
-    } catch {
-      // The native language link also works without browser storage.
-    }
-  };
   const link = (
     <a
       className="language-switch-link"
@@ -38,7 +31,6 @@ export default function LanguageSwitch({ variant = "header" }) {
       lang={locale === "zh" ? "zh-CN" : "en"}
       aria-label={t("切换为英文", "Switch to Chinese")}
       title={t("English", "Simplified Chinese")}
-      onClick={remember}
     >
       <span lang={nextLocale === "zh" ? "zh-CN" : "en"}>
         {nextLocale === "en" ? "EN" : "中文"}

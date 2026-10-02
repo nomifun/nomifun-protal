@@ -1,4 +1,4 @@
-import DownloadPage, { getPageMetadata } from "@/app/(zh)/download/page";
+import DownloadPage, { getPageMetadata } from "@/app/(zh)/zh/download/page";
 export function generateMetadata() {
   return getPageMetadata("en");
 }

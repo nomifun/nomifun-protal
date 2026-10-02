@@ -266,8 +266,8 @@ export async function getProductMetadata(params, locale = "zh") {
   );
 }
 
-export async function generateMetadata({ params }, locale = "zh") {
-  return getProductMetadata(params, locale);
+export async function generateMetadata({ params }) {
+  return getProductMetadata(params, "zh");
 }
 
 export default async function ProductPage({ params, locale = "zh" }) {
