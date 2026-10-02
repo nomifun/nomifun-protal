@@ -1,0 +1,48 @@
+.blog-page-en .page-hero h1 {
+  font-size: clamp(40px, 4.6vw, 70px);
+  line-height: 1.15;
+}
+.blog-page-en .blog-filter {
+  flex-wrap: wrap;
+}
+.blog-page-en .blog-card h2 {
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+}
+.blog-page-en .blog-card-meta {
+  align-items: flex-start;
+}
+.blog-page-en .blog-card-meta time {
+  text-align: right;
+}
+.blog-page-en .article-header h1 {
+  line-height: 1.12;
+}
+.blog-page-en .article-description,
+.blog-page-en .article-prose {
+  line-height: 1.75;
+}
+.blog-page-en .article-prose h2,
+.blog-page-en .article-prose h3 {
+  line-height: 1.3;
+}
+.blog-page-en .article-related h3 {
+  line-height: 1.3;
+}
+@media (max-width: 600px) {
+  .blog-page-en .blog-filter {
+    gap: 5px;
+  }
+  .blog-page-en .blog-filter > span {
+    flex-basis: 100%;
+    margin: 8px 0 0 14px;
+    font-size: 11px;
+  }
+  .blog-page-en .article-meta {
+    flex-wrap: wrap;
+    gap: 10px 18px;
+  }
+  .blog-page-en .article-archive-note .pill {
+    letter-spacing: 0.03em;
+  }
+}

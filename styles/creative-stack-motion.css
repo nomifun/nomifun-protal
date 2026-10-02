@@ -1,0 +1,979 @@
+/* ServicesStack / a-302, rebuilt around NomiFun's five creative modes. */
+.creative-stack-experience {
+  padding-bottom: 90px;
+  overflow: visible;
+  background: #f5f3ee;
+}
+.creative-stack-experience .creative-heading {
+  margin-bottom: 45px;
+}
+.creative-stack-nav {
+  position: sticky;
+  top: 86px;
+  z-index: 35;
+  width: min(740px, calc(100% - 48px));
+  margin: 0 auto -60px;
+  min-height: 54px;
+  padding: 8px 17px;
+  gap: 14px;
+  background: #faf8f2ed;
+  border: 1px solid #fff9;
+  border-radius: 32px;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px #26202a0d;
+}
+.creative-stack-nav .creative-tabs-intro {
+  color: #7d7571;
+  font-size: 10px;
+}
+.creative-stack-nav > button {
+  gap: 5px;
+  padding: 9px 11px;
+  margin: 0;
+  border: 0;
+  border-radius: 22px;
+  white-space: nowrap;
+  font-size: 11px;
+  color: #5d5569;
+}
+.creative-stack-nav > button svg {
+  width: 16px;
+  height: 16px;
+}
+.creative-stack-nav > button[aria-current="true"] {
+  background: #292437;
+  color: #fff;
+}
+.creative-stack-nav > button:hover {
+  background: #e7e0ef;
+  color: #493366;
+}
+.creative-stack-track {
+  position: relative;
+  isolation: isolate;
+}
+.creative-stack-card {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  perspective: 1600px;
+  z-index: calc(2 + var(--creative-card-index));
+}
+.creative-stack-face {
+  position: relative;
+  height: 100%;
+  width: calc(100% - 24px);
+  margin: 0 auto;
+  padding: 159px clamp(24px, 5.4vw, 94px) 21px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 22px;
+  border-radius: 32px;
+  overflow: hidden;
+  transform-origin: 50% 50%;
+  will-change: transform;
+  backface-visibility: hidden;
+  color: #272239;
+  box-shadow: 0 -12px 70px #18132220;
+}
+.creative-mode-chat .creative-stack-face {
+  background: #a39adb;
+}
+.creative-mode-image .creative-stack-face {
+  background: #b3ccf6;
+  color: #182c4b;
+}
+.creative-mode-video .creative-stack-face {
+  background: #23463d;
+  color: #f2f0e6;
+}
+.creative-mode-audio .creative-stack-face {
+  background: #f2b290;
+  color: #49283a;
+}
+.creative-mode-canvas .creative-stack-face {
+  background: #d0e0b7;
+  color: #30402a;
+}
+.creative-stack-heading {
+  position: relative;
+  display: flex;
+  gap: 42px;
+  align-items: flex-end;
+  z-index: 2;
+}
+.creative-stack-heading > div {
+  flex: 1;
+  min-width: 0;
+}
+.creative-mode-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.17em;
+  margin-bottom: 13px;
+  opacity: 0.68;
+}
+.creative-stack-heading h3 {
+  font-size: clamp(28px, 3.5vw, 56px);
+  line-height: 1.24;
+  letter-spacing: -0.045em;
+  max-width: 720px;
+}
+.creative-stack-heading > p {
+  max-width: 355px;
+  font-size: 12px;
+  line-height: 1.85;
+  opacity: 0.76;
+  padding-right: 75px;
+}
+.creative-card-number {
+  position: absolute;
+  right: 0;
+  top: 3px;
+  font-size: clamp(36px, 5vw, 74px);
+  line-height: 1;
+  letter-spacing: -0.055em;
+  opacity: 0.35;
+}
+.creative-stack-visual {
+  position: relative;
+  min-height: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.creative-stack-orbit {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  right: -18vw;
+  top: -5vw;
+  border: 1px solid currentColor;
+  opacity: 0.13;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: creative-orbit-turn 30s linear infinite;
+}
+.creative-stack-orbit::before,
+.creative-stack-orbit::after {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+.creative-stack-orbit::after {
+  inset: 22%;
+  border-style: dashed;
+}
+.creative-stack-orbit::before {
+  transform: scaleX(0.5) rotate(-30deg);
+}
+.creative-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+  padding-top: 4px;
+}
+.creative-card-footer > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 10px;
+  opacity: 0.65;
+}
+.creative-card-footer > span i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.creative-card-footer > button,
+.creative-card-footer > a {
+  color: inherit;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  border-bottom: 1px solid currentColor;
+  padding: 6px 0;
+}
+.creative-card-footer > button:hover svg,
+.creative-card-footer > a:hover svg {
+  transform: translate(2px, 2px);
+}
+.creative-stack-experience .creative-bottom-note {
+  margin-top: 38px;
+}
+
+/* Product screenshots stay legible and uncropped in a large cinematic frame. */
+.creative-stack-shot {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 1160px);
+  height: 100%;
+  max-height: 64vh;
+  border: 1px solid #fff8;
+  border-radius: 18px;
+  box-shadow: 0 22px 54px #172a3b22;
+  transform: perspective(1200px) rotateX(2deg);
+  transition: transform 0.45s;
+}
+.creative-stack-shot:hover {
+  transform: perspective(1200px) rotateX(0);
+}
+.creative-stack-shot .creative-shot-bar {
+  padding: 9px 17px;
+  min-height: 34px;
+  flex-shrink: 0;
+}
+.creative-stack-shot > img {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+  background: #f7f7f8;
+}
+.creative-stack-shot > figcaption {
+  padding: 7px 15px;
+  font-size: 9px;
+  flex-shrink: 0;
+}
+.creative-mode-video .creative-stack-shot {
+  box-shadow: 0 25px 90px #07130d55;
+}
+
+/* A large animated SVG constellation carries the conversation stage. */
+.creative-chat-world {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
+  gap: 2%;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+.creative-context-graphic {
+  width: 100%;
+  max-height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 15px 30px #3c266429);
+}
+.context-orbits {
+  transform-origin: 240px 240px;
+  animation: creative-orbit-turn 38s linear infinite;
+}
+.context-connection {
+  animation: creative-context-flow 2.7s linear infinite;
+}
+.context-signal {
+  transform-box: view-box;
+  animation: creative-context-pulse 3s ease-out infinite;
+}
+.context-core {
+  transform-origin: 240px 240px;
+  animation: creative-core-breathe 4s ease-in-out infinite;
+}
+.creative-stack-experience .creative-chat-demo {
+  min-height: 0;
+  height: 100%;
+  max-height: 560px;
+  padding: 24px 30px 14px;
+  background: #fffaf5f5;
+  border: 1px solid #fff9;
+  box-shadow: 0 18px 54px #2f23432b;
+  transform: rotate(-1.5deg);
+  transition: transform 0.4s;
+}
+.creative-stack-experience .creative-chat-demo:focus-within,
+.creative-stack-experience .creative-chat-demo:hover {
+  transform: rotate(0);
+}
+.creative-stack-experience .creative-user-bubble {
+  margin: 21px 0 19px auto;
+  font-size: 12px;
+  background: #ddd2fa;
+  color: #5c4481;
+}
+.creative-stack-experience .creative-agent-message {
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.creative-stack-experience .creative-agent-message strong {
+  color: #48364f;
+  font-size: 15px;
+}
+.creative-stack-experience .creative-agent-message p {
+  color: #897886;
+  font-size: 11px;
+  margin: 8px 0;
+}
+.creative-stack-experience .creative-demo-composer {
+  padding: 15px;
+}
+.creative-stack-experience .creative-demo-composer > div {
+  margin-top: 17px;
+}
+.creative-stack-experience .creative-tool-receipt {
+  color: #786086;
+}
+.creative-stack-experience .creative-demo-disclaimer {
+  margin-top: 11px;
+  font-size: 9px;
+  color: #988993;
+}
+
+/* The audio stage combines a drawn vinyl sculpture and a working waveform. */
+.creative-audio-world {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 4%;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+.creative-audio-sculpture {
+  height: 100%;
+  max-height: 540px;
+  width: 100%;
+  filter: drop-shadow(0 25px 30px #3d182731);
+}
+.audio-sculpture-disc {
+  transform-origin: 250px 250px;
+  animation: creative-orbit-turn 18s linear infinite;
+  animation-play-state: paused;
+}
+.creative-audio-sculpture.is-playing .audio-sculpture-disc {
+  animation-play-state: running;
+}
+.creative-stack-experience .creative-audio-demo {
+  min-height: 0;
+  height: 100%;
+  max-height: 510px;
+  width: 100%;
+  padding: 24px 25px 16px;
+  background: #fff4e8e8;
+  border: 1px solid #fff8;
+  box-shadow: 0 16px 45px #59302613;
+}
+.creative-stack-experience .creative-audio-title {
+  padding-top: 18px;
+}
+.creative-stack-experience .creative-audio-title > svg {
+  color: #91533e;
+  margin-bottom: 10px;
+}
+.creative-stack-experience .creative-audio-title h4 {
+  font-size: 23px;
+  color: #633f44;
+}
+.creative-stack-experience .creative-audio-title p {
+  color: #976f66;
+}
+.creative-stack-experience .creative-audio-wave {
+  height: clamp(70px, 15vh, 160px);
+  margin: 18px auto 18px;
+  gap: 4px;
+}
+.creative-stack-experience .creative-audio-wave > i {
+  background: #a5658e;
+}
+.creative-stack-experience .creative-audio-wave > i:nth-child(3n) {
+  background: #d4836b;
+}
+.creative-stack-experience .audio-demo-control {
+  color: #7d4c67;
+  background: #f4dce8;
+  border-color: #c899b0;
+}
+
+/* The infinite canvas keeps its live ports, connections and selectable nodes. */
+.creative-stack-experience .creative-canvas-demo {
+  width: 100%;
+  height: 100%;
+  max-height: 560px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  box-shadow: 0 18px 55px #40523125;
+  background: #fbfcf4;
+  border-color: #ffffffe6;
+}
+.creative-stack-experience .creative-canvas-board {
+  min-height: 0;
+  height: 100%;
+  background-color: #f4f7e9;
+  background-image: radial-gradient(#b2c49b 1px, transparent 1px);
+}
+.creative-stack-experience .canvas-demo-bar {
+  padding: 12px 18px;
+  background: #fcfff6;
+}
+.creative-stack-experience .canvas-demo-caption {
+  padding: 10px 15px;
+  background: #fcfff6;
+}
+.creative-stack-experience .canvas-demo-lines > path {
+  stroke: #9078b1;
+  stroke-width: 2;
+  animation: creative-context-flow 3s linear infinite;
+}
+.creative-stack-experience .canvas-demo-node {
+  border-color: #d6e2c5;
+  box-shadow: 0 12px 35px #506b3322;
+}
+.creative-stack-experience .canvas-node-art {
+  background: #bdd6e7;
+  height: clamp(80px, 14vh, 140px);
+}
+.creative-stack-experience .canvas-brief {
+  top: 15%;
+}
+.creative-stack-experience .canvas-image {
+  top: 27%;
+}
+.creative-stack-experience .canvas-video {
+  top: 10%;
+}
+.creative-stack-experience .canvas-node-art .art-sun {
+  background: #fff3af;
+}
+.creative-stack-experience .canvas-node-art .hill-one {
+  background: #74a198;
+}
+.creative-stack-experience .canvas-node-art .hill-two {
+  background: #a3c48b;
+}
+.creative-stack-experience .canvas-node-art .hill-three {
+  background: #567667;
+}
+.creative-stack-experience .canvas-node-timeline > div span {
+  background: #c39edf;
+}
+.creative-stack-experience .canvas-node-timeline {
+  position: relative;
+}
+.creative-stack-experience .canvas-node-timeline > i {
+  position: absolute;
+  top: 18px;
+  height: 44px;
+  width: 2px;
+  margin: 0;
+  background: #c386b8;
+  animation: creative-playhead 6s ease-in-out infinite alternate;
+}
+.creative-stack-experience .canvas-node-timeline > i::before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  border-top: 5px solid #c386b8;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+}
+.creative-stack-experience .canvas-small-wave > i {
+  animation: experience-wave 0.85s ease-in-out infinite alternate;
+}
+
+@keyframes creative-orbit-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes creative-context-flow {
+  to {
+    stroke-dashoffset: -56;
+  }
+}
+@keyframes creative-context-pulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.65);
+  }
+}
+@keyframes creative-core-breathe {
+  50% {
+    transform: scale(1.07);
+  }
+}
+@keyframes creative-playhead {
+  from {
+    left: 12%;
+  }
+  to {
+    left: 78%;
+  }
+}
+
+@media (max-width: 1050px) {
+  .creative-stack-face {
+    padding: 154px 35px 21px;
+    gap: 17px;
+  }
+  .creative-stack-heading {
+    gap: 24px;
+  }
+  .creative-stack-heading > p {
+    max-width: 300px;
+    padding-right: 50px;
+    font-size: 11px;
+  }
+  .creative-stack-heading h3 {
+    font-size: 35px;
+  }
+  .creative-stack-experience .creative-chat-demo {
+    padding: 22px 23px 12px;
+  }
+  .creative-stack-experience .creative-audio-title h4 {
+    font-size: 21px;
+  }
+}
+@media (max-width: 760px) {
+  .creative-stack-nav {
+    top: 78px;
+    width: calc(100% - 34px);
+    gap: 3px;
+    justify-content: space-around;
+    padding: 6px 8px;
+    min-height: 46px;
+  }
+  .creative-stack-nav .creative-tabs-intro {
+    display: none;
+  }
+  .creative-stack-nav > button {
+    padding: 8px 10px;
+    font-size: 10px;
+    gap: 4px;
+  }
+  .creative-stack-nav > button svg {
+    width: 14px;
+    height: 14px;
+  }
+  .creative-stack-face {
+    width: calc(100% - 16px);
+    border-radius: 23px;
+    padding: 139px 22px 22px;
+    gap: 17px;
+  }
+  .creative-stack-heading {
+    display: block;
+    padding-right: 0;
+  }
+  .creative-mode-label {
+    font-size: 9px;
+    margin-bottom: 9px;
+  }
+  .creative-stack-heading h3 {
+    font-size: clamp(26px, 5.6vw, 37px);
+    padding-right: 45px;
+    max-width: 100%;
+  }
+  .creative-stack-heading > p {
+    max-width: 100%;
+    padding-right: 0;
+    margin-top: 9px;
+    font-size: 10px;
+    line-height: 1.65;
+  }
+  .creative-card-number {
+    top: 0;
+    font-size: 35px;
+  }
+  .creative-stack-shot {
+    height: auto;
+    max-height: 100%;
+    width: 100%;
+  }
+  .creative-stack-shot > img {
+    flex: none;
+    height: auto;
+    max-height: 47vh;
+  }
+  .creative-stack-shot .creative-shot-bar {
+    min-height: 29px;
+    padding: 8px 10px;
+    font-size: 8px;
+  }
+  .creative-stack-shot > figcaption {
+    font-size: 8px;
+    padding: 6px 10px;
+  }
+  .creative-chat-world {
+    position: relative;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+  .creative-context-graphic {
+    position: absolute;
+    width: 55%;
+    height: 55%;
+    right: -15%;
+    top: -22%;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  .creative-stack-experience .creative-chat-demo {
+    position: relative;
+    height: 100%;
+    padding: 18px 20px 12px;
+    background: #fffaf5ed;
+    transform: rotate(-1deg);
+  }
+  .creative-stack-experience .creative-user-bubble {
+    margin: 15px 0;
+    font-size: 10px;
+    padding: 11px 14px;
+  }
+  .creative-stack-experience .creative-agent-message {
+    margin-bottom: 13px;
+    gap: 9px;
+  }
+  .creative-stack-experience .creative-agent-message strong {
+    font-size: 13px;
+  }
+  .creative-stack-experience .creative-agent-message p {
+    font-size: 10px;
+    line-height: 1.65;
+  }
+  .creative-stack-experience .creative-demo-composer {
+    padding: 11px 12px;
+  }
+  .creative-stack-experience .creative-demo-composer > div {
+    margin-top: 12px;
+  }
+  .creative-stack-experience .creative-demo-disclaimer {
+    font-size: 8px;
+  }
+  .creative-audio-world {
+    grid-template-columns: minmax(0, 1fr);
+    position: relative;
+  }
+  .creative-audio-sculpture {
+    position: absolute;
+    width: 47%;
+    height: 47%;
+    left: -10%;
+    top: -20%;
+    opacity: 0.75;
+    pointer-events: none;
+  }
+  .creative-stack-experience .creative-audio-demo {
+    position: relative;
+    padding: 19px 18px 15px;
+    background: #fff4e8e8;
+  }
+  .creative-stack-experience .creative-audio-title {
+    padding-top: 13px;
+  }
+  .creative-stack-experience .creative-audio-title h4 {
+    font-size: 21px;
+  }
+  .creative-stack-experience .creative-audio-wave {
+    margin: 13px auto 17px;
+    height: clamp(75px, 15vh, 140px);
+    gap: 3px;
+  }
+  .creative-stack-experience .creative-audio-wave > i:nth-child(n + 48) {
+    display: none;
+  }
+  .creative-stack-experience .creative-canvas-demo {
+    height: 100%;
+  }
+  .creative-stack-experience .creative-canvas-board {
+    min-height: 0;
+  }
+  .creative-stack-experience .canvas-demo-bar {
+    padding: 10px 11px;
+    gap: 8px;
+  }
+  .creative-stack-experience .canvas-demo-bar > span {
+    font-size: 8px;
+  }
+  .creative-stack-experience .canvas-demo-bar > div {
+    gap: 5px;
+  }
+  .creative-stack-experience .canvas-demo-bar button {
+    font-size: 8px;
+    padding: 6px 7px;
+  }
+  .creative-stack-experience .canvas-demo-caption {
+    font-size: 8px;
+    padding: 7px 12px;
+  }
+  .creative-stack-experience .canvas-demo-node {
+    width: 39%;
+  }
+  .creative-stack-experience .canvas-brief {
+    left: 4%;
+    top: 20px;
+  }
+  .creative-stack-experience .canvas-image {
+    left: 54%;
+    top: 54px;
+  }
+  .creative-stack-experience .canvas-video {
+    left: 13%;
+    top: 52%;
+  }
+  .creative-stack-experience .canvas-audio {
+    left: 57%;
+    top: 67%;
+    right: auto;
+    bottom: auto;
+  }
+  .creative-stack-experience .canvas-node-top {
+    font-size: 8px;
+    padding: 8px;
+  }
+  .creative-stack-experience .canvas-node-prompt {
+    font-size: 8px;
+    line-height: 1.65;
+    padding: 11px;
+  }
+  .creative-stack-experience .canvas-node-art {
+    height: 85px;
+  }
+  .creative-stack-experience .canvas-demo-node > small {
+    font-size: 7px;
+    padding: 7px 8px;
+  }
+  .creative-stack-experience .canvas-node-timeline {
+    padding: 13px 9px 6px;
+  }
+  .creative-stack-experience .canvas-node-timeline > div {
+    height: 40px;
+  }
+  .creative-stack-experience .canvas-node-timeline > i {
+    top: 12px;
+    height: 43px;
+  }
+  .creative-stack-experience .canvas-demo-selection {
+    bottom: 9px;
+    left: 10px;
+    font-size: 7px;
+  }
+  .creative-stack-experience .canvas-demo-minimap {
+    display: none;
+  }
+  .creative-card-footer > span {
+    font-size: 8px;
+  }
+  .creative-card-footer > button,
+  .creative-card-footer > a {
+    font-size: 9px;
+    gap: 6px;
+  }
+  .creative-stack-experience .creative-bottom-note {
+    margin-top: 28px;
+  }
+}
+@media (max-width: 380px) {
+  .creative-stack-nav > button {
+    padding: 7px 7px;
+    font-size: 9px;
+  }
+  .creative-stack-face {
+    padding-inline: 16px;
+    gap: 14px;
+  }
+  .creative-stack-heading h3 {
+    font-size: 25px;
+  }
+  .creative-stack-experience .creative-chat-demo {
+    padding: 15px 14px 10px;
+  }
+  .creative-stack-experience .creative-audio-title h4 {
+    font-size: 18px;
+  }
+  .creative-stack-experience .canvas-demo-bar {
+    flex-wrap: wrap;
+  }
+  .creative-stack-experience .canvas-demo-bar > span {
+    width: 100%;
+  }
+}
+@media (max-height: 700px) and (min-width: 761px) {
+  .creative-stack-face {
+    padding-top: 137px;
+    gap: 13px;
+    padding-bottom: 16px;
+  }
+  .creative-stack-heading h3 {
+    font-size: 35px;
+  }
+  .creative-mode-label {
+    margin-bottom: 8px;
+  }
+  .creative-stack-experience .creative-chat-demo {
+    padding: 16px 24px 10px;
+  }
+  .creative-stack-experience .creative-user-bubble {
+    margin: 12px 0;
+    padding: 10px 14px;
+    font-size: 10px;
+  }
+  .creative-stack-experience .creative-agent-message {
+    margin-bottom: 12px;
+  }
+  .creative-stack-experience .creative-agent-message p {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+  .creative-stack-experience .creative-demo-composer {
+    padding: 10px;
+  }
+  .creative-stack-experience .creative-demo-composer > div {
+    margin-top: 10px;
+  }
+  .creative-stack-experience .creative-audio-title {
+    padding-top: 8px;
+  }
+  .creative-stack-experience .creative-audio-title > svg {
+    display: none;
+  }
+  .creative-stack-experience .creative-audio-title h4 {
+    font-size: 20px;
+  }
+  .creative-stack-experience .creative-audio-wave {
+    height: 85px;
+    margin: 8px auto 12px;
+  }
+}
+@media (max-height: 680px) and (max-width: 760px) {
+  .creative-stack-face {
+    padding-top: 130px;
+    gap: 12px;
+    padding-bottom: 15px;
+  }
+  .creative-stack-heading h3 {
+    font-size: 24px;
+  }
+  .creative-stack-heading > p {
+    font-size: 9px;
+    line-height: 1.55;
+  }
+  .creative-mode-label {
+    margin-bottom: 6px;
+  }
+  .creative-stack-experience .creative-chat-demo {
+    padding: 12px 14px 8px;
+  }
+  .creative-stack-experience .creative-user-bubble {
+    margin: 10px 0;
+    padding: 9px 11px;
+    font-size: 9px;
+  }
+  .creative-stack-experience .creative-agent-message strong {
+    font-size: 11px;
+  }
+  .creative-stack-experience .creative-agent-message p {
+    font-size: 9px;
+    line-height: 1.55;
+  }
+  .creative-stack-experience .creative-demo-composer {
+    padding: 9px;
+  }
+  .creative-stack-experience .creative-demo-composer > div {
+    margin-top: 9px;
+  }
+  .creative-stack-experience .creative-audio-title {
+    padding-top: 7px;
+  }
+  .creative-stack-experience .creative-audio-title > svg {
+    display: none;
+  }
+  .creative-stack-experience .creative-audio-title h4 {
+    font-size: 18px;
+  }
+  .creative-stack-experience .creative-audio-wave {
+    height: 72px;
+    margin: 10px auto 13px;
+  }
+  .creative-stack-experience .creative-audio-demo {
+    padding: 15px 15px 10px;
+  }
+  .creative-stack-experience .canvas-image {
+    top: 20px;
+  }
+  .creative-stack-experience .canvas-video {
+    top: 48%;
+  }
+  .creative-stack-experience .canvas-audio {
+    top: 61%;
+  }
+  .creative-stack-experience .canvas-node-top {
+    padding: 6px;
+    font-size: 7px;
+  }
+  .creative-stack-experience .canvas-node-top > svg {
+    width: 11px;
+  }
+  .creative-stack-experience .canvas-node-art {
+    height: 57px;
+    margin: 6px;
+  }
+  .creative-stack-experience .canvas-node-prompt {
+    font-size: 7px;
+    padding: 8px;
+  }
+  .creative-stack-experience .canvas-demo-node > small {
+    font-size: 6px;
+    padding: 6px;
+  }
+  .creative-stack-experience .canvas-small-wave {
+    height: 34px;
+    padding: 5px 7px;
+  }
+  .creative-stack-experience .canvas-small-wave > i {
+    max-height: 28px;
+  }
+  .creative-stack-experience .canvas-node-timeline > div {
+    height: 28px;
+  }
+  .creative-stack-experience .canvas-node-timeline > i {
+    height: 31px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .creative-stack-nav {
+    position: relative;
+    top: auto;
+    margin-bottom: 25px;
+  }
+  .creative-stack-card {
+    position: relative;
+    height: auto;
+    min-height: 720px;
+    margin-bottom: 22px;
+    perspective: none;
+  }
+  .creative-stack-face {
+    min-height: 720px;
+    height: auto;
+    padding-top: 45px;
+    transform: none !important;
+    grid-template-rows: auto minmax(400px, auto) auto;
+  }
+  .creative-stack-experience *,
+  .creative-stack-experience *::before,
+  .creative-stack-experience *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .creative-stack-shot,
+  .creative-stack-experience .creative-chat-demo {
+    transform: none;
+  }
+  .creative-stack-experience .creative-canvas-board {
+    min-height: 400px;
+  }
+}

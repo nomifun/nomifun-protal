@@ -1,0 +1,86 @@
+/* English copy keeps the same liquid stage and arc geometry. */
+.developer-section:lang(en)
+  .developer-liquid-stage
+  .developer-workbench-copy
+  h3 {
+  font-size: clamp(27px, 2.8vw, 43px);
+  line-height: 1.2;
+}
+.developer-section:lang(en)
+  .developer-liquid-stage
+  .developer-workbench-copy
+  > p:not(.developer-kicker) {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.developer-section:lang(en) .developer-model-diagram {
+  grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1.35fr);
+}
+.developer-section:lang(en) .developer-model-endpoint {
+  min-width: 0;
+}
+.developer-section:lang(en) .developer-model-endpoint > span {
+  line-height: 1.5;
+}
+.developer-section:lang(en) .developer-runtime-diagram {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+}
+.developer-section:lang(en) .developer-runtime-layers button > svg,
+.developer-section:lang(en) .developer-action-overlay > svg,
+.developer-section:lang(en) .developer-dag-delivery > svg {
+  flex-shrink: 0;
+}
+.developer-section:lang(en) .developer-runtime-layers button > strong {
+  min-width: 0;
+  line-height: 1.4;
+}
+.developer-section:lang(en) .developer-dag-tasks button strong {
+  min-height: 28px;
+  line-height: 1.4;
+}
+.developer-section:lang(en) .developer-dag-status {
+  line-height: 1.5;
+}
+.arc-ecosystem:lang(en) .eco-card-copy p {
+  line-height: 1.65;
+}
+.arc-ecosystem:lang(en) .eco-card-copy > small {
+  display: block;
+  line-height: 1.45;
+}
+@media (max-width: 700px) {
+  .developer-section:lang(en)
+    .developer-liquid-stage
+    .developer-workbench-copy
+    h3 {
+    font-size: 27px;
+  }
+  .developer-section:lang(en)
+    .developer-liquid-stage
+    .developer-workbench-copy
+    > p:not(.developer-kicker) {
+    font-size: 12px;
+  }
+  .developer-section:lang(en) .developer-model-diagram {
+    grid-template-columns: minmax(0, 1fr) 23px minmax(0, 1.15fr);
+  }
+}
+@media (max-width: 520px) {
+  .arc-ecosystem:lang(en) .eco-card-copy h3 {
+    font-size: 23px;
+  }
+  .arc-ecosystem:lang(en) .eco-card-copy a {
+    margin-top: 13px;
+    padding-top: 12px;
+  }
+  .developer-section:lang(en)
+    .developer-liquid-stage
+    .developer-liquid-tabs
+    > button {
+    line-height: 1.25;
+    min-height: 58px;
+  }
+  .developer-section:lang(en) .developer-diagram-switch button {
+    padding-inline: 10px;
+  }
+}

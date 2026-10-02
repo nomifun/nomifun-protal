@@ -1,0 +1,47 @@
+/* English copy uses the same graphic stages, with space for longer words. */
+html[lang="en"] .prelude-center h2 {
+  font-size: clamp(33px, 3.45vw, 52px);
+  line-height: 1.2;
+  letter-spacing: -0.055em;
+}
+html[lang="en"] .capability-face {
+  padding: 12px;
+}
+html[lang="en"] .capability-face > span {
+  max-width: 150px;
+  text-align: center;
+  line-height: 1.35;
+}
+html[lang="en"] .showcase-gallery-controls > span {
+  max-width: 760px;
+}
+html[lang="en"] .showcase-gallery-controls button {
+  flex-shrink: 0;
+}
+html[lang="en"] .principle-face small {
+  line-height: 1.5;
+}
+@media (max-width: 800px) {
+  html[lang="en"] .capability-face > span {
+    max-width: 118px;
+  }
+  html[lang="en"] .principle-card {
+    min-height: 340px;
+  }
+  html[lang="en"] .principle-face h3,
+  html[lang="en"] .principle-reverse h3 {
+    font-size: 19px;
+  }
+  html[lang="en"] .principle-reverse p {
+    line-height: 1.7;
+    margin: 14px 0;
+  }
+}
+@media (max-width: 767px) {
+  html[lang="en"] .prelude-center h2 {
+    font-size: clamp(25px, 6.7vw, 36px);
+  }
+  html[lang="en"] .prelude-paper strong {
+    font-size: 14px;
+  }
+}

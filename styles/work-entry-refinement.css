@@ -1,0 +1,15 @@
+/* Promote only the moving surfaces; card geometry and content sizing remain
+   independent from the entrance choreography. */
+.work-motion-section:not(.is-reduced) .wm-step-card:first-child {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+.work-motion-section:not(.is-reduced) .wm-underlay {
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-motion-section .wm-step-card:first-child,
+  .work-motion-section .wm-underlay {
+    will-change: auto;
+  }
+}

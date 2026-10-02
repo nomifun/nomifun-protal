@@ -1,0 +1,84 @@
+/* English copy is longer than its Chinese counterpart. Keep it readable at
+   each size without changing the structure or the product interactions. */
+html[lang="en"] .subpage h1 {
+  letter-spacing: -0.045em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+html[lang="en"] .product-headline {
+  font-size: clamp(38px, 4.3vw, 65px);
+}
+html[lang="en"] .subpage .page-lead {
+  line-height: 1.65;
+}
+html[lang="en"] .subpage .page-hero > .eyebrow,
+html[lang="en"] .visual-topline {
+  flex-wrap: wrap;
+}
+html[lang="en"] .map-caption {
+  right: 24px;
+  line-height: 1.5;
+}
+html[lang="en"] .map-surfaces {
+  min-width: 0;
+}
+html[lang="en"] .map-surfaces button {
+  white-space: normal;
+  text-align: left;
+  line-height: 1.35;
+}
+html[lang="en"] .map-surfaces button svg {
+  flex-shrink: 0;
+}
+html[lang="en"] .visual-tabs {
+  max-width: calc(100% - 32px);
+  flex-wrap: wrap;
+}
+html[lang="en"] .capability-rail strong {
+  line-height: 1.4;
+}
+html[lang="en"] .phone-items strong,
+html[lang="en"] .phone-items small {
+  line-height: 1.4;
+}
+html[lang="en"] .download-card .button {
+  line-height: 1.4;
+  min-height: 51px;
+  gap: 12px;
+}
+html[lang="en"] .download-card .button svg {
+  flex-shrink: 0;
+}
+@media (max-width: 560px) {
+  html[lang="en"] .subpage h1 {
+    font-size: 36px;
+    line-height: 1.18;
+  }
+  html[lang="en"] .map-surfaces {
+    margin-left: 18px;
+  }
+  html[lang="en"] .map-surfaces button {
+    padding: 12px 10px;
+  }
+  html[lang="en"] .visual-tabs button {
+    padding: 8px 12px;
+  }
+  html[lang="en"] .contact-primary .email-address {
+    line-height: 1.4;
+  }
+}
+@media (max-width: 360px) {
+  html[lang="en"] .map-core {
+    width: 112px;
+    flex-shrink: 0;
+  }
+  html[lang="en"] .map-surfaces {
+    margin-left: 12px;
+  }
+  html[lang="en"] .map-surfaces button {
+    gap: 6px;
+  }
+  html[lang="en"] .map-surfaces button > svg {
+    width: 18px;
+  }
+}

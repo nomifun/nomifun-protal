@@ -1,0 +1,982 @@
+/* Readable type and controls inside the original full-height motion stages.
+   Text gets space first; compact illustrations can scroll when they need it. */
+
+/* Work cards keep the original 80vh / 90vw rail geometry. */
+.work-motion-section .wm-step-card {
+  padding-top: 78px;
+  padding-bottom: 184px;
+  gap: 18px;
+}
+.work-motion-section .wm-card-1 {
+  color: #514b3f;
+}
+.work-motion-section .wm-card-3 {
+  color: #465337;
+}
+.work-motion-section .wm-card-4 {
+  color: #594663;
+}
+.work-motion-section .wm-card-top {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  opacity: 1;
+}
+.work-motion-section .wm-card-copy h3 {
+  letter-spacing: -0.045em;
+  line-height: 1.3;
+}
+.work-motion-section .wm-card-copy > p,
+html[lang="en"] .work-motion-section .wm-card-copy > p {
+  font-size: 17px;
+  line-height: 1.75;
+  opacity: 1;
+  margin-top: 15px;
+  max-width: 35em;
+}
+.work-motion-section .wm-card-visual {
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #81748780 transparent;
+  padding: 19px 12px 12px;
+}
+.work-motion-section .wm-card-visual > div {
+  flex-shrink: 0;
+  transform: none;
+}
+.work-motion-section .wm-card-visual[data-lenis-prevent] {
+  align-items: flex-start;
+}
+.work-motion-section .wm-card-visual:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+  border-radius: 12px;
+}
+.work-motion-section .wm-card-bottom {
+  min-height: 50px;
+  gap: 15px;
+  flex-shrink: 0;
+}
+.work-motion-section .wm-card-bottom > span {
+  font-size: 12px;
+  padding: 8px 12px;
+}
+.work-motion-section .wm-card-bottom > p {
+  font-size: 13px;
+  line-height: 1.65;
+  opacity: 1;
+}
+.work-motion-section .wm-card-bottom > button {
+  width: 46px;
+  height: 46px;
+  background: #ffffffa8;
+  border-color: #ffffff94;
+}
+.work-motion-section .wm-card-2 .wm-card-bottom > button,
+.work-motion-section .wm-card-5 .wm-card-bottom > button {
+  background: #ffffff1c;
+  border-color: #ffffff38;
+}
+.work-motion-section .wm-sticky-top {
+  font-size: 12px;
+  letter-spacing: 0.07em;
+}
+.work-motion-section .wm-sticky-top small {
+  font-size: 11px;
+  opacity: 0.85;
+}
+.work-motion-section .wm-underlay > .eyebrow {
+  color: #d2c6dc;
+  font-size: 12px;
+}
+.work-motion-section .wm-underlay > p {
+  color: #c9bfd1;
+  font-size: 17px;
+  line-height: 1.75;
+}
+.work-motion-section .wm-scroll-invitation {
+  font-size: 13px;
+  color: #ddd1e6;
+  border-color: #ffffff38;
+}
+.work-motion-section .wm-dock {
+  bottom: 104px;
+  padding: 8px;
+  gap: 10px;
+  border-color: #ffffff32;
+  box-shadow: 0 8px 30px #211d2826;
+}
+.work-motion-section .wm-step-navigation > button,
+html[lang="en"] .work-motion-section .wm-step-navigation > button {
+  font-size: 14px;
+  padding: 11px 13px;
+  color: #e0d5e7;
+}
+.work-motion-section .wm-step-navigation > button > span {
+  font-size: 11px;
+  opacity: 0.8;
+}
+.work-motion-section .wm-step-navigation > button[aria-pressed="true"],
+html[lang="en"]
+  .work-motion-section
+  .wm-step-navigation
+  > button[aria-pressed="true"] {
+  color: #493851;
+}
+.work-motion-section .wm-play-control {
+  min-height: 44px;
+  font-size: 13px;
+  color: #f0e8f5;
+  border-color: #ffffff32;
+}
+
+/* Readable information within the drawings. Tiny serial numbers and terminal
+   traces remain graphic detail; receipts and authorization are real controls. */
+.work-motion-section .wm-request-paper h4 {
+  color: #65583f;
+  letter-spacing: -0.035em;
+}
+.work-motion-section .wm-paper-checks > span {
+  font-size: 12px;
+  color: #6c5e49;
+}
+.work-motion-section .wm-paper-tags > span {
+  color: #75674c;
+}
+.work-motion-section .wm-queue-chip {
+  color: #55693e;
+}
+.work-motion-section .wm-claim-task {
+  color: #5f4770;
+}
+.work-motion-section .wm-claim-task strong {
+  font-size: 14px;
+}
+.work-motion-section .wm-claim-task > div > span {
+  color: #765884;
+}
+.work-motion-section .wm-execution-steps strong {
+  font-size: 14px;
+  color: #4b6040;
+}
+.work-motion-section .wm-execution-steps small {
+  font-size: 10px;
+  color: #667855;
+}
+.work-motion-section .wm-execution-steps > span {
+  color: #667855;
+}
+.work-motion-section .wm-receipt-scene {
+  width: min(375px, 91%);
+}
+.work-motion-section .wm-receipt-paper {
+  padding: 25px;
+}
+.work-motion-section .wm-receipt-paper h4 {
+  color: #69417d;
+  letter-spacing: -0.03em;
+}
+.work-motion-section .wm-receipt-row {
+  font-size: 13px;
+  color: #765a85;
+  padding: 11px 0;
+}
+.work-motion-section .wm-receipt-row strong {
+  color: #54683c;
+  font-size: 12px;
+}
+.work-motion-section .wm-receipt-paper > button {
+  min-height: 44px;
+  font-size: 14px;
+  color: #654076;
+  background: #e9dcf1;
+}
+.work-motion-section .wm-receipt-detail,
+.work-motion-section .wm-receipt-scene.is-expanded .wm-receipt-detail {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #765a85;
+  min-height: 0;
+}
+.work-motion-section .wm-loop-note {
+  font-size: 12px;
+  color: #f1e6fa;
+}
+.work-motion-section .wm-continue-scene.is-authorized .note-next {
+  color: #465d32;
+}
+.work-motion-section .wm-loop-permission,
+html[lang="en"] .work-motion-section .wm-loop-permission {
+  font-size: 14px;
+  line-height: 1.45;
+  min-height: 44px;
+  color: #f0e0fb;
+  border-color: #a38bb7;
+  max-width: 100%;
+  white-space: normal;
+}
+.work-motion-section .wm-permission-toggle {
+  flex-shrink: 0;
+}
+
+/* The sidebar decision example and its operating boundaries are product copy. */
+.work-motion-section .wm-decision-intro .eyebrow {
+  color: #c6afda;
+  font-size: 12px;
+}
+.work-motion-section .wm-decision-intro > p:last-child {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #c4b7ce;
+}
+.work-motion-section .wm-decision-card {
+  border-color: #8b729e66;
+  padding: 30px;
+}
+.work-motion-section .wm-decision-title small {
+  font-size: 11px;
+  color: #c3a5da;
+}
+.work-motion-section .wm-decision-title h4 {
+  font-size: 23px;
+  color: #eee0f7;
+}
+.work-motion-section .wm-decision-switch button {
+  font-size: 14px;
+  min-height: 44px;
+  color: #d4bee3;
+}
+.work-motion-section .wm-decision-switch button[aria-pressed="true"] {
+  color: #faefff;
+}
+.work-motion-section .wm-decision-result > p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #d5c1e2;
+}
+.work-motion-section .wm-decision-result > span > small {
+  font-size: 12px;
+  color: #c7b0d6;
+}
+.work-motion-section .wm-decision-boundary {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #c7b6d2;
+}
+.work-motion-section .wm-decision-boundary > svg {
+  flex-shrink: 0;
+}
+.work-motion-section .wm-continuity > div > strong {
+  font-size: 17px;
+  color: #e8dcf0;
+}
+.work-motion-section .wm-continuity > div > p {
+  font-size: 15px;
+  color: #c4b4cf;
+}
+.work-motion-section .wm-continuity-note {
+  color: #bcaec5;
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 31em;
+}
+
+/* The five creative modes retain their sticky stack and 3D transitions. */
+.creative-stack-experience .creative-stack-nav {
+  min-height: 58px;
+  width: min(850px, calc(100% - 48px));
+  border-color: #d8d1df;
+}
+.creative-stack-experience .creative-stack-nav .creative-tabs-intro {
+  font-size: 12px;
+  color: #655b67;
+}
+.creative-stack-experience .creative-stack-nav > button {
+  font-size: 14px;
+  min-height: 40px;
+}
+.creative-stack-experience .creative-stack-face {
+  padding-top: 158px;
+  padding-bottom: max(102px, calc(90px + env(safe-area-inset-bottom)));
+  gap: 18px;
+}
+.creative-stack-experience .creative-mode-label {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  opacity: 1;
+  margin-bottom: 10px;
+}
+.creative-stack-experience .creative-stack-heading {
+  gap: 30px;
+  align-items: flex-end;
+}
+.creative-stack-experience .creative-stack-heading h3 {
+  letter-spacing: -0.035em;
+}
+.creative-stack-experience .creative-stack-heading > p,
+html[lang="en"] .creative-stack-experience .creative-stack-heading > p {
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: 1;
+  max-width: 410px;
+  padding-right: 60px;
+}
+.creative-stack-experience .creative-card-footer > span {
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 1;
+}
+.creative-stack-experience .creative-card-footer > button,
+.creative-stack-experience .creative-card-footer > a {
+  font-size: 14px;
+  min-height: 42px;
+  line-height: 1.5;
+}
+.creative-stack-experience .creative-stack-visual,
+html[lang="en"] .creative-stack-experience .creative-stack-visual {
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #64556f80 transparent;
+}
+.creative-stack-experience .creative-stack-visual[data-lenis-prevent] {
+  align-items: flex-start;
+}
+.creative-stack-experience .creative-stack-visual:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+  border-radius: 14px;
+}
+.creative-stack-experience .creative-stack-shot .creative-shot-bar {
+  font-size: 12px;
+  min-height: 38px;
+  color: #5b514e;
+}
+.creative-stack-experience .creative-stack-shot > figcaption {
+  font-size: 12px;
+  line-height: 1.55;
+  color: #645c56;
+  padding: 9px 15px;
+}
+.creative-stack-experience .creative-chat-demo {
+  min-height: 430px;
+  max-height: none;
+  padding: 22px 26px 16px;
+}
+.creative-stack-experience .experience-demo-label {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #746374;
+}
+.creative-stack-experience .creative-user-bubble {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #503768;
+  margin: 18px 0;
+}
+.creative-stack-experience .creative-agent-message strong {
+  font-size: 17px;
+  line-height: 1.65;
+}
+.creative-stack-experience .creative-agent-message p,
+html[lang="en"] .creative-stack-experience .creative-agent-message p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #715d6e;
+}
+.creative-stack-experience .creative-tool-receipt {
+  font-size: 12px;
+  line-height: 1.55;
+  color: #644873;
+}
+.creative-stack-experience .creative-demo-composer {
+  padding: 13px;
+}
+.creative-stack-experience .creative-demo-composer > span {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #766976;
+}
+.creative-stack-experience .creative-demo-composer > div,
+html[lang="en"] .creative-stack-experience .creative-demo-composer > div {
+  margin-top: 13px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.creative-stack-experience .creative-demo-composer button {
+  font-size: 13px;
+  min-height: 38px;
+  color: #71556d;
+  padding: 8px 11px;
+}
+.creative-stack-experience .creative-demo-composer button.is-active {
+  color: #654079;
+  border-color: #bda0ce;
+}
+.creative-stack-experience .creative-demo-disclaimer,
+html[lang="en"] .creative-stack-experience .creative-demo-disclaimer {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #756476;
+  margin-top: 12px;
+}
+.creative-stack-experience .creative-audio-demo {
+  min-height: 350px;
+  max-height: none;
+}
+.creative-stack-experience .creative-audio-title p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #775044;
+}
+.creative-stack-experience .audio-demo-control {
+  font-size: 14px !important;
+  min-height: 44px;
+  color: #663c52;
+}
+.creative-stack-experience .creative-canvas-demo {
+  min-height: 440px;
+}
+.creative-stack-experience .canvas-demo-bar > span {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #5a664a;
+}
+.creative-stack-experience .canvas-demo-bar button {
+  font-size: 13px;
+  min-height: 38px;
+  color: #606a51;
+  border-color: #c4cdb9;
+}
+.creative-stack-experience .canvas-demo-bar button[aria-pressed="true"] {
+  color: #63437a;
+  border-color: #bba0cc;
+}
+.creative-stack-experience .canvas-node-top,
+html[lang="en"] .creative-stack-experience .canvas-node-top {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #526344;
+  gap: 6px;
+}
+.creative-stack-experience .canvas-node-prompt {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #394931;
+}
+.creative-stack-experience .canvas-demo-node > small {
+  font-size: 12px;
+  color: #667755;
+  line-height: 1.5;
+}
+.creative-stack-experience .canvas-demo-caption {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #5c6a4e;
+}
+.creative-stack-experience .canvas-demo-selection {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #596647;
+}
+.creative-stack-experience .creative-bottom-note > span,
+.creative-stack-experience .creative-bottom-note > a {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #64576f;
+}
+
+@media (max-width: 1050px) {
+  .creative-stack-experience .creative-stack-heading > p,
+  html[lang="en"] .creative-stack-experience .creative-stack-heading > p {
+    max-width: 330px;
+    padding-right: 40px;
+  }
+  .work-motion-section .wm-step-card {
+    padding-inline: 34px;
+  }
+}
+@media (max-width: 767px) {
+  .work-motion-section .wm-step-card {
+    padding: 86px 22px 174px;
+    gap: 14px;
+  }
+  .work-motion-section .wm-sticky-top {
+    top: 23px;
+    font-size: 11px;
+    letter-spacing: 0.03em;
+  }
+  .work-motion-section .wm-sticky-top small,
+  html[lang="en"] .work-motion-section .wm-sticky-top small {
+    font-size: 10px;
+    max-width: 48%;
+    line-height: 1.45;
+    text-align: right;
+  }
+  .work-motion-section .wm-card-top {
+    font-size: 11px;
+  }
+  .work-motion-section .wm-card-copy h3,
+  html[lang="en"] .work-motion-section .wm-card-copy h3 {
+    font-size: clamp(27px, 7.5vw, 34px);
+    line-height: 1.3;
+  }
+  .work-motion-section .wm-card-copy > p,
+  html[lang="en"] .work-motion-section .wm-card-copy > p {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-top: 12px;
+  }
+  .work-motion-section .wm-card-visual {
+    padding: 18px 8px 8px;
+  }
+  .work-motion-section .wm-card-bottom {
+    min-height: 62px;
+    gap: 7px 9px;
+  }
+  .work-motion-section .wm-card-bottom > span {
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+  .work-motion-section .wm-card-bottom > p {
+    font-size: 12px;
+    max-width: 23em;
+  }
+  .work-motion-section .wm-card-bottom > button {
+    width: 44px;
+    height: 44px;
+  }
+  .work-motion-section .wm-dock {
+    bottom: 94px;
+    width: calc(100% - 24px);
+    padding: 6px;
+    gap: 5px;
+  }
+  .work-motion-section .wm-step-navigation {
+    min-width: 0;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+  .work-motion-section .wm-step-navigation > button,
+  html[lang="en"] .work-motion-section .wm-step-navigation > button {
+    font-size: 12px;
+    min-height: 51px;
+    padding: 7px 6px;
+    flex: 1 0 auto;
+    scroll-snap-align: center;
+  }
+  .work-motion-section .wm-step-navigation > button > span {
+    font-size: 10px;
+  }
+  .work-motion-section .wm-step-navigation > button > strong {
+    font-size: 12px;
+  }
+  .work-motion-section .wm-play-control {
+    flex-shrink: 0;
+    width: 40px;
+    height: 44px;
+    padding: 0;
+  }
+  .work-motion-section .wm-requirement-scene {
+    width: min(300px, 94%);
+  }
+  .work-motion-section .wm-request-paper {
+    padding: 17px;
+  }
+  .work-motion-section .wm-receipt-scene {
+    width: min(300px, 94%);
+  }
+  .work-motion-section .wm-receipt-paper {
+    padding: 19px;
+  }
+  .work-motion-section .wm-receipt-row {
+    font-size: 12px;
+    padding: 9px 0;
+  }
+  .work-motion-section .wm-claim-task {
+    left: 26%;
+    max-width: 76%;
+    white-space: normal;
+  }
+  .work-motion-section .wm-claim-task strong {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .work-motion-section .wm-continue-scene {
+    min-height: 245px;
+  }
+  .work-motion-section .wm-loop-note,
+  html[lang="en"] .work-motion-section .wm-loop-note {
+    font-size: 12px;
+    max-width: 95%;
+    white-space: normal;
+    line-height: 1.45;
+  }
+  .work-motion-section .wm-loop-permission,
+  html[lang="en"] .work-motion-section .wm-loop-permission {
+    width: max-content;
+    font-size: 13px;
+    padding: 9px 11px;
+    bottom: -3px;
+  }
+  .work-motion-section .wm-decision-intro > p:last-child {
+    font-size: 15px;
+  }
+  .work-motion-section .wm-decision-card {
+    padding: 23px;
+  }
+  .work-motion-section .wm-decision-switch {
+    width: 100%;
+    border-radius: 18px;
+  }
+  .work-motion-section .wm-decision-switch button {
+    flex: 1;
+    min-width: 0;
+    font-size: 13px;
+    padding: 8px;
+    line-height: 1.45;
+  }
+  .work-motion-section .wm-decision-result {
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .work-motion-section .wm-decision-result > p {
+    font-size: 14px;
+  }
+  .work-motion-section .wm-decision-result > span > small {
+    font-size: 11px;
+  }
+  .work-motion-section .wm-decision-boundary {
+    font-size: 12px;
+  }
+  .work-motion-section .wm-continuity > div > strong {
+    font-size: 15px;
+  }
+  .work-motion-section .wm-continuity > div > p {
+    font-size: 14px;
+  }
+  .work-motion-section .wm-continuity-note {
+    font-size: 12px;
+  }
+}
+@media (max-width: 760px) {
+  .creative-stack-experience .creative-stack-nav,
+  html[lang="en"] .creative-stack-experience .creative-stack-nav {
+    width: calc(100% - 28px);
+    min-height: 52px;
+    gap: 2px;
+    padding: 6px;
+  }
+  .creative-stack-experience .creative-stack-nav > button,
+  html[lang="en"] .creative-stack-experience .creative-stack-nav > button {
+    font-size: 12px;
+    min-height: 40px;
+    padding: 7px 6px;
+    gap: 4px;
+  }
+  .creative-stack-experience .creative-stack-nav > button svg,
+  html[lang="en"] .creative-stack-experience .creative-stack-nav > button svg {
+    width: 15px;
+    height: 15px;
+  }
+  .creative-stack-experience .creative-stack-face,
+  html[lang="en"] .creative-stack-experience .creative-stack-face {
+    padding: 147px 22px max(104px, calc(91px + env(safe-area-inset-bottom)));
+    gap: 14px;
+  }
+  .creative-stack-experience .creative-stack-heading h3,
+  html[lang="en"] .creative-stack-experience .creative-stack-heading h3 {
+    font-size: clamp(26px, 6.5vw, 32px);
+    line-height: 1.3;
+    padding-right: 35px;
+  }
+  .creative-stack-experience .creative-mode-label {
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+  .creative-stack-experience .creative-stack-heading > p,
+  html[lang="en"] .creative-stack-experience .creative-stack-heading > p {
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 100%;
+    padding: 0;
+    margin-top: 11px;
+  }
+  .creative-stack-experience .creative-card-number {
+    font-size: 30px;
+  }
+  .creative-stack-experience .creative-card-footer > span,
+  html[lang="en"] .creative-stack-experience .creative-card-footer > span {
+    font-size: 12px;
+    line-height: 1.5;
+    max-width: 45%;
+  }
+  .creative-stack-experience .creative-card-footer > button,
+  .creative-stack-experience .creative-card-footer > a,
+  html[lang="en"] .creative-stack-experience .creative-card-footer > button,
+  html[lang="en"] .creative-stack-experience .creative-card-footer > a {
+    font-size: 13px;
+    max-width: 53%;
+    text-align: right;
+    line-height: 1.5;
+  }
+  .creative-stack-experience .creative-stack-shot,
+  html[lang="en"] .creative-stack-experience .creative-stack-shot {
+    flex-shrink: 0;
+    max-height: none;
+  }
+  .creative-stack-experience .creative-stack-shot .creative-shot-bar {
+    font-size: 11px;
+  }
+  .creative-stack-experience .creative-stack-shot > figcaption {
+    font-size: 12px;
+    padding: 9px 11px;
+  }
+  .creative-stack-experience .creative-chat-world,
+  .creative-stack-experience .creative-audio-world,
+  html[lang="en"] .creative-stack-experience .creative-chat-world,
+  html[lang="en"] .creative-stack-experience .creative-audio-world {
+    height: auto;
+    min-height: 350px;
+    flex-shrink: 0;
+  }
+  .creative-stack-experience .creative-chat-demo,
+  html[lang="en"] .creative-stack-experience .creative-chat-demo {
+    height: auto;
+    min-height: 430px;
+    padding: 19px 17px 16px;
+  }
+  .creative-stack-experience .creative-user-bubble,
+  html[lang="en"] .creative-stack-experience .creative-user-bubble {
+    font-size: 14px;
+    padding: 12px 14px;
+    margin: 16px 0;
+  }
+  .creative-stack-experience .creative-agent-message {
+    gap: 9px;
+    margin-bottom: 18px;
+  }
+  .creative-stack-experience .creative-agent-mark {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+  }
+  .creative-stack-experience .creative-agent-message strong {
+    font-size: 15px;
+  }
+  .creative-stack-experience .creative-agent-message p,
+  html[lang="en"] .creative-stack-experience .creative-agent-message p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .creative-stack-experience .creative-demo-composer,
+  html[lang="en"] .creative-stack-experience .creative-demo-composer {
+    padding: 12px;
+  }
+  .creative-stack-experience .creative-tool-receipt {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .creative-stack-experience .creative-demo-composer > span {
+    font-size: 13px;
+  }
+  .creative-stack-experience .creative-demo-composer button {
+    font-size: 12px;
+    padding: 7px 8px;
+  }
+  .creative-stack-experience .creative-audio-demo,
+  html[lang="en"] .creative-stack-experience .creative-audio-demo {
+    height: auto;
+    min-height: 370px;
+    padding: 20px 18px;
+  }
+  .creative-stack-experience .creative-audio-title h4 {
+    font-size: 23px;
+  }
+  .creative-stack-experience .creative-audio-wave {
+    height: 95px;
+    margin: 14px auto 18px;
+  }
+  .creative-stack-experience .creative-canvas-demo,
+  html[lang="en"] .creative-stack-experience .creative-canvas-demo {
+    height: auto;
+    min-height: 580px;
+    max-height: none;
+    flex-shrink: 0;
+    grid-template-rows: auto minmax(440px, auto) auto;
+  }
+  .creative-stack-experience .canvas-demo-bar,
+  html[lang="en"] .creative-stack-experience .canvas-demo-bar {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 13px;
+  }
+  .creative-stack-experience .canvas-demo-bar > span {
+    width: 100%;
+  }
+  .creative-stack-experience .canvas-demo-bar button {
+    font-size: 12px;
+    padding: 7px 8px;
+  }
+  .creative-stack-experience .creative-canvas-board,
+  html[lang="en"] .creative-stack-experience .creative-canvas-board {
+    height: auto;
+    min-height: 440px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: 26px 16px;
+    padding: 24px 13px 80px;
+  }
+  .creative-stack-experience .canvas-demo-node {
+    position: relative;
+    inset: auto;
+    width: auto;
+    transform: none;
+    align-self: start;
+  }
+  .creative-stack-experience .canvas-node-top {
+    font-size: 12px;
+    padding: 10px 9px;
+    gap: 4px;
+  }
+  .creative-stack-experience .canvas-node-top > svg {
+    width: 14px;
+  }
+  .creative-stack-experience .canvas-node-prompt {
+    font-size: 14px;
+    padding: 12px 10px;
+    line-height: 1.6;
+  }
+  .creative-stack-experience .canvas-demo-node > small {
+    font-size: 12px;
+    padding: 10px 9px;
+  }
+  .creative-stack-experience .canvas-node-art {
+    height: 90px;
+    margin: 8px;
+  }
+  .creative-stack-experience .canvas-demo-selection {
+    font-size: 12px;
+    left: 12px;
+    bottom: 13px;
+    max-width: calc(100% - 24px);
+    padding: 8px 10px;
+  }
+  .creative-stack-experience .canvas-demo-caption {
+    font-size: 12px;
+    padding: 11px;
+  }
+  .creative-stack-experience .creative-bottom-note > span,
+  .creative-stack-experience .creative-bottom-note > a {
+    font-size: 14px;
+  }
+}
+@media (max-width: 360px) {
+  .work-motion-section .wm-step-card {
+    padding-inline: 18px;
+  }
+  .work-motion-section .wm-card-copy > p,
+  html[lang="en"] .work-motion-section .wm-card-copy > p {
+    font-size: 14px;
+  }
+  .creative-stack-experience .creative-stack-nav > button svg,
+  html[lang="en"] .creative-stack-experience .creative-stack-nav > button svg {
+    display: none;
+  }
+  .creative-stack-experience .creative-stack-face,
+  html[lang="en"] .creative-stack-experience .creative-stack-face {
+    padding-inline: 17px;
+  }
+  .creative-stack-experience .creative-stack-heading > p,
+  html[lang="en"] .creative-stack-experience .creative-stack-heading > p {
+    font-size: 14px;
+  }
+  .creative-stack-experience .canvas-node-top,
+  html[lang="en"] .creative-stack-experience .canvas-node-top {
+    flex-wrap: wrap;
+  }
+}
+@media (max-height: 720px) {
+  .work-motion-section .wm-step-card {
+    padding-top: 72px;
+    gap: 12px;
+  }
+  .work-motion-section .wm-card-copy h3 {
+    font-size: 34px;
+  }
+  .work-motion-section .wm-card-copy > p,
+  html[lang="en"] .work-motion-section .wm-card-copy > p {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  .creative-stack-experience .creative-stack-face,
+  html[lang="en"] .creative-stack-experience .creative-stack-face {
+    padding-top: 151px;
+    gap: 12px;
+  }
+  .creative-stack-experience .creative-stack-heading h3 {
+    font-size: 34px;
+  }
+}
+@media (max-height: 720px) and (max-width: 767px) {
+  .work-motion-section .wm-step-card {
+    padding-top: 64px;
+    padding-bottom: 172px;
+    gap: 10px;
+  }
+  .work-motion-section .wm-card-bottom > p {
+    display: none;
+  }
+  .work-motion-section .wm-card-copy h3,
+  html[lang="en"] .work-motion-section .wm-card-copy h3 {
+    font-size: 27px;
+  }
+  .work-motion-section .wm-card-copy > p,
+  html[lang="en"] .work-motion-section .wm-card-copy > p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+}
+@media (max-height: 720px) and (max-width: 760px) {
+  .creative-stack-experience .creative-stack-face,
+  html[lang="en"] .creative-stack-experience .creative-stack-face {
+    padding-top: 143px;
+    gap: 11px;
+  }
+  .creative-stack-experience .creative-stack-heading h3,
+  html[lang="en"] .creative-stack-experience .creative-stack-heading h3 {
+    font-size: 25px;
+    line-height: 1.3;
+  }
+  .creative-stack-experience .creative-stack-heading > p,
+  html[lang="en"] .creative-stack-experience .creative-stack-heading > p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-motion-section .wm-step-card {
+    padding: 45px max(28px, calc((100vw - 850px) / 2));
+    gap: 20px;
+  }
+  .work-motion-section .wm-card-visual {
+    min-height: 330px;
+    overflow: visible;
+  }
+  .creative-stack-experience .creative-stack-face,
+  html[lang="en"] .creative-stack-experience .creative-stack-face {
+    padding-top: 42px;
+    padding-bottom: 35px;
+    grid-template-rows: auto minmax(450px, auto) auto;
+  }
+  .creative-stack-experience .creative-stack-visual,
+  html[lang="en"] .creative-stack-experience .creative-stack-visual {
+    overflow: visible;
+  }
+}

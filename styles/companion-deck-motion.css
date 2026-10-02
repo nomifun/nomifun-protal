@@ -1,0 +1,466 @@
+/* NomiFun's companion deck drops and reveals cards under React's lifecycle. */
+.companion-deck-experience {
+  background: #f8f7f3;
+}
+.companion-deck-experience .companion-stage {
+  background: #f0ede7;
+  border-radius: 30px;
+  grid-template-columns: minmax(0, 1.65fr) minmax(330px, 1fr);
+  min-height: 745px;
+}
+.companion-deck-world {
+  padding: 31px 37px 27px;
+  background: #eeeae3;
+}
+.companion-deck-world > .experience-demo-label {
+  color: #7b706b;
+}
+.companion-deck-container {
+  position: relative;
+  height: 450px;
+  width: 100%;
+  flex-shrink: 0;
+  margin-top: 99px;
+  perspective: 1200px;
+  touch-action: pan-y;
+  outline-offset: 7px;
+  border-radius: 26px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.companion-deck-container:focus-visible {
+  outline: 3px solid #9572c9;
+}
+.companion-deck-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex: none;
+  padding: 66px 32px 23px;
+  border-radius: 25px;
+  background: #f8ebe4;
+  background: color-mix(in srgb, var(--card-accent) 34%, #fffaf3);
+  border: 1px solid #fff9;
+  box-shadow: 0 14px 35px #78615b17;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+  transition:
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease;
+  pointer-events: none;
+  animation: none;
+  overflow: hidden;
+}
+.companion-deck-card.is-front {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+  z-index: 10;
+  pointer-events: auto;
+}
+.companion-deck-card.is-next {
+  transform: translate3d(0, -68px, 0) scale(0.95);
+  opacity: 1;
+  z-index: 9;
+}
+.companion-deck-card.is-dropping {
+  transform: translate3d(0, 360px, 0) scale(0.96) rotate(0.6deg);
+  opacity: 0;
+  z-index: 15;
+  transition:
+    transform 0.65s cubic-bezier(0.32, 0.72, 0, 1),
+    opacity 0.45s ease-in;
+}
+.companion-deck-card.is-hidden {
+  transform: translate3d(0, -90px, 0) scale(0.91);
+  opacity: 0;
+  z-index: 1;
+}
+.companion-deck-card-top {
+  position: absolute;
+  top: 23px;
+  left: 26px;
+  right: 26px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: #755c71;
+  z-index: 4;
+}
+.companion-deck-aura {
+  position: absolute;
+  width: 370px;
+  height: 370px;
+  border-radius: 50%;
+  left: 50%;
+  top: 63px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: radial-gradient(circle at 45% 40%, #fffaf386, #fff0 62%);
+}
+.companion-deck-aura::before,
+.companion-deck-aura::after {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  border: 1px solid #fff6;
+  border-radius: 50%;
+  box-shadow: 0 0 25px #fff4;
+  animation: companion-aura-pulse 4s ease-in-out infinite alternate;
+}
+.companion-deck-aura::after {
+  inset: 3%;
+  animation-delay: -2s;
+  border-style: dashed;
+  opacity: 0.5;
+}
+.companion-deck-card .companion-main-figure {
+  width: 238px;
+  height: 238px;
+  margin: 0 0 -13px;
+}
+.companion-deck-card .experience-figure {
+  filter: drop-shadow(0 16px 15px #64495315);
+}
+.companion-deck-card .companion-orbit {
+  width: 335px;
+  height: 220px;
+  top: 105px;
+  border-color: #a4899e36;
+}
+.companion-deck-card .companion-orbit.orbit-two {
+  width: 240px;
+  height: 315px;
+  top: 45px;
+}
+.companion-deck-card .companion-orbit::after {
+  background: var(--card-accent);
+  box-shadow: 0 0 0 6px #fff5;
+}
+.companion-deck-card .companion-speech {
+  top: 78px;
+  right: 23px;
+  max-width: 230px;
+  padding: 11px 13px;
+  background: #fffaf3e6;
+  font-size: 10px;
+  box-shadow: 0 10px 30px #66545510;
+}
+.companion-deck-card .companion-name h3 {
+  font-size: 38px;
+  color: #3b303d;
+  letter-spacing: -0.055em;
+}
+.companion-deck-card .companion-name h3 > span {
+  font-size: 9px;
+  color: #7f687a;
+  background: #fff7;
+}
+.companion-deck-card .companion-name p {
+  color: #8a7385;
+  font-size: 11px;
+  margin-top: 9px;
+}
+.companion-deck-card .companion-floating-note {
+  left: 19px;
+  bottom: 68px;
+  font-size: 8px;
+  padding: 9px 11px;
+  background: #fff7;
+  color: #846c83;
+  z-index: 3;
+}
+.companion-deck-card-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 22px;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  color: #9c8290;
+}
+.companion-deck-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 2px 0;
+  position: relative;
+  z-index: 20;
+}
+.companion-deck-controls > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #726373;
+  font-size: 10px;
+}
+.companion-deck-controls > span i {
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: #baacb7;
+}
+.companion-deck-controls > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.companion-deck-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #fbf8f1;
+  border: 1px solid #ded4dc;
+  border-radius: 21px;
+  padding: 8px 11px;
+  color: #746376;
+  font-size: 9px;
+}
+.companion-deck-controls button:hover {
+  border-color: #a18bb4;
+  background: #fff;
+}
+.companion-deck-controls button:last-child {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+.companion-deck-world .companion-picker {
+  margin-top: 20px;
+  gap: 8px;
+  z-index: 20;
+}
+.companion-deck-world .companion-picker button {
+  background: #ffffff38;
+  border-color: #d8cfd5;
+  border-radius: 12px;
+  padding: 9px 8px 9px 4px;
+}
+.companion-deck-world .companion-picker button > span {
+  background: transparent;
+}
+.companion-deck-world .companion-picker button.is-active {
+  background: #fdfaf4;
+  border-color: #b89dc7;
+}
+.companion-deck-experience .companion-insight {
+  align-self: stretch;
+  background: #faf8f3;
+  padding-top: 55px;
+}
+.companion-deck-experience .companion-insight h3 {
+  font-size: 46px;
+  line-height: 1.25;
+}
+.companion-deck-experience .companion-memory-card {
+  transition: background 0.35s;
+}
+.companion-deck-world:not(.is-in-view) .experience-figure-body,
+.companion-deck-world:not(.is-in-view) .experience-figure-eyes,
+.companion-deck-world:not(.is-in-view) .companion-deck-aura::before,
+.companion-deck-world:not(.is-in-view) .companion-deck-aura::after,
+.companion-deck-card:not(.is-front) .experience-figure-body,
+.companion-deck-card:not(.is-front) .experience-figure-eyes {
+  animation-play-state: paused;
+}
+@keyframes companion-aura-pulse {
+  from {
+    transform: scale(0.95);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(1.07);
+    opacity: 0.9;
+  }
+}
+@media (max-width: 1050px) {
+  .companion-deck-experience .companion-stage {
+    grid-template-columns: minmax(0, 1.25fr) minmax(300px, 1fr);
+  }
+  .companion-deck-world {
+    padding: 29px 24px 25px;
+  }
+  .companion-deck-card .companion-speech {
+    right: 14px;
+    top: 79px;
+    max-width: 170px;
+    font-size: 9px;
+  }
+  .companion-deck-card .companion-main-figure {
+    width: 215px;
+    height: 215px;
+  }
+  .companion-deck-card .companion-floating-note {
+    left: 13px;
+    bottom: 72px;
+    font-size: 7px;
+  }
+  .companion-deck-world .companion-picker button {
+    padding: 8px 7px 8px 3px;
+    gap: 3px;
+  }
+  .companion-deck-world .companion-picker .experience-figure {
+    width: 34px;
+    height: 34px;
+  }
+  .companion-deck-world .companion-picker button > span {
+    font-size: 10px;
+  }
+  .companion-deck-world .companion-picker button > svg:last-child {
+    display: none;
+  }
+  .companion-deck-experience .companion-insight {
+    padding: 42px 30px 30px;
+  }
+  .companion-deck-experience .companion-insight h3 {
+    font-size: 39px;
+  }
+}
+@media (max-width: 760px) {
+  .companion-deck-experience .companion-stage {
+    grid-template-columns: minmax(0, 1fr);
+    border-radius: 23px;
+  }
+  .companion-deck-world {
+    padding: 25px 22px 26px;
+  }
+  .companion-deck-container {
+    margin-top: 77px;
+    height: 421px;
+  }
+  .companion-deck-card {
+    padding: 60px 20px 22px;
+    border-radius: 19px;
+  }
+  .companion-deck-card.is-next {
+    transform: translate3d(0, -44px, 0) scale(0.95);
+  }
+  .companion-deck-card.is-hidden {
+    transform: translate3d(0, -68px, 0) scale(0.91);
+  }
+  .companion-deck-card-top {
+    top: 18px;
+    left: 20px;
+    right: 20px;
+    font-size: 8px;
+  }
+  .companion-deck-card .companion-main-figure {
+    width: 235px;
+    height: 235px;
+  }
+  .companion-deck-card .companion-speech {
+    right: 17px;
+    top: 69px;
+    max-width: 196px;
+    font-size: 9px;
+  }
+  .companion-deck-card .companion-floating-note {
+    left: 13px;
+    bottom: 73px;
+    font-size: 8px;
+  }
+  .companion-deck-card .companion-name h3 {
+    font-size: 34px;
+  }
+  .companion-deck-card .companion-name p {
+    font-size: 10px;
+  }
+  .companion-deck-controls {
+    padding-top: 17px;
+  }
+  .companion-deck-world .companion-picker {
+    margin-top: 16px;
+  }
+  .companion-deck-world .companion-picker button {
+    padding: 10px 6px 10px 4px;
+    gap: 4px;
+  }
+  .companion-deck-world .companion-picker .experience-figure {
+    width: 40px;
+    height: 40px;
+  }
+  .companion-deck-world .companion-picker button > span {
+    font-size: 11px;
+  }
+  .companion-deck-experience .companion-insight {
+    padding: 32px 27px 35px;
+  }
+  .companion-deck-experience .companion-insight h3 {
+    font-size: 37px;
+  }
+}
+@media (max-width: 380px) {
+  .companion-deck-world {
+    padding-inline: 15px;
+  }
+  .companion-deck-container {
+    height: 404px;
+  }
+  .companion-deck-card .companion-main-figure {
+    width: 210px;
+    height: 210px;
+  }
+  .companion-deck-card .companion-speech {
+    font-size: 8px;
+    right: 13px;
+    max-width: 181px;
+  }
+  .companion-deck-card .companion-floating-note {
+    bottom: 64px;
+    padding: 7px 8px;
+    font-size: 7px;
+  }
+  .companion-deck-card .companion-name h3 {
+    font-size: 31px;
+  }
+  .companion-deck-card .companion-name h3 > span {
+    margin-left: 6px;
+    font-size: 8px;
+  }
+  .companion-deck-world .companion-picker {
+    gap: 5px;
+  }
+  .companion-deck-world .companion-picker .experience-figure {
+    width: 29px;
+    height: 29px;
+  }
+  .companion-deck-world .companion-picker button > span {
+    font-size: 10px;
+  }
+  .companion-deck-world .companion-picker button > span small {
+    font-size: 8px;
+  }
+  .companion-deck-experience .companion-insight {
+    padding-inline: 22px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .companion-deck-card {
+    transition: none;
+  }
+  .companion-deck-card.is-front {
+    transform: none;
+  }
+  .companion-deck-card.is-next,
+  .companion-deck-card.is-hidden,
+  .companion-deck-card.is-dropping {
+    transform: none;
+    opacity: 0;
+  }
+  .companion-deck-container {
+    margin-top: 27px;
+  }
+  .companion-deck-experience .experience-figure-body,
+  .companion-deck-experience .experience-figure-eyes,
+  .companion-deck-aura::before,
+  .companion-deck-aura::after {
+    animation: none;
+  }
+}

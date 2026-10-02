@@ -1,0 +1,40 @@
+@import "../styles/global.css";
+@import "../styles/pages.css";
+@import "../styles/platform.css";
+@import "../styles/experiences.css";
+@import "../styles/home.css";
+@import "../styles/prelude-motion.css";
+@import "../styles/work-motion.css";
+@import "../styles/creative-stack-motion.css";
+@import "../styles/companion-deck-motion.css";
+@import "../styles/developer-motion.css";
+@import "../styles/arc-motion.css";
+@import "../styles/motion-extras.css";
+
+@import "../styles/i18n.css";
+
+@import "../styles/i18n-architecture-ecosystem.css";
+
+@import "../styles/i18n-blog.css";
+
+@import "../styles/i18n-companion-work.css";
+
+@import "../styles/i18n-creative-extensions.css";
+
+@import "../styles/i18n-graphic-media.css";
+
+@import "../styles/i18n-home-core.css";
+
+@import "../styles/i18n-product-pages.css";
+
+@import "../styles/i18n-shell.css";
+
+@import "../styles/polish-foundations.css";
+
+@import "../styles/polish-platform-cards.css";
+
+@import "../styles/polish-work-creative.css";
+
+@import "../styles/work-entry-refinement.css";
+
+@import "../styles/creative-layout-refinement.css";

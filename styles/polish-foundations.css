@@ -1,0 +1,747 @@
+/* A reading layer, separate from illustrative miniature UI and scene geometry. */
+:root {
+  --font:
+    "Neue Montreal", "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei",
+    "Hiragino Sans GB", "Noto Sans CJK SC", "Segoe UI", sans-serif;
+  --muted: #625b66;
+  --reading-ink: #292431;
+  --reading-secondary: #59515f;
+  --reading-meta: #6c6372;
+  --copy-size: 18px;
+  --control-size: 15px;
+  --caption-size: 13px;
+}
+body {
+  font-size: 17px;
+}
+.section-copy {
+  font-size: var(--copy-size);
+  line-height: 1.85;
+  color: var(--reading-secondary);
+}
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--reading-meta);
+}
+.section-footnote,
+.demo-caption {
+  font-size: var(--caption-size);
+  line-height: 1.75;
+  color: var(--reading-meta);
+}
+.pill {
+  font-size: 13px;
+  line-height: 1.5;
+}
+.button {
+  font-size: 16px;
+  font-weight: 500;
+}
+.site-header .desktop-navigation {
+  font-size: 15px;
+  gap: 25px;
+}
+.site-header .desktop-navigation a {
+  color: #57505d;
+}
+.site-header .desktop-navigation a[aria-current] {
+  color: #211a2a;
+}
+.site-header .header-download {
+  font-size: 14px;
+}
+.site-header .language-switch {
+  font-size: 13px;
+}
+.site-header.is-inner-page {
+  background: #f6f5f1f2;
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid #dcd6e0;
+}
+.menu-panel.is-inner-page {
+  bottom: 28px;
+}
+.reading-dock {
+  font-size: 13px;
+  gap: 16px;
+  min-height: 58px;
+}
+.reading-dock.is-hero:not(.is-open) {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.reading-dock .dock-title,
+.reading-dock .dock-menu-label {
+  font-size: 13px;
+}
+html[lang="en"] .reading-dock .dock-menu-label {
+  width: 42px;
+}
+.menu-panel .menu-heading,
+.menu-panel .menu-chapters p,
+.menu-panel .menu-note,
+.menu-language-row {
+  font-size: 13px;
+  color: var(--reading-secondary);
+}
+.menu-panel .menu-chapters a {
+  font-size: 13px;
+  min-height: 40px;
+}
+.menu-panel .language-switch {
+  font-size: 13px;
+}
+.home-hero[data-locale] .hero-description {
+  font-size: 20px;
+  color: #57505d;
+  line-height: 1.8;
+}
+.home-hero[data-locale] .hero-buttons .button {
+  font-size: 16px;
+}
+.home-hero[data-locale] .hero-meta {
+  font-size: 13px;
+  color: #625967;
+}
+.home-hero[data-locale] .hero-mode-tabs button {
+  font-size: 14px;
+  min-height: 44px;
+}
+.home-hero[data-locale] .hero-playground > p {
+  font-size: 15px;
+  color: #57505d;
+  line-height: 1.7;
+}
+.home-hero[data-locale] .hero-floor {
+  font-size: 12px;
+  color: #625967;
+}
+.home-hero[data-locale] .hero-eyebrow {
+  font-size: 12px;
+  color: #57505d;
+  background: #fffc;
+}
+.home-hero[data-locale] .hero-rotating-label {
+  font-size: inherit;
+}
+.home-hero[data-locale] .hero-satellite span {
+  font-size: 13px;
+  color: #5f5367;
+}
+.home-hero[data-locale] .hero-satellite small {
+  font-size: 10px;
+  color: #685d70;
+}
+#agent .workbench-top {
+  font-size: 14px;
+}
+#agent .workbench-top > small {
+  font-size: 12px;
+  color: #6c6372;
+}
+#agent .composer-controls {
+  padding: 32px;
+}
+#agent .preset-tabs {
+  gap: 6px;
+  flex-wrap: wrap;
+}
+#agent .preset-tabs button {
+  font-size: 14px;
+  padding: 11px 16px;
+  min-height: 44px;
+  color: #5d5463;
+  white-space: normal;
+}
+#agent .preset-tabs button[aria-pressed="true"] {
+  color: white;
+}
+#agent .module {
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 48px;
+  color: #655d6c;
+}
+#agent .module.enabled {
+  color: #33233f;
+}
+#agent .module > svg {
+  width: 21px;
+  height: 21px;
+}
+#agent .switch-track {
+  width: 38px;
+  height: 22px;
+  padding: 3px;
+  flex-shrink: 0;
+  background: #bcb4c4;
+}
+#agent .switch-track > span {
+  width: 16px;
+  height: 16px;
+}
+#agent .enabled .switch-track {
+  background: #846297;
+}
+#agent .enabled .switch-track > span {
+  transform: translateX(16px);
+}
+#agent .module-detail {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #65576d;
+  min-height: 50px;
+}
+#agent .agent-preview-copy p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #5d4c68;
+  margin-top: 15px;
+}
+#agent .agent-preview-copy h3 {
+  font-size: clamp(25px, 2.3vw, 34px);
+  line-height: 1.35;
+}
+#agent .workbench-bottom {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #66566e;
+  gap: 18px;
+}
+#agent .workbench-bottom button {
+  font-size: 14px;
+  min-height: 44px;
+  color: #4e365d;
+}
+#agent .session-switch {
+  flex-wrap: wrap;
+}
+#agent .session-switch button {
+  font-size: 13px;
+  min-height: 42px;
+}
+#agent .relay-copy p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--reading-secondary);
+}
+#agent .relay-header {
+  font-size: 14px;
+}
+#agent .relay-user {
+  font-size: 15px;
+  line-height: 1.75;
+}
+#agent .relay-response {
+  font-size: 15px;
+  line-height: 1.75;
+}
+#agent .relay-response p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #584765;
+}
+#agent .relay-response small {
+  font-size: 12px;
+  color: #695d73;
+}
+.agent-source figcaption {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #66566e;
+}
+.experience-section .experience-heading > p {
+  font-size: 19px;
+  color: #5a515f;
+  line-height: 1.8;
+}
+.experience-heading .section-heading span {
+  color: #6a5c73;
+}
+.experience-section .experience-overline,
+.experience-section .experience-demo-label {
+  font-size: 13px;
+  color: #625768;
+}
+.experience-section .experience-footnote {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #6c5e73;
+}
+.experience-section .experience-text-link {
+  font-size: 15px;
+  min-height: 44px;
+}
+.extension-section .extension-heading-row > p {
+  font-size: 19px;
+  color: #5c515f;
+  line-height: 1.85;
+}
+.extension-section .extension-step-description {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #63516b;
+}
+.extension-section .platform-demo-label,
+.extension-section .extension-prompt-label {
+  font-size: 13px;
+  color: #63536c;
+}
+.extension-section textarea {
+  font-size: 16px;
+  line-height: 1.75;
+  min-height: 116px;
+}
+.extension-section .extension-shape-switch {
+  flex-wrap: wrap;
+}
+.extension-section .extension-shape-switch button {
+  font-size: 14px;
+  min-height: 44px;
+  color: #65566c;
+}
+.extension-section .extension-shape-switch button.is-active {
+  color: #3a234a;
+}
+.extension-section .extension-next {
+  font-size: 15px;
+  min-height: 46px;
+}
+.extension-section .platform-demo-note {
+  font-size: 13px;
+  color: #746679;
+  line-height: 1.7;
+}
+.extension-section .extension-steps > button {
+  font-size: 14px;
+  min-height: 62px;
+}
+.extension-section .extension-steps strong {
+  font-size: 14px;
+}
+.extension-section .extension-permission-preview {
+  font-size: 15px;
+}
+.extension-section .extension-permission-tag {
+  font-size: 12px;
+}
+.extension-section .extension-binding-points {
+  flex-wrap: wrap;
+}
+.extension-section .extension-binding-points > button {
+  font-size: 14px;
+  min-height: 44px;
+}
+.extension-section .extension-binding-detail p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #68536f;
+}
+.extension-section .extension-binding-detail button {
+  font-size: 14px;
+  min-height: 44px;
+}
+.extension-section .extension-binding-heading > p {
+  font-size: 17px;
+  color: #63546b;
+  line-height: 1.8;
+}
+.extension-section .extension-miniapp-bar {
+  font-size: 13px;
+}
+.extension-section .extension-miniapp-task {
+  font-size: 14px;
+}
+.motion-showcase .showcase-heading > p:not(.eyebrow) {
+  font-size: 19px;
+  line-height: 1.8;
+  color: var(--reading-secondary);
+}
+.motion-showcase .showcase-frame > p {
+  font-size: 13px;
+  line-height: 1.75;
+  color: #6c5e72;
+}
+.motion-showcase .showcase-gallery-controls > span {
+  font-size: 13px;
+  line-height: 1.6;
+}
+.motion-principles .principle-reverse p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #51405e;
+}
+.motion-principles .principle-card {
+  min-height: 360px;
+}
+.subpage .map-panel > p,
+.subpage .product-boundary p,
+.subpage .network-visual-caption {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #5e4e69;
+}
+.subpage .map-surfaces button,
+.subpage .visual-tabs button,
+.subpage .phone-tabbar button {
+  font-size: 14px;
+  min-height: 44px;
+}
+.subpage .visual-disclaimer,
+.subpage .map-caption,
+.subpage .download-format,
+.subpage .download-help {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #6b5d73;
+}
+.subpage .download-note-list a,
+.subpage .contact-repos a {
+  font-size: 15px;
+}
+.motion-principles .principle-face small {
+  font-size: 12px;
+}
+.faq-section .faq-item button {
+  font-size: 17px;
+  line-height: 1.55;
+}
+.faq-section .faq-answer p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: #594e64;
+}
+.story-section .story-timeline article p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #615666;
+}
+.story-section .story-timeline article > span {
+  font-size: 13px;
+}
+.site-footer .footer-links a {
+  font-size: 15px;
+}
+.site-footer .footer-links span {
+  font-size: 13px;
+}
+.site-footer .footer-bottom {
+  font-size: 13px;
+}
+/* Reading routes use comfortable prose rather than condensed demo labels. */
+.subpage .page-lead {
+  font-size: 20px;
+  line-height: 1.8;
+  color: var(--reading-secondary);
+}
+.subpage .page-back {
+  font-size: 14px;
+  min-height: 44px;
+}
+.subpage .product-features p,
+.subpage .product-list .ecosystem-copy > p:not(.eyebrow) {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #62536d;
+}
+.subpage .blog-card-body > p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #65576b;
+}
+.subpage .blog-card-meta,
+.subpage .article-meta {
+  font-size: 13px;
+  color: #65576b;
+}
+.subpage .blog-filter button {
+  font-size: 14px;
+  min-height: 44px;
+}
+.subpage .blog-filter > span {
+  font-size: 13px;
+}
+.subpage .article-prose {
+  font-size: 18px;
+  line-height: 1.85;
+  color: #3f354a;
+}
+.subpage .article-archive-note p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #66526f;
+}
+.subpage .article-description {
+  font-size: 20px;
+  line-height: 1.8;
+  color: var(--reading-secondary);
+}
+.subpage .download-card p,
+.subpage .download-note-list p,
+.subpage .download-source p,
+.subpage .contact-email p,
+.subpage .contact-issues p,
+.subpage .contact-build p {
+  font-size: 16px;
+  line-height: 1.8;
+}
+.subpage .download-card > a,
+.subpage .contact-card-action {
+  font-size: 15px;
+  min-height: 44px;
+}
+html[lang="zh-CN"] .page-italic,
+html[lang="zh-CN"] .platform-serif {
+  font-family: var(--font);
+  font-style: normal;
+  letter-spacing: -0.025em;
+}
+@media (max-width: 1160px) and (min-width: 801px) {
+  .site-header .desktop-navigation {
+    font-size: 14px;
+    gap: 18px;
+  }
+  .site-header .header-actions {
+    gap: 13px;
+  }
+  .site-header .header-source {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  :root {
+    --copy-size: 16px;
+    --caption-size: 13px;
+  }
+  body {
+    font-size: 16px;
+  }
+  .container {
+    width: calc(100% - 40px);
+  }
+  .home-hero[data-locale] .hero-content {
+    padding-top: 124px;
+  }
+  .home-hero[data-locale] .hero-description {
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 440px;
+    margin-top: 23px;
+  }
+  .home-hero[data-locale] .hero-buttons {
+    margin-top: 25px;
+    gap: 12px;
+  }
+  .home-hero[data-locale] .hero-buttons .button {
+    font-size: 15px;
+    min-height: 52px;
+  }
+  .home-hero[data-locale] .hero-meta {
+    font-size: 12px;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .home-hero[data-locale] .hero-mode-tabs button {
+    font-size: 13px;
+    min-height: 42px;
+    padding: 10px 16px;
+  }
+  .home-hero[data-locale] .hero-playground > p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .home-hero[data-locale] .hero-eyebrow {
+    font-size: 10px;
+    padding-inline: 13px;
+    max-width: calc(100vw - 44px);
+  }
+  .home-hero[data-locale] .hero-rotating-label {
+    line-height: 1.5;
+    white-space: normal;
+  }
+  .home-hero[data-locale] .hero-floor {
+    font-size: 11px;
+  }
+  .reading-dock .dock-title,
+  .reading-dock .dock-menu-label {
+    font-size: 12px;
+  }
+  .reading-dock {
+    gap: 12px;
+    padding-inline: 17px;
+    min-height: 56px;
+  }
+  #agent .composer-controls {
+    padding: 24px 20px;
+  }
+  #agent .module {
+    font-size: 15px;
+    min-height: 46px;
+    padding: 12px 8px;
+  }
+  #agent .module-detail {
+    font-size: 14px;
+  }
+  #agent .agent-preview-copy p {
+    font-size: 15px;
+  }
+  #agent .agent-preview-copy h3 {
+    font-size: 27px;
+  }
+  #agent .workbench-top {
+    font-size: 13px;
+    padding: 18px 20px;
+  }
+  #agent .workbench-top > small {
+    max-width: 40%;
+    text-align: right;
+  }
+  #agent .workbench-bottom {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 18px 20px;
+  }
+  #agent .preset-tabs button {
+    font-size: 13px;
+    flex: 1 1 95px;
+    padding-inline: 10px;
+  }
+  #agent .session-switch button {
+    font-size: 13px;
+    padding: 9px 12px;
+  }
+  #agent .relay-copy p {
+    font-size: 16px;
+  }
+  #agent .relay-header {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  #agent .relay-response,
+  #agent .relay-response p {
+    font-size: 15px;
+  }
+  .experience-section .experience-heading > p {
+    font-size: 16px;
+  }
+  .extension-section .extension-heading-row > p {
+    font-size: 16px;
+  }
+  .extension-section .extension-step-description {
+    font-size: 16px;
+  }
+  .extension-section .extension-binding-heading > p {
+    font-size: 16px;
+  }
+  .extension-section .extension-steps > button {
+    padding: 12px 9px;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr) 17px;
+    gap: 6px;
+  }
+  .extension-section .extension-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .extension-section .extension-steps strong {
+    font-size: 13px;
+    min-width: 0;
+    white-space: normal;
+  }
+  .motion-principles .principle-reverse p {
+    font-size: 15px;
+  }
+  .faq-section .faq-item button {
+    font-size: 16px;
+  }
+  .faq-section .faq-answer p {
+    font-size: 16px;
+  }
+  .subpage .page-lead,
+  .subpage .article-description {
+    font-size: 17px;
+  }
+  .subpage .article-prose {
+    font-size: 17px;
+    line-height: 1.9;
+  }
+  .subpage .blog-card-body > p {
+    font-size: 15px;
+  }
+}
+@media (max-width: 380px) {
+  .container {
+    width: calc(100% - 32px);
+  }
+  .home-hero[data-locale] .hero-mode-tabs button {
+    padding-inline: 12px;
+  }
+  .reading-dock {
+    max-width: calc(100vw - 24px);
+    padding-inline: 14px;
+    gap: 10px;
+  }
+  .reading-dock .dock-title {
+    font-size: 12px;
+  }
+}
+
+/* Mobile hero reads in flow; larger copy cannot collide with absolute controls. */
+@media (max-width: 800px) {
+  .home-hero[data-locale] {
+    height: auto;
+    min-height: 100svh;
+    max-height: none;
+    justify-content: flex-start;
+    padding: 112px 0 108px;
+    gap: 26px;
+  }
+  .home-hero[data-locale] .hero-content {
+    padding-top: 0;
+    margin-top: 0;
+  }
+  .home-hero[data-locale] .hero-description {
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 440px;
+  }
+  .home-hero[data-locale] .hero-meta {
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 22px;
+  }
+  .home-hero[data-locale] .hero-playground {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    width: calc(100% - 40px);
+    margin: 0 20px;
+    z-index: 2;
+  }
+  .home-hero[data-locale] .hero-floor {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    width: calc(100% - 40px);
+    z-index: 2;
+    min-height: 44px;
+    font-size: 11px;
+  }
+  .home-hero[data-locale] .hero-floor > button {
+    min-height: 40px;
+    font-size: 12px;
+  }
+  .home-hero[data-locale] .hero-eyebrow {
+    font-size: 10px;
+    max-width: calc(100vw - 40px);
+  }
+}
+.subpage .download-card > p {
+  color: #5e5368;
+}

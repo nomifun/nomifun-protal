@@ -1,0 +1,541 @@
+/* A room that expands, then carries four distinct views through a liquid tab bar. */
+.developer-liquid-track {
+  height: 420vh;
+  height: 420svh;
+  width: 100%;
+  position: relative;
+  margin: 74px 0 0;
+}
+.developer-liquid-stage {
+  --liquid-growth: 0;
+  width: min(1040px, calc(100vw - 48px));
+  height: min(600px, calc(100vh - 48px));
+  position: sticky;
+  top: 24px;
+  margin-inline: auto;
+  padding: clamp(18px, 2.4vw, 38px);
+  border-radius: 32px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #ffdacb;
+  border: 1px solid #ffffff70;
+  box-shadow: 0 28px 80px -38px #98483566;
+  isolation: isolate;
+}
+.developer-liquid-mesh {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+.developer-liquid-mesh > svg {
+  position: absolute;
+  top: -7%;
+  left: 0;
+  width: 5200px;
+  max-width: none;
+  height: 114%;
+  filter: blur(75px);
+  will-change: transform;
+}
+.developer-liquid-filter {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.developer-liquid-stage-top {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  z-index: 2;
+}
+.developer-liquid-index {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: #552c38;
+  font:
+    9px ui-monospace,
+    monospace;
+  letter-spacing: 0.15em;
+  padding-bottom: 18px;
+}
+.developer-liquid-index i {
+  font-style: normal;
+  letter-spacing: 0.05em;
+}
+.developer-liquid-stage .developer-liquid-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 12px;
+  gap: clamp(7px, 1.3vw, 18px);
+}
+.developer-liquid-stage .developer-liquid-tabs > button {
+  z-index: 2;
+  position: relative;
+  border: 0;
+  border-radius: 100px;
+  background: #fff9;
+  padding: 13px 18px;
+  gap: 8px;
+  color: #51384b;
+  font-size: 12px;
+  white-space: nowrap;
+  box-shadow: 0 3px 14px #54344809;
+  min-height: 46px;
+  transition:
+    background 0.25s,
+    color 0.25s;
+}
+.developer-liquid-stage .developer-liquid-tabs > button > span {
+  color: inherit;
+  margin: 0;
+  font-size: inherit;
+}
+.developer-liquid-tabs > button small {
+  color: #896471;
+  font-size: 8px;
+  margin-left: 6px;
+}
+.developer-liquid-stage .developer-liquid-tabs > button[aria-selected="true"] {
+  background: transparent;
+  box-shadow: none;
+  color: #342332;
+}
+.developer-liquid-droplet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 165px;
+  height: 46px;
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform, width, height;
+}
+.developer-liquid-goo {
+  position: absolute;
+  inset: 0;
+  color: #fff;
+}
+.developer-liquid-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  background: #fff;
+}
+.developer-liquid-bridge {
+  position: absolute;
+  left: 50%;
+  top: calc(100% - 2px);
+  width: 44px;
+  height: 16px;
+  transform: translateX(-50%);
+}
+.developer-liquid-landing {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 12px);
+  height: 10px;
+  width: 32px;
+  background: white;
+  transform: translateX(-50%);
+}
+.developer-liquid-panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 18px 55px -25px #793f4866;
+  position: relative;
+  z-index: 1;
+}
+.developer-liquid-stage .developer-liquid-panel {
+  --stage-accent: #b54a34;
+  --stage-wash: #ffebe0;
+  --stage-border: #ecc5b5;
+  grid-area: 1 / 1;
+  grid-template-columns: 0.94fr 1.06fr;
+  border: none;
+  min-height: 0;
+  max-height: 100%;
+  overflow: auto;
+  overscroll-behavior: auto;
+  border-radius: 24px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(8px) scale(0.985);
+  transform-origin: center;
+  transition:
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s 0.4s;
+}
+.developer-liquid-stage .developer-liquid-panel.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  transition-delay: 0s;
+}
+.developer-liquid-panel.is-collaboration {
+  --stage-accent: #7244af;
+  --stage-wash: #f0e7ff;
+  --stage-border: #d2bced;
+}
+.developer-liquid-panel.is-action {
+  --stage-accent: #355bb7;
+  --stage-wash: #e7efff;
+  --stage-border: #b9ceee;
+}
+.developer-liquid-panel.is-runtime {
+  --stage-accent: #ad366f;
+  --stage-wash: #ffe6f0;
+  --stage-border: #e9b7cd;
+}
+.developer-liquid-stage .developer-workbench-copy {
+  padding: clamp(28px, 4vw, 66px) clamp(26px, 3.6vw, 56px);
+  background: #fff;
+  min-width: 0;
+}
+.developer-liquid-stage .developer-kicker {
+  color: var(--stage-accent);
+  font-size: 9px;
+  margin-bottom: 23px;
+}
+.developer-liquid-stage .developer-workbench-copy h3 {
+  font-size: clamp(29px, 3vw, 49px);
+  line-height: 1.4;
+  color: #28202e;
+}
+.developer-liquid-stage .developer-workbench-copy > p:not(.developer-kicker) {
+  color: #6c5b68;
+  font-size: 14px;
+  max-width: 450px;
+  line-height: 1.85;
+}
+.developer-liquid-stage .developer-source-link {
+  color: var(--stage-accent);
+  border-color: var(--stage-border);
+}
+.developer-liquid-stage .developer-scope-note {
+  color: #897383;
+  padding-top: 28px;
+  font-size: 10px;
+}
+.developer-liquid-stage .developer-workbench-visual {
+  background: var(--stage-wash);
+  border-left-color: var(--stage-border);
+  padding: 26px 28px 20px;
+  min-height: 370px;
+}
+.developer-liquid-stage .developer-workbench-visual .platform-demo-label,
+.developer-liquid-stage .developer-workbench-visual .platform-demo-note,
+.developer-liquid-stage .developer-diagram-caption {
+  color: #857081;
+}
+.developer-liquid-stage .developer-task-list button,
+.developer-liquid-stage .developer-diagram-switch button,
+.developer-liquid-stage .developer-dag-tasks button,
+.developer-liquid-stage .developer-action-steps button,
+.developer-liquid-stage .developer-runtime-layers button {
+  color: #886c7b;
+}
+.developer-liquid-stage .developer-task-list button[aria-pressed="true"],
+.developer-liquid-stage .developer-diagram-switch button[aria-pressed="true"],
+.developer-liquid-stage .developer-action-steps button[aria-pressed="true"],
+.developer-liquid-stage .developer-runtime-layers button[aria-pressed="true"] {
+  color: var(--stage-accent);
+  background: #fff;
+  border-color: var(--stage-border);
+}
+.developer-liquid-stage .developer-endpoint-symbol,
+.developer-liquid-stage .developer-agent-symbol,
+.developer-liquid-stage
+  .developer-dag-tasks
+  button[aria-pressed="true"]
+  .developer-agent-symbol,
+.developer-liquid-stage .developer-runtime-ring {
+  color: var(--stage-accent);
+  background: #ffffffb3;
+  border-color: var(--stage-border);
+}
+.developer-liquid-stage .developer-model-endpoint > p,
+.developer-liquid-stage .developer-model-endpoint > div > strong,
+.developer-liquid-stage .developer-runtime-description h4,
+.developer-liquid-stage .developer-runtime-description p {
+  color: var(--stage-accent);
+}
+.developer-liquid-stage .developer-diagram-switch,
+.developer-liquid-stage .developer-dag-goal,
+.developer-liquid-stage .developer-dag-delivery,
+.developer-liquid-stage .developer-action-window {
+  background: #ffffffa8;
+  border-color: var(--stage-border);
+  color: var(--stage-accent);
+}
+.developer-liquid-stage .developer-dag-tasks button {
+  background: var(--stage-wash);
+}
+.developer-liquid-stage .developer-window-focus {
+  border-color: var(--stage-accent);
+}
+.developer-liquid-stage .developer-window-cursor {
+  color: var(--stage-accent);
+}
+.developer-liquid-stage-bottom {
+  padding-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;
+  gap: 12px;
+  font-size: 9px;
+  color: #674155;
+}
+.developer-liquid-stage-bottom > span:last-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.developer-liquid-track + .container .developer-local-manifesto {
+  margin-top: 80px;
+}
+@media (min-width: 1400px) {
+  .developer-liquid-stage {
+    width: min(1160px, calc(100vw - 48px));
+    height: min(670px, calc(100vh - 48px));
+  }
+}
+@media (max-width: 900px) {
+  .developer-liquid-stage .developer-workbench-copy {
+    padding: 30px 24px;
+  }
+  .developer-liquid-stage .developer-workbench-copy h3 {
+    font-size: 29px;
+  }
+  .developer-liquid-stage .developer-workbench-visual {
+    padding: 23px 20px 16px;
+  }
+  .developer-liquid-stage .developer-model-diagram {
+    grid-template-columns: 1fr 28px 1.15fr;
+  }
+  .developer-liquid-stage .developer-task-list button {
+    padding: 11px 8px;
+    gap: 7px;
+  }
+  .developer-liquid-stage .developer-model-endpoint {
+    padding-left: 12px;
+  }
+  .developer-liquid-stage .developer-liquid-tabs > button {
+    padding: 12px 13px;
+    font-size: 11px;
+    gap: 6px;
+  }
+}
+@media (max-width: 700px) {
+  .developer-liquid-stage .developer-liquid-panel {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+  }
+  .developer-liquid-stage .developer-workbench-copy {
+    padding: 26px 24px 20px;
+  }
+  .developer-liquid-stage .developer-workbench-copy h3 {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  .developer-liquid-stage .developer-workbench-copy > p:not(.developer-kicker) {
+    max-width: 100%;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .developer-liquid-stage .developer-kicker {
+    margin-bottom: 13px;
+    font-size: 8px;
+  }
+  .developer-liquid-stage .developer-source-link {
+    margin-top: 15px;
+    font-size: 11px;
+    padding-bottom: 6px;
+  }
+  .developer-liquid-stage .developer-scope-note {
+    padding-top: 15px;
+    font-size: 9px;
+    line-height: 1.7;
+  }
+  .developer-liquid-stage .developer-workbench-visual {
+    border-left: none;
+    border-top: 1px solid var(--stage-border);
+    min-height: 335px;
+    padding: 19px 22px 14px;
+  }
+  .developer-liquid-stage .developer-model-diagram {
+    min-height: 275px;
+  }
+  .developer-liquid-stage .developer-model-endpoint > div {
+    margin-top: 15px;
+    padding-block: 11px;
+  }
+  .developer-liquid-stage .developer-endpoint-symbol {
+    width: 65px;
+    height: 65px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .developer-liquid-stage .developer-runtime-diagram {
+    min-height: 265px;
+  }
+  .developer-liquid-stage .developer-dag-goal {
+    margin-top: 18px;
+  }
+  .developer-liquid-stage .developer-dag {
+    height: 145px;
+  }
+  .developer-liquid-stage .developer-dag-tasks {
+    top: 38px;
+  }
+  .developer-liquid-stage .developer-agent-symbol {
+    width: 44px;
+    height: 44px;
+  }
+  .developer-liquid-stage-bottom > span:first-child {
+    display: none;
+  }
+  .developer-liquid-stage-bottom {
+    justify-content: center;
+    padding-top: 13px;
+  }
+}
+@media (max-width: 600px) {
+  .developer-liquid-track {
+    margin-top: 44px;
+  }
+  .developer-liquid-stage {
+    width: calc(100vw - 24px);
+    top: 24px;
+    padding: 14px;
+    border-radius: 24px;
+  }
+  .developer-liquid-index {
+    font-size: 8px;
+    padding-bottom: 13px;
+  }
+  .developer-liquid-stage .developer-liquid-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: 100%;
+    gap: 4px;
+  }
+  .developer-liquid-stage .developer-liquid-tabs > button {
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 2px;
+    border-radius: 14px;
+    min-height: 54px;
+    font-size: 9px;
+    gap: 4px;
+    white-space: normal;
+  }
+  .developer-liquid-tabs > button small {
+    display: none;
+  }
+  .developer-liquid-pill {
+    border-radius: 14px;
+  }
+  .developer-liquid-stage .developer-liquid-panel,
+  .developer-liquid-panels {
+    border-radius: 17px;
+  }
+  .developer-liquid-stage .developer-workbench-copy {
+    padding: 23px 20px 18px;
+  }
+  .developer-liquid-stage .developer-workbench-visual {
+    padding-inline: 16px;
+  }
+  .developer-liquid-stage .developer-workbench-copy h3 {
+    font-size: 26px;
+  }
+  .developer-liquid-stage .developer-task-list button {
+    min-height: 40px;
+  }
+  .developer-liquid-stage .developer-diagram-switch button {
+    min-height: 38px;
+  }
+}
+@media (max-height: 660px) and (min-width: 701px) {
+  .developer-liquid-stage {
+    padding: 16px;
+  }
+  .developer-liquid-index {
+    padding-bottom: 10px;
+  }
+  .developer-liquid-stage .developer-workbench-copy {
+    padding: 26px;
+  }
+  .developer-liquid-stage .developer-scope-note {
+    padding-top: 15px;
+  }
+  .developer-liquid-stage .developer-kicker {
+    margin-bottom: 12px;
+  }
+  .developer-liquid-stage-bottom {
+    padding-top: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .developer-liquid-track {
+    height: auto;
+    margin-top: 48px;
+  }
+  .developer-liquid-stage {
+    position: relative;
+    top: auto;
+    width: calc(100% - 32px) !important;
+    height: auto !important;
+    padding: 24px;
+  }
+  .developer-liquid-stage .developer-liquid-panel {
+    grid-area: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    max-height: none;
+    overflow: visible;
+    transition: none;
+    scroll-margin-top: 100px;
+  }
+  .developer-liquid-panels {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background: transparent;
+    box-shadow: none;
+  }
+  .developer-liquid-droplet,
+  .developer-liquid-stage-bottom {
+    display: none;
+  }
+  .developer-liquid-stage
+    .developer-liquid-tabs
+    > button[aria-selected="true"] {
+    background: #fff;
+  }
+  .developer-liquid-stage .developer-liquid-tabs {
+    margin-bottom: 24px;
+  }
+}

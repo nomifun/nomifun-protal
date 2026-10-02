@@ -1,0 +1,636 @@
+/* NomiFun's ecosystem cards rotate around a shared circular origin. */
+.ecosystem-section.arc-ecosystem {
+  padding-top: 125px;
+  background: #f4f3ee;
+  isolation: isolate;
+}
+.arc-ecosystem .ecosystem-stage {
+  position: relative;
+  height: 800px;
+  margin-top: 72px;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
+  outline: none;
+}
+.arc-ecosystem .ecosystem-stage:focus-visible {
+  outline: 2px solid #9183a3;
+  outline-offset: -4px;
+}
+.arc-ecosystem .ecosystem-stage[data-drag-status="grabbing"] {
+  cursor: grabbing;
+}
+.arc-ecosystem .ecosystem-card {
+  width: 620px;
+  height: 720px;
+  top: 12px;
+  left: 50%;
+  margin-left: 0;
+  padding: 36px;
+  border-radius: 36px;
+  transform-origin: 50% 360%;
+  transform: translateX(-50%);
+  transition: none;
+  box-shadow:
+    0 20px 60px #47334c0c,
+    inset 0 0 0 1px #ffffff65;
+  pointer-events: auto;
+  background: #e2d5ed;
+  justify-content: space-between;
+  backface-visibility: hidden;
+}
+.arc-ecosystem .ecosystem-stage[data-motion-paused="false"] .ecosystem-card {
+  will-change: transform;
+}
+.arc-ecosystem .eco-mobile {
+  background: #f0d3b9;
+}
+.arc-ecosystem .eco-xiaozhi-yuntai {
+  background: #ccdcca;
+}
+.arc-ecosystem .eco-net-infra {
+  background: #d1dfeb;
+}
+.arc-ecosystem .ecosystem-card:not(.is-active) a {
+  pointer-events: none;
+}
+.arc-ecosystem .eco-card-top {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #796487;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.arc-ecosystem .eco-mobile .eco-card-top {
+  color: #9c7453;
+}
+.arc-ecosystem .eco-xiaozhi-yuntai .eco-card-top {
+  color: #61816b;
+}
+.arc-ecosystem .eco-net-infra .eco-card-top {
+  color: #6b849c;
+}
+.arc-ecosystem .eco-product-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 13px;
+  border-radius: 30px;
+  background: #ffffff68;
+  font-size: 8px;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+}
+.arc-ecosystem .eco-product-badge i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.arc-ecosystem .eco-art {
+  height: 350px;
+  width: calc(100% + 28px);
+  margin: 0 -14px;
+  flex: 1;
+  min-height: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.arc-ecosystem .eco-art > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.arc-ecosystem .eco-card-copy {
+  flex-shrink: 0;
+  width: 100%;
+}
+.arc-ecosystem .eco-card-copy > small {
+  font-size: 9px;
+  letter-spacing: 0.09em;
+  color: #806a8b;
+}
+.arc-ecosystem .eco-card-copy h3 {
+  font-size: 38px;
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  margin: 13px 0 14px;
+  line-height: 1.18;
+  color: #382d3e;
+}
+.arc-ecosystem .eco-card-copy p {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #796984;
+  max-width: 450px;
+}
+.arc-ecosystem .eco-card-copy a {
+  font-size: 13px;
+  padding-top: 21px;
+  margin-top: 26px;
+  border-color: #49354a1a;
+  color: #4c3b57;
+  cursor: pointer;
+}
+.arc-ecosystem .eco-card-copy a > svg {
+  transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.arc-ecosystem .eco-card-copy a:hover > svg {
+  transform: translate(4px, -4px);
+}
+.arc-ecosystem .eco-card-copy a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+.arc-ecosystem .eco-mobile .eco-card-copy h3 {
+  color: #513e2f;
+}
+.arc-ecosystem .eco-mobile .eco-card-copy :is(p, small, a) {
+  color: #8e6f55;
+}
+.arc-ecosystem .eco-xiaozhi-yuntai .eco-card-copy h3 {
+  color: #304b39;
+}
+.arc-ecosystem .eco-xiaozhi-yuntai .eco-card-copy :is(p, small, a) {
+  color: #647f69;
+}
+.arc-ecosystem .eco-net-infra .eco-card-copy h3 {
+  color: #354c63;
+}
+.arc-ecosystem .eco-net-infra .eco-card-copy :is(p, small, a) {
+  color: #6c849a;
+}
+.arc-ecosystem .arc-horizon {
+  position: absolute;
+  top: 300px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.52;
+}
+.arc-ecosystem .arc-horizon > span {
+  position: absolute;
+  width: 155%;
+  height: 750px;
+  left: -27.5%;
+  top: 0;
+  border: 1px solid #c9c0ce66;
+  border-radius: 50%;
+}
+.arc-ecosystem .arc-horizon > span:nth-child(2) {
+  width: 170%;
+  height: 970px;
+  left: -35%;
+  top: -45px;
+  border-style: dashed;
+  opacity: 0.75;
+}
+.arc-ecosystem .arc-horizon > span:nth-child(3) {
+  width: 195%;
+  height: 1200px;
+  left: -47.5%;
+  top: -100px;
+  opacity: 0.4;
+}
+.arc-ecosystem .arc-stage-coordinates {
+  position: absolute;
+  bottom: 17px;
+  left: 5%;
+  right: 5%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: #a39aa8;
+  pointer-events: none;
+}
+.arc-ecosystem .arc-drag-badge {
+  position: absolute;
+  z-index: 80;
+  left: 50%;
+  top: 50%;
+  width: 102px;
+  height: 102px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 50%;
+  background: #302738e8;
+  color: #fff8ff;
+  box-shadow: 0 10px 30px #47334c22;
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.6);
+  transition:
+    opacity 0.22s,
+    transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  backdrop-filter: blur(8px);
+}
+.arc-ecosystem .ecosystem-controls {
+  margin-top: 4px;
+  gap: 35px;
+}
+.arc-ecosystem .ecosystem-controls > button {
+  width: 54px;
+  height: 54px;
+  background: #ffffffa3;
+  border-color: #ddd5df;
+  transition:
+    background 0.25s,
+    transform 0.25s;
+}
+.arc-ecosystem .ecosystem-controls > button:hover {
+  background: #e2d5ed;
+  transform: scale(1.06);
+}
+.arc-ecosystem .ecosystem-controls button:focus-visible {
+  outline: 2px solid #8a729b;
+  outline-offset: 4px;
+}
+.arc-ecosystem .arc-product-index {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 76px;
+  font-size: 12px;
+}
+.arc-ecosystem .arc-product-index i {
+  color: #a79fa9;
+  font-style: normal;
+}
+.arc-ecosystem .arc-product-dots {
+  display: flex;
+  gap: 1px;
+}
+.arc-ecosystem .arc-product-dots > button {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+}
+.arc-ecosystem .arc-product-dots > button::after {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #c4bcca;
+  transition:
+    transform 0.25s,
+    background 0.25s;
+}
+.arc-ecosystem .arc-product-dots > button.is-current::after {
+  background: #796487;
+  transform: scale(1.5);
+}
+.arc-ecosystem .arc-hint {
+  margin-top: 16px;
+  color: #a198a6;
+  font-size: 11px;
+}
+.arc-ecosystem .arc-live-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Each open product has its own moving diagram, powered by local SVG. */
+.arc-ecosystem .eco-device-float,
+.arc-ecosystem .eco-floating-node,
+.arc-ecosystem .eco-orbit-label {
+  animation: eco-device-float 5s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.arc-ecosystem .eco-floating-node {
+  animation-name: eco-node-drift;
+}
+.arc-ecosystem .eco-node-two {
+  animation-delay: -0.8s;
+}
+.arc-ecosystem .eco-node-three {
+  animation-delay: -1.8s;
+}
+.arc-ecosystem .eco-node-four {
+  animation-delay: -2.7s;
+}
+.arc-ecosystem .eco-orbit-label {
+  animation-duration: 6.5s;
+}
+.arc-ecosystem .eco-label-late {
+  animation-delay: -3s;
+}
+.arc-ecosystem .eco-signal-line {
+  animation: eco-signal-flow 3s linear infinite;
+  animation-play-state: paused;
+}
+.arc-ecosystem .eco-net-packets {
+  animation-duration: 4s;
+}
+.arc-ecosystem .eco-core-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: eco-core-turn 30s linear infinite;
+  animation-play-state: paused;
+}
+.arc-ecosystem .eco-radio-waves {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: eco-radio-breathe 4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.arc-ecosystem .eco-status-pulse {
+  animation: eco-status-pulse 2.8s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.arc-ecosystem .eco-robot-head {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: eco-robot-look 7s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.arc-ecosystem .eco-robot-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: eco-robot-blink 6s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.arc-ecosystem .eco-robot-scan {
+  animation: eco-robot-scan 3s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.arc-ecosystem .eco-scan-delay {
+  animation-delay: -0.7s;
+}
+.arc-ecosystem
+  .ecosystem-stage[data-motion-paused="false"]
+  .ecosystem-card:is([data-status="active"], [data-status="inview"])
+  .eco-art
+  :is(
+    .eco-device-float,
+    .eco-floating-node,
+    .eco-orbit-label,
+    .eco-signal-line,
+    .eco-core-ring,
+    .eco-radio-waves,
+    .eco-status-pulse,
+    .eco-robot-head,
+    .eco-robot-eyes,
+    .eco-robot-scan
+  ) {
+  animation-play-state: running;
+}
+@keyframes eco-device-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+@keyframes eco-node-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(2px, -4px);
+  }
+}
+@keyframes eco-signal-flow {
+  to {
+    stroke-dashoffset: -110;
+  }
+}
+@keyframes eco-core-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes eco-radio-breathe {
+  0%,
+  100% {
+    transform: scale(0.97);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.035);
+    opacity: 1;
+  }
+}
+@keyframes eco-status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+@keyframes eco-robot-look {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  45%,
+  65% {
+    transform: rotate(3deg);
+  }
+}
+@keyframes eco-robot-blink {
+  0%,
+  42%,
+  46%,
+  100% {
+    transform: scaleY(1);
+  }
+  44% {
+    transform: scaleY(0.1);
+  }
+}
+@keyframes eco-robot-scan {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1280px) {
+  .arc-ecosystem .ecosystem-stage {
+    height: 700px;
+    margin-top: 55px;
+  }
+  .arc-ecosystem .ecosystem-card {
+    width: 510px;
+    height: 625px;
+    padding: 30px;
+    border-radius: 30px;
+  }
+  .arc-ecosystem .eco-art {
+    height: 290px;
+  }
+  .arc-ecosystem .eco-card-copy h3 {
+    font-size: 33px;
+  }
+  .arc-ecosystem .eco-card-copy p {
+    font-size: 13px;
+  }
+  .arc-ecosystem .eco-card-copy a {
+    margin-top: 21px;
+    padding-top: 17px;
+  }
+}
+@media (max-width: 900px) {
+  .ecosystem-section.arc-ecosystem {
+    padding-top: 85px;
+  }
+  .arc-ecosystem .ecosystem-stage {
+    height: 600px;
+    margin-top: 42px;
+  }
+  .arc-ecosystem .ecosystem-card {
+    width: 420px;
+    height: 540px;
+    padding: 26px;
+  }
+  .arc-ecosystem .eco-art {
+    height: 240px;
+  }
+  .arc-ecosystem .eco-card-top {
+    font-size: 8px;
+    gap: 10px;
+  }
+  .arc-ecosystem .eco-product-badge {
+    font-size: 6px;
+    padding: 8px 10px;
+    gap: 5px;
+  }
+  .arc-ecosystem .eco-card-copy h3 {
+    font-size: 29px;
+  }
+  .arc-ecosystem .eco-card-copy p {
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .arc-ecosystem .eco-card-copy a {
+    font-size: 12px;
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+  .arc-ecosystem .arc-drag-badge {
+    width: 86px;
+    height: 86px;
+  }
+}
+@media (max-width: 520px) {
+  .ecosystem-section.arc-ecosystem {
+    padding-top: 70px;
+  }
+  .arc-ecosystem .ecosystem-stage {
+    height: 492px;
+    margin-top: 32px;
+  }
+  .arc-ecosystem .ecosystem-card {
+    width: min(300px, calc(100vw - 42px));
+    height: 444px;
+    top: 8px;
+    padding: 22px;
+    border-radius: 26px;
+  }
+  .arc-ecosystem .eco-art {
+    width: calc(100% + 28px);
+    height: 192px;
+    margin: 0 -14px;
+  }
+  .arc-ecosystem .eco-card-top {
+    font-size: 7px;
+    letter-spacing: 0.04em;
+    gap: 4px;
+  }
+  .arc-ecosystem .eco-product-badge {
+    font-size: 5px;
+    padding: 7px 8px;
+    gap: 4px;
+  }
+  .arc-ecosystem .eco-product-badge i {
+    width: 4px;
+    height: 4px;
+  }
+  .arc-ecosystem .eco-card-copy > small {
+    font-size: 7px;
+    letter-spacing: 0.04em;
+  }
+  .arc-ecosystem .eco-card-copy h3 {
+    font-size: 24px;
+    margin: 10px 0 11px;
+  }
+  .arc-ecosystem .eco-card-copy p {
+    font-size: 11px;
+    line-height: 1.85;
+  }
+  .arc-ecosystem .eco-card-copy a {
+    font-size: 11px;
+    padding-top: 15px;
+    margin-top: 18px;
+  }
+  .arc-ecosystem .arc-horizon {
+    top: 270px;
+  }
+  .arc-ecosystem .arc-stage-coordinates {
+    font-size: 6px;
+    bottom: 13px;
+    letter-spacing: 0.07em;
+  }
+  .arc-ecosystem .ecosystem-controls {
+    gap: 27px;
+    margin-top: 2px;
+  }
+  .arc-ecosystem .ecosystem-controls > button {
+    width: 46px;
+    height: 46px;
+  }
+  .arc-ecosystem .arc-hint {
+    font-size: 10px;
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .arc-ecosystem .arc-drag-badge {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .arc-ecosystem .eco-art *,
+  .arc-ecosystem .ecosystem-stage[data-motion-paused="false"] .eco-art * {
+    animation: none !important;
+  }
+  .arc-ecosystem .arc-drag-badge {
+    display: none;
+  }
+  .arc-ecosystem .ecosystem-card {
+    will-change: auto !important;
+  }
+  .arc-ecosystem
+    :is(
+      .eco-card-copy a > svg,
+      .ecosystem-controls > button,
+      .arc-product-dots > button::after
+    ) {
+    transition: none;
+  }
+}

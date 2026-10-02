@@ -1,0 +1,388 @@
+/* A full-screen creative stage has one scroll owner: the page. The earlier
+   accessibility pass grew the text without budgeting the stage's fixed height.
+   Standard desktop uses a separate editorial column so a complete conversation
+   and its controls fit without shrinking text or masking overflowing content. */
+.creative-stage-copy {
+  display: contents;
+}
+.creative-stage-art {
+  position: absolute;
+  right: -40px;
+  top: 260px;
+  width: 190px;
+  height: 190px;
+  opacity: 0.58;
+  pointer-events: none;
+}
+.creative-mode-audio .creative-stage-art {
+  right: auto;
+  left: -50px;
+}
+html[lang] .creative-stack-experience .creative-stage-art > svg {
+  position: static;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  opacity: 1;
+}
+html[lang] .creative-stack-experience .creative-chat-world,
+html[lang] .creative-stack-experience .creative-audio-world {
+  grid-template-columns: minmax(0, 1fr);
+}
+html[lang] .creative-stack-experience .creative-card-number {
+  top: 151px;
+  right: clamp(22px, 5.4vw, 94px);
+}
+html[lang]
+  .creative-stack-experience
+  .creative-mode-chat
+  .creative-stack-visual,
+html[lang]
+  .creative-stack-experience
+  .creative-mode-audio
+  .creative-stack-visual {
+  flex-direction: column;
+  gap: 12px;
+}
+html[lang] .creative-stack-experience .creative-stage-description {
+  flex-shrink: 0;
+  width: 100%;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* 1366 x 768 is the smallest primary desktop composition. 1440 x 900 and
+   1920 x 1080 gain space naturally. Card intervals remain exactly 100svh. */
+@media (min-width: 1024px) and (min-height: 700px) {
+  html[lang] .creative-stack-experience .creative-stack-face {
+    padding: 154px clamp(30px, 4vw, 76px) 94px;
+    gap: 16px;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+  }
+  html[lang] .creative-stack-experience .creative-stack-heading {
+    gap: 30px;
+    align-items: center;
+  }
+  html[lang] .creative-stack-experience .creative-mode-label {
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+  html[lang] .creative-stack-experience .creative-stack-heading h3 {
+    font-size: clamp(34px, 3.1vw, 48px);
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  html[lang] .creative-stack-experience .creative-title-phrase {
+    display: inline-block;
+    white-space: nowrap;
+  }
+  html[lang] .creative-stack-experience .creative-stack-heading > p {
+    max-width: 460px;
+    padding-right: 0;
+    font-size: 16px;
+    line-height: 1.65;
+    margin: 0;
+  }
+  html[lang] .creative-stack-experience .creative-card-number {
+    top: 86px;
+    right: clamp(30px, 4vw, 76px);
+    font-size: 44px;
+  }
+  html[lang] .creative-stack-experience .creative-stack-visual {
+    overflow: visible;
+    align-items: center;
+  }
+
+  /* The original constellation and record are the main visual, not decoration
+     squeezed into the title's remaining height. Their own square canvas stays
+     about 420 / 506 / 623px at the standard desktop sizes. Copy and demo occupy
+     the other column; the left artwork can use the footer's unused space. */
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-chat
+    .creative-stack-face,
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-audio
+    .creative-stack-face {
+    --creative-art-size: clamp(420px, calc(65svh - 79px), 640px);
+    grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    column-gap: clamp(28px, 4vw, 72px);
+    padding-top: 146px;
+  }
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-chat
+    .creative-stage-copy,
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-audio
+    .creative-stage-copy {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-row: 1 / -1;
+    gap: 8px;
+    min-height: 0;
+    align-self: start;
+    position: relative;
+    z-index: 2;
+  }
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-chat
+    .creative-stack-heading,
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-audio
+    .creative-stack-heading {
+    display: block;
+  }
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-chat
+    .creative-stack-heading
+    h3,
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-audio
+    .creative-stack-heading
+    h3 {
+    font-size: clamp(34px, 3.2vw, 52px);
+    line-height: 1.16;
+    max-width: 610px;
+  }
+  html[lang] .creative-stack-experience .creative-stage-art {
+    position: static;
+    width: var(--creative-art-size);
+    height: var(--creative-art-size);
+    max-width: 100%;
+    min-height: 0;
+    opacity: 1;
+    justify-self: start;
+  }
+  html[lang] .creative-stack-experience .creative-stage-art > svg {
+    max-width: none;
+    display: block;
+    margin: 0;
+    object-fit: contain;
+  }
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-chat
+    .creative-stack-visual,
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-audio
+    .creative-stack-visual {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 12px;
+    align-content: center;
+    align-self: stretch;
+    align-items: center;
+    justify-content: stretch;
+    min-width: 0;
+  }
+  html[lang] .creative-stack-experience .creative-stage-description {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 650px;
+  }
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-chat
+    .creative-card-footer,
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-audio
+    .creative-card-footer {
+    grid-column: 2;
+  }
+  html[lang] .creative-stack-experience .creative-chat-world,
+  html[lang] .creative-stack-experience .creative-audio-world {
+    height: auto;
+    min-height: 0;
+  }
+  html[lang] .creative-stack-experience .creative-chat-demo {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 22px 26px 18px;
+    transform: none;
+    gap: 0;
+  }
+  html[lang] .creative-stack-experience .creative-chat-thread {
+    flex: none;
+  }
+  html[lang] .creative-stack-experience .creative-user-bubble {
+    max-width: 100%;
+    margin: 14px 0;
+    padding: 12px 16px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  html[lang] .creative-stack-experience .creative-agent-message {
+    margin-bottom: 14px;
+    gap: 12px;
+  }
+  html[lang] .creative-stack-experience .creative-agent-message strong {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  html[lang] .creative-stack-experience .creative-agent-message p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 7px 0 9px;
+  }
+  html[lang] .creative-stack-experience .creative-tool-receipt {
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 5px 9px;
+  }
+  html[lang] .creative-stack-experience .creative-demo-composer {
+    padding: 12px 14px;
+    margin-top: 0;
+  }
+  html[lang] .creative-stack-experience .creative-demo-composer > div {
+    margin-top: 9px;
+    gap: 8px;
+  }
+  html[lang] .creative-stack-experience .creative-demo-composer button {
+    font-size: 13px;
+    min-height: 36px;
+    padding: 7px 11px;
+  }
+  html[lang] .creative-stack-experience .creative-demo-disclaimer {
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 10px 0 0;
+  }
+  html[lang] .creative-stack-experience .creative-audio-demo {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 23px 28px;
+  }
+  html[lang] .creative-stack-experience .creative-audio-title {
+    padding-top: 18px;
+  }
+  html[lang] .creative-stack-experience .creative-audio-title h4 {
+    font-size: 26px;
+    line-height: 1.35;
+  }
+  html[lang] .creative-stack-experience .creative-audio-title p {
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 10px 0;
+  }
+  html[lang] .creative-stack-experience .creative-audio-wave {
+    height: clamp(92px, 11svh, 124px);
+    margin: 18px auto;
+  }
+  html[lang] .creative-stack-experience .creative-audio-wave > i {
+    max-height: 100%;
+  }
+
+  /* Screenshots resize by containment; the complete image and provenance are
+     retained. Canvas nodes use deliberate board placement instead of a tall
+     minimum that would force a nested scrollbar. */
+  html[lang] .creative-stack-experience .creative-stack-shot {
+    height: 100%;
+    max-height: none;
+    max-width: 1160px;
+    transform: none;
+  }
+  html[lang] .creative-stack-experience .creative-canvas-demo {
+    min-height: 0;
+    height: 100%;
+    max-height: none;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+  }
+  html[lang] .creative-stack-experience .creative-canvas-board {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    gap: clamp(22px, 3vw, 52px);
+    padding: 16px 30px 60px;
+  }
+  html[lang] .creative-stack-experience .creative-canvas-board.has-audio {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(18px, 2.5vw, 42px);
+  }
+  html[lang] .creative-stack-experience .canvas-demo-node {
+    position: relative;
+    inset: auto;
+    width: auto;
+    transform: none;
+    align-self: center;
+  }
+  html[lang] .creative-stack-experience .canvas-node-top {
+    font-size: 13px;
+    padding: 9px 11px;
+  }
+  html[lang] .creative-stack-experience .canvas-node-prompt {
+    font-size: 16px;
+    padding: 12px 14px;
+    line-height: 1.5;
+  }
+  html[lang] .creative-stack-experience .canvas-demo-node > small {
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 8px 11px;
+  }
+  html[lang] .creative-stack-experience .canvas-node-art {
+    height: clamp(72px, 10svh, 108px);
+  }
+  html[lang] .creative-stack-experience .canvas-brief {
+    inset: auto;
+    width: auto;
+  }
+  html[lang] .creative-stack-experience .canvas-image {
+    inset: auto;
+    width: auto;
+  }
+  html[lang] .creative-stack-experience .canvas-video {
+    inset: auto;
+    width: auto;
+  }
+  html[lang] .creative-stack-experience .canvas-audio {
+    inset: auto;
+    width: auto;
+  }
+  html[lang] .creative-stack-experience .canvas-small-wave {
+    height: 39px;
+    padding: 4px 10px;
+  }
+  html[lang] .creative-stack-experience .canvas-small-wave > i {
+    max-height: 31px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[lang] .creative-stack-experience .creative-stack-face {
+    height: auto;
+    padding-top: 45px;
+    padding-bottom: 35px;
+    grid-template-rows: auto minmax(450px, auto) auto;
+  }
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-chat
+    .creative-stack-face,
+  html[lang]
+    .creative-stack-experience
+    .creative-mode-audio
+    .creative-stack-face {
+    grid-template-rows: minmax(450px, auto) auto;
+  }
+  html[lang] .creative-stack-experience .creative-stack-visual {
+    overflow: visible;
+  }
+  html[lang] .creative-stack-experience .creative-card-number {
+    top: 20px;
+  }
+}

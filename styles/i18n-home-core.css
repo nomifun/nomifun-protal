@@ -1,0 +1,61 @@
+/* English copy keeps the original scene proportions and touch controls. */
+.home-hero[data-locale="en"] .hero-content h1 {
+  line-height: 1.18;
+}
+.agent-section[data-locale="en"] .preset-tabs {
+  flex-wrap: wrap;
+}
+.agent-section[data-locale="en"] .preset-tabs button {
+  padding-inline: 10px;
+}
+.agent-section[data-locale="en"] .module > svg,
+.agent-section[data-locale="en"] .switch-track {
+  flex-shrink: 0;
+}
+.story-section[data-locale="en"] .story-intro > p:not(.eyebrow) {
+  max-width: 870px;
+  margin-inline: auto;
+}
+@media (max-width: 800px) {
+  .home-hero[data-locale="en"] .hero-eyebrow {
+    gap: 7px;
+    padding-inline: 12px;
+    font-size: 7px;
+    letter-spacing: 0.06em;
+  }
+  .home-hero[data-locale="en"] .hero-description {
+    max-width: 320px;
+    font-size: 12px;
+  }
+  .agent-section[data-locale="en"] .preset-tabs {
+    gap: 4px;
+  }
+  .agent-section[data-locale="en"] .preset-tabs button {
+    padding-inline: 8px;
+    font-size: 10px;
+  }
+  .agent-section[data-locale="en"] .module-list {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .agent-section[data-locale="en"] .module > span:not(.switch-track) {
+    min-width: 0;
+    line-height: 1.35;
+  }
+  .agent-section[data-locale="en"] .relay-header {
+    flex-wrap: wrap;
+  }
+  .story-section[data-locale="en"] .story-intro h2 {
+    max-width: 480px;
+    margin-inline: auto;
+    line-height: 1.35;
+  }
+}
+@media (max-width: 360px) {
+  .agent-section[data-locale="en"] .module-list {
+    grid-template-columns: 1fr;
+  }
+  .agent-section[data-locale="en"] .preset-tabs button {
+    white-space: normal;
+    flex: 1 1 70px;
+  }
+}

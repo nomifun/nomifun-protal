@@ -1,0 +1,61 @@
+# Dependencies (keep package-lock.json and other lockfiles tracked)
+node_modules/
+.pnp.*
+.yarn/*
+!.yarn/patches/
+!.yarn/plugins/
+!.yarn/releases/
+!.yarn/versions/
+
+# Next.js and other generated build output
+/.next/
+/out/
+/build/
+/dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# Test output and caches
+/coverage/
+.cache/
+.turbo/
+.npm/
+.eslintcache
+.stylelintcache
+__pycache__/
+*.py[cod]
+
+# Logs and local process files
+*.log
+*.pid
+*.pid.lock
+
+# Local environment and private keys; templates may be committed
+.env*
+!.env.example
+!.env.*.example
+!.env.sample
+!.env.*.sample
+*.pem
+*.key
+
+# Local deployment metadata
+.vercel/
+
+# OS and editor temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.swp
+*.swo
+*~
+
+# Project-specific temporary captures (keep docs/qa and public assets)
+/scripts/shots/
+/scripts/ix2-raw.json

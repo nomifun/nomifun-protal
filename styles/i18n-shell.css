@@ -1,0 +1,140 @@
+.language-switch {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.language-switch-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid #27242a23;
+  border-radius: 100px;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+  white-space: nowrap;
+}
+.language-switch-link:hover {
+  background: #e3daf4;
+  border-color: #27242a40;
+}
+.language-switch-link:focus-visible {
+  outline: 2px solid #7551b1;
+  outline-offset: 3px;
+}
+.menu-language-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.language-switch-menu {
+  background: #e9e5e0;
+  border-radius: 100px;
+  padding: 3px;
+  color: var(--ink);
+}
+.language-switch-menu .language-switch-link,
+.language-switch-current {
+  min-width: 58px;
+  min-height: 38px;
+  border: 0;
+  border-radius: 100px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.language-switch-current {
+  background: white;
+  box-shadow: 0 1px 4px #18131c0c;
+}
+html[lang="en"] .dock-menu-label {
+  width: 34px;
+}
+html[lang="en"] .site-header {
+  gap: 20px;
+}
+html[lang="en"] .desktop-navigation {
+  gap: clamp(16px, 2vw, 29px);
+}
+html[lang="en"] .footer-top h2 {
+  letter-spacing: -0.055em;
+}
+@media (max-width: 1100px) and (min-width: 801px) {
+  html[lang="en"] .site-header {
+    padding-inline: 3%;
+    gap: 15px;
+  }
+  html[lang="en"] .header-actions {
+    gap: 10px;
+  }
+  html[lang="en"] .desktop-navigation {
+    gap: 15px;
+    font-size: 12px;
+  }
+  html[lang="en"] .header-download {
+    padding-inline: 15px;
+  }
+  html[lang="en"] .header-download .button-motion-inner {
+    gap: 8px;
+  }
+}
+@media (max-width: 900px) and (min-width: 801px) {
+  html[lang="en"] .header-source {
+    display: none;
+  }
+}
+@media (max-width: 520px) {
+  .site-header .header-download {
+    display: none;
+  }
+  .header-actions {
+    gap: 10px;
+  }
+  html[lang="en"] .reading-dock {
+    gap: 12px;
+  }
+  html[lang="en"] .dock-title {
+    font-size: 10px;
+  }
+  html[lang="en"] .reading-dock button {
+    padding-left: 12px;
+  }
+  html[lang="en"] .menu-panel nav > a {
+    font-size: 25px;
+    letter-spacing: -0.04em;
+    gap: 16px;
+  }
+  html[lang="en"] .menu-panel nav > a svg {
+    width: 23px;
+    flex-shrink: 0;
+  }
+}
+@media (max-width: 360px) {
+  html[lang="en"] .reading-dock {
+    max-width: calc(100vw - 28px);
+    padding-inline: 13px;
+    gap: 10px;
+  }
+  html[lang="en"] .dock-title {
+    font-size: 9px;
+  }
+  html[lang="en"] .menu-panel nav > a {
+    font-size: 23px;
+    gap: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .language-switch-link {
+    transition: none;
+  }
+}

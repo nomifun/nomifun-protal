@@ -1,0 +1,83 @@
+/* English copy retains the deck and full-screen workflow choreography. */
+html[lang="en"] .companion-heading .section-heading {
+  font-size: clamp(34px, 4.2vw, 62px);
+}
+html[lang="en"] .companion-heading > p {
+  flex: 0 1 360px;
+  font-size: 16px;
+}
+html[lang="en"] .companion-deck-experience .companion-insight h3 {
+  font-size: clamp(30px, 2.65vw, 38px);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+html[lang="en"] .companion-picker small {
+  font-size: 8px;
+  line-height: 1.35;
+}
+html[lang="en"] .companion-insight .experience-segmented button {
+  font-size: 10px;
+}
+html[lang="en"] .permission-heading {
+  flex-wrap: wrap;
+}
+html[lang="en"] .permission-heading > small {
+  margin-left: 0;
+}
+html[lang="en"] .wm-card-copy h3 {
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+html[lang="en"] .wm-card-copy > p {
+  line-height: 1.7;
+}
+html[lang="en"] .wm-decision-result > .wm-decision-demand {
+  font-size: 35px;
+  max-width: 130px;
+  line-height: 1.08;
+}
+@media (max-width: 760px) {
+  html[lang="en"] .companion-heading > p {
+    flex-basis: auto;
+    font-size: 14px;
+  }
+  html[lang="en"] .companion-heading .section-heading {
+    font-size: clamp(32px, 8.7vw, 44px);
+  }
+  html[lang="en"] .companion-picker small {
+    max-width: 10ch;
+  }
+  html[lang="en"] .wm-card-copy h3 {
+    font-size: clamp(27px, 7.4vw, 36px);
+  }
+  html[lang="en"] .wm-sticky-top {
+    letter-spacing: 0.06em;
+  }
+  html[lang="en"] .wm-sticky-top small {
+    max-width: 44%;
+    text-align: right;
+    line-height: 1.4;
+  }
+  html[lang="en"] .wm-step-navigation > button {
+    padding-inline: 6px;
+  }
+  html[lang="en"] .wm-loop-note {
+    max-width: 100%;
+    white-space: normal;
+  }
+  html[lang="en"] .wm-loop-permission {
+    max-width: 100%;
+  }
+  html[lang="en"] .wm-loop-permission > span:last-child {
+    white-space: normal;
+  }
+  html[lang="en"] .wm-decision-result > .wm-decision-demand {
+    font-size: 29px;
+    max-width: 90px;
+  }
+}
+@media (max-height: 720px) and (max-width: 767px) {
+  html[lang="en"] .wm-card-copy h3 {
+    font-size: 26px;
+  }
+}
