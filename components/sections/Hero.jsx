@@ -8,15 +8,15 @@ import useReducedMotion from "@/components/motion/useReducedMotion";
 
 const modes = [
   {
-    label: "思考",
-    labelEn: "Think",
+    label: "陪伴",
+    labelEn: "Connect",
     icon: "ChatCircle",
-    prompt: "把一个想法，变成可执行的计划。",
-    promptEn: "Turn an idea into a plan you can act on.",
-    left: "你的知识，随时可用",
-    leftEn: "Your knowledge, within reach",
-    right: "从对话，到真实行动",
-    rightEn: "From conversation to action",
+    prompt: "从桌面到桌边，和同一位伙伴继续日常。",
+    promptEn: "The same companion, on your screen and at your side.",
+    left: "有自己的个性，也记得你",
+    leftEn: "Personality. Memory. A connection.",
+    right: "从屏幕，到声音与动作",
+    rightEn: "From screen to voice and movement",
   },
   {
     label: "创造",
@@ -49,13 +49,13 @@ export default function Hero() {
   const canvas = useRef(null);
   const [label, setLabel] = useState(0);
   const heroLabels = [
-    t("本地优先的 Agent 工作空间", "A local-first Agent workspace"),
-    t("自由组合，让能力刚好适合你", "Compose capabilities around you"),
-    t("桌面伙伴，让 AI 走进日常", "Desktop companions for everyday life"),
+    t("属于你的个人 AI 伙伴", "Your own personal AI companion"),
     t(
-      "电脑即服务，连接手机与机器人",
-      "Your computer connects phones and robots",
+      "有个性，有记忆，也能一起做事",
+      "Personality, memory, and the ability to act",
     ),
+    t("从桌面走进物理世界", "From your desktop into the real world"),
+    t("本地优先的 Agent 工作空间", "A local-first Agent workspace"),
   ];
   useEffect(() => {
     if (!animated || matchMedia("(prefers-reduced-motion: reduce)").matches)
@@ -113,15 +113,12 @@ export default function Hero() {
           </span>
         </p>
         <h1>
-          {t("让 AI，", "AI belongs")}
+          {t("让 AI 生活在", "Let AI live")}
           <br />
-          {t("真正生活在", "on your ")}
-          <span className="hero-mobile-break">
-            <br />
-          </span>
-          {t("你的电脑里", "computer")}
+          {t("你生命的左右", "by your side")}
           <span className="hero-period">{t("。", ".")}</span>
         </h1>
+        {/* Keep this core brand copy when adjusting the slogan or feature emphasis. */}
         <p className="hero-description">
           {t(
             "组装你的 Agent，遇见你的伙伴。",
@@ -144,7 +141,7 @@ export default function Hero() {
               <Icon name="ArrowUpRight" size={20} />
             </span>
           </Link>
-          <a href="#agent" className="button light">
+          <a href="#possibilities" className="button light">
             <span className="button-motion-inner">
               <RollText>
                 {t("探索它的可能", "Explore the possibilities")}
@@ -158,7 +155,7 @@ export default function Hero() {
           <i />
           <span>{t("自由开源", "Open source")}</span>
           <i />
-          <span>{t("电脑即服务", "Your computer, your hub")}</span>
+          <span>{t("本地优先", "Local first")}</span>
         </div>
       </div>
       <div className="hero-playground">
@@ -193,7 +190,7 @@ export default function Hero() {
       </div>
       <div className="hero-floor">
         <span>OPEN SOURCE. OPEN POSSIBILITIES.</span>
-        <a href="#agent">
+        <a href="#possibilities">
           {t("向下，打开更多可能", "Scroll into the possibilities")}
           <Icon name="ArrowDown" size={17} />
         </a>

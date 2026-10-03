@@ -379,7 +379,7 @@ export default function CompanionSection() {
         <div className="experience-heading companion-heading">
           <div>
             <span className="eyebrow">
-              {t("YOUR OWN COMPANIONS / 你的桌面伙伴", "YOUR OWN COMPANIONS")}
+              {t("PERSONAL AI / 你的桌面伙伴", "YOUR PERSONAL AI COMPANIONS")}
             </span>
             <h2 id="companion-heading" className="section-heading">
               {t("有个性。会成长。", "Personal. Always growing.")}
@@ -389,13 +389,13 @@ export default function CompanionSection() {
           </div>
           <p>
             {t(
-              "为每个伙伴设定形象、人格、模型与知识。",
-              "Choose each companion's look, personality, model and knowledge.",
+              "有自己的形象、人格与记忆，也能调动完整 Agent 能力。",
+              "A personality and memories of its own, with a complete Agent's capabilities.",
             )}
             <br />
             {t(
-              "完整 Agent 能力，装进你熟悉的桌面日常。",
-              "A complete Agent, at home on your desktop.",
+              "从桌面日常，到手机与实体设备，延续同一位伙伴的陪伴。",
+              "Keep the same companion close, across your desktop, phone, and physical device.",
             )}
           </p>
         </div>

@@ -1,4 +1,5 @@
 import Hero from "@/components/sections/Hero";
+import PhysicalWorldSection from "@/components/sections/PhysicalWorldSection";
 import AgentComposer from "@/components/sections/AgentComposer";
 import CompanionSection from "@/components/sections/CompanionSection";
 import WorkLoop from "@/components/sections/WorkLoop";
@@ -20,9 +21,10 @@ export default function HomePage() {
       <Hero />
       <MotionHighlights />
       <MotionPrelude />
+      <CompanionSection />
+      <PhysicalWorldSection />
       <MotionShowcase />
       <AgentComposer />
-      <CompanionSection />
       <WorkLoop />
       <CreativeSection />
       <ExtensionSection />

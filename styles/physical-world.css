@@ -1,0 +1,211 @@
+.physical-world-section {
+  padding: 100px 0 76px;
+  background: #eeeae3;
+  scroll-margin-top: 100px;
+}
+.physical-world-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 76px);
+}
+.physical-world-copy .eyebrow {
+  color: #685d70;
+  margin-bottom: 26px;
+}
+.physical-world-copy h2 {
+  font-size: clamp(32px, 3.55vw, 52px);
+  letter-spacing: -0.05em;
+  line-height: 1.35;
+}
+.physical-world-copy h2 span {
+  color: #786489;
+}
+.physical-world-description {
+  margin-top: 26px;
+  color: #5e5661;
+  font-size: 17px;
+  line-height: 1.9;
+  max-width: 490px;
+}
+.physical-world-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 22px;
+  margin-top: 30px;
+}
+.physical-world-actions .button {
+  min-height: 48px;
+  font-size: 14px;
+  white-space: normal;
+}
+.physical-world-actions .experience-text-link {
+  min-height: 44px;
+  font-size: 14px;
+}
+.physical-world-demo {
+  margin: 0;
+  background: #29232e;
+  color: #f8f4f9;
+  border: 1px solid #423747;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 22px 55px #3b283412;
+}
+.physical-world-demo-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+.physical-world-demo-heading > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.physical-world-demo-heading > span:last-child {
+  color: #d5bdcc;
+  flex-shrink: 0;
+}
+.physical-world-demo video {
+  width: 100%;
+  aspect-ratio: 1080 / 590;
+  object-fit: contain;
+  background: #171318;
+}
+.physical-world-demo figcaption {
+  padding: 22px 24px;
+}
+.physical-world-demo figcaption strong {
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+.physical-world-demo figcaption p {
+  margin-top: 8px;
+  color: #d5c7d9;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.physical-world-places {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 48px;
+  border-top: 1px solid #d5cdc9;
+  border-bottom: 1px solid #d5cdc9;
+}
+.physical-world-place {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 28px 24px;
+  transition: background 0.2s;
+}
+.physical-world-place + .physical-world-place {
+  border-left: 1px solid #d5cdc9;
+}
+.physical-world-place:hover {
+  background: #ffffff60;
+}
+.physical-world-place-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  color: #66516f;
+  background: #e1d7e8;
+}
+.physical-world-place:nth-child(2) .physical-world-place-icon {
+  color: #855f48;
+  background: #eedcce;
+}
+.physical-world-place:nth-child(3) .physical-world-place-icon {
+  color: #446d59;
+  background: #d5e2d6;
+}
+.physical-world-place > div {
+  min-width: 0;
+  flex: 1;
+}
+.physical-world-place h3 {
+  font-size: 17px;
+  line-height: 1.5;
+}
+.physical-world-place p {
+  margin-top: 5px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #625968;
+}
+.physical-world-note {
+  margin-top: 20px;
+  max-width: 1080px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #6c616e;
+}
+.physical-world-section[data-locale="en"] .physical-world-copy h2 {
+  font-size: clamp(30px, 3.15vw, 46px);
+  line-height: 1.2;
+}
+@media (max-width: 1000px) {
+  .physical-world-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .physical-world-description {
+    max-width: 680px;
+  }
+  .physical-world-place {
+    padding: 22px 16px;
+    gap: 12px;
+  }
+}
+@media (max-width: 760px) {
+  .physical-world-section {
+    padding: 68px 0 54px;
+  }
+  .physical-world-copy h2 {
+    font-size: clamp(28px, 7.5vw, 40px);
+  }
+  .physical-world-section[data-locale="en"] .physical-world-copy h2 {
+    font-size: clamp(29px, 7.7vw, 42px);
+  }
+  .physical-world-description {
+    font-size: 16px;
+    margin-top: 22px;
+  }
+  .physical-world-actions {
+    gap: 16px;
+  }
+  .physical-world-demo-heading {
+    padding: 16px;
+    font-size: 10px;
+    letter-spacing: 0.03em;
+  }
+  .physical-world-demo figcaption {
+    padding: 20px;
+  }
+  .physical-world-places {
+    grid-template-columns: 1fr;
+    margin-top: 30px;
+  }
+  .physical-world-place {
+    padding: 22px 8px;
+  }
+  .physical-world-place + .physical-world-place {
+    border-left: 0;
+    border-top: 1px solid #d5cdc9;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .physical-world-place {
+    transition: none;
+  }
+}

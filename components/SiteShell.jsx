@@ -17,8 +17,9 @@ const navigation = [
 ];
 const chapters = [
   ["possibilities", "能力世界", "Possibilities"],
+  ["companion", "桌面伙伴", "Personal companions"],
+  ["physical-world", "伙伴走进现实", "Into the real world"],
   ["agent", "组合 Agent", "Compose an Agent"],
-  ["companion", "桌面伙伴", "Companions"],
   ["work", "持续工作", "Continuous work"],
   ["creation", "多模态创作", "Multimodal creation"],
   ["extend", "能力扩展", "Extend capabilities"],
@@ -235,8 +236,8 @@ export default function SiteShell({ children }) {
     try {
       await navigator.clipboard.writeText(
         t(
-          "NomiFun：本地优先的开源 Agent 工作空间。可组合能力、桌面伙伴、多模态创作与持续工作，在自己的电脑上发生。https://www.nomifun.com",
-          "NomiFun: your local-first, open-source Agent workspace. Compose capabilities, create with AI, and keep work moving with desktop companions—all on your own computer. https://www.nomifun.com/",
+          "NomiFun：让 AI 生活在你生命的左右。属于你的个人 AI 伙伴，有个性、有记忆，也能一起做事。从桌面、手机到小智云台，让陪伴延伸到真实世界。本地优先，代码开源。https://www.nomifun.com/zh",
+          "NomiFun: Let AI live by your side. Your personal AI companion has personality, memory, and the ability to act. From desktop and phone to Xiaozhi Yuntai, bring your companion into the real world. Local first. Open source. https://www.nomifun.com/",
         ),
       );
       setToast(

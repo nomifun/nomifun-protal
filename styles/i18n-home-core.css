@@ -51,6 +51,10 @@
   }
 }
 @media (max-width: 360px) {
+  .home-hero[data-locale="en"] .hero-playground .hero-mode-tabs button {
+    padding-inline: 10px;
+    gap: 5px;
+  }
   .agent-section[data-locale="en"] .module-list {
     grid-template-columns: 1fr;
   }

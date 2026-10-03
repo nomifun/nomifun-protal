@@ -70,10 +70,10 @@ const details = {
     action: "查看 Mobile 源码",
   },
   "xiaozhi-yuntai": {
-    lead: "让伙伴听见你，和你说话，也用表情与动作回应。小智云台负责感知与表达，NomiFun Desktop 负责思考、记忆和行动编排。",
+    lead: "你的桌面伙伴，也可以有真实世界的身体。绑定小智云台，让同一个伙伴听见你、和你说话，用表情与动作回应。NomiFun Desktop 延续它的身份、记忆与能力。",
     statement: ["熟悉的伙伴。", "真实的声音与动作。"],
     intro:
-      "不是从零再养一个机器人身份。将设备绑定到已有伙伴，让它带着同一份知识、设定与记忆，来到桌边。",
+      "把设备绑定到已有伙伴，让熟悉的个性、知识与记忆一起来到桌边。小智云台负责声音、表情与动作，你的电脑负责思考和行动编排。",
     features: [
       [
         "电脑就是机器人的大脑",
@@ -193,10 +193,10 @@ const englishDetails = {
     action: "Explore Mobile source",
   },
   "xiaozhi-yuntai": {
-    lead: "Let your companion hear you, speak with you, and respond through expressions and movement. Xiaozhi Yuntai handles sensing and expression; NomiFun Desktop handles reasoning, memory, and action orchestration.",
+    lead: "Give your desktop companion a physical presence. Connect Xiaozhi Yuntai so the same companion can hear you, speak with you, and respond through expressions and movement. NomiFun Desktop carries its identity, memory, and capabilities.",
     statement: ["A familiar companion.", "A real voice. Real movement."],
     intro:
-      "Bring an existing companion to your desk. Bind the device to its identity, knowledge, settings, and memory, without starting a new robot personality from scratch.",
+      "Bind a device to an existing companion and bring its familiar personality, knowledge, and memory to your desk. Xiaozhi Yuntai provides voice, expressions, and movement; your computer handles reasoning and action orchestration.",
     features: [
       [
         "Your computer is the robot's brain",

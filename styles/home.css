@@ -27,7 +27,7 @@
   position: relative;
   z-index: 2;
   text-align: center;
-  margin-top: -70px;
+  margin-top: 0;
 }
 .hero-eyebrow {
   display: flex;
@@ -124,10 +124,8 @@
   box-shadow: 0 0 0 6px #b7d8cb26;
 }
 .hero-playground {
-  position: absolute;
-  bottom: 112px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  margin-top: 40px;
   text-align: center;
   z-index: 2;
   width: 100%;
@@ -1365,7 +1363,7 @@
     min-height: 820px;
   }
   .hero-content {
-    margin-top: -130px;
+    margin-top: 0;
   }
   .hero-eyebrow {
     margin-bottom: 25px;
@@ -1384,7 +1382,7 @@
     margin-top: 20px;
   }
   .hero-playground {
-    bottom: 75px;
+    margin-top: 28px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

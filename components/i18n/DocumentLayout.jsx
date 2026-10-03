@@ -2,17 +2,16 @@ import "@/app/globals.css";
 import SiteShell from "@/components/SiteShell";
 import Behaviors from "@/components/Behaviors";
 import LocaleProvider from "./LocaleProvider";
-import { createI18n, pageMetadata } from "@/lib/i18n";
+import { pageMetadata } from "@/lib/i18n";
 
 export function documentMetadata(locale) {
-  const { t } = createI18n(locale);
   const page = pageMetadata(
     locale,
     "/",
-    "NomiFun — 让 AI，真正生活在你的电脑里",
-    "NomiFun — AI that feels at home on your computer",
-    "一个属于你的开源 Agent 工作空间。自由组合能力，创造桌面伙伴，让对话、创作和持续工作在自己的电脑上发生。",
-    "Your open-source Agent workspace. Compose capabilities, create desktop companions, and bring conversation, creativity and continuous work to your own computer.",
+    "NomiFun — 让 AI 生活在你生命的左右",
+    "NomiFun — Let AI live by your side",
+    "属于你的个人 AI 伙伴，有个性、有记忆，也能一起做事。从桌面、手机到小智云台，让陪伴延伸到真实世界。本地优先，代码开源，Agent 能力自由组合。",
+    "Your personal AI companion, with personality, memory, and the ability to act. From desktop and phone to Xiaozhi Yuntai, bring your companion into the real world. Local first, open source, with composable Agent capabilities.",
   );
   return {
     ...page,
@@ -22,10 +21,7 @@ export function documentMetadata(locale) {
       ...page.openGraph,
       type: "website",
       siteName: "NomiFun",
-      title: t(
-        "NomiFun — 你的电脑，你的 Agent 世界",
-        "NomiFun — Your computer. Your Agent world.",
-      ),
+      title: page.title,
     },
     robots: { index: true, follow: true },
     icons: { icon: "/images/brand/nomifun.svg" },

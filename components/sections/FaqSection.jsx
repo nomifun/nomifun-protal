@@ -4,6 +4,12 @@ import gsap from "gsap";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 const questions = [
   [
+    "桌面伙伴可以连接真实设备吗？",
+    "可以通过小智云台，把兼容的 ESP32-S3 设备绑定到已有桌面伙伴，延续它的身份、知识与记忆，用声音、表情和云台动作回应。需要兼容硬件、固件配置、可信局域网配对，并保持 Desktop 运行；具体能力随板型、固件和模型配置而不同。",
+    "Can my desktop companion connect to a physical device?",
+    "With Xiaozhi Yuntai, bind a compatible ESP32-S3 device to an existing desktop companion and keep its identity, knowledge, and memory. It can respond through voice, expressions, and pan-tilt movement. Compatible hardware, configured firmware, pairing on a trusted local network, and a running Desktop are required. Capabilities vary by board, firmware, and model configuration.",
+  ],
+  [
     "开始使用，需要部署服务器吗？",
     "在电脑上安装 Desktop、配置你选择的模型即可开始。手机与机器人在可信局域网内可直接连接 Desktop，不需要额外业务服务器；跨网访问可按需自托管 Net Infra。",
     "Do I need to deploy a server?",
