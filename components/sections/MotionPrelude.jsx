@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Icon from "@/components/Icon";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { deviceDemo } from "@/lib/site";
 
 function WindowBar({ label }) {
   return (
@@ -399,7 +400,7 @@ function RobotCard() {
   return (
     <div className="prelude-robot">
       <img
-        src="/images/product/xiaozhi-yuntai-poster.png"
+        src={deviceDemo.poster}
         alt={t("NomiFun 小智云台实物", "NomiFun Xiaozhi robotic gimbal device")}
         width="300"
         height="200"

@@ -1,7 +1,7 @@
 import Link from "@/components/i18n/LocaleLink";
 import { notFound } from "next/navigation";
 import Icon from "@/components/Icon";
-import { products, getProducts } from "@/lib/site";
+import { products, getProducts, deviceDemo } from "@/lib/site";
 import { createI18n, pageMetadata } from "@/lib/i18n";
 import ProductVisual from "./ProductVisual";
 
@@ -361,14 +361,14 @@ export default async function ProductPage({ params, locale = "zh" }) {
             controls
             playsInline
             preload="none"
-            poster={asset("/images/product/xiaozhi-yuntai-poster.png")}
+            poster={asset(deviceDemo.poster)}
             aria-label={t(
               "NomiFun 小智云台真实设备演示",
               "NomiFun Xiaozhi Yuntai real device demonstration",
             )}
           >
-            <source src="/media/xiaozhi-yuntai-demo.mp4" type="video/mp4" />
-            <a href="/media/xiaozhi-yuntai-demo.mp4">
+            <source src={deviceDemo.video} type="video/mp4" />
+            <a href={deviceDemo.video}>
               {t("打开设备演示视频", "Open device demonstration video")}
             </a>
           </video>

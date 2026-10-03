@@ -73,7 +73,7 @@
 }
 .physical-world-demo video {
   width: 100%;
-  aspect-ratio: 1080 / 590;
+  aspect-ratio: 16 / 9;
   object-fit: contain;
   background: #171318;
 }

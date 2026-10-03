@@ -4,13 +4,13 @@
 
 ## 小智云台真实演示
 
-- 新门户路径：`public/media/xiaozhi-yuntai-demo.mp4`
-- 来源：`C:/Users/MINISFORUM/code/nomifun/main/nomifun-protal/public/media/xiaozhi-yuntai-demo.mp4`
-- 使用位置：`/products/xiaozhi-yuntai`，以用户主动播放的 `<video controls playsInline preload="none">` 展示。
-- 原文件大小：6,829,806 字节。
-- 源文件与新门户文件 SHA-256 一致：`975a85bf6627fd33130244f1ae52ffd65728f7a9192c66560dafd3f0e3ab68d6`。
-- 未编辑、未生成替代实物、未使用远程媒体下载。页面标注为项目已有设备演示，不主张它对应当前最新固件或所有板型。
-- 视频封面 `public/images/product/xiaozhi-yuntai-poster.png` 来自同一视频约 22 秒处的真实设备画面。在原生浏览器播放器里捕获后，仅裁除窗口留白与播放器控制区域；没有生成或修改硬件外观。原始截图保留于 `docs/qa/source-robot-fullscreen.png`。
+- 2026-10-03 按用户要求替换为其提供的本地录像 `6ada7b89d801b9955e65a91ac67c63b1.mp4`；提供日期不代表录制日期或固件版本。
+- 原片：3,167,454 字节，1280×720，30 fps，24.68 秒；HEVC Main 视频与 AAC LC 单声道音频。SHA-256：`4c694bf202740d08342b34d94ec299f7dd1e09560e6ebc0712af1bd640ee54de`。
+- 网页版本：`public/media/xiaozhi-yuntai-demo-7b67f896.mp4`，9,311,060 字节。为浏览器兼容性转为 H.264 High / Level 4.0、yuv420p，保留分辨率、帧率、完整时长与原音频流；MP4 启用 faststart，移除来源容器元数据。没有剪辑、变速、添加字幕或生成实物画面。
+- 网页视频 SHA-256：`7b67f896641d5b565e58061f8c5bb93f16891d553018dbbc7e551a62ab65ae01`。
+- 封面：`public/images/product/xiaozhi-yuntai-poster-ebc825a5.jpg`，从用户原片第 2 秒直接提取完整真实画面，1280×720，134,482 字节。SHA-256：`ebc825a593e1a861c14501078a2acc0242447d8faaa9202fc240581d3fb9c76c`。
+- 首页设备专题、产品展示画廊、小智云台中英文产品页及能力总览设备卡共用 `lib/site.js` 的 `deviceDemo`。媒体文件名包含内容摘要，避免替换后继续命中旧视频或旧封面缓存。
+- 页面继续以用户主动播放的 `<video controls playsInline preload="none">` 展示；该录像不主张对应当前最新固件或所有板型。旧片及其截图属于历史素材，`docs/qa/source-robot-fullscreen.png` 不再是当前封面的来源。
 
 ## 原始起源文章
 

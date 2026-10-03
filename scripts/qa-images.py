@@ -1,11 +1,16 @@
+import argparse
+import subprocess
 from pathlib import Path
-from PIL import Image
 
-root = Path(__file__).resolve().parents[1]
-qa = root / 'docs' / 'qa'
-# Extract the visible video frame from the browser screenshot. The public
-# demo is unchanged; only the player's letterboxing and controls are cropped.
-raw = Image.open(qa / 'source-robot-fullscreen.png').convert('RGB')
-raw.crop((0, 34, 1080, 624)).save(root / 'public' / 'images' / 'product' / 'xiaozhi-yuntai-poster.png')
-
-print('NomiFun device poster written; media capture:', raw.size)
+parser = argparse.ArgumentParser(description='Extract a real frame from a device video.')
+parser.add_argument('video', type=Path, help='Original recording to extract from')
+parser.add_argument('poster', type=Path, help='JPEG output path; update deviceDemo after replacing it')
+parser.add_argument('--ffmpeg', default='ffmpeg', help='FFmpeg executable path')
+parser.add_argument('--seconds', type=float, default=2, help='Frame time in seconds')
+args = parser.parse_args()
+subprocess.run([
+    args.ffmpeg, '-hide_banner', '-loglevel', 'error', '-y',
+    '-ss', str(args.seconds), '-i', str(args.video),
+    '-frames:v', '1', '-q:v', '2', str(args.poster),
+], check=True)
+print('NomiFun device poster extracted:', args.poster.resolve())

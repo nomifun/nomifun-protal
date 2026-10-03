@@ -48,7 +48,7 @@ node .cache/english-agent-fixture/start.mjs
 
 ## 设备演示：保留真实原始媒体
 
-`public/media/xiaozhi-yuntai-demo.mp4` 与 `public/images/product/xiaozhi-yuntai-poster.png` 继续使用项目真实设备演示。英文页翻译视频标题、替代文本、界面说明和播放入口，标记原始设备演示／原语言音频，不生成假的硬件图、不篡改屏幕或杜撰字幕。其原始来源与 SHA-256 已在 `docs/assets-provenance.md` 记录。
+2026-10-03 替换为用户提供的录像。`public/media/xiaozhi-yuntai-demo-7b67f896.mp4` 为保留完整内容及原声的 H.264 网页版本；`public/images/product/xiaozhi-yuntai-poster-ebc825a5.jpg` 直接取自原片第 2 秒。中英文共用 `lib/site.js` 的 `deviceDemo`，英文页翻译视频标题、替代文本、界面说明和播放入口，保留原语言音频，不生成假的硬件图、不篡改屏幕或杜撰字幕。来源、格式转换和 SHA-256 见 `docs/assets-provenance.md`。
 
 ## 社群二维码
 

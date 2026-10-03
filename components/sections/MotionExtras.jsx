@@ -6,6 +6,7 @@ import Icon from "@/components/Icon";
 import Link from "@/components/i18n/LocaleLink";
 import useReducedMotion from "@/components/motion/useReducedMotion";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { deviceDemo } from "@/lib/site";
 
 const capabilities = [
   [
@@ -186,8 +187,8 @@ const media = [
   },
   {
     name: ["连接真实机器人", "Connected to real robots"],
-    src: "/images/product/xiaozhi-yuntai-poster.png",
-    video: "/media/xiaozhi-yuntai-demo.mp4",
+    src: deviceDemo.poster,
+    video: deviceDemo.video,
     note: [
       "来自项目已有设备演示",
       "Original device recording from the project",

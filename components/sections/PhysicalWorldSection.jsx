@@ -3,6 +3,7 @@
 import Link from "@/components/i18n/LocaleLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import Icon from "@/components/Icon";
+import { deviceDemo } from "@/lib/site";
 
 const places = [
   {
@@ -82,15 +83,15 @@ export default function PhysicalWorldSection() {
               controls
               playsInline
               preload="none"
-              poster="/images/product/xiaozhi-yuntai-poster.png"
+              poster={deviceDemo.poster}
               aria-label={t(
                 "桌面伙伴连接小智云台的项目已有实拍演示",
                 "Existing project footage of a desktop companion connected to Xiaozhi Yuntai",
               )}
               aria-describedby="physical-world-video-caption"
             >
-              <source src="/media/xiaozhi-yuntai-demo.mp4" type="video/mp4" />
-              <a href="/media/xiaozhi-yuntai-demo.mp4">
+              <source src={deviceDemo.video} type="video/mp4" />
+              <a href={deviceDemo.video}>
                 {t("打开设备演示视频", "Open device demonstration video")}
               </a>
             </video>
