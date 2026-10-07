@@ -27,7 +27,7 @@ npm run dev -- --port 3107
 - `/products` 和四个产品详情：Desktop、Mobile、小智云台、Net Infra。
 - `/download`：正式 Releases 与备用下载链接。没有硬编码或虚构“最新版本”。
 - `/blog`：可筛选的 Markdown 博客。文章放在 `content/blog/*.md`，自动生成详情页，`draft: true` 不发布。原起源文章保留为历史归档。
-- `/contact`：真实邮箱、Issue、企业微信与 QQ 社群二维码，以及社交/项目入口。
+- `/contact`：真实邮箱、Issue、微信与 QQ 社群二维码，以及社交/项目入口。
 
 核心编辑点：`components/sections/`、`lib/site.js`、`lib/i18n/`、`content/blog/`、`styles/`。文章的中文位于 `content/blog/`，英文位于 `content/blog/en/`，使用相同slug；按已有frontmatter填写title / description / publishedAt / author / tags / draft，再重新构建。英文没有中文正文回退。
 

@@ -8,8 +8,8 @@ export function getPageMetadata(locale = "zh") {
     "/contact",
     "联系我们",
     "Contact",
-    "参与 NomiFun 开源共建、反馈问题、交流想法。官方邮箱、GitHub Issues、企业微信群与 QQ 交流群入口。",
-    "Build NomiFun with us, report issues, and exchange ideas. Find our official email, GitHub Issues, WeCom group, and QQ community.",
+    "参与 NomiFun 开源共建、反馈问题、交流想法。官方邮箱、GitHub Issues、微信群与 QQ 交流群入口。",
+    "Build NomiFun with us, report issues, and exchange ideas. Find our official email, GitHub Issues, WeChat group, and QQ community.",
   );
 }
 export const metadata = getPageMetadata();
@@ -20,15 +20,15 @@ export default function ContactPage({ locale = "zh" }) {
   const socialLinks = getSocialLinks(locale);
   const communityContacts = [
     {
-      id: "wecom",
-      name: t("企业微信群", "WeCom group"),
+      id: "wechat",
+      name: t("微信交流群", "WeChat group"),
       caption: t(
-        "扫码加入 NomiFun 企业微信交流群。",
-        "Scan to join the NomiFun WeCom community.",
+        "扫码加入 NomiFun 微信交流群。",
+        "Scan to join the NomiFun WeChat community.",
       ),
-      image: links.wecomGroupQr,
-      width: 396,
-      height: 396,
+      image: links.wechatGroupQr,
+      width: 1996,
+      height: 1934,
     },
     {
       id: "qq",
