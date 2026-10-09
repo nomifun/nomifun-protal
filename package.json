@@ -13,7 +13,7 @@
     "check:i18n": "node scripts/check-i18n.mjs",
     "check:work-motion": "node scripts/check-work-motion.mjs",
     "sync:releases": "node scripts/sync-releases.mjs",
-    "check:downloads": "node scripts/check-downloads.mjs && node scripts/check-download-selection.mjs",
+    "check:downloads": "node scripts/check-downloads.mjs && node scripts/check-download-selection.mjs && node scripts/check-download-catalog.mjs && node scripts/check-release-history.mjs",
     "check:release-service": "node scripts/check-release-service.mjs"
   },
   "dependencies": {

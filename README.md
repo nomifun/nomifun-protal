@@ -25,7 +25,7 @@ npm run dev -- --port 3107
 
 - `/`、`/en`、`/zh`：Desktop 产品首页。场景切换、能力装配、会话 Agent 接力、伙伴/记忆/渠道、IDMM 与持续工作、创作画布、小程序/无头插件、开发者架构、产品起源和生态弧形拖拽。
 - `/products` 和四个产品详情：Desktop、Mobile、小智云台、Net Infra。
-- `/download`：每个操作系统卡片内直接提供 CrabNebula（推荐）与 GitHub 的安装包下载按钮和各自版本，选择架构或安装格式后即可下载。中英文页面一致推荐 CrabNebula，多个下载源提供备用入口；两个来源独立核实，接口失败保留已核实数据及原时间。源码区单独展示 GitHub / Gitee 仓库。
+- `/download`：每个操作系统卡片内直接提供 CrabNebula（推荐）与 GitHub 的安装包下载按钮。按来源、系统、架构及安装格式分别选择历史发布中最近可用的安装包，并展示安装包自己的版本；新版仅发布 macOS 时，Windows/Linux 下载仍保留。查询不完整或失败时保留已核实地址和原时间，补包后自动更新对应组合。源码区单独展示 GitHub / Gitee 仓库。
 - `/blog`：可筛选的 Markdown 博客。文章放在 `content/blog/*.md`，自动生成详情页，`draft: true` 不发布。原起源文章保留为历史归档。
 - `/contact`：真实邮箱、Issue、微信与 QQ 社群二维码，以及社交/项目入口。
 

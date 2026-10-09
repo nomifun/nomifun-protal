@@ -222,6 +222,18 @@
   margin: 0 0 5px;
   font-size: 12px;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.release-metadata-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 400;
+  font-size: 12px;
+  white-space: nowrap;
 }
 .release-package-metadata p {
   margin: 0;

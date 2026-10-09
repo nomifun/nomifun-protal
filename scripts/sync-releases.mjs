@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
-import { RELEASE_SOURCES, fetchRelease } from "../lib/downloads.mjs";
-import { fetchGitHubHtmlRelease } from "../lib/github-release-html.mjs";
+import { RELEASE_SOURCES } from "../lib/downloads.mjs";
+import { mergeDownloadCatalog } from "../lib/download-catalog.mjs";
+import { fetchReleaseHistory } from "../lib/release-history.mjs";
 
 const snapshotPath = new URL("../lib/releases-snapshot.json", import.meta.url);
 const manifestPath = new URL("../public/release-metadata/", import.meta.url);
@@ -15,13 +16,26 @@ try {
 const results = await Promise.allSettled(
   Object.keys(RELEASE_SOURCES).map(async (sourceId) => {
     const signal = AbortSignal.timeout(10000);
-    try {
-      return [sourceId, await fetchRelease(sourceId, { signal })];
-    } catch (error) {
-      if (sourceId !== "github") throw error;
-      console.warn(`${error.message} Trying the public GitHub release page.`);
-      return [sourceId, await fetchGitHubHtmlRelease({ signal })];
-    }
+    const candidateVersions = [
+      ...new Set(
+        Object.values(snapshot)
+          .flatMap((release) => [
+            release.version,
+            ...(release.knownVersions ?? []),
+            ...(release.assets ?? []).map((asset) => asset.version),
+          ])
+          .filter(Boolean),
+      ),
+    ];
+    const incoming = await fetchReleaseHistory(sourceId, {
+      signal,
+      seed: snapshot[sourceId],
+      candidateVersions,
+    });
+    return [
+      sourceId,
+      mergeDownloadCatalog(sourceId, snapshot[sourceId], incoming),
+    ];
   }),
 );
 
@@ -30,21 +44,9 @@ for (const [index, result] of results.entries()) {
   const sourceId = Object.keys(RELEASE_SOURCES)[index];
   if (result.status === "fulfilled") {
     const [, release] = result.value;
-    // A size independently verified for an immutable asset can be retained
-    // when the metadata endpoint omits it. New asset URLs remain unknown.
-    const knownSizes = new Map(
-      (snapshot[sourceId]?.assets ?? []).map((asset) => [
-        asset.url,
-        asset.size,
-      ]),
-    );
-    release.assets = release.assets.map((asset) => ({
-      ...asset,
-      size: asset.size ?? knownSizes.get(asset.url) ?? null,
-    }));
     snapshot[sourceId] = release;
     console.log(
-      `${RELEASE_SOURCES[sourceId].name}: ${release.version}, ${release.assets.length} installers.`,
+      `${RELEASE_SOURCES[sourceId].name}: latest ${release.version}, ${release.assets.length} current platform installers${release.partial ? ", some history requests failed" : ""}${release.historyComplete ? "" : ", bounded history coverage"}.`,
     );
   } else if (snapshot[sourceId]?.checkedAt) {
     console.warn(

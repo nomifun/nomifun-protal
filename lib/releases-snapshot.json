@@ -3,8 +3,39 @@
     "version": "0.8.2",
     "publishedAt": "2026-10-09T06:31:37.000Z",
     "releaseUrl": "https://github.com/nomifun/nomifun-desktop/releases/tag/v0.8.2",
-    "checkedAt": "2026-10-09T09:07:04.513Z",
+    "checkedAt": "2026-10-09T11:19:12.956Z",
+    "historyComplete": true,
+    "partial": false,
+    "latestResolved": true,
+    "knownVersions": [
+      "0.8.2",
+      "0.8.1",
+      "0.8.0",
+      "0.7.6",
+      "0.7.5",
+      "0.7.4",
+      "0.7.3",
+      "0.7.2",
+      "0.7.1",
+      "0.7.0",
+      "0.6.5",
+      "0.6.4"
+    ],
     "assets": [
+      {
+        "id": "NomiFun-0.8.2-1.x86_64.rpm",
+        "name": "NomiFun-0.8.2-1.x86_64.rpm",
+        "url": "https://github.com/nomifun/nomifun-desktop/releases/download/v0.8.2/NomiFun-0.8.2-1.x86_64.rpm",
+        "platform": "linux",
+        "arch": "x64",
+        "format": "rpm",
+        "size": null,
+        "version": "0.8.2",
+        "publishedAt": "2026-10-09T06:31:37.000Z",
+        "releaseUrl": "https://github.com/nomifun/nomifun-desktop/releases/tag/v0.8.2",
+        "checkedAt": "2026-10-09T11:19:12.956Z",
+        "retained": false
+      },
       {
         "id": "NomiFun_0.8.2_aarch64.dmg",
         "name": "NomiFun_0.8.2_aarch64.dmg",
@@ -12,7 +43,54 @@
         "platform": "macos",
         "arch": "arm64",
         "format": "dmg",
-        "size": null
+        "size": null,
+        "version": "0.8.2",
+        "publishedAt": "2026-10-09T06:31:37.000Z",
+        "releaseUrl": "https://github.com/nomifun/nomifun-desktop/releases/tag/v0.8.2",
+        "checkedAt": "2026-10-09T11:19:12.956Z",
+        "retained": false
+      },
+      {
+        "id": "NomiFun_0.8.2_amd64.AppImage",
+        "name": "NomiFun_0.8.2_amd64.AppImage",
+        "url": "https://github.com/nomifun/nomifun-desktop/releases/download/v0.8.2/NomiFun_0.8.2_amd64.AppImage",
+        "platform": "linux",
+        "arch": "x64",
+        "format": "appimage",
+        "size": null,
+        "version": "0.8.2",
+        "publishedAt": "2026-10-09T06:31:37.000Z",
+        "releaseUrl": "https://github.com/nomifun/nomifun-desktop/releases/tag/v0.8.2",
+        "checkedAt": "2026-10-09T11:19:12.956Z",
+        "retained": false
+      },
+      {
+        "id": "NomiFun_0.8.2_amd64.deb",
+        "name": "NomiFun_0.8.2_amd64.deb",
+        "url": "https://github.com/nomifun/nomifun-desktop/releases/download/v0.8.2/NomiFun_0.8.2_amd64.deb",
+        "platform": "linux",
+        "arch": "x64",
+        "format": "deb",
+        "size": null,
+        "version": "0.8.2",
+        "publishedAt": "2026-10-09T06:31:37.000Z",
+        "releaseUrl": "https://github.com/nomifun/nomifun-desktop/releases/tag/v0.8.2",
+        "checkedAt": "2026-10-09T11:19:12.956Z",
+        "retained": false
+      },
+      {
+        "id": "NomiFun_0.8.2_x64-setup.exe",
+        "name": "NomiFun_0.8.2_x64-setup.exe",
+        "url": "https://github.com/nomifun/nomifun-desktop/releases/download/v0.8.2/NomiFun_0.8.2_x64-setup.exe",
+        "platform": "windows",
+        "arch": "x64",
+        "format": "exe",
+        "size": null,
+        "version": "0.8.2",
+        "publishedAt": "2026-10-09T06:31:37.000Z",
+        "releaseUrl": "https://github.com/nomifun/nomifun-desktop/releases/tag/v0.8.2",
+        "checkedAt": "2026-10-09T11:19:12.956Z",
+        "retained": false
       },
       {
         "id": "NomiFun_0.8.2_x64.dmg",
@@ -21,33 +99,74 @@
         "platform": "macos",
         "arch": "x64",
         "format": "dmg",
-        "size": null
+        "size": null,
+        "version": "0.8.2",
+        "publishedAt": "2026-10-09T06:31:37.000Z",
+        "releaseUrl": "https://github.com/nomifun/nomifun-desktop/releases/tag/v0.8.2",
+        "checkedAt": "2026-10-09T11:19:12.956Z",
+        "retained": false
       }
     ]
   },
   "crabnebula": {
     "version": "0.8.2",
-    "publishedAt": "2026-10-09T06:45:17.457Z",
+    "publishedAt": "2026-10-09T09:26:46.680Z",
     "releaseUrl": "https://crabnebula.cloud/nomifun/nomifun-desktop/releases",
-    "checkedAt": "2026-10-09T09:07:02.663Z",
+    "checkedAt": "2026-10-09T11:19:12.068Z",
+    "historyComplete": false,
+    "partial": false,
+    "latestResolved": true,
+    "knownVersions": [
+      "0.8.2",
+      "0.8.1",
+      "0.8.0",
+      "0.7.6",
+      "0.7.5",
+      "0.7.4",
+      "0.7.3"
+    ],
     "assets": [
       {
-        "id": "01M4FP67BB5JAMFXNWP3JCY0K4",
+        "id": "01M4FY61MAVXJ9BBDR4Q12T0F2",
         "name": "NomiFun_0.8.2_aarch64.dmg",
-        "url": "https://cdn.crabnebula.app/asset/01M4FP67BB5JAMFXNWP3JCY0K4",
+        "url": "https://cdn.crabnebula.app/asset/01M4FY61MAVXJ9BBDR4Q12T0F2",
         "platform": "macos",
         "arch": "arm64",
         "format": "dmg",
-        "size": 154773110
+        "size": null,
+        "version": "0.8.2",
+        "publishedAt": "2026-10-09T09:26:46.680Z",
+        "releaseUrl": "https://crabnebula.cloud/nomifun/nomifun-desktop/releases",
+        "checkedAt": "2026-10-09T11:19:12.068Z",
+        "retained": false
       },
       {
-        "id": "01M4FPB9EN409R8PXV0DPNF478",
+        "id": "01M4FY9QRDBJ065255BNNKH075",
         "name": "NomiFun_0.8.2_x64.dmg",
-        "url": "https://cdn.crabnebula.app/asset/01M4FPB9EN409R8PXV0DPNF478",
+        "url": "https://cdn.crabnebula.app/asset/01M4FY9QRDBJ065255BNNKH075",
         "platform": "macos",
         "arch": "x64",
         "format": "dmg",
-        "size": 184105821
+        "size": null,
+        "version": "0.8.2",
+        "publishedAt": "2026-10-09T09:26:46.680Z",
+        "releaseUrl": "https://crabnebula.cloud/nomifun/nomifun-desktop/releases",
+        "checkedAt": "2026-10-09T11:19:12.068Z",
+        "retained": false
+      },
+      {
+        "id": "01M4FZJDQPZ8CN51KEM39D1NG7",
+        "name": "NomiFun_0.8.2_x64-setup.exe",
+        "url": "https://cdn.crabnebula.app/asset/01M4FZJDQPZ8CN51KEM39D1NG7",
+        "platform": "windows",
+        "arch": "x64",
+        "format": "exe",
+        "size": null,
+        "version": "0.8.2",
+        "publishedAt": "2026-10-09T09:26:46.680Z",
+        "releaseUrl": "https://crabnebula.cloud/nomifun/nomifun-desktop/releases",
+        "checkedAt": "2026-10-09T11:19:12.068Z",
+        "retained": false
       }
     ]
   }

@@ -48,7 +48,10 @@ for (const relative of [
   "api/releases.mjs",
   "lib/release-service.mjs",
   "lib/downloads.mjs",
+  "lib/download-catalog.mjs",
+  "lib/release-history.mjs",
   "lib/github-release-html.mjs",
+  "lib/releases-snapshot.json",
 ]) {
   const destination = path.join(functionDir, relative);
   await fs.mkdir(path.dirname(destination), { recursive: true });

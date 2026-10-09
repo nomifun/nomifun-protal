@@ -355,9 +355,24 @@ const snapshot = JSON.parse(
   ),
 );
 for (const sourceId of ["github", "crabnebula"]) {
+  const expected = {
+    ...snapshot[sourceId],
+    // Older snapshots inherit provenance from their release; catalog snapshots
+    // preserve the version and check time of each independently released file.
+    assets: snapshot[sourceId].assets.map((asset) => ({
+      ...asset,
+      version: asset.version ?? snapshot[sourceId].version,
+      publishedAt: asset.publishedAt ?? snapshot[sourceId].publishedAt,
+      releaseUrl: asset.releaseUrl ?? snapshot[sourceId].releaseUrl,
+      checkedAt: asset.checkedAt ?? snapshot[sourceId].checkedAt,
+      retained: asset.retained === true,
+    })),
+  };
+  assert.deepEqual(normalizeRelease(sourceId, snapshot[sourceId]), expected);
   assert.deepEqual(
-    normalizeRelease(sourceId, snapshot[sourceId]),
-    snapshot[sourceId],
+    normalizeRelease(sourceId, expected, "2030-01-01T00:00:00.000Z"),
+    expected,
+    `${sourceId} snapshot normalization must preserve package provenance and original check times`,
   );
   assert.ok(
     snapshot[sourceId].checkedAt,

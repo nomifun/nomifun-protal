@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Icon from "@/components/Icon";
 import { createI18n } from "@/lib/i18n";
 import { links } from "@/lib/site";
+import { mergeDownloadCatalog } from "@/lib/download-catalog.mjs";
 import {
   getInstallerChoices,
   selectInstallerChoice,
@@ -112,7 +113,14 @@ export default function DownloadCenter({ locale, snapshot }) {
           if (!controller.signal.aborted)
             setRecords((previous) => ({
               ...previous,
-              [id]: { release, status: "live" },
+              [id]: {
+                release: mergeDownloadCatalog(
+                  id,
+                  previous[id].release,
+                  release,
+                ),
+                status: "live",
+              },
             }));
         })
         .catch(() => {
@@ -216,13 +224,12 @@ export default function DownloadCenter({ locale, snapshot }) {
                 <div key={id}>
                   <h4>
                     {RELEASE_SOURCES[id].name}
-                    {id === "crabnebula" &&
-                      " · " + t("推荐", "Recommended")} ·{" "}
-                    {snapshot[id]?.version}
+                    {id === "crabnebula" && " · " + t("推荐", "Recommended")}
                   </h4>
                   {getPlatformAssets(snapshot[id], platform.id).map((asset) => (
                     <a key={asset.id} href={asset.url} download={asset.name}>
-                      {assetLabel(asset, platform.id, t)}{" "}
+                      {assetLabel(asset, platform.id, t)} · v
+                      {asset.version || snapshot[id]?.version}{" "}
                       <Icon name="DownloadSimple" size={18} />
                     </a>
                   ))}
@@ -319,8 +326,8 @@ export default function DownloadCenter({ locale, snapshot }) {
               ) : (
                 <p className="release-platform-note">
                   {t(
-                    "当前版本尚未提供该系统安装包。",
-                    "No installer for this system is available in the current releases.",
+                    "暂未找到该系统的已核实安装包。",
+                    "No verified installer for this system was found.",
                   )}
                 </p>
               )}
@@ -347,9 +354,9 @@ export default function DownloadCenter({ locale, snapshot }) {
                           )}
                         </span>
                         <span className="release-version">
-                          {record.release?.version
-                            ? "v" + record.release.version.replace(/^v/, "")
-                            : t("待核实", "Unverified")}
+                          {asset?.version
+                            ? "v" + asset.version.replace(/^v/, "")
+                            : "—"}
                         </span>
                         {asset ? (
                           <a
@@ -367,7 +374,7 @@ export default function DownloadCenter({ locale, snapshot }) {
                               " " +
                               assetLabel(asset, platform.id, t) +
                               " " +
-                              record.release.version +
+                              asset.version +
                               " · " +
                               RELEASE_SOURCES[id].name
                             }
@@ -395,8 +402,8 @@ export default function DownloadCenter({ locale, snapshot }) {
                               " · " +
                               (assets.length === 0
                                 ? t(
-                                    "暂无安装包，查看发布状态",
-                                    "No installer, view releases",
+                                    "未找到已核实安装包，查看发布状态",
+                                    "No verified installer found, view releases",
                                   )
                                 : t(
                                     "暂无此架构或格式，查看发布状态",
@@ -405,18 +412,27 @@ export default function DownloadCenter({ locale, snapshot }) {
                             }
                           >
                             {assets.length === 0
-                              ? t("未提供", "Unavailable")
+                              ? t("未找到", "Not found")
                               : t("无此包", "No package")}{" "}
                             <Icon name="ArrowUpRight" size={14} />
                           </a>
                         )}
                       </div>
-                      {record.status === "error" && (
+                      {(record.status === "error" ||
+                        record.release?.partial ||
+                        asset?.retained) && (
                         <p className="release-row-feedback" role="status">
-                          {t(
-                            "刷新暂不可用 · 已保存版本",
-                            "Refresh unavailable · saved release",
-                          )}
+                          {record.status === "error"
+                            ? t(
+                                "刷新暂不可用 · 已保存版本",
+                                "Refresh unavailable · saved release",
+                              )
+                            : record.release?.partial
+                              ? t(
+                                  "部分版本暂未核实 · 保留下载",
+                                  "Some releases unverified · downloads kept",
+                                )
+                              : t("已保留原有安装包", "Saved installer kept")}
                         </p>
                       )}
                     </div>
@@ -440,7 +456,24 @@ export default function DownloadCenter({ locale, snapshot }) {
                       : null;
                     return (
                       <div key={id} className="release-package-metadata">
-                        <h4>{RELEASE_SOURCES[id].name}</h4>
+                        <h4>
+                          {RELEASE_SOURCES[id].name}
+                          {asset?.version &&
+                            " · v" + asset.version.replace(/^v/, "")}
+                          {asset?.releaseUrl && (
+                            <a
+                              href={asset.releaseUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="release-metadata-link"
+                            >
+                              {id === "github"
+                                ? t("此版本说明", "Release notes")
+                                : t("发布页", "Release page")}{" "}
+                              <Icon name="ArrowUpRight" size={13} />
+                            </a>
+                          )}
+                        </h4>
                         {asset ? (
                           <p className="release-file-name">
                             {asset.name}
@@ -451,8 +484,8 @@ export default function DownloadCenter({ locale, snapshot }) {
                           <p>
                             {assets.length === 0
                               ? t(
-                                  "暂无该系统安装包。",
-                                  "No installer for this system.",
+                                  "未找到该系统的已核实安装包。",
+                                  "No verified installer for this system was found.",
                                 )
                               : !choice
                                 ? t(
@@ -466,10 +499,20 @@ export default function DownloadCenter({ locale, snapshot }) {
                           </p>
                         )}
                         <p className="release-sync-note">
-                          {syncLabel(record.status, t)}
-                          {record.release?.checkedAt &&
+                          {syncLabel(
+                            asset?.retained ? "snapshot" : record.status,
+                            t,
+                          )}
+                          {(asset
+                            ? asset.checkedAt
+                            : record.release?.checkedAt) &&
                             " · " +
-                              checkedTime(record.release.checkedAt, locale)}
+                              checkedTime(
+                                asset
+                                  ? asset.checkedAt
+                                  : record.release.checkedAt,
+                                locale,
+                              )}
                         </p>
                       </div>
                     );

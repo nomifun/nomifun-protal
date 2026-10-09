@@ -11,12 +11,21 @@
     api/releases.mjs
     lib/release-service.mjs
     lib/downloads.mjs
+    lib/download-catalog.mjs
+    lib/release-history.mjs
+    lib/releases-snapshot.json
     lib/github-release-html.mjs
 ```
 
 `/api/releases` 是唯一动态接口。静态页面与该接口使用同一个域名，浏览器无需直接跨域请求 CrabNebula；安装包继续由 CrabNebula CDN 或 GitHub 直接提供，官网不代理二进制文件。
 
 中英文下载页都将 CrabNebula 作为推荐下载源。每个操作系统卡片内直接显示 CrabNebula 与 GitHub 的下载按钮，以及各自的版本和安装包；用户选择架构或安装格式后即可从对应来源下载。多个下载源提供备用入口，各来源的版本独立同步，发版时间差不会改变另一来源显示的版本。
+
+安装包按“来源＋操作系统＋处理器架构＋格式”独立查找最近可用版本，不绑定来源的整体 latest。例如整体最新版只有 macOS 0.9.0，而 Windows 最近有包的是 0.8.2，Windows 的按钮继续下载并显示 0.8.2。每个安装包保留自己的 `version`、`publishedAt`、`releaseUrl` 和 `checkedAt`；来源顶层版本仅描述整体发布，不能用于替换安装包显示版本。
+
+GitHub 查询公开历史发布（API 限流时使用同一仓库的历史发布网页）。CrabNebula 没有可公开枚举的历史版本列表，使用 GitHub 公开正式版本及快照已有版本作为候选，再向 CrabNebula 自己的公开接口读取对应历史版本；只有其返回的真实正式发布附件会进入该来源的目录，两个来源不复制安装包或版本。CrabNebula 的发布说明继续使用公开总页，不构造未经支持的历史网页链接。
+
+历史查找受 10 秒总期限、4 页／40 个 GitHub 正式版本、20 个 CrabNebula 候选和每来源 4 个并发请求限制，每次响应最多 2 MiB。`historyComplete` 表示能否证明已枚举完整目录，`partial` 表示请求失败、超时或达到查找上限；CrabNebula 候选查找成功时 `historyComplete: false` 并不等于刷新失败。未查到的既有系统组合保留原地址、版本与核实时间，并标记 `retained`；真正补传新包后对应组合自动更新。构建同步、服务端冷启动／缓存与浏览器刷新都使用同一合并规则。
 
 ## 构建与托管配置
 
@@ -46,7 +55,7 @@ node scripts/check-release-service.mjs --packaged
 
 每个来源在同一暖进程中缓存 60 秒，并复用并发刷新。成功响应的 `s-maxage` 是内存缓存剩余秒数（最多 60 秒），CDN `stale-while-revalidate` 限制为 60 秒；缓存命中保留实际的 `checkedAt`，不会把旧检查改为当前时间。CDN 更新存在短暂延迟，不能保证发布后立即全球可见。错误响应明确失败，客户端保留构建快照或最近一次成功结果。
 
-接口的上游请求总预算为 10 秒。GitHub 公开 API 遇到限流或失败时，可使用同一官方仓库的公开发布页读取版本与安装包，不添加 Token。若回退也失败，继续遵守 503 与保留客户端数据的行为。
+接口的上游请求总预算为 10 秒。GitHub 公开 API 遇到限流或失败时，可使用同一官方仓库的公开历史发布页读取版本与安装包，不添加 Token。若最新查询失败但取得有效历史，返回部分目录并保留更近的已核实记录；所有查询均失败时返回 503，由客户端保留已有数据。查询范围不足以证明某系统没有安装包时，界面显示“未找到”，不会把未知结果写成“未提供”。
 
 ## 本地验收
 

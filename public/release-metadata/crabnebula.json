@@ -1,26 +1,62 @@
 {
   "version": "0.8.2",
-  "publishedAt": "2026-10-09T06:45:17.457Z",
+  "publishedAt": "2026-10-09T09:26:46.680Z",
   "releaseUrl": "https://crabnebula.cloud/nomifun/nomifun-desktop/releases",
-  "checkedAt": "2026-10-09T09:07:02.663Z",
+  "checkedAt": "2026-10-09T11:19:12.068Z",
+  "historyComplete": false,
+  "partial": false,
+  "latestResolved": true,
+  "knownVersions": [
+    "0.8.2",
+    "0.8.1",
+    "0.8.0",
+    "0.7.6",
+    "0.7.5",
+    "0.7.4",
+    "0.7.3"
+  ],
   "assets": [
     {
-      "id": "01M4FP67BB5JAMFXNWP3JCY0K4",
+      "id": "01M4FY61MAVXJ9BBDR4Q12T0F2",
       "name": "NomiFun_0.8.2_aarch64.dmg",
-      "url": "https://cdn.crabnebula.app/asset/01M4FP67BB5JAMFXNWP3JCY0K4",
+      "url": "https://cdn.crabnebula.app/asset/01M4FY61MAVXJ9BBDR4Q12T0F2",
       "platform": "macos",
       "arch": "arm64",
       "format": "dmg",
-      "size": 154773110
+      "size": null,
+      "version": "0.8.2",
+      "publishedAt": "2026-10-09T09:26:46.680Z",
+      "releaseUrl": "https://crabnebula.cloud/nomifun/nomifun-desktop/releases",
+      "checkedAt": "2026-10-09T11:19:12.068Z",
+      "retained": false
     },
     {
-      "id": "01M4FPB9EN409R8PXV0DPNF478",
+      "id": "01M4FY9QRDBJ065255BNNKH075",
       "name": "NomiFun_0.8.2_x64.dmg",
-      "url": "https://cdn.crabnebula.app/asset/01M4FPB9EN409R8PXV0DPNF478",
+      "url": "https://cdn.crabnebula.app/asset/01M4FY9QRDBJ065255BNNKH075",
       "platform": "macos",
       "arch": "x64",
       "format": "dmg",
-      "size": 184105821
+      "size": null,
+      "version": "0.8.2",
+      "publishedAt": "2026-10-09T09:26:46.680Z",
+      "releaseUrl": "https://crabnebula.cloud/nomifun/nomifun-desktop/releases",
+      "checkedAt": "2026-10-09T11:19:12.068Z",
+      "retained": false
+    },
+    {
+      "id": "01M4FZJDQPZ8CN51KEM39D1NG7",
+      "name": "NomiFun_0.8.2_x64-setup.exe",
+      "url": "https://cdn.crabnebula.app/asset/01M4FZJDQPZ8CN51KEM39D1NG7",
+      "platform": "windows",
+      "arch": "x64",
+      "format": "exe",
+      "size": null,
+      "version": "0.8.2",
+      "publishedAt": "2026-10-09T09:26:46.680Z",
+      "releaseUrl": "https://crabnebula.cloud/nomifun/nomifun-desktop/releases",
+      "checkedAt": "2026-10-09T11:19:12.068Z",
+      "retained": false
     }
   ]
 }

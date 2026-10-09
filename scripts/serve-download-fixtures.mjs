@@ -40,7 +40,7 @@ function fixture(source, attempt) {
   return {
     fixture: "LOCAL SIMULATION — never download these synthetic assets",
     version,
-    publishedAt: "2026-10-09T08:00:00.000Z",
+    publishedAt: new Date(Date.now() + attempt * 1000).toISOString(),
     checkedAt: new Date().toISOString(),
     releaseUrl: cn
       ? "https://crabnebula.cloud/nomifun/nomifun-desktop/releases"
