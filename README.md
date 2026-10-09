@@ -39,7 +39,7 @@ npm run dev -- --port 3107
 
 参考动效逐族映射到 NomiFun 内容：全幅 shader 与标签轮换、十格双面 3D 翻牌、250vh 双波图形穿越与平面点阵、真实界面滚动放大与画廊、500vh 横向工作流程、伙伴自动落牌、五张全屏 3D 创作压栈、420vh 扩张式液态导航与四区移动色场、大曲率惯性生态轮盘。按钮磁吸/覆层、逐字滚动导航、向上展开的磨砂目录、原则卡上滑、FAQ 自动高度与复制反馈也已接入。完整源码对照见 `docs/motion-reference-inventory.md`。
 
-React 统一管理动画、监听和资源清理。桌面保留主要滚动舞台，手机与窄屏的工作、创作、技术设计采用自然高度阅读，保留局部图形动效与交互；减少动态效果时改连续阅读，系统偏好运行中变化会停止相应动画。首屏、伙伴轮播、桌面工作演示、波形等提供手动暂停；画廊的非活动视频暂停。浏览器验证边界见 `docs/motion-qa.md`。
+React 统一管理动画、监听和资源清理。桌面与手机保留工作横轨、创作叠卡和液态技术舞台；手机的自然高度内容由页面滚动从标题读到图景底部，完整阅读后再推进横移或叠卡，不产生演示内部滚动。减少动态效果时改连续阅读，系统偏好运行中变化会停止相应动画。首屏、伙伴轮播、工作演示、波形等提供手动暂停；画廊的非活动视频暂停。浏览器验证边界见 `docs/motion-qa.md`。
 
 原模板的客户案例、评论、奖项、预约报价、表单占位接口、Google Tag Manager、搜索引擎验证 ID、原品牌元数据和媒体没有进入新版站点。没有分析或遥测脚本，字体和展示视频在本地目录。没有新增账号或后台服务。
 
@@ -66,4 +66,4 @@ Vercel 使用 `npm run build:vercel`，将静态导出与一个 `/api/releases?s
 
 最新创作区构图见 `docs/creative-visual-scale-qa.md`：星轨与唱片改为独立大图舞台，三个标准尺寸下约 420px／506px／623px，说明与完整演示组合在右侧，保留原 SVG 动效与聊天、波形交互。
 
-手机内部滚动修复与完整验收见 [mobile-scroll-qa](docs/mobile-scroll-qa.md)：`mobile-work.css`、`mobile-creative.css`、`mobile-developer.css` 与 `mobile-content.css` 在旧样式之后导入，分别处理纵向工作卡、创作章节、可变高度技术标签、能力网格及扩展步骤。中英文、多尺寸、展开状态和跨断点清理均有本轮截图与 DOM 记录。
+手机动效与内部滚动的当前方案见 [mobile-motion-qa](docs/mobile-motion-qa.md)：`mobile-work.css`、`mobile-creative.css`、`mobile-developer.css` 与 `mobile-content.css` 在旧样式之后导入，分别处理可完整阅读的横向工作卡、自然高度叠卡、液态技术舞台、能力网格及扩展步骤。初次内部滚动修复的历史记录保留在 [mobile-scroll-qa](docs/mobile-scroll-qa.md)，其中将手机改为静态纵向阅读的方案已被本轮动效恢复替代。

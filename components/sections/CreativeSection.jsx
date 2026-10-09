@@ -641,6 +641,22 @@ export default function CreativeSection() {
   const trackRef = useRef(null);
   const cardRefs = useRef([]);
 
+  // A sticky card's offsetTop changes as it sticks. Sum the natural chapter
+  // heights so navigation and animation boundaries share stable page positions.
+  const chapterTop = (index) => {
+    const track = trackRef.current;
+    const styles = window.getComputedStyle(track);
+    const gap = parseFloat(styles.rowGap) || 0;
+    return (
+      window.scrollY +
+      track.getBoundingClientRect().top +
+      (parseFloat(styles.paddingTop) || 0) +
+      cardRefs.current
+        .slice(0, index)
+        .reduce((height, card) => height + card.offsetHeight + gap, 0)
+    );
+  };
+
   useEffect(() => {
     const panels = Array.from(
       sectionRef.current?.querySelectorAll(".creative-stack-visual") || [],
@@ -700,6 +716,19 @@ export default function CreativeSection() {
         motion: "(prefers-reduced-motion: no-preference)",
       },
       (match) => {
+        const measureStickyCards = () => {
+          if (!match.conditions.narrow || !match.conditions.motion) return;
+          cardRefs.current.forEach((card) => {
+            // The page reads a tall chapter before its bottom docks above the
+            // reading controls. A short chapter keeps its title below the tabs.
+            const top = Math.min(
+              152,
+              window.innerHeight - 96 - card.offsetHeight,
+            );
+            card.style.setProperty("--creative-sticky-top", `${top}px`);
+          });
+        };
+        measureStickyCards();
         const context = gsap.context(() => {
           // Each full-height incoming creation card retreats the
           // previous card to .75 / rotateX 15 / alternating rotateY +/-8.
@@ -707,16 +736,30 @@ export default function CreativeSection() {
             if (!card) return;
             ScrollTrigger.create({
               trigger: card,
-              start: "top 48%",
-              end: "bottom 48%",
+              start:
+                match.conditions.narrow && match.conditions.motion
+                  ? () => chapterTop(index) - window.innerHeight * 0.48
+                  : "top 48%",
+              end:
+                match.conditions.narrow && match.conditions.motion
+                  ? () =>
+                      chapterTop(index) +
+                      card.offsetHeight -
+                      window.innerHeight * 0.48
+                  : "bottom 48%",
               onEnter: () => setActive(modes[index].id),
               onEnterBack: () => setActive(modes[index].id),
             });
             const incoming = cardRefs.current[index + 1];
-            // Tall phone chapters belong to the page. Retreating a whole chapter
-            // would scale its still-readable content away before it is finished.
-            if (!incoming || !match.conditions.wide || !match.conditions.motion)
-              return;
+            if (!incoming || !match.conditions.motion) return;
+            const retreatStart = () =>
+              Math.max(
+                chapterTop(index) -
+                  parseFloat(
+                    card.style.getPropertyValue("--creative-sticky-top"),
+                  ),
+                chapterTop(index + 1) - window.innerHeight + 72,
+              );
             gsap.to(card.querySelector(".creative-stack-face"), {
               scale: 0.75,
               rotateX: 15,
@@ -725,20 +768,34 @@ export default function CreativeSection() {
               ease: "none",
               scrollTrigger: {
                 trigger: incoming,
-                start: "top bottom",
-                end: "top top",
+                start: match.conditions.narrow ? retreatStart : "top bottom",
+                end: match.conditions.narrow
+                  ? () =>
+                      Math.max(retreatStart() + 1, chapterTop(index + 1) - 152)
+                  : "top top",
                 scrub: 0.6,
                 invalidateOnRefresh: true,
               },
             });
           });
         }, sectionRef);
-        const observer = new ResizeObserver(refresh);
-        if (match.conditions.narrow || !match.conditions.motion)
+        const update = () => {
+          measureStickyCards();
+          refresh();
+        };
+        const observer = new ResizeObserver(update);
+        if (match.conditions.narrow || !match.conditions.motion) {
           observer.observe(trackRef.current);
+          cardRefs.current.forEach((card) => observer.observe(card));
+        }
+        window.addEventListener("resize", update);
         return () => {
+          window.removeEventListener("resize", update);
           observer.disconnect();
           context.revert();
+          cardRefs.current.forEach((card) =>
+            card?.style.removeProperty("--creative-sticky-top"),
+          );
         };
       },
     );
@@ -763,15 +820,10 @@ export default function CreativeSection() {
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    // Desktop sticky offsets move as cards stick, so that rail retains its
-    // equal-height intervals. Natural chapters use their actual page position.
     const reading = window.matchMedia("(max-width: 1000px)").matches;
-    const top =
-      reading || reduced
-        ? window.scrollY + card.getBoundingClientRect().top - 152
-        : window.scrollY +
-          track.getBoundingClientRect().top +
-          index * card.offsetHeight;
+    const top = reduced
+      ? window.scrollY + card.getBoundingClientRect().top - 152
+      : chapterTop(index) - (reading ? 152 : 0);
     if (window.lenis && !reduced) window.lenis.scrollTo(top, { duration: 1.1 });
     else window.scrollTo({ top, behavior: reduced ? "auto" : "smooth" });
   };

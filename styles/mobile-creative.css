@@ -1,5 +1,5 @@
-/* Narrow screens read complete chapters. The artwork, typography and controls
-   keep their own space instead of competing for the remainder of one screen. */
+/* Mobile keeps the cinematic card stack. Tall chapters read through the page
+   before docking their footer, while artwork and type retain their own space. */
 @media (max-width: 1000px) {
   html[lang] .creative-stack-experience .creative-stack-track {
     display: grid;
@@ -7,10 +7,11 @@
     padding-top: 12px;
   }
   html[lang] .creative-stack-experience .creative-stack-card {
-    position: relative;
-    top: auto;
+    position: sticky;
+    top: var(--creative-sticky-top, 0px);
     height: auto;
-    perspective: none;
+    align-self: start;
+    perspective: 1600px;
     scroll-margin-top: 152px;
   }
   html[lang] .creative-stack-experience .creative-stack-face {
@@ -24,7 +25,7 @@
     gap: 26px;
     border-radius: 26px;
     box-shadow: 0 14px 40px -24px #18132245;
-    will-change: auto;
+    will-change: transform;
   }
   html[lang] .creative-stack-experience .creative-stack-nav {
     position: sticky;
@@ -178,6 +179,17 @@
   html[lang] .creative-stack-experience .creative-card-footer > a {
     margin-left: auto;
     min-height: 44px;
+  }
+}
+
+@media (max-width: 1000px) and (prefers-reduced-motion: reduce) {
+  html[lang] .creative-stack-experience .creative-stack-card {
+    position: relative;
+    top: auto;
+    perspective: none;
+  }
+  html[lang] .creative-stack-experience .creative-stack-face {
+    will-change: auto;
   }
 }
 

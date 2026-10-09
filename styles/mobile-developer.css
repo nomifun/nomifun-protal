@@ -1,5 +1,9 @@
-/* On touch-sized layouts the selected technical view grows with its content.
-   The liquid color and tab indicator remain, while the page owns scrolling. */
+/* The viewport carries a natural-height stage through the page's scroll.
+   No panel captures a wheel or touch gesture of its own. */
+.developer-liquid-viewport {
+  display: contents;
+}
+
 @media (max-width: 1000px) {
   html[lang] .developer-section .developer-liquid-track {
     height: auto;
@@ -173,6 +177,24 @@
 }
 
 @media (max-width: 1000px) and (prefers-reduced-motion: no-preference) {
+  html[lang]
+    .developer-section
+    .developer-liquid-track[data-liquid-mobile-motion] {
+    height: var(--liquid-track-height, auto);
+  }
+
+  html[lang] .developer-section .developer-liquid-viewport {
+    display: block;
+    position: sticky;
+    top: 24px;
+    height: calc(100svh - 128px);
+    overflow: clip;
+  }
+
+  html[lang] .developer-section .developer-liquid-stage {
+    will-change: transform, clip-path;
+  }
+
   html[lang] .developer-section .developer-liquid-panels {
     display: block;
   }
@@ -180,12 +202,18 @@
   html[lang]
     .developer-section
     .developer-liquid-stage
-    .developer-liquid-panel:not(.is-active),
+    .developer-liquid-panel {
+    position: absolute;
+    inset: 0 0 auto;
+    width: 100%;
+  }
+
   html[lang]
     .developer-section
     .developer-liquid-stage
-    .developer-liquid-panel[hidden] {
-    display: none;
+    .developer-liquid-panel.is-active {
+    position: relative;
+    inset: auto;
   }
 }
 

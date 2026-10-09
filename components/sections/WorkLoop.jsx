@@ -6,6 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Icon from "@/components/Icon";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import {
+  createMobileWorkGeometry,
+  getMobileWorkMotionState,
   getWorkMotionState,
   WORK_STEP_STOPS,
 } from "@/lib/behaviors/work-choreography";
@@ -358,12 +360,14 @@ export default function WorkLoop() {
   const [reduced, setReduced] = useState(false);
   const [narrow, setNarrow] = useState(false);
   const [inView, setInView] = useState(false);
-  const reading = narrow || reduced;
+  const reading = reduced;
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
   const stickyRef = useRef(null);
   const navigationRef = useRef(null);
   const scrollRef = useRef(null);
+  const mobileGeometryRef = useRef(null);
+  const mobileClockRef = useRef(null);
   const stepRef = useRef(0);
   stepRef.current = step;
 
@@ -429,7 +433,6 @@ export default function WorkLoop() {
     const update = () => setReduced(media.matches);
     const updateLayout = () => {
       setNarrow(layout.matches);
-      if (layout.matches) setPlaying(false);
     };
     update();
     updateLayout();
@@ -488,6 +491,141 @@ export default function WorkLoop() {
       window.removeEventListener("resize", schedule);
     };
   }, [reading, locale]);
+
+  useEffect(() => {
+    if (
+      !narrow ||
+      reduced ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+    gsap.registerPlugin(ScrollTrigger);
+    let alive = true;
+    let layoutFrame = null;
+    const track = trackRef.current;
+    const sticky = stickyRef.current;
+    const stage = track.querySelector(".wm-card-stage");
+    const rail = track.querySelector(".wm-cards-rail");
+    const cards = [...track.querySelectorAll(".wm-step-card")];
+    const underlay = track.querySelector(".wm-underlay");
+    const previousHeight = track.style.height;
+    let geometry;
+    let trigger;
+    const clock = { progress: 0 };
+    const measure = () => {
+      geometry = createMobileWorkGeometry({
+        width: sticky.clientWidth,
+        height: sticky.clientHeight,
+        stageHeight: stage.clientHeight,
+        cardWidth: cards[0].offsetWidth,
+        cardHeights: cards.map((card) => card.offsetHeight),
+      });
+      mobileGeometryRef.current = geometry;
+      track.style.height = `${geometry.totalDistance + sticky.clientHeight}px`;
+    };
+    measure();
+    mobileClockRef.current = clock;
+    const context = gsap.context(() => {
+      // Explicitly capture every axis so breakpoint/reduced-motion cleanup
+      // restores natural cards, including after a partially read tall ticket.
+      gsap.set(rail, { x: 0, force3D: true });
+      gsap.set(cards, {
+        x: 0,
+        y: 0,
+        scaleX: 1,
+        scaleY: 1,
+        rotation: 0,
+        transformOrigin: "100% 100%",
+        force3D: true,
+      });
+      gsap.set(underlay, { opacity: 1, scaleX: 1, scaleY: 1 });
+      const moveRail = gsap.quickSetter(rail, "x", "px");
+      const moveX = cards.map((card) => gsap.quickSetter(card, "x", "px"));
+      const moveY = cards.map((card) => gsap.quickSetter(card, "y", "px"));
+      const scaleX = gsap.quickSetter(cards[0], "scaleX");
+      const scaleY = gsap.quickSetter(cards[0], "scaleY");
+      const rotate = gsap.quickSetter(cards[0], "rotation", "deg");
+      const fadeUnderlay = gsap.quickSetter(underlay, "opacity");
+      const scaleUnderlayX = gsap.quickSetter(underlay, "scaleX");
+      const scaleUnderlayY = gsap.quickSetter(underlay, "scaleY");
+      let renderedStep = stepRef.current;
+      const render = () => {
+        if (!alive) return;
+        const state = getMobileWorkMotionState(clock.progress, geometry);
+        moveRail(state.railX);
+        cards.forEach((card, index) => {
+          moveX[index](index === 0 ? state.firstX : state.followingX);
+          moveY[index](index === 0 ? state.firstY : state.cardY[index]);
+        });
+        scaleX(state.firstScale);
+        scaleY(state.firstScale);
+        rotate(state.firstRotation);
+        fadeUnderlay(state.underlayOpacity);
+        scaleUnderlayX(state.underlayScale);
+        scaleUnderlayY(state.underlayScale);
+        if (state.step !== renderedStep) {
+          renderedStep = state.step;
+          setStep(state.step);
+        }
+      };
+      render();
+      const animation = gsap.fromTo(
+        clock,
+        { progress: 0 },
+        {
+          progress: 1,
+          ease: "none",
+          onUpdate: render,
+          scrollTrigger: {
+            trigger: track,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.2,
+            invalidateOnRefresh: true,
+            onRefreshInit: measure,
+            onRefresh: (self) => {
+              trigger = self;
+              scrollRef.current = self;
+              render();
+            },
+          },
+        },
+      );
+      trigger = animation.scrollTrigger;
+      scrollRef.current = trigger;
+    }, sectionRef);
+    const scheduleLayout = () => {
+      if (!alive || layoutFrame !== null) return;
+      layoutFrame = requestAnimationFrame(() => {
+        layoutFrame = null;
+        if (!alive) return;
+        // ResizeObserver includes receipt expansion and late font metrics.
+        // Update the page distance before all neighboring triggers refresh.
+        measure();
+        window.dispatchEvent(new Event("portal:layout"));
+      });
+    };
+    const observer = new ResizeObserver(scheduleLayout);
+    cards.forEach((card) => observer.observe(card));
+    observer.observe(stage);
+    window.addEventListener("resize", scheduleLayout);
+    document.fonts?.ready.then(scheduleLayout);
+    scheduleLayout();
+    return () => {
+      alive = false;
+      if (layoutFrame !== null) cancelAnimationFrame(layoutFrame);
+      observer.disconnect();
+      window.removeEventListener("resize", scheduleLayout);
+      scrollRef.current = null;
+      mobileGeometryRef.current = null;
+      mobileClockRef.current = null;
+      context.revert();
+      gsap.set([rail, ...cards, underlay], {
+        clearProps: "transform,transformOrigin,opacity",
+      });
+      track.style.height = previousHeight;
+    };
+  }, [narrow, reduced, locale]);
 
   useEffect(() => {
     if (
@@ -605,7 +743,7 @@ export default function WorkLoop() {
       context.revert();
       gsap.set(surfaces, { clearProps: "transform,transformOrigin,opacity" });
     };
-  }, [reading]);
+  }, [reading, narrow, locale]);
 
   const goTo = useCallback(
     (index) => {
@@ -629,8 +767,9 @@ export default function WorkLoop() {
           });
         return;
       }
+      const stops = mobileGeometryRef.current?.stops || stopPoints;
       const target =
-        trigger.start + stopPoints[bounded] * (trigger.end - trigger.start);
+        trigger.start + stops[bounded] * (trigger.end - trigger.start);
       if (window.lenis?.scrollTo)
         window.lenis.scrollTo(target, { duration: 1.1 });
       else window.scrollTo({ top: target, behavior: "smooth" });
@@ -639,17 +778,39 @@ export default function WorkLoop() {
   );
 
   useEffect(() => {
-    if (!playing || !inView || narrow) return;
-    const timer = window.setInterval(() => {
-      if (document.hidden) return;
-      if (stepRef.current >= steps.length - 1) {
-        setPlaying(false);
-        return;
-      }
-      goTo(stepRef.current + 1);
-    }, 2800);
+    if (!playing || !inView || reduced) return;
+    const timer = window.setInterval(
+      () => {
+        if (document.hidden) return;
+        const geometry = mobileGeometryRef.current;
+        const clock = mobileClockRef.current;
+        const trigger = scrollRef.current;
+        if (geometry && clock && trigger) {
+          const current = geometry.stages[stepRef.current];
+          const distance = clock.progress * geometry.totalDistance;
+          // A tall ticket is read fully before autoplay changes the rail. The
+          // animation moves the page itself, so touching the art never traps it.
+          if (distance < current.readEnd - 2) {
+            const target =
+              trigger.start +
+              (current.readEnd / geometry.totalDistance) *
+                (trigger.end - trigger.start);
+            if (window.lenis?.scrollTo)
+              window.lenis.scrollTo(target, { duration: 2.2 });
+            else window.scrollTo({ top: target, behavior: "smooth" });
+            return;
+          }
+        }
+        if (stepRef.current >= steps.length - 1) {
+          setPlaying(false);
+          return;
+        }
+        goTo(stepRef.current + 1);
+      },
+      narrow ? 3400 : 2800,
+    );
     return () => window.clearInterval(timer);
-  }, [playing, inView, narrow, goTo]);
+  }, [playing, inView, narrow, reduced, goTo]);
 
   const scenes = [
     <RequirementScene key="requirement" />,
@@ -708,53 +869,55 @@ export default function WorkLoop() {
               )}
             </small>
           </div>
-          <div className="wm-cards-rail">
-            {steps.map((item, index) => (
-              <article
-                key={item.label}
-                className={`wm-step-card wm-card-${index + 1} ${step === index ? "is-current" : ""}`}
-                inert={!reading && step !== index}
-                aria-label={t(item.name, item.nameEn)}
-              >
-                <div className="wm-card-top">
-                  <span>{item.label}</span>
-                  <Icon name={item.icon} size={26} />
-                </div>
-                <div className="wm-card-copy">
-                  <h3>{t(item.title, item.titleEn)}</h3>
-                  <p>{t(item.description, item.descriptionEn)}</p>
-                </div>
-                <div
-                  className="wm-card-visual"
-                  role="region"
-                  aria-label={t(`${item.name}演示`, `${item.nameEn} demo`)}
+          <div className="wm-card-stage">
+            <div className="wm-cards-rail">
+              {steps.map((item, index) => (
+                <article
+                  key={item.label}
+                  className={`wm-step-card wm-card-${index + 1} ${step === index ? "is-current" : ""}`}
+                  inert={!reading && step !== index}
+                  aria-label={t(item.name, item.nameEn)}
                 >
-                  {scenes[index]}
-                </div>
-                <div className="wm-card-bottom">
-                  <span>
-                    <i />
-                    {t(item.status, item.statusEn)}
-                  </span>
-                  <p>{t(item.note, item.noteEn)}</p>
-                  {index < 4 && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setPlaying(false);
-                        goTo(index + 1);
-                      }}
-                      aria-label={t(
-                        `进入${steps[index + 1].name}`,
-                        `Go to ${steps[index + 1].nameEn}`,
-                      )}
-                    >
-                      <Icon name="ArrowRight" size={22} />
-                    </button>
-                  )}
-                </div>
-              </article>
-            ))}
+                  <div className="wm-card-top">
+                    <span>{item.label}</span>
+                    <Icon name={item.icon} size={26} />
+                  </div>
+                  <div className="wm-card-copy">
+                    <h3>{t(item.title, item.titleEn)}</h3>
+                    <p>{t(item.description, item.descriptionEn)}</p>
+                  </div>
+                  <div
+                    className="wm-card-visual"
+                    role="region"
+                    aria-label={t(`${item.name}演示`, `${item.nameEn} demo`)}
+                  >
+                    {scenes[index]}
+                  </div>
+                  <div className="wm-card-bottom">
+                    <span>
+                      <i />
+                      {t(item.status, item.statusEn)}
+                    </span>
+                    <p>{t(item.note, item.noteEn)}</p>
+                    {index < 4 && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setPlaying(false);
+                          goTo(index + 1);
+                        }}
+                        aria-label={t(
+                          `进入${steps[index + 1].name}`,
+                          `Go to ${steps[index + 1].nameEn}`,
+                        )}
+                      >
+                        <Icon name="ArrowRight" size={22} />
+                      </button>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
           <div className="wm-dock">
             <div
@@ -778,7 +941,7 @@ export default function WorkLoop() {
                 </button>
               ))}
             </div>
-            {!narrow && (
+            {!reduced && (
               <button
                 type="button"
                 className="wm-play-control"

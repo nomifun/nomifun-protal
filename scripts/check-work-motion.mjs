@@ -8,6 +8,8 @@ const source = await fs.readFile(
   "utf8",
 );
 const {
+  createMobileWorkGeometry,
+  getMobileWorkMotionState,
   getWorkMotionState,
   smoothWorkEntrance,
   workRailTravel,
@@ -186,9 +188,113 @@ for (const [fn, joins] of [
   }
 }
 
+// Variable-height phone tickets must expose both the heading and footer using
+// the outer page clock. In particular, changing receipt content must extend
+// its reading distance instead of clipping it or creating an inner scroller.
+const mobileViewports = [
+  { width: 320, height: 568 },
+  { width: 390, height: 844 },
+  { width: 430, height: 932 },
+  { width: 844, height: 390 },
+  { width: 820, height: 1180 },
+];
+for (const viewport of mobileViewports) {
+  const stageInset =
+    viewport.height <= 500 ? (viewport.width >= 600 ? 204 : 250) : 302;
+  const stageHeight = viewport.height - stageInset;
+  const cardHeights = [880, 970, 915, 1100, 990].map((height) =>
+    Math.max(stageHeight, height),
+  );
+  const geometry = createMobileWorkGeometry({
+    ...viewport,
+    stageHeight,
+    cardWidth: Math.min(850, viewport.width - 24),
+    cardHeights,
+  });
+  const poseAtDistance = (distance) =>
+    getMobileWorkMotionState(distance / geometry.totalDistance, geometry);
+  geometry.stages.forEach((stage, index) => {
+    const top = getMobileWorkMotionState(geometry.stops[index], geometry);
+    close(top.cardY[index], 0, 1e-7, `phone card ${index + 1} heading`);
+    close(
+      top.railX + index * geometry.cardWidth + geometry.cardWidth / 2,
+      viewport.width / 2,
+      1e-7,
+      `phone card ${index + 1} centered navigation`,
+    );
+    close(top.firstScale, 1);
+    close(top.firstRotation, 0);
+    assert.equal(top.step, index);
+    const bottom = poseAtDistance(stage.readEnd);
+    close(
+      cardHeights[index] + bottom.cardY[index],
+      stageHeight,
+      1e-7,
+      `phone card ${index + 1} footer fits before rail motion`,
+    );
+    close(bottom.railX, top.railX);
+    close(poseAtDistance(stage.end).railX, top.railX);
+    if (stage.overflow) {
+      const middle = poseAtDistance((stage.readStart + stage.readEnd) / 2);
+      close(middle.cardY[index], -stage.overflow / 2);
+      close(middle.railX, top.railX);
+    }
+    const delta = 1e-5;
+    for (const boundary of [
+      stage.start,
+      stage.readStart,
+      stage.readEnd,
+      stage.end,
+      stage.transitionEnd,
+    ]) {
+      const before = poseAtDistance(boundary - delta);
+      const after = poseAtDistance(boundary + delta);
+      close(before.railX, after.railX, 0.001, "phone phase rail continuity");
+      close(
+        before.cardY[index],
+        after.cardY[index],
+        0.001,
+        "phone reading continuity",
+      );
+    }
+  });
+  const receiptGrowth = 243;
+  const expanded = createMobileWorkGeometry({
+    ...viewport,
+    stageHeight,
+    cardWidth: geometry.cardWidth,
+    cardHeights: cardHeights.map((height, index) =>
+      index === 3 ? height + receiptGrowth : height,
+    ),
+  });
+  close(expanded.totalDistance - geometry.totalDistance, receiptGrowth);
+  close(expanded.stages[3].start, geometry.stages[3].start);
+  close(expanded.stages[4].start - geometry.stages[4].start, receiptGrowth);
+  const forward = Array.from({ length: 1001 }, (_, index) =>
+    getMobileWorkMotionState(index / 1000, geometry),
+  );
+  forward.forEach((state, index) => {
+    if (!index) return;
+    const previous = forward[index - 1];
+    assert(state.railX <= previous.railX + 1e-8);
+    state.cardY.forEach((value, card) => {
+      assert(value <= previous.cardY[card] + 1e-8);
+      assert(value >= -geometry.stages[card].overflow - 1e-8);
+    });
+    assert.equal(
+      JSON.stringify(state),
+      JSON.stringify(getMobileWorkMotionState(index / 1000, geometry)),
+      "reverse traversal uses the same measured path",
+    );
+  });
+}
+
 console.log(
   "Work motion check passed: standard desktop centering, entrance sequencing, continuous phase joins, stable endpoints and reverse traversal.",
 );
 console.log(
   `Standard desktop viewports: ${standardViewports.map(({ width, height }) => `${width}x${height}`).join(", ")}`,
+);
+console.log(
+  "Phone motion check passed: full-height ticket reading, centered heading navigation, footer access before rail travel, dynamic receipt distance and reversible motion.",
 );

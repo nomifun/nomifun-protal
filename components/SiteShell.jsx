@@ -92,12 +92,17 @@ export default function SiteShell({ children }) {
       const inFullScreenStage =
         currentPath === "/" &&
         !matchMedia("(prefers-reduced-motion: reduce)").matches &&
-        [...document.querySelectorAll(".wm-track,.creative-stack-track")].some(
-          (stage) => {
-            const bounds = stage.getBoundingClientRect();
-            return bounds.top <= 1 && bounds.bottom >= innerHeight - 1;
-          },
-        );
+        [
+          ...document.querySelectorAll(
+            ".wm-track,.creative-stack-track,.developer-liquid-track[data-liquid-mobile-motion]",
+          ),
+        ].some((stage) => {
+          const bounds = stage.getBoundingClientRect();
+          const pinnedTop = stage.hasAttribute("data-liquid-mobile-motion")
+            ? 24
+            : 1;
+          return bounds.top <= pinnedTop && bounds.bottom >= innerHeight - 1;
+        });
       setHeroVisible(inHero);
       setProgress(max > 0 ? Math.min(100, Math.round((y / max) * 100)) : 0);
       if (header.current) {

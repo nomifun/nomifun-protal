@@ -587,205 +587,202 @@ export default function DeveloperSection() {
         ref={trackRef}
         data-motion="liquid-stage"
       >
-        <div className="developer-liquid-stage" data-liquid-stage>
-          <div className="developer-liquid-mesh" aria-hidden="true">
-            <svg
-              data-liquid-mesh
-              width="5200"
-              height="900"
-              viewBox="0 0 5200 900"
-              preserveAspectRatio="none"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="1300" height="900" fill="#ffe5dc" />
-              <rect x="1300" width="1300" height="900" fill="#eee2ff" />
-              <rect x="2600" width="1300" height="900" fill="#dde9ff" />
-              <rect x="3900" width="1300" height="900" fill="#ffe3ee" />
-              <circle cx="830" cy="250" r="420" fill="#ff755b" />
-              <circle cx="270" cy="660" r="430" fill="#ffbd70" />
-              <circle cx="1060" cy="790" r="350" fill="#ed7650" />
-              <circle cx="1800" cy="230" r="480" fill="#b06dfa" />
-              <circle cx="2360" cy="630" r="450" fill="#ec8af7" />
-              <circle cx="1580" cy="800" r="330" fill="#c4adff" />
-              <circle cx="3410" cy="200" r="480" fill="#5a77f4" />
-              <circle cx="2900" cy="640" r="440" fill="#62bef8" />
-              <circle cx="3670" cy="770" r="370" fill="#697ce5" />
-              <circle cx="4470" cy="180" r="460" fill="#f773a5" />
-              <circle cx="4970" cy="630" r="450" fill="#f69991" />
-              <circle cx="4210" cy="750" r="360" fill="#dd669f" />
-            </svg>
-          </div>
-          <svg className="developer-liquid-filter" aria-hidden="true">
-            <defs>
-              <filter
-                id={filterId}
-                x="-30%"
-                y="-50%"
-                width="160%"
-                height="300%"
+        <div className="developer-liquid-viewport" data-liquid-viewport>
+          <div className="developer-liquid-stage" data-liquid-stage>
+            <div className="developer-liquid-mesh" aria-hidden="true">
+              <svg
+                data-liquid-mesh
+                width="5200"
+                height="900"
+                viewBox="0 0 5200 900"
+                preserveAspectRatio="none"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <feGaussianBlur
-                  in="SourceGraphic"
-                  stdDeviation="2"
-                  result="blur"
-                />
-                <feColorMatrix
-                  in="blur"
-                  type="matrix"
-                  values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10"
-                />
-              </filter>
-            </defs>
-          </svg>
-          <div className="developer-liquid-stage-top">
-            <span className="developer-liquid-index" aria-hidden="true">
-              OPEN BY DESIGN <i>{String(selected + 1).padStart(2, "0")} / 04</i>
-            </span>
-            <div
-              className="developer-perspectives developer-liquid-tabs"
-              role="tablist"
-              aria-label={t(
-                "探索 NomiFun 技术设计",
-                "Explore NomiFun's technical design",
-              )}
-            >
-              <span
-                className="developer-liquid-droplet"
-                data-liquid-indicator
-                aria-hidden="true"
+                <rect width="1300" height="900" fill="#ffe5dc" />
+                <rect x="1300" width="1300" height="900" fill="#eee2ff" />
+                <rect x="2600" width="1300" height="900" fill="#dde9ff" />
+                <rect x="3900" width="1300" height="900" fill="#ffe3ee" />
+                <circle cx="830" cy="250" r="420" fill="#ff755b" />
+                <circle cx="270" cy="660" r="430" fill="#ffbd70" />
+                <circle cx="1060" cy="790" r="350" fill="#ed7650" />
+                <circle cx="1800" cy="230" r="480" fill="#b06dfa" />
+                <circle cx="2360" cy="630" r="450" fill="#ec8af7" />
+                <circle cx="1580" cy="800" r="330" fill="#c4adff" />
+                <circle cx="3410" cy="200" r="480" fill="#5a77f4" />
+                <circle cx="2900" cy="640" r="440" fill="#62bef8" />
+                <circle cx="3670" cy="770" r="370" fill="#697ce5" />
+                <circle cx="4470" cy="180" r="460" fill="#f773a5" />
+                <circle cx="4970" cy="630" r="450" fill="#f69991" />
+                <circle cx="4210" cy="750" r="360" fill="#dd669f" />
+              </svg>
+            </div>
+            <svg className="developer-liquid-filter" aria-hidden="true">
+              <defs>
+                <filter
+                  id={filterId}
+                  x="-30%"
+                  y="-50%"
+                  width="160%"
+                  height="300%"
+                >
+                  <feGaussianBlur
+                    in="SourceGraphic"
+                    stdDeviation="2"
+                    result="blur"
+                  />
+                  <feColorMatrix
+                    in="blur"
+                    type="matrix"
+                    values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10"
+                  />
+                </filter>
+              </defs>
+            </svg>
+            <div className="developer-liquid-stage-top">
+              <span className="developer-liquid-index" aria-hidden="true">
+                OPEN BY DESIGN{" "}
+                <i>{String(selected + 1).padStart(2, "0")} / 04</i>
+              </span>
+              <div
+                className="developer-perspectives developer-liquid-tabs"
+                role="tablist"
+                aria-label={t(
+                  "探索 NomiFun 技术设计",
+                  "Explore NomiFun's technical design",
+                )}
               >
                 <span
-                  className="developer-liquid-goo"
-                  style={{ filter: `url(#${filterId})` }}
+                  className="developer-liquid-droplet"
+                  data-liquid-indicator
+                  aria-hidden="true"
                 >
-                  <span className="developer-liquid-pill" />
-                  <svg
-                    className="developer-liquid-bridge"
-                    viewBox="0 0 44 16"
-                    preserveAspectRatio="none"
-                    fill="currentColor"
+                  <span
+                    className="developer-liquid-goo"
+                    style={{ filter: `url(#${filterId})` }}
                   >
-                    <path d="M35 0C35 0 28 1.5 28 8C28 14.5 44 16 44 16L0 16C0 16 16 14.5 16 8C16 1.5 9 0 9 0L35 0Z" />
-                  </svg>
-                  <span className="developer-liquid-landing" />
-                </span>
-              </span>
-              {perspectives.map((item, index) => (
-                <button
-                  type="button"
-                  role="tab"
-                  id={`developer-tab-${item.id}`}
-                  data-liquid-tab
-                  key={item.id}
-                  aria-selected={selected === index}
-                  aria-pressed={selected === index}
-                  aria-controls={`developer-panel-${item.id}`}
-                  tabIndex={selected === index ? 0 : -1}
-                  onClick={() => selectPerspective(index)}
-                  onKeyDown={(event) => {
-                    const next =
-                      event.key === "ArrowRight"
-                        ? (index + 1) % perspectives.length
-                        : event.key === "ArrowLeft"
-                          ? (index + perspectives.length - 1) %
-                            perspectives.length
-                          : mobile && event.key === "ArrowDown"
-                            ? (index + 2) % perspectives.length
-                            : mobile && event.key === "ArrowUp"
-                              ? (index + perspectives.length - 2) %
-                                perspectives.length
-                              : event.key === "Home"
-                                ? 0
-                                : event.key === "End"
-                                  ? perspectives.length - 1
-                                  : null;
-                    if (next === null) return;
-                    event.preventDefault();
-                    selectPerspective(next);
-                    trackRef.current
-                      ?.querySelectorAll("[data-liquid-tab]")
-                      [next]?.focus();
-                  }}
-                >
-                  <Icon name={item.icon} size={19} />
-                  <span>{item.title}</span>
-                  <small>0{index + 1}</small>
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="developer-liquid-panels">
-            {perspectives.map((item, index) => {
-              const Diagram = diagrams[index];
-              const active = index === selected;
-              return (
-                <div
-                  key={item.id}
-                  id={`developer-panel-${item.id}`}
-                  role="tabpanel"
-                  aria-labelledby={`developer-tab-${item.id}`}
-                  aria-hidden={readable ? undefined : !active}
-                  inert={readable || active ? undefined : true}
-                  hidden={mobile && !readable && !active}
-                  tabIndex={0}
-                  data-liquid-panel
-                  className={`developer-workbench developer-liquid-panel is-${item.id} ${active ? "is-active" : ""}`}
-                >
-                  <div className="developer-workbench-copy">
-                    <p className="developer-kicker">{item.kicker}</p>
-                    <h3>{item.heading}</h3>
-                    <p>{item.description}</p>
-                    <a
-                      className="developer-source-link"
-                      href={links.github}
-                      target="_blank"
-                      rel="noreferrer"
+                    <span className="developer-liquid-pill" />
+                    <svg
+                      className="developer-liquid-bridge"
+                      viewBox="0 0 44 16"
+                      preserveAspectRatio="none"
+                      fill="currentColor"
                     >
-                      {t("到源码里探索", "Explore the source")}{" "}
-                      <Icon name="ArrowUpRight" size={18} />
-                    </a>
-                    <div className="developer-scope-note">
-                      <Icon name="Info" size={16} />
-                      <span>{item.note}</span>
+                      <path d="M35 0C35 0 28 1.5 28 8C28 14.5 44 16 44 16L0 16C0 16 16 14.5 16 8C16 1.5 9 0 9 0L35 0Z" />
+                    </svg>
+                    <span className="developer-liquid-landing" />
+                  </span>
+                </span>
+                {perspectives.map((item, index) => (
+                  <button
+                    type="button"
+                    role="tab"
+                    id={`developer-tab-${item.id}`}
+                    data-liquid-tab
+                    key={item.id}
+                    aria-selected={selected === index}
+                    aria-pressed={selected === index}
+                    aria-controls={`developer-panel-${item.id}`}
+                    tabIndex={selected === index ? 0 : -1}
+                    onClick={() => selectPerspective(index)}
+                    onKeyDown={(event) => {
+                      const next =
+                        event.key === "ArrowRight"
+                          ? (index + 1) % perspectives.length
+                          : event.key === "ArrowLeft"
+                            ? (index + perspectives.length - 1) %
+                              perspectives.length
+                            : mobile && event.key === "ArrowDown"
+                              ? (index + 2) % perspectives.length
+                              : mobile && event.key === "ArrowUp"
+                                ? (index + perspectives.length - 2) %
+                                  perspectives.length
+                                : event.key === "Home"
+                                  ? 0
+                                  : event.key === "End"
+                                    ? perspectives.length - 1
+                                    : null;
+                      if (next === null) return;
+                      event.preventDefault();
+                      selectPerspective(next);
+                      trackRef.current
+                        ?.querySelectorAll("[data-liquid-tab]")
+                        [next]?.focus();
+                    }}
+                  >
+                    <Icon name={item.icon} size={19} />
+                    <span>{item.title}</span>
+                    <small>0{index + 1}</small>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="developer-liquid-panels">
+              {perspectives.map((item, index) => {
+                const Diagram = diagrams[index];
+                const active = index === selected;
+                return (
+                  <div
+                    key={item.id}
+                    id={`developer-panel-${item.id}`}
+                    role="tabpanel"
+                    aria-labelledby={`developer-tab-${item.id}`}
+                    aria-hidden={readable ? undefined : !active}
+                    inert={readable || active ? undefined : true}
+                    tabIndex={0}
+                    data-liquid-panel
+                    className={`developer-workbench developer-liquid-panel is-${item.id} ${active ? "is-active" : ""}`}
+                  >
+                    <div className="developer-workbench-copy">
+                      <p className="developer-kicker">{item.kicker}</p>
+                      <h3>{item.heading}</h3>
+                      <p>{item.description}</p>
+                      <a
+                        className="developer-source-link"
+                        href={links.github}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {t("到源码里探索", "Explore the source")}{" "}
+                        <Icon name="ArrowUpRight" size={18} />
+                      </a>
+                      <div className="developer-scope-note">
+                        <Icon name="Info" size={16} />
+                        <span>{item.note}</span>
+                      </div>
+                    </div>
+                    <div className="developer-workbench-visual">
+                      <div className="platform-demo-label">
+                        <span />
+                        {t("架构与交互示意", "Interactive architecture demo")}
+                      </div>
+                      <Diagram />
+                      <p className="platform-demo-note">
+                        {t(
+                          "用于理解设计，不代表真实模型或任务正在运行。",
+                          "A design demonstration; no live models or tasks are running.",
+                        )}
+                      </p>
                     </div>
                   </div>
-                  <div className="developer-workbench-visual">
-                    <div className="platform-demo-label">
-                      <span />
-                      {t("架构与交互示意", "Interactive architecture demo")}
-                    </div>
-                    <Diagram />
-                    <p className="platform-demo-note">
-                      {t(
-                        "用于理解设计，不代表真实模型或任务正在运行。",
-                        "A design demonstration; no live models or tasks are running.",
-                      )}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <div className="developer-liquid-stage-bottom" aria-hidden="true">
-            <span>
-              {t(
-                "模型 · 协作 · 行动 · 内核",
-                "Models · Teams · Action · Runtime",
-              )}
-            </span>
-            <span>
-              {mobile
-                ? t(
-                    "选择上方视角，探索开放设计",
-                    "Choose a tab to explore the design",
-                  )
-                : t(
-                    "继续滚动，探索下一种视角",
-                    "Scroll to explore another perspective",
-                  )}{" "}
-              <Icon name={mobile ? "ArrowUp" : "ArrowDown"} size={15} />
-            </span>
+                );
+              })}
+            </div>
+            <div className="developer-liquid-stage-bottom" aria-hidden="true">
+              <span>
+                {t(
+                  "模型 · 协作 · 行动 · 内核",
+                  "Models · Teams · Action · Runtime",
+                )}
+              </span>
+              <span>
+                {t(
+                  "继续滚动，探索下一种视角",
+                  "Scroll to explore another perspective",
+                )}{" "}
+                <Icon name="ArrowDown" size={15} />
+              </span>
+            </div>
           </div>
         </div>
       </div>
