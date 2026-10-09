@@ -70,6 +70,8 @@ import { Bell } from "@phosphor-icons/react/dist/ssr/Bell";
 import { DotsThree } from "@phosphor-icons/react/dist/ssr/DotsThree";
 import { Sun } from "@phosphor-icons/react/dist/ssr/Sun";
 import { Key } from "@phosphor-icons/react/dist/ssr/Key";
+import { ChartBar } from "@phosphor-icons/react/dist/ssr/ChartBar";
+import { Wallet } from "@phosphor-icons/react/dist/ssr/Wallet";
 import { FilmStrip } from "@phosphor-icons/react/dist/ssr/FilmStrip";
 import { PenNib } from "@phosphor-icons/react/dist/ssr/PenNib";
 import { Flag } from "@phosphor-icons/react/dist/ssr/Flag";
@@ -156,6 +158,8 @@ const icons = {
   DotsThree,
   Sun,
   Key,
+  ChartBar,
+  Wallet,
   FilmStrip,
   PenNib,
   Flag,

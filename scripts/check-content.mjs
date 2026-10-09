@@ -73,6 +73,7 @@ const required = [
   "/products/mobile",
   "/products/xiaozhi-yuntai",
   "/products/net-infra",
+  "/products/model-gateway",
   "/download",
   "/blog",
   "/contact",

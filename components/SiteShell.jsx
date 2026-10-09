@@ -389,6 +389,7 @@ export default function SiteShell({ children }) {
                   ["mobile", "Mobile", "Mobile"],
                   ["xiaozhi-yuntai", "小智云台", "Xiaozhi Yuntai"],
                   ["net-infra", "Net Infra", "Net Infra"],
+                  ["model-gateway", "Model Gateway", "Model Gateway"],
                 ].map(([slug, zh, en]) => (
                   <Link key={slug} href={`/products/${slug}`}>
                     <RollText>{t(zh, en)}</RollText>

@@ -26,6 +26,16 @@
 | 12       | `#developers`     | Rust + Tauri、按需能力、有界资源与性能测量边界             |
 | 13       | `#ecosystem`      | 电脑即服务、手机/机器人直连和可选跨网网络层                |
 
+## Model Gateway 产品矩阵补充（2026-10-09）
+
+只读核对 `C:/Users/MINISFORUM/code/nomifun/multi/nomifun-model-gateway` 的 `README.md`、`README.zh-CN.md`、`LICENSE` 与 Git remote，并确认公开仓库 [nomifun/nomifun-model-gateway](https://github.com/nomifun/nomifun-model-gateway) 可访问。
+
+定位为面向社区与团队、支持定制 Token 商业服务的 Apache-2.0 开源模型网关。已有文档支持的能力包括原生模型转发、供应商与模型目录配置、用户/API 密钥、用量与价格、钱包/订阅、官方商户支付适配器、中英文 Web 控制台，以及可选的 Desktop provider 接入。社区运营方独立部署、定价和运营；NomiFun 官方提供开源软件，不运营网关实例或出售 API。支付需运营方配置并独立验证商户资料，当前一库仅支持一个运行中的网关进程。
+
+官网以第五个开源项目加入首页生态轮播、产品连接图、产品列表、页脚与独立双语详情页，下载页的生态项目与联系页的源码列表同步提供入口；Model Gateway 仅展示已确认的 GitHub 源码地址。介绍页的架构图为解释用途的示意，不连接网关或模型服务。本轮验证官网展示与静态导出，不构成真实上游调用、商户支付、生产容量或高可用验收。Gateway 仓库仅用于只读参考。
+
+本地验收：生产构建生成 44 个静态入口、40 个 HTML 页面；`npm run check:content` 与 `npm run check:i18n` 通过，sitemap 包含 26 个规范地址。浏览器检查覆盖中英文矩阵及详情、语言往返、产品图键盘切换、首页第 05/05 张生态卡片和 GitHub 入口，并在 1280 × 720 与 390 × 844 视口检查布局；新增页面未出现横向溢出。预览截图保存在本次 Codex 可视化输出目录中。
+
 ## 用户重点 0–13 的逐项映射
 
 ### 0. 个人项目起源与早期创新

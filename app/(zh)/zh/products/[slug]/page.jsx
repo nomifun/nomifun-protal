@@ -123,6 +123,33 @@ const details = {
       "Net Infra 需要自托管部署 NomiRelay 与 nfagent，并配置网络入口、认证和 TLS。它是可选传输基础设施，不是无需部署的云服务。实际协议能力、限制与运维要求以仓库集成文档为准。",
     action: "GitHub 源码",
   },
+  "model-gateway": {
+    lead: "为使用 NomiFun 的社区、团队与客户提供可定制的 Token 商业服务。自行部署模型网关，把上游模型接入、用户访问和计费运营集中在自己的服务中。",
+    statement: ["模型能力开放。", "商业服务由你定义。"],
+    intro:
+      "以 Apache-2.0 开源的独立模型网关。选择上游、配置模型与价格，通过中英文 Web 控制台管理服务，再让用户接入 NomiFun Desktop 或原生 API 客户端。",
+    features: [
+      [
+        "接入模型，保留原生协议",
+        "按模型支持的能力接入 OpenAI、Anthropic、Gemini、OpenAI 兼容与 Azure OpenAI 渠道。通过供应商模板、目录发现或手工配置，发布自己的模型目录与 Token 价格。",
+      ],
+      [
+        "围绕用户，管理服务",
+        "在内嵌控制台管理用户与 API 密钥，配置模型访问范围、额度、速率和并发限制。用户可查看模型、价格、账户与用量，并用实例地址和密钥连接 Desktop。",
+      ],
+      [
+        "把用量变成清晰账务",
+        "管理钱包、订阅套餐、兑换码与用量结算，让 Token 商业服务有可追踪的账本。提供 Stripe、支付宝与微信支付 v3 商户适配器，由运营方配置并验证后启用。",
+      ],
+      [
+        "自己的品牌，自己的部署",
+        "定制运营方信息、购买入口与服务价格。Go 服务内嵌 Web 控制台，支持 SQLite 或 PostgreSQL，并提供 Docker 部署与接入文档，便于搭建独立服务。",
+      ],
+    ],
+    boundary:
+      "Model Gateway 由运营方自行部署，运营方负责价格、条款、隐私、支付与用户支持；NomiFun 官方提供开源软件，不运营网关实例或出售 API。Desktop 接入为可选能力，需使用包含 Model Gateway provider 的版本；支付需配置并验证自己的商户资料。当前按同一原生协议转发，一库仅支持一个运行中的网关进程，实际模型能力与部署要求以仓库说明为准。",
+    action: "GitHub 源码",
+  },
 };
 
 const englishDetails = {
@@ -246,6 +273,33 @@ const englishDetails = {
       "Net Infra requires self-hosting NomiRelay and nfagent, with network endpoints, authentication, and TLS configured. It is optional transport infrastructure, not a cloud service that requires no deployment. See the repository's integration documentation for current protocol capabilities, limits, and operating requirements.",
     action: "GitHub source",
   },
+  "model-gateway": {
+    lead: "Run a customizable token billing service for NomiFun communities, teams, and customers. Self-host a model gateway to bring upstream model access, user management, and billing into your own service.",
+    statement: ["Open model capabilities.", "A business service you define."],
+    intro:
+      "An independent model gateway released under Apache-2.0. Choose providers, configure models and prices, and manage your service through an English/Chinese web console. Users connect through NomiFun Desktop or native API clients.",
+    features: [
+      [
+        "Connect models with their native protocols",
+        "Connect OpenAI, Anthropic, Gemini, OpenAI-compatible, and Azure OpenAI channels according to each model's supported capabilities. Publish a model catalog and token prices using provider templates, catalog discovery, or manual configuration.",
+      ],
+      [
+        "Manage access around your users",
+        "Manage users and API keys in the embedded console, with model scopes, budgets, rate limits, and concurrency limits. Users can view models, prices, accounts, and usage, then connect Desktop with the instance URL and their key.",
+      ],
+      [
+        "Turn usage into clear accounting",
+        "Manage wallets, subscriptions, redemption codes, and usage settlement with a traceable ledger. Stripe, Alipay, and WeChat Pay v3 merchant adapters are available for operators to configure and validate before enabling payments.",
+      ],
+      [
+        "Your brand. Your deployment.",
+        "Customize operator details, purchase links, and service prices. A Go service embeds the web console, supports SQLite or PostgreSQL, and includes Docker deployment and integration guides for running an independent service.",
+      ],
+    ],
+    boundary:
+      "Operators self-host Model Gateway and are responsible for pricing, terms, privacy, payments, and user support. NomiFun provides open-source software and does not operate gateway instances or sell API access. Desktop integration is optional and requires a version with the Model Gateway provider. Payments require your own configured and validated merchant accounts. Requests stay in the same native protocol; one database supports one running gateway process. See the repository for supported models and deployment requirements.",
+    action: "GitHub source",
+  },
 };
 
 export function generateStaticParams() {
@@ -321,14 +375,16 @@ export default async function ProductPage({ params, locale = "zh" }) {
               {t("GitHub 源码", "GitHub source")} <Icon name="GithubLogo" />
             </a>
           )}
-          <a
-            className="button ghost"
-            href={product.gitee}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t("Gitee 源码", "Gitee source")} <Icon name="GitBranch" />
-          </a>
+          {product.gitee && (
+            <a
+              className="button ghost"
+              href={product.gitee}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t("Gitee 源码", "Gitee source")} <Icon name="GitBranch" />
+            </a>
+          )}
         </div>
       </section>
       <ProductVisual slug={slug} />

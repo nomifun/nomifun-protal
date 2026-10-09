@@ -44,6 +44,18 @@ const surfaces = [
     route: "net-infra",
     wire: "OPTIONAL / SELF-HOSTED RELAY",
   },
+  {
+    id: "gateway",
+    icon: "Key",
+    label: "Model Gateway",
+    title: "为你的用户，搭建模型服务。",
+    titleEn: "Build a model service for your users.",
+    body: "社区与团队可自行部署模型网关，配置模型与 Token 价格，管理用户、密钥、钱包和订阅。用户通过实例地址与密钥接入 NomiFun Desktop。",
+    bodyEn:
+      "Communities and teams can self-host a gateway, configure models and token prices, and manage users, keys, wallets, and subscriptions. Users connect NomiFun Desktop with the instance URL and their API key.",
+    route: "model-gateway",
+    wire: "OPTIONAL / SELF-HOSTED MODEL SERVICE",
+  },
 ];
 
 export default function ProductMap() {

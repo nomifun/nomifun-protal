@@ -326,6 +326,63 @@ export default function ProductVisual({ slug }) {
         </div>
       </section>
     );
+  if (slug === "model-gateway")
+    return (
+      <section
+        className="product-visual container gateway-product-visual"
+        aria-label={t(
+          "模型服务架构示意",
+          "Model service architecture illustration",
+        )}
+      >
+        <div className="visual-topline">
+          <span>YOUR MODEL SERVICE</span>
+          <small>{t("架构示意", "Architecture illustration")}</small>
+        </div>
+        <div className="network-visual-panel gateway-visual-panel">
+          <div className="network-node">
+            <Icon name="Desktop" size={37} />
+            <strong>
+              {t("Desktop 与 API 客户端", "Desktop & API clients")}
+            </strong>
+            <small>{t("实例地址与 API 密钥", "Instance URL & API key")}</small>
+          </div>
+          <div className="network-wire" />
+          <div className="network-node gateway-service">
+            <Icon name="Key" size={37} />
+            <strong>Model Gateway</strong>
+            <small>
+              {t("你的品牌、模型与定价", "Your brand, models & pricing")}
+            </small>
+          </div>
+          <div className="network-wire" />
+          <div className="network-node">
+            <Icon name="PlugsConnected" size={37} />
+            <strong>{t("上游模型服务", "Upstream model services")}</strong>
+            <small>OpenAI · Anthropic · Gemini</small>
+          </div>
+        </div>
+        <div className="gateway-capabilities">
+          {[
+            ["GridFour", "模型目录与价格", "Models & pricing"],
+            ["LockKey", "用户与密钥", "Users & API keys"],
+            ["ChartBar", "用量与结算", "Usage & settlement"],
+            ["Wallet", "钱包与订阅", "Wallets & subscriptions"],
+          ].map(([icon, zh, en]) => (
+            <div key={icon}>
+              <Icon name={icon} size={23} />
+              <span>{t(zh, en)}</span>
+            </div>
+          ))}
+        </div>
+        <p className="network-visual-caption">
+          {t(
+            "运营方独立部署与定价，用户选择需要的服务接入。模型调用、用量和账务在同一网关中管理。",
+            "Operators deploy and price their own services. Users choose a service to connect to, with model calls, usage, and accounting managed in one gateway.",
+          )}
+        </p>
+      </section>
+    );
   return (
     <section
       className="product-visual container network-product-visual"

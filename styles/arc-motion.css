@@ -51,6 +51,9 @@
 .arc-ecosystem .eco-net-infra {
   background: #d1dfeb;
 }
+.arc-ecosystem .eco-model-gateway {
+  background: #d4e7db;
+}
 .arc-ecosystem .ecosystem-card:not(.is-active) a {
   pointer-events: none;
 }
@@ -69,6 +72,9 @@
 }
 .arc-ecosystem .eco-net-infra .eco-card-top {
   color: #6b849c;
+}
+.arc-ecosystem .eco-model-gateway .eco-card-top {
+  color: #4d7661;
 }
 .arc-ecosystem .eco-product-badge {
   display: inline-flex;
@@ -161,6 +167,12 @@
 }
 .arc-ecosystem .eco-net-infra .eco-card-copy :is(p, small, a) {
   color: #6c849a;
+}
+.arc-ecosystem .eco-model-gateway .eco-card-copy h3 {
+  color: #284c3c;
+}
+.arc-ecosystem .eco-model-gateway .eco-card-copy :is(p, small, a) {
+  color: #4d7661;
 }
 .arc-ecosystem .arc-horizon {
   position: absolute;

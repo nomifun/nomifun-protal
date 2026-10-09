@@ -137,15 +137,17 @@ export default function ContactPage({ locale = "zh" }) {
                   {t("GitHub 源码", "GitHub source")}{" "}
                   <Icon name="ArrowUpRight" size={17} />
                 </a>
-                <a
-                  href={product.gitee}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${product.name} — ${t("Gitee 源码仓库", "Gitee source repository")}`}
-                >
-                  {t("Gitee 源码", "Gitee source")}{" "}
-                  <Icon name="ArrowUpRight" size={17} />
-                </a>
+                {product.gitee && (
+                  <a
+                    href={product.gitee}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${product.name} — ${t("Gitee 源码仓库", "Gitee source repository")}`}
+                  >
+                    {t("Gitee 源码", "Gitee source")}{" "}
+                    <Icon name="ArrowUpRight" size={17} />
+                  </a>
+                )}
               </div>
             </article>
           ))}

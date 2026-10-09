@@ -10,8 +10,8 @@ export function getPageMetadata(locale = "zh") {
     "/products",
     "开源矩阵",
     "Open-source ecosystem",
-    "一个本地中枢，四个开源项目。认识 NomiFun Desktop、Mobile、小智云台和 Net Infra。",
-    "One local core, four open-source projects. Meet NomiFun Desktop, Mobile, Xiaozhi Yuntai, and Net Infra.",
+    "五个开源项目，连接个人 AI 与商业服务。认识 NomiFun Desktop、Mobile、小智云台、Net Infra 和 Model Gateway。",
+    "Five open-source projects for personal AI and commercial services. Meet NomiFun Desktop, Mobile, Xiaozhi Yuntai, Net Infra, and Model Gateway.",
   );
 }
 export const metadata = getPageMetadata();
@@ -36,8 +36,8 @@ export default function ProductsPage({ locale = "zh" }) {
           </h1>
           <p className="page-lead">
             {t(
-              "桌面是起点，手机、机器人和网络是延伸。四个开放项目，围绕同一个属于你的 AI 运行中枢。",
-              "Start on your desktop. Extend to your phone, robot, and network. Four open projects built around one AI runtime that belongs to you.",
+              "桌面是起点，手机、机器人和网络是延伸。五个开放项目，让个人 AI 随处可用，也让社区与团队搭建自己的 Token 商业服务。",
+              "Start on your desktop. Extend to your phone, robot, and network. Five open projects bring your AI within reach and help communities and teams run their own token billing services.",
             )}
           </p>
         </div>
@@ -45,7 +45,7 @@ export default function ProductsPage({ locale = "zh" }) {
       <ProductMap />
       <section
         className="product-list container"
-        aria-label={t("四个开源项目", "Four open-source projects")}
+        aria-label={t("五个开源项目", "Five open-source projects")}
       >
         {products.map((product) => (
           <Link

@@ -138,13 +138,13 @@ for (const file of englishPages) {
 }
 assert.equal(
   englishPages.length,
-  24,
-  "Expected 12 English routes and 12 /en aliases",
+  26,
+  "Expected 13 English routes and 13 /en aliases",
 );
 assert.equal(
   chinesePages.length,
-  12,
-  "Expected all 12 Chinese routes under /zh",
+  13,
+  "Expected all 13 Chinese routes under /zh",
 );
 for (const file of contentPages) {
   const html = fs.readFileSync(file, "utf8");
@@ -195,13 +195,13 @@ for (const original of [
 const sitemap = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 assert.equal(
   (sitemap.match(/<url>/g) || []).length,
-  24,
-  "Expected 24 bilingual sitemap URLs",
+  26,
+  "Expected 26 bilingual sitemap URLs",
 );
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
   ([, url]) => url,
 );
-assert.equal(new Set(sitemapUrls).size, 24, "Sitemap URLs must be unique");
+assert.equal(new Set(sitemapUrls).size, 26, "Sitemap URLs must be unique");
 assert.ok(sitemapUrls.includes("https://www.nomifun.com/"));
 assert.ok(sitemapUrls.includes("https://www.nomifun.com/zh"));
 assert.ok(
@@ -215,5 +215,5 @@ if (issues.length) {
   process.exit(1);
 }
 console.log(
-  `PASS: ${englishPages.length} English pages (including /en aliases), ${chinesePages.length} Chinese pages; localized links, canonical/hreflang, English text/ARIA, 3 distinct English assets, 24 canonical sitemap URLs, and language path helpers.`,
+  `PASS: ${englishPages.length} English pages (including /en aliases), ${chinesePages.length} Chinese pages; localized links, canonical/hreflang, English text/ARIA, 3 distinct English assets, 26 canonical sitemap URLs, and language path helpers.`,
 );

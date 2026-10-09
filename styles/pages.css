@@ -91,6 +91,10 @@
   --accent: #cedee4;
   --accent-strong: #648c9c;
 }
+.accent-mint {
+  --accent: #d4e9df;
+  --accent-strong: #447866;
+}
 .product-map {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -897,6 +901,91 @@
   color: #6b8793;
   line-height: 1.8;
   padding: 0 30px;
+}
+.gateway-product-visual {
+  padding-bottom: 38px;
+}
+.gateway-visual-panel .network-node {
+  width: min(230px, 28%);
+  flex-shrink: 1;
+  padding: 16px;
+  text-align: center;
+  border-color: #8db6a3;
+}
+.gateway-visual-panel .network-node small {
+  color: #4d7661;
+}
+.gateway-visual-panel .gateway-service {
+  color: #f1faf4;
+  background: #284c3c;
+  border-color: #284c3c;
+}
+.gateway-visual-panel .gateway-service small {
+  color: #bbdfc8;
+}
+.gateway-visual-panel .network-wire {
+  flex: 1;
+  height: 1px;
+  min-width: 15px;
+  max-width: 70px;
+  background: #709c82;
+}
+.gateway-visual-panel .network-wire::after {
+  top: -2px;
+  right: 0;
+  bottom: auto;
+  background: #709c82;
+}
+.gateway-capabilities {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 970px;
+  margin: 0 auto 32px;
+  padding: 0 45px;
+}
+.gateway-capabilities > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid #8db6a3;
+  background: #f3faf580;
+  border-radius: 10px;
+  padding: 20px 12px;
+  color: #385f4d;
+  font-size: 13px;
+}
+.gateway-capabilities svg {
+  flex-shrink: 0;
+}
+.gateway-product-visual .network-visual-caption {
+  color: #4d7661;
+}
+@media (max-width: 760px) {
+  .gateway-visual-panel {
+    flex-direction: column;
+    padding: 35px 25px;
+  }
+  .gateway-visual-panel .network-node {
+    width: 100%;
+    max-width: 360px;
+  }
+  .gateway-visual-panel .network-wire {
+    flex: none;
+    width: 35px;
+    margin: 12px 0;
+    transform: rotate(90deg);
+  }
+  .gateway-capabilities {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 25px;
+  }
+  .gateway-capabilities > div {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
 }
 .product-boundary {
   padding-bottom: 50px;

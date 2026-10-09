@@ -893,17 +893,211 @@ function NetworkArtwork() {
   );
 }
 
+function ModelGatewayArtwork() {
+  return (
+    <svg viewBox="0 0 560 350" fill="none" aria-hidden="true">
+      <ellipse
+        cx="280"
+        cy="178"
+        rx="220"
+        ry="145"
+        stroke="#80ab96"
+        strokeOpacity=".3"
+      />
+      <path d="M86 175H174M436 175H480" stroke="#81ad96" strokeWidth="2" />
+      <path
+        className="eco-signal-line"
+        d="M86 175H174M436 175H480"
+        stroke="#f4fff8"
+        strokeWidth="4"
+        strokeDasharray="3 30"
+      />
+      <g className="eco-device-float">
+        <rect
+          x="166"
+          y="53"
+          width="272"
+          height="248"
+          rx="24"
+          fill="#28483e"
+          stroke="#83ac96"
+          strokeWidth="2"
+        />
+        <path d="M166 99H438" stroke="#83ac96" strokeOpacity=".35" />
+        <circle
+          className="eco-status-pulse"
+          cx="189"
+          cy="77"
+          r="4"
+          fill="#b9dfc4"
+        />
+        <text
+          x="205"
+          y="81"
+          fill="#e4f4e9"
+          fontSize="12"
+          fontFamily="sans-serif"
+          letterSpacing="1"
+        >
+          MODEL GATEWAY
+        </text>
+        {[
+          ["MODELS", 185, 119],
+          ["API KEYS", 310, 119],
+          ["USAGE", 185, 205],
+          ["WALLET", 310, 205],
+        ].map(([label, x, y]) => (
+          <g key={label}>
+            <rect
+              x={x}
+              y={y}
+              width="108"
+              height="70"
+              rx="12"
+              fill="#426858"
+              stroke="#8eb7a0"
+              strokeOpacity=".4"
+            />
+            <path
+              d={`M${x + 16} ${y + 20}H${x + 47}`}
+              stroke="#bce0c7"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
+            <path
+              d={`M${x + 16} ${y + 30}H${x + 75}`}
+              stroke="#8ab59b"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+            <text
+              x={x + 16}
+              y={y + 54}
+              fill="#e3f3e8"
+              fontSize="9"
+              fontFamily="sans-serif"
+              letterSpacing=".8"
+            >
+              {label}
+            </text>
+          </g>
+        ))}
+      </g>
+      <g className="eco-floating-node eco-node-one">
+        <rect
+          x="26"
+          y="142"
+          width="80"
+          height="67"
+          rx="15"
+          fill="#eef8f0"
+          stroke="#9ec4ab"
+        />
+        <rect
+          x="49"
+          y="156"
+          width="34"
+          height="22"
+          rx="4"
+          stroke="#507b63"
+          strokeWidth="2"
+        />
+        <path
+          d="M59 182H73"
+          stroke="#507b63"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <text
+          x="44"
+          y="198"
+          fill="#507b63"
+          fontSize="9"
+          fontFamily="sans-serif"
+        >
+          CLIENTS
+        </text>
+      </g>
+      <g className="eco-floating-node eco-node-two">
+        <rect
+          x="464"
+          y="133"
+          width="82"
+          height="85"
+          rx="15"
+          fill="#eef8f0"
+          stroke="#9ec4ab"
+        />
+        {[150, 166, 182].map((y) => (
+          <path
+            key={y}
+            d={`M482 ${y}H528`}
+            stroke="#83aa91"
+            strokeWidth="5"
+            strokeLinecap="round"
+          />
+        ))}
+        <text
+          x="474"
+          y="204"
+          fill="#507b63"
+          fontSize="8"
+          fontFamily="sans-serif"
+        >
+          PROVIDERS
+        </text>
+      </g>
+      <g className="eco-orbit-label">
+        <rect
+          x="35"
+          y="64"
+          width="118"
+          height="30"
+          rx="15"
+          fill="#fff"
+          fillOpacity=".75"
+        />
+        <text x="52" y="83" fill="#507b63" fontSize="9" fontFamily="sans-serif">
+          YOUR PRICING
+        </text>
+      </g>
+      <g className="eco-orbit-label eco-label-late">
+        <rect
+          x="363"
+          y="314"
+          width="153"
+          height="28"
+          rx="14"
+          fill="#fff"
+          fillOpacity=".75"
+        />
+        <text
+          x="381"
+          y="332"
+          fill="#507b63"
+          fontSize="9"
+          fontFamily="sans-serif"
+        >
+          SELF-HOSTED SERVICE
+        </text>
+      </g>
+    </svg>
+  );
+}
+
 const artwork = {
   desktop: DesktopArtwork,
   mobile: MobileArtwork,
   "xiaozhi-yuntai": RobotArtwork,
   "net-infra": NetworkArtwork,
+  "model-gateway": ModelGatewayArtwork,
 };
 const badges = {
   desktop: "THE LOCAL BRAIN",
   mobile: "TAKE IT WITH YOU",
   "xiaozhi-yuntai": "MEET IN REAL LIFE",
   "net-infra": "STAY CONNECTED",
+  "model-gateway": "BUILD YOUR SERVICE",
 };
 
 export default function EcosystemSection() {
@@ -931,8 +1125,8 @@ export default function EcosystemSection() {
           </h2>
           <p>
             {t(
-              "桌面、手机、机器人与跨网连接。四个开源项目，各司其职。",
-              "Desktop, mobile, robots and cross-network connections. Four open-source projects, each with a purpose.",
+              "桌面、手机、机器人、跨网连接与模型商业服务。五个开源项目，各司其职。",
+              "Desktop, mobile, robots, cross-network connections, and commercial model services. Five open-source projects, each with a purpose.",
             )}
           </p>
         </div>
@@ -1057,6 +1251,11 @@ export default function EcosystemSection() {
           {t(
             "跨网访问时，可自行部署 Net Infra，接入你自己的传输通道。",
             "For access across networks, self-host Net Infra and use your own transport channels.",
+          )}
+          <br />
+          {t(
+            "想为社区或团队提供模型服务，可用 Model Gateway 定制自己的 Token 价格、钱包与订阅。",
+            "To serve a community or team, use Model Gateway to configure your own token prices, wallets, and subscriptions.",
           )}
         </p>
         <Link href="/products" className="button light">
