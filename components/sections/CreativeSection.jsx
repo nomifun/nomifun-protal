@@ -686,40 +686,62 @@ export default function CreativeSection() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const media = gsap.matchMedia();
-    const refresh = () => ScrollTrigger.refresh();
-    media.add("(prefers-reduced-motion: no-preference)", () => {
-      const context = gsap.context(() => {
-        // Each full-height incoming creation card retreats the
-        // previous card to .75 / rotateX 15 / alternating rotateY +/-8.
-        cardRefs.current.forEach((card, index) => {
-          if (!card) return;
-          ScrollTrigger.create({
-            trigger: card,
-            start: "top 48%",
-            end: "bottom 48%",
-            onEnter: () => setActive(modes[index].id),
-            onEnterBack: () => setActive(modes[index].id),
+    let layoutFrame;
+    const refresh = () => {
+      cancelAnimationFrame(layoutFrame);
+      layoutFrame = requestAnimationFrame(() =>
+        window.dispatchEvent(new Event("portal:layout")),
+      );
+    };
+    media.add(
+      {
+        wide: "(min-width: 1001px)",
+        narrow: "(max-width: 1000px)",
+        motion: "(prefers-reduced-motion: no-preference)",
+      },
+      (match) => {
+        const context = gsap.context(() => {
+          // Each full-height incoming creation card retreats the
+          // previous card to .75 / rotateX 15 / alternating rotateY +/-8.
+          cardRefs.current.forEach((card, index) => {
+            if (!card) return;
+            ScrollTrigger.create({
+              trigger: card,
+              start: "top 48%",
+              end: "bottom 48%",
+              onEnter: () => setActive(modes[index].id),
+              onEnterBack: () => setActive(modes[index].id),
+            });
+            const incoming = cardRefs.current[index + 1];
+            // Tall phone chapters belong to the page. Retreating a whole chapter
+            // would scale its still-readable content away before it is finished.
+            if (!incoming || !match.conditions.wide || !match.conditions.motion)
+              return;
+            gsap.to(card.querySelector(".creative-stack-face"), {
+              scale: 0.75,
+              rotateX: 15,
+              rotateY: index % 2 ? 8 : -8,
+              yPercent: [8, 7, 6, 6][index],
+              ease: "none",
+              scrollTrigger: {
+                trigger: incoming,
+                start: "top bottom",
+                end: "top top",
+                scrub: 0.6,
+                invalidateOnRefresh: true,
+              },
+            });
           });
-          const incoming = cardRefs.current[index + 1];
-          if (!incoming) return;
-          gsap.to(card.querySelector(".creative-stack-face"), {
-            scale: 0.75,
-            rotateX: 15,
-            rotateY: index % 2 ? 8 : -8,
-            yPercent: [8, 7, 6, 6][index],
-            ease: "none",
-            scrollTrigger: {
-              trigger: incoming,
-              start: "top bottom",
-              end: "top top",
-              scrub: 0.6,
-              invalidateOnRefresh: true,
-            },
-          });
-        });
-      }, sectionRef);
-      return () => context.revert();
-    });
+        }, sectionRef);
+        const observer = new ResizeObserver(refresh);
+        if (match.conditions.narrow || !match.conditions.motion)
+          observer.observe(trackRef.current);
+        return () => {
+          observer.disconnect();
+          context.revert();
+        };
+      },
+    );
     // Images load asynchronously; refresh the full-screen card geometry once
     // intrinsic screenshot sizes are known, and remove every listener on exit.
     const images = Array.from(sectionRef.current.querySelectorAll("img"));
@@ -727,6 +749,7 @@ export default function CreativeSection() {
     const timer = window.setTimeout(refresh, 250);
     return () => {
       window.clearTimeout(timer);
+      cancelAnimationFrame(layoutFrame);
       images.forEach((img) => img.removeEventListener("load", refresh));
       media.revert();
     };
@@ -740,13 +763,15 @@ export default function CreativeSection() {
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    // A sticky card's bounding box no longer describes its original position.
-    // The track plus full-height card intervals remains correct in both directions.
-    const top = reduced
-      ? window.scrollY + card.getBoundingClientRect().top - 112
-      : window.scrollY +
-        track.getBoundingClientRect().top +
-        index * card.offsetHeight;
+    // Desktop sticky offsets move as cards stick, so that rail retains its
+    // equal-height intervals. Natural chapters use their actual page position.
+    const reading = window.matchMedia("(max-width: 1000px)").matches;
+    const top =
+      reading || reduced
+        ? window.scrollY + card.getBoundingClientRect().top - 152
+        : window.scrollY +
+          track.getBoundingClientRect().top +
+          index * card.offsetHeight;
     if (window.lenis && !reduced) window.lenis.scrollTo(top, { duration: 1.1 });
     else window.scrollTo({ top, behavior: reduced ? "auto" : "smooth" });
   };

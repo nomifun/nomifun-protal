@@ -356,7 +356,9 @@ export default function WorkLoop() {
   const [receiptExpanded, setReceiptExpanded] = useState(false);
   const [authorized, setAuthorized] = useState(false);
   const [reduced, setReduced] = useState(false);
+  const [narrow, setNarrow] = useState(false);
   const [inView, setInView] = useState(false);
+  const reading = narrow || reduced;
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
   const stickyRef = useRef(null);
@@ -366,6 +368,7 @@ export default function WorkLoop() {
   stepRef.current = step;
 
   useEffect(() => {
+    if (narrow) return;
     const navigation = navigationRef.current;
     const active = navigation?.querySelector('[aria-pressed="true"]');
     if (
@@ -387,7 +390,7 @@ export default function WorkLoop() {
         left: navigation.scrollLeft + offset,
         behavior: reduced ? "auto" : "smooth",
       });
-  }, [step, reduced, locale]);
+  }, [step, reduced, narrow, locale]);
 
   useEffect(() => {
     const panels = Array.from(
@@ -395,7 +398,11 @@ export default function WorkLoop() {
     );
     const updateScrollRegions = () => {
       panels.forEach((panel) => {
-        const overflowing = panel.scrollHeight > panel.clientHeight + 2;
+        const scrollable = /^(auto|scroll)$/.test(
+          window.getComputedStyle(panel).overflowY,
+        );
+        const overflowing =
+          !reading && scrollable && panel.scrollHeight > panel.clientHeight + 2;
         panel.toggleAttribute("data-lenis-prevent", overflowing);
         if (overflowing) panel.setAttribute("tabindex", "0");
         else panel.removeAttribute("tabindex");
@@ -414,13 +421,20 @@ export default function WorkLoop() {
         panel.removeAttribute("tabindex");
       });
     };
-  }, [locale, reduced]);
+  }, [locale, reading]);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const layout = window.matchMedia("(max-width: 1000px)");
     const update = () => setReduced(media.matches);
+    const updateLayout = () => {
+      setNarrow(layout.matches);
+      if (layout.matches) setPlaying(false);
+    };
     update();
+    updateLayout();
     media.addEventListener("change", update);
+    layout.addEventListener("change", updateLayout);
     const observer = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       { threshold: 0.1 },
@@ -428,17 +442,65 @@ export default function WorkLoop() {
     observer.observe(stickyRef.current);
     return () => {
       media.removeEventListener("change", update);
+      layout.removeEventListener("change", updateLayout);
       observer.disconnect();
     };
   }, []);
 
   useEffect(() => {
+    if (!reading) return;
+    const cards = Array.from(
+      trackRef.current?.querySelectorAll(".wm-step-card") || [],
+    );
+    let frame = null;
+    const update = () => {
+      frame = null;
+      // Follow the card being read, even when a receipt expands or the viewport
+      // changes. Natural-height cards do not share the desktop rail intervals.
+      const anchor = Math.min(window.innerHeight * 0.3, 200);
+      let current = 0;
+      cards.forEach((card, index) => {
+        if (card.getBoundingClientRect().top <= anchor) current = index;
+      });
+      setStep(current);
+    };
+    const schedule = () => {
+      if (frame === null) frame = window.requestAnimationFrame(update);
+    };
+    let layoutFrame = null;
+    const observer = new ResizeObserver(() => {
+      schedule();
+      if (layoutFrame === null)
+        layoutFrame = requestAnimationFrame(() => {
+          layoutFrame = null;
+          window.dispatchEvent(new Event("portal:layout"));
+        });
+    });
+    cards.forEach((card) => observer.observe(card));
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    schedule();
+    return () => {
+      if (frame !== null) window.cancelAnimationFrame(frame);
+      if (layoutFrame !== null) window.cancelAnimationFrame(layoutFrame);
+      observer.disconnect();
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [reading, locale]);
+
+  useEffect(() => {
     if (
-      reduced ||
+      reading ||
+      window.matchMedia("(max-width: 1000px)").matches ||
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     )
       return;
     gsap.registerPlugin(ScrollTrigger);
+    let alive = true;
+    const surfaces = sectionRef.current.querySelectorAll(
+      ".wm-cards-rail,.wm-step-card,.wm-underlay",
+    );
     const context = gsap.context(() => {
       const track = trackRef.current;
       const rail = track.querySelector(".wm-cards-rail");
@@ -485,6 +547,9 @@ export default function WorkLoop() {
       const scaleUnderlayX = gsap.quickSetter(underlay, "scaleX");
       const scaleUnderlayY = gsap.quickSetter(underlay, "scaleY");
       const render = () => {
+        // Reverting the scrubbed clock can run onUpdate. It must not write a
+        // desktop pose back onto a phone layout while the context is destroyed.
+        if (!alive) return;
         const state = getWorkMotionState(clock.progress, geometry);
         moveFirstX(state.firstX);
         moveFirstY(state.firstY);
@@ -534,21 +599,34 @@ export default function WorkLoop() {
     const resize = () => ScrollTrigger.refresh();
     window.addEventListener("resize", resize);
     return () => {
+      alive = false;
       window.removeEventListener("resize", resize);
       scrollRef.current = null;
       context.revert();
+      gsap.set(surfaces, { clearProps: "transform,transformOrigin,opacity" });
     };
-  }, [reduced]);
+  }, [reading]);
 
   const goTo = useCallback(
     (index) => {
       const bounded = Math.min(steps.length - 1, Math.max(0, index));
       const trigger = scrollRef.current;
-      if (!trigger || reduced) {
+      if (!trigger || reading) {
         setStep(bounded);
-        trackRef.current
-          ?.querySelectorAll(".wm-step-card")
-          [bounded]?.scrollIntoView({ behavior: "instant", block: "center" });
+        const card =
+          trackRef.current?.querySelectorAll(".wm-step-card")[bounded];
+        if (!card) return;
+        const margin =
+          parseFloat(window.getComputedStyle(card).scrollMarginTop) || 0;
+        const target =
+          window.scrollY + card.getBoundingClientRect().top - margin;
+        if (window.lenis?.scrollTo && !reduced)
+          window.lenis.scrollTo(target, { duration: 0.8 });
+        else
+          window.scrollTo({
+            top: target,
+            behavior: reduced ? "auto" : "smooth",
+          });
         return;
       }
       const target =
@@ -557,11 +635,11 @@ export default function WorkLoop() {
         window.lenis.scrollTo(target, { duration: 1.1 });
       else window.scrollTo({ top: target, behavior: "smooth" });
     },
-    [reduced],
+    [reduced, reading],
   );
 
   useEffect(() => {
-    if (!playing || !inView) return;
+    if (!playing || !inView || narrow) return;
     const timer = window.setInterval(() => {
       if (document.hidden) return;
       if (stepRef.current >= steps.length - 1) {
@@ -571,7 +649,7 @@ export default function WorkLoop() {
       goTo(stepRef.current + 1);
     }, 2800);
     return () => window.clearInterval(timer);
-  }, [playing, inView, goTo]);
+  }, [playing, inView, narrow, goTo]);
 
   const scenes = [
     <RequirementScene key="requirement" />,
@@ -592,7 +670,7 @@ export default function WorkLoop() {
   return (
     <section
       ref={sectionRef}
-      className={`work-motion-section ${reduced ? "is-reduced" : ""}`}
+      className={`work-motion-section ${reduced ? "is-reduced" : ""} ${narrow ? "is-narrow" : ""}`}
       id="work"
       aria-labelledby="work-heading"
     >
@@ -635,7 +713,7 @@ export default function WorkLoop() {
               <article
                 key={item.label}
                 className={`wm-step-card wm-card-${index + 1} ${step === index ? "is-current" : ""}`}
-                inert={!reduced && step !== index}
+                inert={!reading && step !== index}
                 aria-label={t(item.name, item.nameEn)}
               >
                 <div className="wm-card-top">
@@ -700,23 +778,25 @@ export default function WorkLoop() {
                 </button>
               ))}
             </div>
-            <button
-              type="button"
-              className="wm-play-control"
-              aria-pressed={playing}
-              aria-label={
-                playing
-                  ? t("暂停工作流演示", "Pause the workflow demo")
-                  : t("播放工作流演示", "Play the workflow demo")
-              }
-              onClick={() => {
-                if (!playing && step === 4) goTo(0);
-                setPlaying((value) => !value);
-              }}
-            >
-              <Icon name={playing ? "Pause" : "Play"} size={16} />
-              <span>{playing ? t("暂停", "Pause") : t("演示", "Play")}</span>
-            </button>
+            {!narrow && (
+              <button
+                type="button"
+                className="wm-play-control"
+                aria-pressed={playing}
+                aria-label={
+                  playing
+                    ? t("暂停工作流演示", "Pause the workflow demo")
+                    : t("播放工作流演示", "Play the workflow demo")
+                }
+                onClick={() => {
+                  if (!playing && step === 4) goTo(0);
+                  setPlaying((value) => !value);
+                }}
+              >
+                <Icon name={playing ? "Pause" : "Play"} size={16} />
+                <span>{playing ? t("暂停", "Pause") : t("演示", "Play")}</span>
+              </button>
+            )}
           </div>
           <div className="wm-scroll-progress" aria-hidden="true">
             <span style={{ width: `${((step + 1) / steps.length) * 100}%` }} />

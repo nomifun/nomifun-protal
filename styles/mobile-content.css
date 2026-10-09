@@ -1,0 +1,37 @@
+/* Capability tiles use the available width without creating a nested swipe
+   surface. The front and back keep the same artwork and flip choreography. */
+@media (max-width: 800px) {
+  .capability-motion-band .capability-flip-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: visible;
+    gap: 12px;
+    padding-bottom: 0;
+  }
+  .capability-motion-band .capability-flip-cell:last-child {
+    grid-column: 2;
+  }
+  .capability-motion-band .capability-flip-cell {
+    min-width: 0;
+    height: 112px;
+  }
+  .capability-motion-band .capability-face > span {
+    font-size: 13px;
+    line-height: 1.4;
+    padding-inline: 8px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .capability-motion-band .capability-flip-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .capability-motion-band .capability-flip-cell:last-child {
+    grid-column: auto;
+  }
+  /* The step markup has four children. On phones, the number replaces the
+     decorative icon so the existing three-column grid can give the label room. */
+  .extension-section .extension-steps > button > svg:not(:last-child) {
+    display: none;
+  }
+}

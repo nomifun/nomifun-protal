@@ -1,0 +1,317 @@
+/* Narrow screens read the complete workflow in the page's scroll flow.
+   Illustration scale, ticket colors and readable type are retained; each card
+   earns the height its content needs instead of scrolling its illustration. */
+@media (max-width: 1000px) {
+  html[lang] .work-motion-section .wm-track {
+    height: auto;
+  }
+  html[lang] .work-motion-section .wm-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 24px;
+  }
+  html[lang] .work-motion-section .wm-underlay {
+    position: relative;
+    inset: auto;
+    order: 0;
+    padding: 64px 24px 30px;
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+  html[lang] .work-motion-section .wm-underlay h2 {
+    font-size: clamp(34px, 6vw, 54px);
+  }
+  html[lang] .work-motion-section .wm-underlay > p {
+    font-size: 16px;
+  }
+  html[lang] .work-motion-section .wm-scroll-invitation,
+  html[lang] .work-motion-section .wm-scroll-progress {
+    display: none;
+  }
+  html[lang] .work-motion-section .wm-sticky-top {
+    position: relative;
+    inset: auto;
+    order: 1;
+    width: min(850px, calc(100% - 48px));
+    margin: 0 auto 16px;
+    gap: 18px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  html[lang] .work-motion-section .wm-sticky-top small {
+    max-width: 48%;
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: right;
+  }
+  html[lang] .work-motion-section .wm-dock {
+    position: relative;
+    inset: auto;
+    order: 2;
+    width: min(850px, calc(100% - 24px));
+    margin: 0 auto 24px;
+    transform: none;
+    padding: 7px;
+    border-radius: 20px;
+    display: block;
+  }
+  html[lang] .work-motion-section .wm-step-navigation {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    width: 100%;
+    min-width: 0;
+    gap: 4px;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  html[lang] .work-motion-section .wm-step-navigation > button {
+    min-width: 0;
+    min-height: 66px;
+    padding: 8px 4px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    border-radius: 13px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  html[lang] .work-motion-section .wm-step-navigation > button > span,
+  html[lang] .work-motion-section .wm-step-navigation > button > strong {
+    font-size: 12px;
+  }
+  html[lang] .work-motion-section .wm-play-control {
+    display: none;
+  }
+  html[lang] .work-motion-section .wm-cards-rail {
+    position: relative;
+    inset: auto;
+    order: 3;
+    width: min(850px, calc(100% - 24px));
+    height: auto;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    transform: none;
+    will-change: auto;
+  }
+  html[lang] .work-motion-section .wm-step-card {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 34px clamp(24px, 5vw, 54px) 36px;
+    gap: 24px;
+    overflow: visible;
+    border-radius: 18px;
+    scroll-margin-top: 100px;
+    transform: none;
+    will-change: auto;
+  }
+  html[lang] .work-motion-section .wm-step-card:nth-child(odd) {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 24px,
+      calc(100% - 10px) 34px,
+      calc(100% - 10px) calc(100% - 34px),
+      100% calc(100% - 24px),
+      100% 100%,
+      0 100%,
+      0 calc(100% - 24px),
+      10px calc(100% - 34px),
+      10px 34px,
+      0 24px
+    );
+  }
+  html[lang] .work-motion-section .wm-card-top {
+    font-size: 11px;
+  }
+  html[lang] .work-motion-section .wm-card-copy h3 {
+    font-size: clamp(29px, 5.5vw, 42px);
+    line-height: 1.3;
+    max-width: 650px;
+  }
+  html[lang] .work-motion-section .wm-card-copy > p {
+    font-size: 16px;
+    line-height: 1.75;
+    margin-top: 14px;
+    max-width: 38em;
+  }
+  html[lang] .work-motion-section .wm-card-visual {
+    flex: none;
+    min-height: 0;
+    width: 100%;
+    padding: 28px 8px 24px;
+    overflow: visible;
+    align-items: center;
+    justify-content: center;
+  }
+  html[lang] .work-motion-section .wm-card-visual > div {
+    flex-shrink: 0;
+    transform: none;
+  }
+  html[lang] .work-motion-section .wm-card-bottom {
+    grid-template-columns: minmax(0, 1fr) auto;
+    min-height: 0;
+    gap: 12px;
+  }
+  html[lang] .work-motion-section .wm-card-bottom > span {
+    width: fit-content;
+    max-width: 100%;
+    font-size: 12px;
+    white-space: normal;
+  }
+  html[lang] .work-motion-section .wm-card-bottom > p {
+    display: block;
+    grid-row: 2;
+    grid-column: 1 / -1;
+    max-width: none;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  html[lang] .work-motion-section .wm-card-bottom > button {
+    grid-column: 2;
+    grid-row: 1;
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Paper drawings keep their small rotations, with space for their corners
+     and attached badges. Expanded receipt text grows the whole card. */
+  html[lang] .work-motion-section .wm-requirement-scene {
+    width: min(355px, 92%);
+  }
+  html[lang] .work-motion-section .wm-paper-tags {
+    flex-wrap: wrap;
+  }
+  html[lang] .work-motion-section .wm-paper-tags > span {
+    font-size: 10px;
+  }
+  html[lang] .work-motion-section .wm-queue-chip {
+    right: -12px;
+    font-size: 12px;
+  }
+  html[lang] .work-motion-section .wm-claim-scene {
+    width: min(450px, 100%);
+    height: 320px;
+    min-height: 320px;
+  }
+  html[lang] .work-motion-section .wm-claim-orbit {
+    width: min(280px, 92%);
+    height: 180px;
+  }
+  html[lang] .work-motion-section .wm-claim-orbit.orbit-two {
+    width: min(330px, 100%);
+    height: 160px;
+  }
+  html[lang] .work-motion-section .wm-claim-task {
+    left: 24%;
+    max-width: 76%;
+    white-space: normal;
+    padding: 16px;
+  }
+  html[lang] .work-motion-section .wm-claim-task strong {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  html[lang] .work-motion-section .wm-claim-task > div > span {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  html[lang] .work-motion-section .wm-claim-persist {
+    top: 0;
+    right: 2%;
+    max-width: 100%;
+    font-size: 11px;
+  }
+  html[lang] .work-motion-section .wm-execution-steps > span > div {
+    min-width: 0;
+  }
+  html[lang] .work-motion-section .wm-execution-steps > span > svg,
+  html[lang] .work-motion-section .wm-running-step > i {
+    flex-shrink: 0;
+  }
+  html[lang] .work-motion-section .wm-execution-steps small {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  html[lang] .work-motion-section .wm-receipt-scene {
+    width: min(375px, 92%);
+    padding-bottom: 40px;
+  }
+  html[lang] .work-motion-section .wm-receipt-row {
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 13px;
+  }
+  html[lang] .work-motion-section .wm-receipt-paper > button {
+    gap: 8px;
+    font-size: 14px;
+    min-height: 44px;
+    text-align: left;
+  }
+  html[lang] .work-motion-section .wm-receipt-detail,
+  html[lang]
+    .work-motion-section
+    .wm-receipt-scene.is-expanded
+    .wm-receipt-detail {
+    font-size: 14px;
+    line-height: 1.75;
+    min-height: 0;
+  }
+
+  /* The loop diagram and its permission control have distinct rows. Long
+     English labels wrap without covering the circular path or the footer. */
+  html[lang] .work-motion-section .wm-continue-scene {
+    width: min(425px, 100%);
+    height: auto;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: 285px auto;
+    gap: 20px;
+  }
+  html[lang] .work-motion-section .wm-continue-scene > svg {
+    height: 285px;
+  }
+  html[lang] .work-motion-section .wm-loop-center {
+    top: 95px;
+  }
+  html[lang] .work-motion-section .wm-loop-note {
+    max-width: 92%;
+    white-space: normal;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  html[lang] .work-motion-section .wm-loop-note.note-result {
+    top: 18px;
+    right: 3%;
+  }
+  html[lang] .work-motion-section .wm-loop-note.note-next {
+    top: 220px;
+    bottom: auto;
+    left: 3%;
+  }
+  html[lang] .work-motion-section .wm-loop-permission {
+    position: relative;
+    inset: auto;
+    grid-row: 2;
+    justify-self: center;
+    transform: none;
+    width: max-content;
+    max-width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.45;
+    white-space: normal;
+    text-align: left;
+  }
+}

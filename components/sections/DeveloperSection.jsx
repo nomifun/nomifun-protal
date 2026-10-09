@@ -505,6 +505,8 @@ export default function DeveloperSection() {
   const perspectives = getPerspectives(t);
   const [selected, setSelected] = useState(0);
   const [readable, setReadable] = useState(false);
+  const [mobile, setMobile] = useState(false);
+  const selectedRef = useRef(0);
   const trackRef = useRef(null);
   const stageControl = useRef(null);
   const filterId = `developer-goo-${useId().replace(/:/g, "")}`;
@@ -516,22 +518,31 @@ export default function DeveloperSection() {
   ];
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobileMedia = window.matchMedia("(max-width: 1000px)");
     let destroy = () => {};
     const configure = () => {
       destroy();
       setReadable(media.matches);
+      setMobile(mobileMedia.matches);
       const controller = initLiquidStage(trackRef.current, {
         count: perspectives.length,
         reduced: media.matches,
-        onSelect: setSelected,
+        natural: mobileMedia.matches,
+        initialIndex: selectedRef.current,
+        onSelect: (index) => {
+          selectedRef.current = index;
+          setSelected(index);
+        },
       });
       stageControl.current = controller;
       destroy = controller.destroy;
     };
     configure();
     media.addEventListener("change", configure);
+    mobileMedia.addEventListener("change", configure);
     return () => {
       media.removeEventListener("change", configure);
+      mobileMedia.removeEventListener("change", configure);
       destroy();
       stageControl.current = null;
     };
@@ -679,11 +690,16 @@ export default function DeveloperSection() {
                         : event.key === "ArrowLeft"
                           ? (index + perspectives.length - 1) %
                             perspectives.length
-                          : event.key === "Home"
-                            ? 0
-                            : event.key === "End"
-                              ? perspectives.length - 1
-                              : null;
+                          : mobile && event.key === "ArrowDown"
+                            ? (index + 2) % perspectives.length
+                            : mobile && event.key === "ArrowUp"
+                              ? (index + perspectives.length - 2) %
+                                perspectives.length
+                              : event.key === "Home"
+                                ? 0
+                                : event.key === "End"
+                                  ? perspectives.length - 1
+                                  : null;
                     if (next === null) return;
                     event.preventDefault();
                     selectPerspective(next);
@@ -711,6 +727,7 @@ export default function DeveloperSection() {
                   aria-labelledby={`developer-tab-${item.id}`}
                   aria-hidden={readable ? undefined : !active}
                   inert={readable || active ? undefined : true}
+                  hidden={mobile && !readable && !active}
                   tabIndex={0}
                   data-liquid-panel
                   className={`developer-workbench developer-liquid-panel is-${item.id} ${active ? "is-active" : ""}`}
@@ -758,11 +775,16 @@ export default function DeveloperSection() {
               )}
             </span>
             <span>
-              {t(
-                "继续滚动，探索下一种视角",
-                "Scroll to explore another perspective",
-              )}{" "}
-              <Icon name="ArrowDown" size={15} />
+              {mobile
+                ? t(
+                    "选择上方视角，探索开放设计",
+                    "Choose a tab to explore the design",
+                  )
+                : t(
+                    "继续滚动，探索下一种视角",
+                    "Scroll to explore another perspective",
+                  )}{" "}
+              <Icon name={mobile ? "ArrowUp" : "ArrowDown"} size={15} />
             </span>
           </div>
         </div>

@@ -1,0 +1,1883 @@
+[
+  {
+    "kind": "developer-tab",
+    "viewport": [
+      390,
+      844
+    ],
+    "buttons": [
+      {
+        "h": 42,
+        "name": "Chat",
+        "w": 133
+      },
+      {
+        "h": 42,
+        "name": "Image",
+        "w": 133
+      },
+      {
+        "h": 42,
+        "name": "Video",
+        "w": 133
+      },
+      {
+        "h": 42,
+        "name": "Audio",
+        "w": 133
+      },
+      {
+        "h": 42,
+        "name": "Search",
+        "w": 275
+      }
+    ],
+    "h": 1048,
+    "inline": "",
+    "nested": 0,
+    "prevent": false,
+    "s": 1048,
+    "selected": "developer-panel-models",
+    "stageHeight": 1311,
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "viewport": [
+      390,
+      844
+    ],
+    "buttons": [
+      {
+        "h": 44,
+        "name": "Plan tasks",
+        "w": 136
+      },
+      {
+        "h": 44,
+        "name": "Delegate in parallel",
+        "w": 136
+      },
+      {
+        "h": 106,
+        "name": "AGENT 01\nResearch",
+        "w": 89
+      },
+      {
+        "h": 106,
+        "name": "AGENT 02\nPlan",
+        "w": 89
+      },
+      {
+        "h": 106,
+        "name": "AGENT 03\nBuild & verify",
+        "w": 89
+      }
+    ],
+    "h": 995,
+    "inline": "",
+    "nested": 0,
+    "prevent": false,
+    "s": 995,
+    "selected": "developer-panel-collaboration",
+    "stageHeight": 1258,
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "viewport": [
+      390,
+      844
+    ],
+    "buttons": [
+      {
+        "h": 44,
+        "name": "Browser Use",
+        "w": 136
+      },
+      {
+        "h": 44,
+        "name": "Computer Use",
+        "w": 136
+      },
+      {
+        "h": 44,
+        "name": "01\nObserve",
+        "w": 85
+      },
+      {
+        "h": 44,
+        "name": "02\nInteract",
+        "w": 81
+      },
+      {
+        "h": 44,
+        "name": "03\nVerify",
+        "w": 70
+      }
+    ],
+    "h": 1035,
+    "inline": "",
+    "nested": 0,
+    "prevent": false,
+    "s": 1035,
+    "selected": "developer-panel-action",
+    "stageHeight": 1298,
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "viewport": [
+      390,
+      844
+    ],
+    "buttons": [
+      {
+        "h": 50,
+        "name": "Product & UI",
+        "w": 275
+      },
+      {
+        "h": 50,
+        "name": "Agent Runtime",
+        "w": 275
+      },
+      {
+        "h": 50,
+        "name": "Capabilities & plugins",
+        "w": 275
+      },
+      {
+        "h": 50,
+        "name": "Local host",
+        "w": 275
+      }
+    ],
+    "h": 1176,
+    "inline": "",
+    "nested": 0,
+    "prevent": false,
+    "s": 1176,
+    "selected": "developer-panel-runtime",
+    "stageHeight": 1439,
+    "visible": 1
+  },
+  {
+    "kind": "route",
+    "path": "/",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "NomiFun — Let AI live by your side",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/products",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "Open-source ecosystem · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/products/desktop",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "NomiFun Desktop · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/products/mobile",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "NomiFun Mobile · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/products/xiaozhi-yuntai",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "NomiFun Xiaozhi Yuntai · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/products/net-infra",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "NomiFun Net Infra · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/products/model-gateway",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "NomiFun Model Gateway · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/download",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "Download · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/blog",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "Journal · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/blog/composable-agents",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "Agent capabilities, made composable · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/blog/one-local-hub",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "One computer, a connected NomiFun · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/blog/nomifun-origin-story",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "The Story of NomiFun, an Open-Source Project · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/contact",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "Contact · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "NomiFun — 让 AI 生活在你生命的左右",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/products",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "开源矩阵 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/products/desktop",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "NomiFun Desktop · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/products/mobile",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "NomiFun Mobile · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/products/xiaozhi-yuntai",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "NomiFun 小智云台 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/products/net-infra",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "NomiFun Net Infra · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/products/model-gateway",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "NomiFun Model Gateway · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/download",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "下载 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/blog",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "博客 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/blog/composable-agents",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "让 Agent 的能力可以组合 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/blog/one-local-hub",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "一台电脑，连接整个 NomiFun · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/blog/nomifun-origin-story",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "开源项目糯米饭（NomiFun）的自述 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/contact",
+    "width": 320,
+    "brokenImages": [],
+    "doc": [
+      305,
+      305
+    ],
+    "main": true,
+    "title": "联系我们 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "NomiFun — Let AI live by your side",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/products",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "Open-source ecosystem · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/products/desktop",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "NomiFun Desktop · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/products/mobile",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "NomiFun Mobile · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/products/xiaozhi-yuntai",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "NomiFun Xiaozhi Yuntai · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/products/net-infra",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "NomiFun Net Infra · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/products/model-gateway",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "NomiFun Model Gateway · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/download",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "Download · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/blog",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "Journal · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/blog/composable-agents",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "Agent capabilities, made composable · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/blog/one-local-hub",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "One computer, a connected NomiFun · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/blog/nomifun-origin-story",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "The Story of NomiFun, an Open-Source Project · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/contact",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "Contact · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "NomiFun — 让 AI 生活在你生命的左右",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/products",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "开源矩阵 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/products/desktop",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "NomiFun Desktop · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/products/mobile",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "NomiFun Mobile · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/products/xiaozhi-yuntai",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "NomiFun 小智云台 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/products/net-infra",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "NomiFun Net Infra · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/products/model-gateway",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "NomiFun Model Gateway · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/download",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "下载 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/blog",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "博客 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/blog/composable-agents",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "让 Agent 的能力可以组合 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/blog/one-local-hub",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "一台电脑，连接整个 NomiFun · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/blog/nomifun-origin-story",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "开源项目糯米饭（NomiFun）的自述 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "route",
+    "path": "/zh/contact",
+    "width": 390,
+    "brokenImages": [],
+    "doc": [
+      375,
+      375
+    ],
+    "main": true,
+    "title": "联系我们 · NomiFun",
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "expanded",
+    "path": "/",
+    "width": 320,
+    "canvas": [
+      791,
+      791
+    ],
+    "doc": [
+      305,
+      305
+    ],
+    "nodes": 4,
+    "permission": "true",
+    "prevent": [],
+    "receiptExpanded": true,
+    "yScroll": []
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/",
+    "width": 320,
+    "clipped": [],
+    "panel": [
+      1123,
+      1123
+    ],
+    "prevent": false,
+    "selected": "developer-panel-models",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/",
+    "width": 320,
+    "clipped": [],
+    "panel": [
+      1144,
+      1144
+    ],
+    "prevent": false,
+    "selected": "developer-panel-collaboration",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/",
+    "width": 320,
+    "clipped": [],
+    "panel": [
+      1209,
+      1209
+    ],
+    "prevent": false,
+    "selected": "developer-panel-action",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/",
+    "width": 320,
+    "clipped": [],
+    "panel": [
+      1310,
+      1310
+    ],
+    "prevent": false,
+    "selected": "developer-panel-runtime",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "expanded",
+    "path": "/zh",
+    "width": 320,
+    "canvas": [
+      730,
+      730
+    ],
+    "doc": [
+      305,
+      305
+    ],
+    "nodes": 4,
+    "permission": "true",
+    "prevent": [],
+    "receiptExpanded": true,
+    "yScroll": []
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/zh",
+    "width": 320,
+    "clipped": [],
+    "panel": [
+      1077,
+      1077
+    ],
+    "prevent": false,
+    "selected": "developer-panel-models",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/zh",
+    "width": 320,
+    "clipped": [],
+    "panel": [
+      994,
+      994
+    ],
+    "prevent": false,
+    "selected": "developer-panel-collaboration",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/zh",
+    "width": 320,
+    "clipped": [],
+    "panel": [
+      1108,
+      1108
+    ],
+    "prevent": false,
+    "selected": "developer-panel-action",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/zh",
+    "width": 320,
+    "clipped": [],
+    "panel": [
+      1111,
+      1111
+    ],
+    "prevent": false,
+    "selected": "developer-panel-runtime",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "expanded",
+    "path": "/",
+    "width": 390,
+    "canvas": [
+      720,
+      720
+    ],
+    "doc": [
+      375,
+      375
+    ],
+    "nodes": 4,
+    "permission": "true",
+    "prevent": [],
+    "receiptExpanded": true,
+    "yScroll": []
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/",
+    "width": 390,
+    "clipped": [],
+    "panel": [
+      1048,
+      1048
+    ],
+    "prevent": false,
+    "selected": "developer-panel-models",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/",
+    "width": 390,
+    "clipped": [],
+    "panel": [
+      995,
+      995
+    ],
+    "prevent": false,
+    "selected": "developer-panel-collaboration",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/",
+    "width": 390,
+    "clipped": [],
+    "panel": [
+      1035,
+      1035
+    ],
+    "prevent": false,
+    "selected": "developer-panel-action",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/",
+    "width": 390,
+    "clipped": [],
+    "panel": [
+      1176,
+      1176
+    ],
+    "prevent": false,
+    "selected": "developer-panel-runtime",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "expanded",
+    "path": "/zh",
+    "width": 390,
+    "canvas": [
+      645,
+      645
+    ],
+    "doc": [
+      375,
+      375
+    ],
+    "nodes": 4,
+    "permission": "true",
+    "prevent": [],
+    "receiptExpanded": true,
+    "yScroll": []
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/zh",
+    "width": 390,
+    "clipped": [],
+    "panel": [
+      964,
+      964
+    ],
+    "prevent": false,
+    "selected": "developer-panel-models",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/zh",
+    "width": 390,
+    "clipped": [],
+    "panel": [
+      920,
+      920
+    ],
+    "prevent": false,
+    "selected": "developer-panel-collaboration",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/zh",
+    "width": 390,
+    "clipped": [],
+    "panel": [
+      982,
+      982
+    ],
+    "prevent": false,
+    "selected": "developer-panel-action",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "developer-tab",
+    "path": "/zh",
+    "width": 390,
+    "clipped": [],
+    "panel": [
+      1038,
+      1038
+    ],
+    "prevent": false,
+    "selected": "developer-panel-runtime",
+    "stageInline": "",
+    "visible": 1
+  },
+  {
+    "kind": "menu",
+    "path": "/",
+    "width": 320,
+    "open": {
+      "body": "hidden",
+      "menu": [
+        458,
+        1006
+      ],
+      "prevent": true
+    },
+    "closed": ""
+  },
+  {
+    "kind": "menu",
+    "path": "/zh",
+    "width": 320,
+    "open": {
+      "body": "hidden",
+      "menu": [
+        458,
+        820
+      ],
+      "prevent": true
+    },
+    "closed": ""
+  },
+  {
+    "kind": "gallery-close",
+    "path": "/",
+    "body": ""
+  },
+  {
+    "kind": "gallery-close",
+    "path": "/zh",
+    "body": ""
+  },
+  {
+    "kind": "home",
+    "path": "/",
+    "doc": [
+      305,
+      305
+    ],
+    "prevent": [],
+    "viewport": [
+      320,
+      568
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "home",
+    "path": "/zh",
+    "doc": [
+      305,
+      305
+    ],
+    "prevent": [],
+    "viewport": [
+      320,
+      568
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "home",
+    "path": "/",
+    "doc": [
+      345,
+      345
+    ],
+    "prevent": [],
+    "viewport": [
+      360,
+      667
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "home",
+    "path": "/zh",
+    "doc": [
+      345,
+      345
+    ],
+    "prevent": [],
+    "viewport": [
+      360,
+      667
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "home",
+    "path": "/",
+    "doc": [
+      375,
+      375
+    ],
+    "prevent": [],
+    "viewport": [
+      390,
+      844
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "home",
+    "path": "/zh",
+    "doc": [
+      375,
+      375
+    ],
+    "prevent": [],
+    "viewport": [
+      390,
+      844
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "home",
+    "path": "/",
+    "doc": [
+      415,
+      415
+    ],
+    "prevent": [],
+    "viewport": [
+      430,
+      932
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "home",
+    "path": "/zh",
+    "doc": [
+      415,
+      415
+    ],
+    "prevent": [],
+    "viewport": [
+      430,
+      932
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "home",
+    "path": "/",
+    "doc": [
+      753,
+      753
+    ],
+    "prevent": [],
+    "viewport": [
+      768,
+      1024
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "home",
+    "path": "/zh",
+    "doc": [
+      753,
+      753
+    ],
+    "prevent": [],
+    "viewport": [
+      768,
+      1024
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "home",
+    "path": "/",
+    "doc": [
+      829,
+      829
+    ],
+    "prevent": [],
+    "viewport": [
+      844,
+      390
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "home",
+    "path": "/zh",
+    "doc": [
+      829,
+      829
+    ],
+    "prevent": [],
+    "viewport": [
+      844,
+      390
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "home",
+    "path": "/",
+    "doc": [
+      985,
+      985
+    ],
+    "prevent": [],
+    "viewport": [
+      1000,
+      700
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "home",
+    "path": "/zh",
+    "doc": [
+      985,
+      985
+    ],
+    "prevent": [],
+    "viewport": [
+      1000,
+      700
+    ],
+    "xScroll": [],
+    "yScroll": []
+  },
+  {
+    "kind": "desktop",
+    "path": "/",
+    "creative": [
+      [
+        466,
+        466
+      ],
+      [
+        368,
+        368
+      ],
+      [
+        368,
+        368
+      ],
+      [
+        466,
+        466
+      ],
+      [
+        368,
+        368
+      ]
+    ],
+    "creativeSticky": "sticky",
+    "developerSticky": "sticky",
+    "doc": [
+      1351,
+      1351
+    ],
+    "viewport": [
+      1366,
+      768
+    ],
+    "workSticky": "sticky"
+  },
+  {
+    "kind": "desktop",
+    "path": "/zh",
+    "creative": [
+      [
+        466,
+        466
+      ],
+      [
+        368,
+        368
+      ],
+      [
+        368,
+        368
+      ],
+      [
+        466,
+        466
+      ],
+      [
+        368,
+        368
+      ]
+    ],
+    "creativeSticky": "sticky",
+    "developerSticky": "sticky",
+    "doc": [
+      1351,
+      1351
+    ],
+    "viewport": [
+      1366,
+      768
+    ],
+    "workSticky": "sticky"
+  },
+  {
+    "kind": "desktop",
+    "path": "/",
+    "creative": [
+      [
+        598,
+        598
+      ],
+      [
+        497,
+        497
+      ],
+      [
+        497,
+        497
+      ],
+      [
+        598,
+        598
+      ],
+      [
+        497,
+        497
+      ]
+    ],
+    "creativeSticky": "sticky",
+    "developerSticky": "sticky",
+    "doc": [
+      1425,
+      1425
+    ],
+    "viewport": [
+      1440,
+      900
+    ],
+    "workSticky": "sticky"
+  },
+  {
+    "kind": "desktop",
+    "path": "/zh",
+    "creative": [
+      [
+        598,
+        598
+      ],
+      [
+        497,
+        497
+      ],
+      [
+        497,
+        497
+      ],
+      [
+        598,
+        598
+      ],
+      [
+        497,
+        497
+      ]
+    ],
+    "creativeSticky": "sticky",
+    "developerSticky": "sticky",
+    "doc": [
+      1425,
+      1425
+    ],
+    "viewport": [
+      1440,
+      900
+    ],
+    "workSticky": "sticky"
+  },
+  {
+    "kind": "desktop",
+    "path": "/",
+    "creative": [
+      [
+        778,
+        778
+      ],
+      [
+        673,
+        673
+      ],
+      [
+        673,
+        673
+      ],
+      [
+        778,
+        778
+      ],
+      [
+        673,
+        673
+      ]
+    ],
+    "creativeSticky": "sticky",
+    "developerSticky": "sticky",
+    "doc": [
+      1905,
+      1905
+    ],
+    "viewport": [
+      1920,
+      1080
+    ],
+    "workSticky": "sticky"
+  },
+  {
+    "kind": "desktop",
+    "path": "/zh",
+    "creative": [
+      [
+        778,
+        778
+      ],
+      [
+        673,
+        673
+      ],
+      [
+        673,
+        673
+      ],
+      [
+        778,
+        778
+      ],
+      [
+        673,
+        673
+      ]
+    ],
+    "creativeSticky": "sticky",
+    "developerSticky": "sticky",
+    "doc": [
+      1905,
+      1905
+    ],
+    "viewport": [
+      1920,
+      1080
+    ],
+    "workSticky": "sticky"
+  },
+  {
+    "kind": "desktop-navigation",
+    "viewport": [
+      1920,
+      1080
+    ],
+    "from": "canvas",
+    "to": "image",
+    "active": "creative-tab-image",
+    "error": 0.203125,
+    "expected": 17336.796875,
+    "y": 17337
+  },
+  {
+    "kind": "resize",
+    "creative": {
+      "position": "relative",
+      "transform": ""
+    },
+    "developer": {
+      "inlineHeight": "",
+      "visible": 1
+    },
+    "doc": [
+      375,
+      375
+    ],
+    "prevent": [],
+    "viewport": [
+      390,
+      844
+    ],
+    "work": {
+      "first": "",
+      "inert": 0,
+      "narrow": true,
+      "rail": ""
+    }
+  },
+  {
+    "kind": "resize",
+    "creative": {
+      "position": "sticky",
+      "transform": "translate(0px, 0px)"
+    },
+    "developer": {
+      "inlineHeight": "600px",
+      "visible": 4
+    },
+    "doc": [
+      1351,
+      1351
+    ],
+    "prevent": [
+      "wm-card-visual",
+      "wm-card-visual",
+      "wm-card-visual",
+      "wm-card-visual",
+      "wm-card-visual",
+      "developer-workbench developer-liquid-panel is-models is-active",
+      "developer-workbench developer-liquid-panel is-collaboration ",
+      "developer-workbench developer-liquid-panel is-action ",
+      "developer-workbench developer-liquid-panel is-runtime "
+    ],
+    "viewport": [
+      1366,
+      768
+    ],
+    "work": {
+      "first": "translate3d(607.95px, 537.6px, 0px) rotate(6deg) scale(0.62, 0.62)",
+      "inert": 4,
+      "narrow": false,
+      "rail": "translate3d(368.5px, 0px, 0px)"
+    }
+  },
+  {
+    "kind": "resize",
+    "creative": {
+      "position": "relative",
+      "transform": ""
+    },
+    "developer": {
+      "inlineHeight": "",
+      "visible": 1
+    },
+    "doc": [
+      985,
+      985
+    ],
+    "prevent": [],
+    "viewport": [
+      1000,
+      700
+    ],
+    "work": {
+      "first": "",
+      "inert": 0,
+      "narrow": true,
+      "rail": ""
+    }
+  },
+  {
+    "kind": "resize",
+    "creative": {
+      "position": "sticky",
+      "transform": "translate(0px, 0px)"
+    },
+    "developer": {
+      "inlineHeight": "600px",
+      "visible": 4
+    },
+    "doc": [
+      986,
+      986
+    ],
+    "prevent": [
+      "wm-card-visual",
+      "wm-card-visual",
+      "wm-card-visual",
+      "wm-card-visual",
+      "wm-card-visual",
+      "creative-stack-visual",
+      "creative-stack-visual",
+      "creative-stack-visual",
+      "developer-workbench developer-liquid-panel is-collaboration ",
+      "developer-workbench developer-liquid-panel is-action "
+    ],
+    "viewport": [
+      1001,
+      700
+    ],
+    "work": {
+      "first": "translate3d(443.7px, 490px, 0px) rotate(6deg) scale(0.62, 0.62)",
+      "inert": 4,
+      "narrow": false,
+      "rail": "translate3d(213px, 0px, 0px)"
+    }
+  },
+  {
+    "kind": "resize",
+    "creative": {
+      "position": "relative",
+      "transform": ""
+    },
+    "developer": {
+      "inlineHeight": "",
+      "visible": 1
+    },
+    "doc": [
+      753,
+      753
+    ],
+    "prevent": [],
+    "viewport": [
+      768,
+      1024
+    ],
+    "work": {
+      "first": "",
+      "inert": 0,
+      "narrow": true,
+      "rail": ""
+    }
+  },
+  {
+    "kind": "resize",
+    "creative": {
+      "position": "sticky",
+      "transform": "translate(0px, 0px)"
+    },
+    "developer": {
+      "inlineHeight": "670px",
+      "visible": 4
+    },
+    "doc": [
+      1425,
+      1425
+    ],
+    "prevent": [
+      "wm-card-visual",
+      "wm-card-visual",
+      "wm-card-visual",
+      "wm-card-visual",
+      "developer-workbench developer-liquid-panel is-collaboration ",
+      "developer-workbench developer-liquid-panel is-action ",
+      "developer-workbench developer-liquid-panel is-runtime "
+    ],
+    "viewport": [
+      1440,
+      900
+    ],
+    "work": {
+      "first": "translate3d(641.25px, 630px, 0px) rotate(6deg) scale(0.62, 0.62)",
+      "inert": 4,
+      "narrow": false,
+      "rail": "translate3d(352.5px, 0px, 0px)"
+    }
+  },
+  {
+    "kind": "resize",
+    "creative": {
+      "position": "relative",
+      "transform": ""
+    },
+    "developer": {
+      "inlineHeight": "",
+      "visible": 1
+    },
+    "doc": [
+      305,
+      305
+    ],
+    "prevent": [],
+    "viewport": [
+      320,
+      568
+    ],
+    "work": {
+      "first": "",
+      "inert": 0,
+      "narrow": true,
+      "rail": ""
+    }
+  }
+]

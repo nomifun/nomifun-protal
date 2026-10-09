@@ -1,0 +1,339 @@
+/* On touch-sized layouts the selected technical view grows with its content.
+   The liquid color and tab indicator remain, while the page owns scrolling. */
+@media (max-width: 1000px) {
+  html[lang] .developer-section .developer-liquid-track {
+    height: auto;
+    margin-top: 48px;
+  }
+
+  html[lang] .developer-section .developer-liquid-stage {
+    position: relative;
+    top: auto;
+    width: calc(100% - 40px);
+    height: auto;
+    min-height: 0;
+    padding: 24px;
+    overflow: clip;
+  }
+
+  html[lang] .developer-section .developer-liquid-stage .developer-liquid-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    max-width: 680px;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-liquid-tabs
+    > button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    min-width: 0;
+    min-height: 60px;
+    padding: 12px 16px;
+    gap: 9px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.45;
+    text-align: left;
+    white-space: normal;
+  }
+
+  html[lang] .developer-section .developer-liquid-tabs > button > span {
+    min-width: 0;
+    margin: 0;
+  }
+
+  html[lang] .developer-section .developer-liquid-tabs > button small {
+    display: none;
+  }
+
+  html[lang] .developer-section .developer-liquid-pill {
+    border-radius: 16px;
+  }
+
+  /* A two-row tab bar has no single lower edge for the desktop goo bridge. */
+  html[lang] .developer-section .developer-liquid-bridge,
+  html[lang] .developer-section .developer-liquid-landing {
+    display: none;
+  }
+
+  html[lang] .developer-section .developer-liquid-panels {
+    flex: none;
+    min-height: 0;
+    grid-template-rows: auto;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-liquid-panel {
+    grid-area: auto;
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-workbench-copy {
+    justify-content: flex-start;
+    padding: 32px;
+    border-radius: 24px 24px 0 0;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-workbench-visual {
+    height: auto;
+    min-height: 390px;
+    padding: 28px 32px;
+    border-left: 0;
+    border-top: 1px solid var(--stage-border);
+    border-radius: 0 0 24px 24px;
+  }
+
+  html[lang] .developer-section .developer-liquid-stage .developer-source-link,
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-task-list
+    button,
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-diagram-switch
+    button,
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-action-steps
+    button,
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-runtime-layers
+    button {
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-dag-tasks
+    button {
+    min-width: 0;
+    min-height: 44px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-dag-tasks
+    button
+    strong {
+    font-size: 14px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-dag-goal
+    > span,
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-dag-delivery
+    > span,
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-action-overlay
+    > span {
+    min-width: 0;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-dag-delivery {
+    width: fit-content;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1000px) and (prefers-reduced-motion: no-preference) {
+  html[lang] .developer-section .developer-liquid-panels {
+    display: block;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-liquid-panel:not(.is-active),
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-liquid-panel[hidden] {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  html[lang] .developer-section .developer-liquid-stage {
+    width: calc(100% - 24px);
+    padding: 16px;
+    border-radius: 24px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-liquid-tabs
+    > button {
+    min-height: 68px;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-workbench-copy {
+    padding: 26px 20px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-workbench-visual {
+    padding: 24px 20px;
+  }
+
+  /* Keep routing choices and the endpoint spacious instead of scaling the
+     complete architecture diagram into two narrow columns. */
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-model-diagram {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    min-height: 0;
+    padding-block: 24px 0;
+  }
+
+  html[lang] .developer-section .developer-liquid-stage .developer-task-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-task-list
+    button {
+    min-width: 0;
+    padding: 11px 10px;
+    gap: 7px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-task-list
+    button:last-child {
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
+
+  html[lang] .developer-section .developer-liquid-stage .developer-route-line {
+    width: 1px;
+    height: 30px;
+    margin: 0 auto;
+    border: 0;
+    background: var(--stage-border);
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-route-line
+    > i,
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-route-line::before {
+    display: none;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-route-line
+    > span {
+    left: -2px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-model-endpoint {
+    padding: 0;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-model-diagram
+    .developer-diagram-caption {
+    position: static;
+    margin-top: 4px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-diagram-switch {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    max-width: 360px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-diagram-switch
+    button {
+    min-width: 0;
+    padding: 10px 8px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-action-steps {
+    width: 100%;
+    gap: 8px;
+  }
+
+  html[lang]
+    .developer-section
+    .developer-liquid-stage
+    .developer-action-steps
+    button {
+    justify-content: center;
+    padding: 8px;
+  }
+}
