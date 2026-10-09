@@ -9,7 +9,7 @@ npm ci
 npm run dev -- --port 3107
 ```
 
-打开 http://localhost:3107。构建命令 `npm run build` 生成 `out/`。生产预览可运行 `node scripts/serve-static.mjs`，默认 3107 端口。
+打开 http://localhost:3107。构建命令 `npm run build` 先同步发布快照，再生成 `out/`。生产预览可运行 `npm run preview`，默认 3107 端口。开发与静态预览都提供与 Vercel 相同的双源版本接口。
 
 ## Git 与本地文件
 
@@ -25,7 +25,7 @@ npm run dev -- --port 3107
 
 - `/`、`/en`、`/zh`：Desktop 产品首页。场景切换、能力装配、会话 Agent 接力、伙伴/记忆/渠道、IDMM 与持续工作、创作画布、小程序/无头插件、开发者架构、产品起源和生态弧形拖拽。
 - `/products` 和四个产品详情：Desktop、Mobile、小智云台、Net Infra。
-- `/download`：正式 Releases 与备用下载链接。没有硬编码或虚构“最新版本”。
+- `/download`：每个操作系统卡片内直接提供 CrabNebula（推荐）与 GitHub 的安装包下载按钮和各自版本，选择架构或安装格式后即可下载。中英文页面一致推荐 CrabNebula，多个下载源提供备用入口；两个来源独立核实，接口失败保留已核实数据及原时间。源码区单独展示 GitHub / Gitee 仓库。
 - `/blog`：可筛选的 Markdown 博客。文章放在 `content/blog/*.md`，自动生成详情页，`draft: true` 不发布。原起源文章保留为历史归档。
 - `/contact`：真实邮箱、Issue、微信与 QQ 社群二维码，以及社交/项目入口。
 
@@ -52,9 +52,13 @@ npm run build
 npm run check:content
 npm run check:i18n
 npm run check:work-motion
+npm run check:downloads
+npm run check:release-service
 ```
 
 `check:content` 检查双语导出页面的站内链接、锚点、图片/视频/字体。`check:i18n` 检查英文展示及ARIA漏译、语言链接、metadata、英文资源和路径辅助函数。初版内容验收记录保存在 `design-qa.md`；动效记录见 `docs/motion-qa.md`，双语最新验收见 `docs/i18n-qa.md`。
+
+Vercel 使用 `npm run build:vercel`，将静态导出与一个 `/api/releases?source=github|crabnebula` Function 打包到 Build Output API v3。接口按源缓存约一分钟，解决 CrabNebula 元数据的浏览器跨域限制；安装包直接从对应发布平台下载。纯静态托管仍可使用 `out/` 及构建时快照。配置、缓存与本地验收步骤见 [下载版本同步与 Vercel 部署](docs/download-deployment.md)。
 
 字体与组件可读性修正见 `docs/readability-audit.md`。`styles/polish-foundations.css`、`polish-platform-cards.css`、`polish-work-creative.css` 按正文、实际控件、辅助说明分级；手机长场景保持正常字号并按实际溢出滚读。首页阅读dock在首屏之后出现，内页使用常驻顶栏，避免盖住主要动作。
 

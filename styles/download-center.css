@@ -1,0 +1,325 @@
+.release-center {
+  padding-bottom: 30px;
+}
+.release-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.release-heading h2 {
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  margin-top: 13px;
+}
+.release-refresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: transparent;
+  white-space: nowrap;
+  font-size: 13px;
+}
+.release-refresh:disabled {
+  cursor: wait;
+  color: #66645f;
+}
+.release-platform-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 18px;
+}
+.release-platform-card {
+  background: #ece6f3;
+  border: 1px solid #d7d0dd;
+  border-radius: 12px;
+  padding: 24px;
+  min-width: 0;
+}
+.release-platform-card:nth-child(2) {
+  background: #efdfd4;
+  border-color: #ddcbbf;
+}
+.release-platform-card:nth-child(3) {
+  background: #e4e7dc;
+  border-color: #cdd2c1;
+}
+.release-platform-card.is-detected {
+  outline: 2px solid #71617f;
+  outline-offset: 3px;
+}
+.release-platform-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 34px;
+}
+.release-platform-card h3 {
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+.release-device-badge {
+  margin-left: auto;
+  font-size: 11px;
+  padding: 4px 7px;
+  border: 1px solid #71617f;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+.release-package-label {
+  display: block;
+  font-size: 12px;
+  margin: 18px 0 6px;
+  color: #5e5751;
+}
+.release-platform-card select {
+  width: 100%;
+  min-height: 36px;
+  padding: 7px 30px 7px 10px;
+  border: 1px solid #a8a09b;
+  border-radius: 6px;
+  background: #fffb;
+  font-size: 13px;
+  color: var(--ink);
+}
+.release-platform-card select:focus-visible {
+  outline: 3px solid #9572c9;
+  outline-offset: 3px;
+}
+.release-platform-note {
+  font-size: 13px;
+  color: #5e5751;
+  line-height: 1.7;
+  margin: 12px 0 16px;
+}
+.release-platform-sources {
+  border-top: 1px solid #887b7038;
+  padding-top: 8px;
+}
+.release-platform-source + .release-platform-source {
+  border-top: 1px solid #887b7026;
+}
+.release-download-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+}
+.release-source-name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+.release-recommended {
+  border-radius: 4px;
+  padding: 2px 5px;
+  background: #f8f5ef;
+  color: #51425e;
+  font-size: 10px;
+  font-weight: 400;
+}
+.release-version {
+  font-size: 12px;
+  color: #5e5751;
+  white-space: nowrap;
+}
+.release-download-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 7px 11px;
+  border: 1px solid #a79d95;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  background: #ffffff30;
+}
+.release-download-link.is-primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.release-download-link:hover {
+  background: #ffffff80;
+}
+.release-download-link.is-primary:hover {
+  background: #38313e;
+}
+.release-status-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  min-height: 34px;
+  font-size: 12px;
+  color: #625c55;
+  white-space: nowrap;
+}
+.release-status-link:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+.release-unavailable-label {
+  font-size: 12px;
+  color: #625c55;
+  white-space: nowrap;
+}
+.release-row-feedback {
+  margin: 0 0 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #785437;
+}
+.release-package-details {
+  margin-top: 5px;
+}
+.release-package-details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 30px;
+  color: #655e58;
+  font-size: 12px;
+  cursor: pointer;
+  list-style: none;
+}
+.release-package-details summary::-webkit-details-marker {
+  display: none;
+}
+.release-package-details summary > svg {
+  transition: transform 0.15s;
+}
+.release-package-details[open] summary > svg {
+  transform: rotate(180deg);
+}
+.release-details-body {
+  border-top: 1px solid #887b7026;
+  margin-top: 4px;
+  padding-top: 12px;
+}
+.release-package-metadata + .release-package-metadata {
+  margin-top: 14px;
+}
+.release-package-metadata h4 {
+  margin: 0 0 5px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.release-package-metadata p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #625c55;
+  overflow-wrap: anywhere;
+}
+.release-package-metadata .release-sync-note {
+  margin-top: 4px;
+}
+.release-secondary-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+.release-secondary-links > span {
+  margin-right: auto;
+  color: #66615a;
+}
+.release-secondary-links > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+}
+.release-nojs {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.release-nojs > p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.release-nojs h3 {
+  margin: 24px 0 8px;
+}
+.release-nojs h4 {
+  margin: 16px 0 6px;
+  font-size: 15px;
+}
+.release-nojs a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  text-decoration: underline;
+}
+@media (max-width: 1000px) {
+  .release-platform-grid {
+    gap: 14px;
+  }
+  .release-platform-card {
+    padding: 20px;
+  }
+  .release-source-name {
+    font-size: 12px;
+  }
+  .release-download-link {
+    padding-inline: 8px;
+  }
+}
+@media (max-width: 760px) {
+  .release-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .release-platform-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .release-platform-card {
+    padding: 22px;
+  }
+  .release-source-name {
+    font-size: 13px;
+  }
+  .release-platform-card select {
+    min-height: 40px;
+  }
+  .release-download-link,
+  .release-status-link {
+    min-height: 40px;
+    padding-inline: 10px;
+  }
+  .release-package-details summary {
+    min-height: 36px;
+  }
+  .release-secondary-links {
+    gap: 7px 18px;
+  }
+  .release-secondary-links > span {
+    flex-basis: 100%;
+  }
+}

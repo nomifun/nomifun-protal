@@ -39,7 +39,7 @@ const details = {
     ],
     boundary:
       "这里展示的是当前开发分支的能力设计与实现。项目仍在持续迭代；安装包提供的具体能力、平台支持与实验状态，请按下载版本核对。使用云模型或外部渠道时，相应请求会发送给你选择的服务。",
-    action: "获取 Desktop",
+    action: "下载安装包",
     actionHref: "/download",
   },
   mobile: {
@@ -67,7 +67,7 @@ const details = {
     ],
     boundary:
       "Mobile 面向 Android、iOS 与 H5 开发。平台安装与分发状态以仓库为准。局域网监听器没有内置 TLS，请在可信局域网或专用 VPN 使用；跨网络连接需要相应网络配置，不能把局域网直连理解为自动穿透所有网络。",
-    action: "查看 Mobile 源码",
+    action: "GitHub 源码",
   },
   "xiaozhi-yuntai": {
     lead: "你的桌面伙伴，也可以有真实世界的身体。绑定小智云台，让同一个伙伴听见你、和你说话，用表情与动作回应。NomiFun Desktop 延续它的身份、记忆与能力。",
@@ -94,7 +94,7 @@ const details = {
     ],
     boundary:
       "需要兼容的硬件、固件烧录、网络配置与伙伴绑定。语音识别、合成和对话使用你选定的模型；选择云端模型时，相应语音或文本会按配置发送给供应商。舵机需按板型要求校准后启用。",
-    action: "探索固件源码",
+    action: "GitHub 固件源码",
   },
   "net-infra": {
     lead: "当手机与电脑不在同一网络，用自己管理的连接把它们带到一起。NomiRelay 负责传输，Desktop 继续负责 AI 和数据。",
@@ -121,7 +121,7 @@ const details = {
     ],
     boundary:
       "Net Infra 需要自托管部署 NomiRelay 与 nfagent，并配置网络入口、认证和 TLS。它是可选传输基础设施，不是无需部署的云服务。实际协议能力、限制与运维要求以仓库集成文档为准。",
-    action: "查看 Net Infra 源码",
+    action: "GitHub 源码",
   },
 };
 
@@ -159,7 +159,7 @@ const englishDetails = {
     ],
     boundary:
       "This page presents capabilities designed and implemented in the current development branch. The project continues to evolve. Check the release you download for available features, platform support, and experimental status. Cloud models and external channels receive the requests you configure them to handle.",
-    action: "Get Desktop",
+    action: "Download app",
     actionHref: "/download",
   },
   mobile: {
@@ -190,7 +190,7 @@ const englishDetails = {
     ],
     boundary:
       "Mobile is developed for Android, iOS, and H5. Check the repository for current installation and distribution status. The local-network listener does not include built-in TLS; use a trusted local network or a private VPN. Access across networks requires appropriate network configuration. Direct local access does not automatically traverse every network.",
-    action: "Explore Mobile source",
+    action: "GitHub source",
   },
   "xiaozhi-yuntai": {
     lead: "Give your desktop companion a physical presence. Connect Xiaozhi Yuntai so the same companion can hear you, speak with you, and respond through expressions and movement. NomiFun Desktop carries its identity, memory, and capabilities.",
@@ -217,7 +217,7 @@ const englishDetails = {
     ],
     boundary:
       "Compatible hardware, firmware flashing, network setup, and companion binding are required. Speech recognition, synthesis, and conversation use the models you choose. When cloud models are selected, the configured audio or text requests are sent to those providers. Calibrate the servos according to your board's requirements before enabling them.",
-    action: "Explore firmware source",
+    action: "GitHub firmware source",
   },
   "net-infra": {
     lead: "When your phone and computer are on different networks, bring them together through a connection you manage. NomiRelay handles transport; Desktop continues to handle AI and data.",
@@ -244,7 +244,7 @@ const englishDetails = {
     ],
     boundary:
       "Net Infra requires self-hosting NomiRelay and nfagent, with network endpoints, authentication, and TLS configured. It is optional transport infrastructure, not a cloud service that requires no deployment. See the repository's integration documentation for current protocol capabilities, limits, and operating requirements.",
-    action: "Explore Net Infra source",
+    action: "GitHub source",
   },
 };
 
@@ -301,22 +301,33 @@ export default async function ProductPage({ params, locale = "zh" }) {
             <p className="page-lead">{data.lead}</p>
           </div>
         </div>
-        <div className="page-actions">
+        <div className="page-actions product-repository-actions">
           <Link
             className="button"
             href={data.actionHref || product.repo}
             target={data.actionHref ? undefined : "_blank"}
             rel={data.actionHref ? undefined : "noopener noreferrer"}
           >
-            {data.action} <Icon name="ArrowUpRight" />
+            {data.action}{" "}
+            <Icon name={data.actionHref ? "DownloadSimple" : "GithubLogo"} />
           </Link>
+          {data.actionHref && (
+            <a
+              className="button ghost"
+              href={product.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t("GitHub 源码", "GitHub source")} <Icon name="GithubLogo" />
+            </a>
+          )}
           <a
             className="button ghost"
             href={product.gitee}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {t("Gitee 镜像", "Gitee mirror")} <Icon name="ArrowUpRight" />
+            {t("Gitee 源码", "Gitee source")} <Icon name="GitBranch" />
           </a>
         </div>
       </section>

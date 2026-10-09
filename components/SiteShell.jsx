@@ -5,6 +5,7 @@ import Link from "@/components/i18n/LocaleLink";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import LanguageSwitch from "@/components/i18n/LanguageSwitch";
 import { stripLocale } from "@/lib/i18n";
+import { links } from "@/lib/site";
 import gsap from "gsap";
 import Icon from "./Icon";
 import RollText from "./motion/RollText";
@@ -297,9 +298,10 @@ export default function SiteShell({ children }) {
         <div className="header-actions">
           <a
             className="header-source"
-            href="https://github.com/nomifun/nomifun-desktop"
+            href={links.github}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
+            title={t("GitHub 源码仓库", "GitHub source repository")}
             aria-label={t(
               "GitHub 开源仓库",
               "Open-source repository on GitHub",
@@ -341,17 +343,30 @@ export default function SiteShell({ children }) {
                     <Icon name="ArrowUpRight" size={20} />
                   </span>
                 </Link>
-                <a
-                  className="footer-source"
-                  href="https://github.com/nomifun/nomifun-desktop"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span className="button-motion-inner">
-                    <RollText>{t("一起构建", "Build with us")}</RollText>
-                    <Icon name="GithubLogo" size={20} />
-                  </span>
-                </a>
+                <div className="footer-repositories">
+                  <a
+                    className="footer-source"
+                    href={links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="button-motion-inner">
+                      <RollText>{t("GitHub 源码", "GitHub source")}</RollText>
+                      <Icon name="GithubLogo" size={20} />
+                    </span>
+                  </a>
+                  <a
+                    className="footer-source"
+                    href={links.gitee}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="button-motion-inner">
+                      <RollText>{t("Gitee 源码", "Gitee source")}</RollText>
+                      <Icon name="GitBranch" size={20} />
+                    </span>
+                  </a>
+                </div>
               </div>
               <button className="footer-copy" onClick={copyOverview}>
                 <Icon name="Link" size={17} />

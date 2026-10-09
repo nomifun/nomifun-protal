@@ -2,6 +2,8 @@ import Link from "@/components/i18n/LocaleLink";
 import Icon from "@/components/Icon";
 import { links, getProducts } from "@/lib/site";
 import { createI18n, pageMetadata } from "@/lib/i18n";
+import DownloadCenter from "@/components/downloads/DownloadCenter";
+import snapshot from "@/lib/releases-snapshot.json";
 
 export function getPageMetadata(locale = "zh") {
   return pageMetadata(
@@ -9,46 +11,11 @@ export function getPageMetadata(locale = "zh") {
     "/download",
     "下载",
     "Download",
-    "从官方 GitHub Releases 获取 NomiFun Desktop。Windows、macOS、Linux 安装与四个开源项目入口。",
-    "Get NomiFun Desktop from official GitHub Releases. Find Windows, macOS, and Linux installation packages and explore all four open-source projects.",
+    "从 CrabNebula 或 GitHub 直接下载 NomiFun Desktop，分别查看最新版本与各系统安装包。GitHub、Gitee 源码仓库入口独立展示。",
+    "Download NomiFun Desktop directly from CrabNebula or GitHub. Compare each source's latest version and available installers, with separate GitHub and Gitee source repositories.",
   );
 }
 export const metadata = getPageMetadata();
-
-const platforms = [
-  {
-    name: "Windows",
-    label: "为你的日常电脑",
-    labelEn: "For your everyday computer",
-    file: ".exe 安装包",
-    fileEn: ".exe installer",
-    icon: "WindowsLogo",
-    note: "选择对应架构的安装包。运行需要 Microsoft WebView2。",
-    noteEn:
-      "Choose the installer for your processor architecture. Microsoft WebView2 is required.",
-  },
-  {
-    name: "macOS",
-    label: "为创作与开发",
-    labelEn: "For creating and developing",
-    file: ".dmg 安装包",
-    fileEn: ".dmg installer",
-    icon: "AppleLogo",
-    note: "选择 Apple Silicon、Intel 或 Universal 版本，以发布附件为准。",
-    noteEn:
-      "Choose Apple Silicon, Intel, or Universal, according to the files available in the release.",
-  },
-  {
-    name: "Linux",
-    label: "为开放的工作方式",
-    labelEn: "For an open way of working",
-    file: ".AppImage / .deb / .rpm",
-    icon: "LinuxLogo",
-    note: "选择对应发行版与架构。运行环境要求请查看仓库说明。",
-    noteEn:
-      "Choose the package for your distribution and architecture. See the repository for runtime requirements.",
-  },
-];
 
 export default function DownloadPage({ locale = "zh" }) {
   const { t } = createI18n(locale);
@@ -75,58 +42,31 @@ export default function DownloadPage({ locale = "zh" }) {
           </p>
         </div>
       </section>
-      <section
-        className="download-grid container"
-        aria-label={t("选择桌面平台", "Choose your desktop platform")}
-      >
-        {platforms.map((platform) => (
-          <article key={platform.name} className="download-card">
-            <span className="platform-mark" aria-hidden="true">
-              <Icon name={platform.icon} size={50} weight="light" />
-            </span>
-            <span className="eyebrow">
-              {t(platform.label, platform.labelEn)}
-            </span>
-            <h2>{platform.name}</h2>
-            <span className="download-format">
-              {t(platform.file, platform.fileEn || platform.file)}
-            </span>
-            <p>{t(platform.note, platform.noteEn)}</p>
-            <a
-              href={links.releases}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="button"
-            >
-              {t("查看发布与下载", "View releases & download")}{" "}
-              <Icon name="DownloadSimple" size={18} />
-            </a>
-          </article>
-        ))}
-      </section>
+      <DownloadCenter locale={locale} snapshot={snapshot} />
       <section className="download-source container">
         <div>
-          <span className="pill">OFFICIAL RELEASES</span>
-          <h2>{t("选一个适合你的版本。", "Choose the release that fits.")}</h2>
+          <span className="pill">OPEN SOURCE</span>
+          <h2>{t("源码，也是另一种起点。", "Start with the source, too.")}</h2>
           <p>
             {t(
-              "官方安装包集中发布在 GitHub Releases。官网按当前开源源码介绍产品，新设计可能先于正式安装包发布。请查看对应版本的更新说明与附件，按系统和处理器架构选择；部分平台的附件可能分批发布。",
-              "Official packages are published on GitHub Releases. This website describes the current open-source code, so new designs may appear here before they reach a packaged release. Check the release notes and assets, then choose your operating system and processor architecture. Files for some platforms may arrive in stages.",
+              "想了解实现、自己构建或参与贡献，可以从 GitHub 或 Gitee 查看项目源码。官网按当前源码介绍产品，具体能力以安装版本为准；不同来源、不同系统的安装包可能分批发布。",
+              "Explore the implementation, build it yourself, or contribute through GitHub or Gitee. This website describes the current source; available features depend on your installed version. Packages may arrive at different times across sources and systems.",
             )}
           </p>
         </div>
         <div className="download-source-actions">
-          <a href={links.releases} target="_blank" rel="noopener noreferrer">
-            GitHub Releases <Icon name="ArrowUpRight" />
+          <a href={links.github} target="_blank" rel="noopener noreferrer">
+            {t("GitHub 源码仓库", "GitHub source repository")}{" "}
+            <Icon name="GithubLogo" />
           </a>
-          <a href={links.chinaMirror} target="_blank" rel="noopener noreferrer">
-            {t("中国区备用下载", "Alternative download for China")}{" "}
-            <Icon name="ArrowUpRight" />
+          <a href={links.gitee} target="_blank" rel="noopener noreferrer">
+            {t("Gitee 源码仓库", "Gitee source repository")}{" "}
+            <Icon name="GitBranch" />
           </a>
           <small>
             {t(
-              "GitHub 为正式发布源；备用分享内容可能存在同步延迟。",
-              "GitHub is the official release source. The alternative share may take time to sync.",
+              "仓库用于阅读源码与参与开发。安装应用请使用上方的下载按钮。",
+              "Repositories are for source code and development. Use the download buttons above to install the app.",
             )}
           </small>
         </div>

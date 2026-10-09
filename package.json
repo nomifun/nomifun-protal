@@ -3,12 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/dev.mjs",
+    "prebuild": "node scripts/sync-releases.mjs",
     "build": "next build",
+    "build:vercel": "npm run build && node scripts/package-vercel.mjs",
     "start": "next start",
+    "preview": "node scripts/serve-static.mjs",
     "check:content": "node scripts/check-content.mjs",
     "check:i18n": "node scripts/check-i18n.mjs",
-    "check:work-motion": "node scripts/check-work-motion.mjs"
+    "check:work-motion": "node scripts/check-work-motion.mjs",
+    "sync:releases": "node scripts/sync-releases.mjs",
+    "check:downloads": "node scripts/check-downloads.mjs && node scripts/check-download-selection.mjs",
+    "check:release-service": "node scripts/check-release-service.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

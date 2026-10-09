@@ -122,18 +122,32 @@ export default function ContactPage({ locale = "zh" }) {
         </div>
         <div className="contact-repos">
           {products.map((product) => (
-            <a
-              key={product.slug}
-              href={product.repo}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>
+            <article key={product.slug} className="contact-repo-row">
+              <h3>
                 <Icon name={product.icon} size={23} />
                 {product.name}
-              </span>
-              <Icon name="ArrowUpRight" size={23} />
-            </a>
+              </h3>
+              <div className="contact-repo-actions">
+                <a
+                  href={product.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${product.name} — ${t("GitHub 源码仓库", "GitHub source repository")}`}
+                >
+                  {t("GitHub 源码", "GitHub source")}{" "}
+                  <Icon name="ArrowUpRight" size={17} />
+                </a>
+                <a
+                  href={product.gitee}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${product.name} — ${t("Gitee 源码仓库", "Gitee source repository")}`}
+                >
+                  {t("Gitee 源码", "Gitee source")}{" "}
+                  <Icon name="ArrowUpRight" size={17} />
+                </a>
+              </div>
+            </article>
           ))}
         </div>
       </section>

@@ -41,9 +41,9 @@ const questions = [
   ],
   [
     "在哪里了解版本、参与贡献？",
-    "下载页链接正式 Releases。首页按当前源码介绍产品方向，具体可用功能以安装版本为准；欢迎从 GitHub 的 Issue、代码与设计讨论参与，提出你的下一种可能。",
+    "下载页在每个操作系统选项内提供 CrabNebula（推荐）与 GitHub 下载按钮，并分别显示各自的版本和安装包。一个来源不可用时，可以使用另一个来源。两边发版可能有时间差，请以对应按钮显示的版本为准。项目页有独立的 GitHub 与 Gitee 源码入口；欢迎通过 GitHub Issue、代码与设计讨论参与。首页按当前源码介绍产品方向，具体可用功能以安装版本为准。",
     "Where can I find releases or contribute?",
-    "The download page links to official releases. This homepage describes the product direction from current source; available features depend on the version you install. Join us through GitHub issues, code contributions, and design discussions to help shape what comes next.",
+    "Each operating system on the download page offers CrabNebula (recommended) and GitHub download buttons, with versions and packages shown separately for each source. If one source is unavailable, use the other. Releases may arrive at different times, so check the version shown with each button. Project pages have separate GitHub and Gitee source links. Join us through GitHub issues, code contributions, and design discussions. This homepage describes the current source; available features depend on the version you install.",
   ],
 ];
 function Accordion({ q, a, i }) {

@@ -1,0 +1,26 @@
+{
+  "version": "0.8.2",
+  "publishedAt": "2026-10-09T06:45:17.457Z",
+  "releaseUrl": "https://crabnebula.cloud/nomifun/nomifun-desktop/releases",
+  "checkedAt": "2026-10-09T09:07:02.663Z",
+  "assets": [
+    {
+      "id": "01M4FP67BB5JAMFXNWP3JCY0K4",
+      "name": "NomiFun_0.8.2_aarch64.dmg",
+      "url": "https://cdn.crabnebula.app/asset/01M4FP67BB5JAMFXNWP3JCY0K4",
+      "platform": "macos",
+      "arch": "arm64",
+      "format": "dmg",
+      "size": 154773110
+    },
+    {
+      "id": "01M4FPB9EN409R8PXV0DPNF478",
+      "name": "NomiFun_0.8.2_x64.dmg",
+      "url": "https://cdn.crabnebula.app/asset/01M4FPB9EN409R8PXV0DPNF478",
+      "platform": "macos",
+      "arch": "x64",
+      "format": "dmg",
+      "size": 184105821
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
+import releaseHandler from "../api/releases.mjs";
 const root = path.resolve("out");
 const port = Number(process.env.PORT || 3107);
 const host = process.env.PORTAL_HOST || "127.0.0.1";
@@ -19,7 +20,7 @@ const types = {
   ".txt": "text/plain",
 };
 http
-  .createServer((req, res) => {
+  .createServer(async (req, res) => {
     let pathname;
     try {
       pathname = decodeURIComponent(
@@ -27,6 +28,10 @@ http
       );
     } catch {
       res.writeHead(400).end();
+      return;
+    }
+    if (pathname === "/api/releases") {
+      await releaseHandler(req, res);
       return;
     }
     let file = path.resolve(root, "." + pathname);

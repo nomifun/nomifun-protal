@@ -1,0 +1,74 @@
+.footer-cta {
+  flex-wrap: wrap;
+}
+
+.footer-repositories {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+}
+
+.footer-repositories .footer-source {
+  min-height: 44px;
+}
+
+.product-repository-actions .button {
+  min-height: 48px;
+}
+
+.contact-repo-row {
+  padding: 22px 0;
+  border-bottom: 1px solid #d7d2c9;
+}
+
+.contact-repo-row:first-child {
+  border-top: 1px solid #d7d2c9;
+}
+
+.contact-repo-row h3 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.contact-repo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 12px;
+}
+
+.contact-repo-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: #665b6d;
+}
+
+.contact-repo-actions a:hover {
+  color: var(--ink);
+}
+
+.contact-repo-row h3 svg,
+.contact-repo-actions a svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 560px) {
+  .product-repository-actions .button {
+    width: 100%;
+  }
+
+  .footer-cta {
+    gap: 16px 24px;
+  }
+
+  .contact-repo-row h3 {
+    font-size: 16px;
+    gap: 12px;
+  }
+}
