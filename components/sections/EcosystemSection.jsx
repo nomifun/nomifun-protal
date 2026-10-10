@@ -36,6 +36,17 @@ function DesktopArtwork() {
           <stop stopColor="#a278d1" stopOpacity=".24" />
           <stop offset="1" stopColor="#a278d1" stopOpacity="0" />
         </radialGradient>
+        <linearGradient
+          id="eco-logo-bowl"
+          x1="15"
+          y1="49"
+          x2="65"
+          y2="69"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#FF9FB4" />
+          <stop offset="1" stopColor="#FF6F91" />
+        </linearGradient>
       </defs>
       <ellipse
         cx="280"
@@ -117,13 +128,34 @@ function DesktopArtwork() {
           strokeDasharray="5 8"
         />
         <circle cx="280" cy="173" r="28" fill="url(#eco-desktop-glow)" />
-        <path
-          d="M265 180V166L279 180V166M287 167H297M287 173H295M287 180V167"
-          stroke="#fff9ff"
-          strokeWidth="2.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <g transform="translate(280 176) scale(0.72) translate(-40 -52)">
+          <path
+            d="M33 17 q-4.5 -4 0 -8.5"
+            stroke="#FFD7DE"
+            strokeWidth="4.5"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <path
+            d="M40 15 q-4.5 -4 0 -8.5"
+            stroke="#FFE9EE"
+            strokeWidth="4.5"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <path
+            d="M47 17 q-4.5 -4 0 -8.5"
+            stroke="#FFD7DE"
+            strokeWidth="4.5"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <path d="M22 46 Q22 27 40 27 Q58 27 58 46 Z" fill="#FFFFFF" />
+          <path
+            d="M14 49 H66 Q61.5 70 40 70 Q18.5 70 14 49 Z"
+            fill="url(#eco-logo-bowl)"
+          />
+        </g>
         <g className="eco-floating-node eco-node-one">
           <rect x="174" y="104" width="68" height="39" rx="9" fill="#bca1dc" />
           <text
@@ -352,12 +384,13 @@ function MobileArtwork() {
           DESKTOP CONNECTED
         </text>
         <circle cx="232" cy="153" r="12" fill="#c8aa8e" />
-        <path
-          d="M228 156V149L235 156V149"
-          stroke="#fff6e9"
-          strokeWidth="1.7"
-          strokeLinecap="round"
-        />
+        <g transform="translate(232 156) scale(0.22) translate(-40 -52)">
+          <path d="M22 46 Q22 27 40 27 Q58 27 58 46 Z" fill="#fff6e9" />
+          <path
+            d="M14 49 H66 Q61.5 70 40 70 Q18.5 70 14 49 Z"
+            fill="#f6b7a5"
+          />
+        </g>
         <rect
           x="252"
           y="142"
@@ -730,13 +763,34 @@ function NetworkArtwork() {
           stroke="#90a9c0"
           strokeOpacity=".3"
         />
-        <path
-          d="M255 190V164L279 190V164M290 165H307M290 176H304M290 191V165"
-          stroke="#e8f4ff"
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <g transform="translate(280 183) scale(0.62) translate(-40 -52)">
+          <path
+            d="M33 17 q-4.5 -4 0 -8.5"
+            stroke="#cfe8f5"
+            strokeWidth="4.5"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <path
+            d="M40 15 q-4.5 -4 0 -8.5"
+            stroke="#e8f4ff"
+            strokeWidth="4.5"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <path
+            d="M47 17 q-4.5 -4 0 -8.5"
+            stroke="#cfe8f5"
+            strokeWidth="4.5"
+            fill="none"
+            strokeLinecap="round"
+          />
+          <path d="M22 46 Q22 27 40 27 Q58 27 58 46 Z" fill="#ffffff" />
+          <path
+            d="M14 49 H66 Q61.5 70 40 70 Q18.5 70 14 49 Z"
+            fill="url(#eco-logo-bowl)"
+          />
+        </g>
         <circle
           className="eco-status-pulse"
           cx="280"
