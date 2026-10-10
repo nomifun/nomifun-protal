@@ -22,22 +22,15 @@ const desktopModes = {
     result: "发现 → 认领 → 执行 → 反馈",
   },
 };
-const mobileModes = {
-  会话: [
-    ["设计下一个产品功能", "继续上次的讨论"],
-    ["探索新的创作方向", "查看最近结果"],
-    ["整理我的知识库", "发送新指令"],
-  ],
-  任务: [
-    ["每周阅读整理", "定时任务"],
-    ["项目工作进度", "查看执行结果"],
-    ["一个新的工作想法", "交给 Desktop 处理"],
-  ],
-  伙伴: [
-    ["Nomi · 创作伙伴", "沿用电脑上的身份与记忆"],
-    ["Dev · 开发伙伴", "调用已配置的知识与工具"],
-    ["一起成长", "伙伴配置来自同一 Desktop"],
-  ],
+const desktopShots = {
+  会话: "/images/product/desktop-chat.png",
+  创作: "/images/product/desktop-canvas.png",
+  自动工作: "/images/product/autowork.png",
+};
+const mobileShots = {
+  会话: "/images/product/mobile-connected.png",
+  任务: "/images/product/mobile-tasks.png",
+  伙伴: "/images/product/mobile-companions.png",
 };
 
 const englishDesktopModes = {
@@ -73,24 +66,6 @@ const englishDesktopModes = {
   },
 };
 
-const englishMobileModes = {
-  会话: [
-    ["Design the next product feature", "Pick up the last discussion"],
-    ["Explore a creative direction", "See the latest results"],
-    ["Organize my knowledge base", "Send a new instruction"],
-  ],
-  任务: [
-    ["Weekly reading digest", "Scheduled task"],
-    ["Project progress", "Review execution results"],
-    ["A new work idea", "Hand it to Desktop"],
-  ],
-  伙伴: [
-    ["Nomi · Creative companion", "The same identity and memory"],
-    ["Dev · Coding companion", "Your configured knowledge and tools"],
-    ["Grow together", "Companions from the same Desktop"],
-  ],
-};
-
 const englishLabels = {
   会话: "Chat",
   创作: "Create",
@@ -105,7 +80,7 @@ const englishLabels = {
 };
 
 export default function ProductVisual({ slug }) {
-  const { locale, t } = useLocale();
+  const { locale, t, asset } = useLocale();
   const label = (key) => t(key, englishLabels[key]);
   const [desktopMode, setDesktopMode] = useState("会话");
   const [mobileMode, setMobileMode] = useState("会话");
@@ -122,9 +97,7 @@ export default function ProductVisual({ slug }) {
       >
         <div className="visual-topline">
           <span>NOMIFUN DESKTOP</span>
-          <small>
-            {t("能力交互示意", "Interactive capability illustration")}
-          </small>
+          <small>{t("能力一览与真实截图", "Capabilities and real screenshots")}</small>
         </div>
         <div
           className="visual-tabs"
@@ -163,6 +136,14 @@ export default function ProductVisual({ slug }) {
               </div>
             ))}
           </div>
+          <img
+            className="desktop-visual-shot"
+            src={asset(desktopShots[desktopMode])}
+            alt={current.result}
+            loading="lazy"
+            width="1600"
+            height="1000"
+          />
           <div className="capability-result">
             <Icon name="Desktop" size={26} />
             <span>{current.result}</span>
@@ -176,10 +157,7 @@ export default function ProductVisual({ slug }) {
     return (
       <section
         className="product-visual container mobile-product-visual"
-        aria-label={t(
-          "Mobile 功能交互示意",
-          "Interactive Mobile feature illustration",
-        )}
+        aria-label={t("Mobile 真实产品截图", "Real Mobile product screenshots")}
       >
         <div className="mobile-connection">
           <span className="eyebrow">YOUR DESKTOP, WITH YOU</span>
@@ -210,12 +188,7 @@ export default function ProductVisual({ slug }) {
           </div>
           <div className="phone-heading">
             <span>NomiFun</span>
-            <small>{t("功能交互示意", "Interactive illustration")}</small>
-          </div>
-          <div className="phone-welcome">
-            {t("你的工作，", "Your work")}
-            <br />
-            <strong>{t("正在继续。", "keeps moving.")}</strong>
+            <small>{t("真实截图", "Real screenshot")}</small>
           </div>
           <div
             className="phone-tabbar"
@@ -223,7 +196,7 @@ export default function ProductVisual({ slug }) {
             onKeyDown={handleTabNavigation}
             aria-label={t("探索手机功能", "Explore phone features")}
           >
-            {Object.keys(mobileModes).map((item) => (
+            {Object.keys(mobileShots).map((item) => (
               <button
                 key={item}
                 className={mobileMode === item ? "active" : ""}
@@ -239,23 +212,18 @@ export default function ProductVisual({ slug }) {
             ))}
           </div>
           <div
-            className="phone-items"
+            className="phone-screen"
             role="tabpanel"
             id="mobile-visual-panel"
             aria-labelledby={`mobile-visual-${mobileMode}`}
           >
-            {(locale === "en" ? englishMobileModes : mobileModes)[
-              mobileMode
-            ].map(([title, subtitle], i) => (
-              <div key={title}>
-                <span className="phone-item-num">0{i + 1}</span>
-                <span>
-                  <strong>{title}</strong>
-                  <small>{subtitle}</small>
-                </span>
-                <Icon name="ArrowRight" size={16} />
-              </div>
-            ))}
+            <img
+              src={mobileShots[mobileMode]}
+              alt={t("NomiFun Mobile 应用截图", "NomiFun Mobile app screenshot")}
+              loading="lazy"
+              width="585"
+              height="1266"
+            />
           </div>
           <span className="phone-connected">
             {t("连接自己的 Desktop", "Connected to your Desktop")}

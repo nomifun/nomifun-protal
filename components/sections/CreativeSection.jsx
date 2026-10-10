@@ -984,13 +984,13 @@ export default function CreativeSection() {
                       src={asset(item.src)}
                       alt={item.alt}
                       loading="lazy"
-                      width="1440"
-                      height="900"
+                      width="1600"
+                      height="1000"
                     />
                     <figcaption>
                       {t(
-                        "来自 NomiFun Desktop 源码中的真实产品截图（0.7.2 / 2026.08）；当前版本界面与功能可能有调整。",
-                        "Historical product screenshot: v0.7.2 / Aug 2026. Current features may differ; sample prompts retain their original language.",
+                        "来自 NomiFun Desktop 开发版的真实界面截图（0.8.3 dev / 2026.10）；界面与功能以正式发布为准。",
+                        "Actual product screenshot from a NomiFun Desktop dev build (0.8.3 dev / Oct 2026). Interface may differ in the released version.",
                       )}
                     </figcaption>
                   </figure>

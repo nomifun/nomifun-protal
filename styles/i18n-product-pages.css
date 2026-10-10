@@ -37,10 +37,6 @@ html[lang="en"] .visual-tabs {
 html[lang="en"] .capability-rail strong {
   line-height: 1.4;
 }
-html[lang="en"] .phone-items strong,
-html[lang="en"] .phone-items small {
-  line-height: 1.4;
-}
 html[lang="en"] .download-card .button {
   line-height: 1.4;
   min-height: 51px;

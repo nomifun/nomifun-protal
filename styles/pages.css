@@ -407,12 +407,22 @@
   margin-left: auto;
   flex-shrink: 0;
 }
+.desktop-visual-shot {
+  display: block;
+  width: 100%;
+  max-width: 920px;
+  height: auto;
+  margin: 36px auto 0;
+  border-radius: 14px;
+  border: 1px solid #ded4ea;
+  box-shadow: 0 26px 60px rgba(84, 62, 118, 0.16);
+}
 .capability-result {
   display: flex;
   gap: 15px;
   align-items: center;
   justify-content: center;
-  margin: 34px auto 0;
+  margin: 30px auto 0;
   color: #57505f;
   font-size: 14px;
   flex-wrap: wrap;
@@ -552,16 +562,6 @@
   font-weight: 400;
   color: #9d9690;
 }
-.phone-welcome {
-  font-size: 27px;
-  letter-spacing: -0.03em;
-  line-height: 1.5;
-  margin: 31px 0 25px;
-}
-.phone-welcome strong {
-  font-weight: 500;
-  color: #bc755c;
-}
 .phone-tabbar {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -582,41 +582,15 @@
   background: #fffdfa;
   color: #35312a;
 }
-.phone-items {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  margin: 20px 0 24px;
-  min-height: 181px;
+.phone-screen {
+  margin: 16px -7px 20px;
 }
-.phone-items > div {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  background: #f1eee7;
-  border-radius: 9px;
-  padding: 15px 10px;
-}
-.phone-item-num {
-  color: #a69787;
-  font-size: 9px;
-}
-.phone-items > div > span:nth-child(2) {
-  flex: 1;
-}
-.phone-items strong {
+.phone-screen img {
   display: block;
-  font-size: 10px;
-  font-weight: 500;
-}
-.phone-items small {
-  display: block;
-  font-size: 8px;
-  color: #91867b;
-  margin-top: 5px;
-}
-.phone-items svg {
-  color: #998878;
+  width: 100%;
+  height: auto;
+  border-radius: 13px;
+  border: 1px solid #e6dfd5;
 }
 .phone-connected {
   display: flex;

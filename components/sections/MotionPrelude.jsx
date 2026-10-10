@@ -385,7 +385,7 @@ function ProductWindow() {
           "NomiFun visual agent capability workspace",
         )}
         width="740"
-        height="430"
+        height="463"
         loading="lazy"
       />
       <span>

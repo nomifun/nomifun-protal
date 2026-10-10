@@ -4,12 +4,12 @@
 
 | 优先级 | 建议文件                                        | 内容与构图                                                                  | 用途                                                |
 | ------ | ----------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------- |
-| P1     | `public/images/product/agent-workbench.png`     | 中文 Agent 工作台，编程预设，启用模块/逐操作授权清晰；1440×900 或 1920×1200 | 首页真实工作台展开，当前已提供真实组件+测试数据截图 |
-| P1     | `public/images/creative/image-workbench.png`    | 最新稳定版本的图像工作台，虚构项目、公开素材，无密钥；16:10                 | 首页图像 Tab，替换已有历史产品图                    |
-| P1     | `public/images/creative/video-workbench.png`    | 最新稳定版本的视频生成/时间线界面，至少一个已完成公开素材；16:10            | 首页视频 Tab，替换已有历史产品图                    |
-| P2     | `public/images/product/companion-desktop.png`   | 一个桌面伙伴和伙伴设置，简洁桌面、无个人信息；16:10                         | 可用于替换插画或补充伙伴实物体验                    |
-| P2     | `public/images/product/autowork.png`            | 虚构需求的认领/执行/回执状态；16:10                                         | 持续工作具体操作展示                                |
-| P2     | `public/images/product/mobile-connected.png`    | 手机直连 Desktop 后有示例会话或需求；9:19.5                                 | Mobile 详情页后续实拍                               |
+| P1     | `public/images/product/agent-workbench.png`     | 中文 Agent 工作台，编程预设，启用模块/逐操作授权清晰；1440×900 或 1920×1200 | ✅ 2026-10-10 已更新为 dev 实例（0.8.3）真实截图，1600×1000，含英文变体 |
+| P1     | `public/images/creative/image-workbench.png`    | 最新稳定版本的图像工作台，虚构项目、公开素材，无密钥；16:10                 | ✅ 2026-10-10 二更：画布内实时生成的图片节点选中态（编辑面板+操作栏），素材为 dev 实例当场用 agnes-image-2.1-flash 生成的赛博朋克猫图，含英文变体 |
+| P1     | `public/images/creative/video-workbench.png`    | 最新稳定版本的视频生成/时间线界面，至少一个已完成公开素材；16:10            | ✅ 2026-10-10 二更：时间线节点编排界面，6 个真实生成素材 clip（00:30 总长）。注：dev 实例两个视频模型（agnes-video-v2.0 / 2.5-flash）实际生成均返回 503 model_not_found，无法产出真实生成视频，改用时间线编排界面，含英文变体 |
+| P2     | `public/images/product/companion-desktop.png`   | 一个桌面伙伴和伙伴设置，简洁桌面、无个人信息；16:10                         | 备选素材（已拍候选图，页面暂无挂载位，未入库）      |
+| P2     | `public/images/product/autowork.png`            | 虚构需求的认领/执行/回执状态；16:10                                         | ✅ 2026-10-10 已接入 Desktop 产品页"自动工作"标签，含英文变体 |
+| P2     | `public/images/product/mobile-connected.png`    | 手机直连 Desktop 后有示例会话或需求；9:19.5                                 | ✅ 2026-10-10 已接入 Mobile 产品页"会话"标签（伙伴会话实拍）；另有 mobile-tasks/mobile-companions 接入"任务/伙伴"标签 |
 | P2     | `public/media/xiaozhi-yuntai-demo-7b67f896.mp4` | 真实小智设备屏幕/云台动作与桌面连接，15–30 秒，H.264，无背景人脸与私人环境  | 2026-10-03 更新为用户提供的 24.68 秒录像            |
 
 更新前在 `docs/assets-provenance.md` 写明版本、日期、来源和授权；截图不能把开发分支能力标成稳定版已发布。工作台图片沿用固定入口；设备视频与封面使用内容摘要命名，并在 `lib/site.js` 的 `deviceDemo` 更新共享引用。新增可选图片需要在相应组件引用，不能只放文件后假定会自动展示。

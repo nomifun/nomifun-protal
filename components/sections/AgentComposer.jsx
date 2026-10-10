@@ -284,8 +284,8 @@ export default function AgentComposer() {
               />
               <figcaption>
                 {t(
-                  "当前源码的真实工作台组件 · 测试数据交互预览，功能以安装版本为准。",
-                  "Real workbench component from current source, previewed with test data. Features depend on your installed version.",
+                  "开发版真实工作台界面实拍（0.8.3 dev）· 功能以安装版本为准。",
+                  "Actual workspace UI from a dev build (0.8.3 dev). Features depend on your installed version.",
                 )}
               </figcaption>
             </figure>

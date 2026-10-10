@@ -165,24 +165,24 @@ const media = [
     name: ["可组合 Agent", "Composable agents"],
     src: "/images/product/agent-workbench.png",
     note: [
-      "真实工作台组件 · 测试数据预览",
-      "Actual workspace component · Preview with test data",
+      "真实工作台界面 · 开发版实拍 0.8.3",
+      "Actual workspace UI · Dev build 0.8.3",
     ],
   },
   {
     name: ["图像创作工作台", "Image creation workspace"],
     src: "/images/creative/image-workbench.png",
     note: [
-      "产品界面记录 · 0.7.2 / 2026.08",
-      "Product UI · 0.7.2 / Aug 2026 · Sample prompt remains in its original language",
+      "产品界面实拍 · 0.8.3 dev / 2026.10",
+      "Product UI · 0.8.3 dev / Oct 2026 · Sample prompt remains in its original language",
     ],
   },
   {
     name: ["视频创作工作台", "Video creation workspace"],
     src: "/images/creative/video-workbench.png",
     note: [
-      "产品界面记录 · 0.7.2 / 2026.08",
-      "Product UI · 0.7.2 / Aug 2026 · Sample prompt remains in its original language",
+      "产品界面实拍 · 0.8.3 dev / 2026.10",
+      "Product UI · 0.8.3 dev / Oct 2026 · Sample prompt remains in its original language",
     ],
   },
   {
@@ -358,8 +358,8 @@ export function MotionShowcase() {
           <img
             src={asset(media[0].src)}
             alt={t(
-              "真实 Agent 能力工作台组件测试数据预览",
-              "Actual agent capability workspace component with test data",
+              "Agent 能力工作台真实界面（开发版）",
+              "Actual agent capability workspace UI (dev build)",
             )}
             loading="lazy"
           />

@@ -50,11 +50,22 @@ QQ 二维码仍沿用 2026-10-03 从旧官网联系页 `https://www.nomifun.com/
 | `public/images/contact/nomifun-wechat-group-9e898c22.png` | 用户于 2026-10-07 提供的微信群原图 | 1996 × 1934 | `9e898c22ef09c4de48fa55e6b7ae08efdc0fd37303a0f3b037ae0e313d91aaba` |
 | `public/images/contact/nomifun-qq-group.png`    | `https://www.nomifun.com/images/zh/联系方式/qq-group/qr.png`     | 405 × 720 | `0cda04ef1b77755404c7ec1fea2a7448be32cab00573018642c2ecceba6795ec` |
 
+## 2026-10-10 真实运行截图替换
+
+- 来源：本机运行的 nomifun-desktop dev 实例（UI 由 nomifun-desktop/ui Vite dev server 提供，后端版本 0.8.3），通过桌面端 WebUI 远程访问入口（127.0.0.1:25808）以 admin 账号登录后，用 Playwright + Chrome 在 1440×900@2x 截取；Mobile 截图为 nomifun-mobile `bun run dev`（Expo Web + scripts/dev-proxy.mjs 代理到同一桌面实例）在 390×844@3x 视口截取。
+- 桌面端画面是真实运行页面，不是组件 fixture：Agent 工作台（`/#/agent`，编程/Coding 预设）、无限画布创作页（`/#/nomi/canvases` 内图片/视频生成工具）、会话详情与需求平台。画布中两张海报为该 dev 实例既有的演示生成结果；截图时临时创建的空节点已在拍摄后删除，画布恢复原状。
+- Mobile 画面为真实应用（连接同一桌面实例）：会话详情（与桌面伙伴"天天"的既有会话）、任务、伙伴三个标签页。截图中的会话与伙伴均为 dev 环境既有演示数据。
+- 尺寸：桌面端图统一缩放至 1600×1000（16:10），手机端图缩放至 585×1266（≈9:19.5）。
+- 文件清单：`public/images/product/agent-workbench.png`、`desktop-chat.png`、`desktop-canvas.png`、`autowork.png`（及 `en/` 英文变体）、`mobile-connected.png`、`mobile-tasks.png`、`mobile-companions.png`、`creative/image-workbench.png`、`creative/video-workbench.png`（及 `en/` 变体）。中英文变体分别在同一运行实例切换应用语言后拍摄；Mobile 应用本身以中文为第一界面，两语页面共用同一组截图。
+- 用途：前三者继续作为首页示意位；desktop-chat/desktop-canvas/autowork 接入 Desktop 产品页"会话/创作/自动工作"三个标签；mobile-connected/mobile-tasks/mobile-companions 接入 Mobile 产品页"会话/任务/伙伴"三个标签，替换原 CSS 假列表。
+- 旧素材处置：原 agent-workbench（fixture 测试数据图）与 image/video-workbench（2026-08-25 / 0.7.2 旧版界面）均被新文件原位覆盖删除，未保留占用空间的副本。
+- 2026-10-10 二次更新：`creative/image-workbench.png`（中英文）重拍为画布内"当场生成"的图片节点编辑态——该图片素材是截图时实时调用 `agnes-image-2.1-flash` 生成（提示词"赛博朋克城市夜景中的小猫…"），非预置内容；`creative/video-workbench.png`（中英文）改为时间线编排界面（6 个真实素材 clip / 00:30），因 dev 实例可用视频模型（`agnes-video-v2.0`、`agnes-video-2.5-flash`）生成都返回 503 `model_not_found`（渠道未配置，健康检查仅测连通性），无法产出真实生成视频。时间线界面的素材 clip 全部为实例中 AI 生成的真实图片资产。
+- 截图仅反映 dev 运行时的界面外观，不代表这些能力已在当前稳定版发布；图中不出现真实账号私聊、API Key 或个人文件。
+
 ## 首页与共享资源
 
 - NomiFun 标志：复制旧 Portal 的 public/brand/logo.svg，未改品牌图形。
-- Agent 工作台：public/images/product/agent-workbench.png，2026-10-02 在真实源码组件 fixture 的编程预设上截图，测试数据；1280x720。另在隔离数据目录启动编译 WebUI，实际核对会话/Agent 页。
-- 创作图集：public/images/creative/image-workbench.png 与 video-workbench.png，源自 Desktop/docs/images/creative-studio/zh-CN/03-image-workbench.png 与 04-video-workbench.png，原图集 2026-08-25 / 0.7.2，页面注明界面版本可能变化。
+- Agent 工作台与创作图集已于 2026-10-10 更新为 dev 实例真实截图，见上方"真实运行截图替换"一节；早期 fixture 图与 0.7.2 版图集不再使用。
 - 伙伴插画和能力连线为官网原生 SVG/HTML/CSS 交互示意；不是实物或原生运行截图。
 - 英文字体沿用用户提供参考工程里的本地 Neue Montreal 字体。
 - 2026-10-02 在线复核四个 GitHub 项目与 Releases 入口可访问；发布记录分平台提供安装产物，因此官网不锁定最新版本号与假附件。
