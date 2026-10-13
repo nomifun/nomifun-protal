@@ -42,7 +42,7 @@ const modes = [
   },
 ];
 export default function Hero() {
-  const { locale, t } = useLocale();
+  const { locale, t, asset } = useLocale();
   const reduced = useReducedMotion();
   const [mode, setMode] = useState(0),
     [animated, setAnimated] = useState(true);
@@ -87,7 +87,11 @@ export default function Hero() {
     };
   }, [animated, reduced]);
   return (
-    <section className={`home-hero hero-mode-${mode}`} data-locale={locale}>
+    <section
+      id="open-source"
+      className={`home-hero hero-mode-${mode}${animated ? "" : " hero-motion-paused"}`}
+      data-locale={locale}
+    >
       <div className="hero-atmosphere" aria-hidden="true">
         <canvas ref={canvas} />
       </div>
@@ -105,6 +109,60 @@ export default function Hero() {
           <span>{t(modes[mode].right, modes[mode].rightEn)}</span>
         </div>
       </div>
+      <div className="hero-product-glimpses">
+        <a
+          href="#agent"
+          className="hero-product-glimpse hero-glimpse-agent"
+          aria-label={t(
+            "探索可组合的 Agent 能力工作台",
+            "Explore the agent capability workspace",
+          )}
+        >
+          <div className="hero-glimpse-bar">
+            <Icon name="Stack" size={14} />
+            <span>COMPOSABLE AGENT</span>
+            <Icon name="ArrowUpRight" size={14} />
+          </div>
+          <img
+            src={asset("/images/product/agent-workbench.png")}
+            alt={t(
+              "NomiFun Desktop Agent 能力工作台界面",
+              "The NomiFun Desktop agent capability workspace",
+            )}
+            width="1600"
+            height="1000"
+          />
+          <span className="hero-glimpse-caption">
+            {t("全面的能力，自由组合。", "Powerful capabilities. Your way.")}
+          </span>
+        </a>
+        <a
+          href="#creation"
+          className="hero-product-glimpse hero-glimpse-creative"
+          aria-label={t(
+            "探索多模态创作工作台",
+            "Explore the multimodal creative workspace",
+          )}
+        >
+          <div className="hero-glimpse-bar">
+            <Icon name="Sparkle" size={14} />
+            <span>CREATE WITHOUT LIMITS</span>
+            <Icon name="ArrowUpRight" size={14} />
+          </div>
+          <img
+            src={asset("/images/creative/image-workbench.png")}
+            alt={t(
+              "NomiFun Desktop 图像创作界面",
+              "NomiFun Desktop image creation interface",
+            )}
+            width="1600"
+            height="1000"
+          />
+          <span className="hero-glimpse-caption">
+            {t("让灵感，有自己的工作空间。", "A workspace for every idea.")}
+          </span>
+        </a>
+      </div>
       <div className="hero-content container">
         <p className="eyebrow hero-eyebrow">
           <span className="live-dot" />
@@ -113,30 +171,52 @@ export default function Hero() {
           </span>
         </p>
         <h1>
-          {t("让 AI 生活在", "Let AI live")}
+          {t("强大的 AI，", "Powerful AI.")}
           <br />
-          {t("你生命的左右", "by your side")}
+          <span className="hero-slogan-open">
+            {t("向每个人开放", "Open to everyone")}
+          </span>
           <span className="hero-period">{t("。", ".")}</span>
         </h1>
-        {/* Keep this core brand copy when adjusting the slogan or feature emphasis. */}
-        <p className="hero-description">
-          {t(
-            "组装你的 Agent，遇见你的伙伴。",
-            "Build your Agent. Meet your companion. ",
-          )}
-          <br className="mobile-only" />
-          {t("从灵感到行动，", "From inspiration to action, ")}
-          <br className="desktop-only" />
-          {t(
-            "让 AI 的强大能力，成为你触手可及的日常。",
-            "bring the power of AI into your everyday life.",
-          )}
-        </p>
+        <div className="hero-description">
+          <div
+            className="hero-quality-line"
+            aria-label={t(
+              "探索能力、设计与性能",
+              "Explore capabilities, design and performance",
+            )}
+          >
+            <a href="#possibilities">
+              <Icon name="Stack" size={20} />
+              {t("全面的能力", "Full capabilities")}
+            </a>
+            <a href="#product-view">
+              <Icon name="SquaresFour" size={20} />
+              {t("领先的设计", "Leading design")}
+            </a>
+            <a href="#developers">
+              <Icon name="Lightning" size={20} />
+              {t("强悍的性能", "Powerful performance")}
+            </a>
+          </div>
+          <p className="hero-open-promise">
+            <strong>
+              {t("完全免费开源给社会，", "Free and open source for everyone.")}
+            </strong>
+            <span>{t("无条件商用。", "Unconditional commercial use.")}</span>
+          </p>
+          <p className="hero-manifesto-line">
+            {t(
+              "开源不意味着平凡，强大也可以开源。",
+              "Open source can be extraordinary. Powerful can be open.",
+            )}
+          </p>
+        </div>
         <div className="hero-buttons">
           <Link href="/download" className="button">
             <span className="button-motion-inner">
               <RollText>
-                {t("下载，开始自己的 AI 世界", "Download your AI workspace")}
+                {t("免费下载，开启更多可能", "Download for free")}
               </RollText>
               <Icon name="ArrowUpRight" size={20} />
             </span>
@@ -144,7 +224,7 @@ export default function Hero() {
           <a href="#possibilities" className="button light">
             <span className="button-motion-inner">
               <RollText>
-                {t("探索它的可能", "Explore the possibilities")}
+                {t("探索完整能力", "Explore the capabilities")}
               </RollText>
               <Icon name="ArrowDown" size={19} />
             </span>
@@ -153,7 +233,7 @@ export default function Hero() {
         <div className="hero-meta">
           <span>Windows / macOS</span>
           <i />
-          <span>{t("自由开源", "Open source")}</span>
+          <span>{t("你的模型，自由选择", "Your choice of models")}</span>
           <i />
           <span>{t("本地优先", "Local first")}</span>
         </div>

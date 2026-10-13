@@ -4,6 +4,12 @@ import gsap from "gsap";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 const questions = [
   [
+    "真的免费，也可以商用吗？",
+    "是的。NomiFun 软件完全免费开源，个人、团队与企业都可以使用、修改和商用，无需购买商业授权，也不需要向我们申请许可。全面的能力、领先的设计与强悍的性能，同样可以免费开放给每个人。你自行选择的模型 API、云服务或硬件，如有费用，由对应提供方收取。",
+    "Is it really free, including commercial use?",
+    "Yes. NomiFun software is completely free and open source. Individuals, teams, and businesses can use, modify, and commercialize it without purchasing a commercial license or asking us for permission. Comprehensive capabilities, forward-thinking design, and powerful performance can be open to everyone. Model APIs, cloud services, or hardware you choose may be billed by their respective providers.",
+  ],
+  [
     "桌面伙伴可以连接真实设备吗？",
     "可以通过小智云台，把兼容的 ESP32-S3 设备绑定到已有桌面伙伴，延续它的身份、知识与记忆，用声音、表情和云台动作回应。需要兼容硬件、固件配置、可信局域网配对，并保持 Desktop 运行；具体能力随板型、固件和模型配置而不同。",
     "Can my desktop companion connect to a physical device?",

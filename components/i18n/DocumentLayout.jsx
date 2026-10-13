@@ -8,10 +8,10 @@ export function documentMetadata(locale) {
   const page = pageMetadata(
     locale,
     "/",
-    "NomiFun — 让 AI 生活在你生命的左右",
-    "NomiFun — Let AI live by your side",
-    "属于你的个人 AI 伙伴，有个性、有记忆，也能一起做事。从桌面、手机到小智云台，让陪伴延伸到真实世界。本地优先，代码开源，Agent 能力自由组合。",
-    "Your personal AI companion, with personality, memory, and the ability to act. From desktop and phone to Xiaozhi Yuntai, bring your companion into the real world. Local first, open source, with composable Agent capabilities.",
+    "NomiFun — 强大的 AI，向每个人开放。",
+    "NomiFun — Powerful AI. Open to everyone.",
+    "强大的 AI，向每个人开放。全面的能力、领先的设计、强悍的性能，完全免费开源，无条件商用。开源不意味着平凡，强大也可以开源。从桌面、手机到小智云台，让你的个人 AI 伙伴有个性、有记忆，也能一起做事。",
+    "Powerful AI. Open to everyone. Comprehensive capabilities, forward-thinking design and powerful performance. Completely free and open source, with unconditional commercial use. From desktop and phone to Xiaozhi Yuntai, your personal AI companion has personality, memory, and the ability to act.",
   );
   return {
     ...page,

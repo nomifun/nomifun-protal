@@ -719,6 +719,7 @@ export default function CreativeSection() {
         const measureStickyCards = () => {
           if (!match.conditions.narrow || !match.conditions.motion) return;
           cardRefs.current.forEach((card) => {
+            if (!card) return;
             // The page reads a tall chapter before its bottom docks above the
             // reading controls. A short chapter keeps its title below the tabs.
             const top = Math.min(

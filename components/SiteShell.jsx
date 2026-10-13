@@ -17,6 +17,7 @@ const navigation = [
   ["/contact", "联系我们", "Contact"],
 ];
 const chapters = [
+  ["open-source", "强大，向每个人开放", "Open to everyone"],
   ["possibilities", "能力世界", "Possibilities"],
   ["companion", "桌面伙伴", "Personal companions"],
   ["physical-world", "伙伴走进现实", "Into the real world"],
@@ -242,8 +243,8 @@ export default function SiteShell({ children }) {
     try {
       await navigator.clipboard.writeText(
         t(
-          "NomiFun：让 AI 生活在你生命的左右。属于你的个人 AI 伙伴，有个性、有记忆，也能一起做事。从桌面、手机到小智云台，让陪伴延伸到真实世界。本地优先，代码开源。https://www.nomifun.com/zh",
-          "NomiFun: Let AI live by your side. Your personal AI companion has personality, memory, and the ability to act. From desktop and phone to Xiaozhi Yuntai, bring your companion into the real world. Local first. Open source. https://www.nomifun.com/",
+          "NomiFun：强大的 AI，向每个人开放。全面的能力、领先的设计、强悍的性能，完全免费开源，无条件商用。开源不意味着平凡，强大也可以开源。从桌面、手机到小智云台，让你的个人 AI 伙伴有个性、有记忆，也能一起做事。https://www.nomifun.com/zh",
+          "NomiFun: Powerful AI. Open to everyone. Comprehensive capabilities. Forward-thinking design. Powerful performance. Completely free and open source, with unconditional commercial use. Open source can be extraordinary. Powerful can be open. From desktop and phone to Xiaozhi Yuntai, your personal AI companion has personality, memory, and the ability to act. https://www.nomifun.com/",
         ),
       );
       setToast(
@@ -341,6 +342,15 @@ export default function SiteShell({ children }) {
                 <br />
                 {t("由你创造。", "comes next.")}
               </h2>
+              <p className="footer-promise">
+                <Icon name="Code" size={21} />
+                <span>
+                  {t(
+                    "免费开源 · 无条件商用",
+                    "Free & open source · Unconditional commercial use",
+                  )}
+                </span>
+              </p>
               <div className="footer-cta">
                 <Link href="/download" className="button light">
                   <span className="button-motion-inner">
@@ -525,8 +535,8 @@ export default function SiteShell({ children }) {
               </div>
               <p className="menu-note">
                 {t(
-                  "让强大的 AI，成为你自己的日常。",
-                  "Make powerful AI part of your everyday.",
+                  "强大的 AI，向每个人开放。",
+                  "Powerful AI. Open to everyone.",
                 )}
               </p>
             </div>
