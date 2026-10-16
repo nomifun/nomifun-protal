@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Icon from "@/components/Icon";
+import InstallerSelect from "@/components/downloads/InstallerSelect";
 import { createI18n } from "@/lib/i18n";
 import { links } from "@/lib/site";
 import { mergeDownloadCatalog } from "@/lib/download-catalog.mjs";
@@ -31,18 +32,49 @@ const formats = {
   rpm: ".rpm",
 };
 
-function assetLabel(asset, platform, t) {
-  const architecture =
-    platform === "macos"
+function architectureLabel(asset, platform, t) {
+  return (
+    (platform === "macos"
       ? { arm64: "Apple Silicon", x64: "Intel", universal: "Universal" }[
           asset.arch
         ]
-      : { x64: "x64", arm64: "ARM64", x86: "x86" }[asset.arch];
+      : { x64: "x64", arm64: "ARM64", x86: "x86" }[asset.arch]) ||
+    t("架构见文件名", "See filename for architecture")
+  );
+}
+
+function assetLabel(asset, platform, t) {
   return (
-    (architecture || t("架构见文件名", "See filename for architecture")) +
+    architectureLabel(asset, platform, t) +
     " · " +
     (formats[asset.format] || asset.format)
   );
+}
+
+function packageDescription(asset, platform, t) {
+  if (platform === "macos")
+    return asset.arch === "arm64"
+      ? t("适用于 Apple M 系列芯片", "For Apple M-series chips")
+      : asset.arch === "x64"
+        ? t("适用于 Intel 芯片的 Mac", "For Intel-based Macs")
+        : asset.arch === "universal"
+          ? t("兼容 Apple Silicon 与 Intel", "For Apple Silicon and Intel")
+          : t("处理器架构请查看文件名", "See filename for architecture");
+  if (platform === "linux") {
+    const description = {
+      appimage: t("便携应用 · 多种发行版", "Portable · most distributions"),
+      deb: "Debian / Ubuntu",
+      rpm: "Fedora / Red Hat",
+    }[asset.format];
+    if (description) return description;
+  }
+  return asset.arch === "x64"
+    ? t("Intel / AMD · 64 位处理器", "Intel / AMD · 64-bit processors")
+    : asset.arch === "arm64"
+      ? t("ARM · 64 位处理器", "ARM · 64-bit processors")
+      : asset.arch === "x86"
+        ? t("Intel / AMD · 32 位处理器", "Intel / AMD · 32-bit processors")
+        : t("请选择匹配处理器的安装包", "Match the package to your processor");
 }
 
 function checkedTime(value, locale) {
@@ -266,19 +298,25 @@ export default function DownloadCenter({ locale, snapshot }) {
               </div>
               {choices.length > 0 ? (
                 <>
-                  <label
-                    className="release-package-label"
-                    htmlFor={"installer-" + platform.id}
-                  >
-                    {t("处理器 / 安装格式", "Processor / package")}
-                  </label>
-                  <select
+                  <InstallerSelect
                     id={"installer-" + platform.id}
+                    label={t("处理器 / 安装格式", "Processor / package")}
+                    labelledBy={"platform-" + platform.id}
+                    describedBy={"installer-note-" + platform.id}
+                    placeholder={t(
+                      "请重新选择安装包",
+                      "Choose a package again",
+                    )}
                     value={choice ? choice.arch + ":" + choice.format : ""}
-                    onChange={(event) => {
+                    options={choices.map((item) => ({
+                      value: item.arch + ":" + item.format,
+                      label: architectureLabel(item, platform.id, t),
+                      description: packageDescription(item, platform.id, t),
+                      format: formats[item.format] || item.format,
+                    }))}
+                    onChange={(value) => {
                       const selected = choices.find(
-                        (item) =>
-                          item.arch + ":" + item.format === event.target.value,
+                        (item) => item.arch + ":" + item.format === value,
                       );
                       if (selected)
                         setSelections((previous) => ({
@@ -286,22 +324,11 @@ export default function DownloadCenter({ locale, snapshot }) {
                           [platform.id]: selected,
                         }));
                     }}
+                  />
+                  <p
+                    className="release-platform-note"
+                    id={"installer-note-" + platform.id}
                   >
-                    {!choice && (
-                      <option value="" disabled>
-                        {t("请重新选择安装包", "Choose a package again")}
-                      </option>
-                    )}
-                    {choices.map((item) => (
-                      <option
-                        key={item.arch + ":" + item.format}
-                        value={item.arch + ":" + item.format}
-                      >
-                        {assetLabel(item, platform.id, t)}
-                      </option>
-                    ))}
-                  </select>
-                  <p className="release-platform-note">
                     {!choice
                       ? t(
                           "所选架构或格式暂不可用，请重新选择。",
