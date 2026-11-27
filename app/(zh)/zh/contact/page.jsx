@@ -27,8 +27,8 @@ export default function ContactPage({ locale = "zh" }) {
         "Scan to join the NomiFun WeChat community.",
       ),
       image: links.wechatGroupQr,
-      width: 726,
-      height: 838,
+      width: 1076,
+      height: 1110,
     },
     {
       id: "qq",
